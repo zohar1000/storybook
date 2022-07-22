@@ -1,0 +1,4 @@
+
+consider different fonts for rtl/ltr
+consider different font sizes when user changes app font size?
+import from echarts only what is used - reduce bundle size?  echarts.use(...

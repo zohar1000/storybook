@@ -1,1 +1,36 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background: #cccccc;
+  display: block;
+  min-height: 500px;
+}
+
+.graph-container {
+  height: inherit !important;
+}
+
+app-graph-lines {
+  height: inherit !important;
+}
+
+.root {
+  background: black;
+}
+
+#storybook-preview-iframe {
+  background: #eeeeee;
+}
+
+body.sb-show-main {
+  // height: 100vh;
+  background: #eeeeee;
+  > #root > graphs-lines--regular {
+    height: 100% !important;
+    background: white !important;
+    display: block;
+  }
+}
