@@ -1,0 +1,39 @@
+@font-face {
+    font-family: 'CMR_regular';
+    src: url('NotoSans-Regular.ttf') format('truetype'), url('notosans-regular-webfont.woff2') format('woff2'), url('notosans-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'CMR_medium';
+    src: url('NotoSans-Medium.ttf') format('truetype'), url('notosans-medium-webfont.woff2') format('woff2'), url('notosans-medium-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'CMR_bold';
+    src: url('NotoSans-Bold.ttf') format('truetype'), url('notosans-bold-webfont.woff2') format('woff2'), url('notosans-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+  font-family: 'CMR_black';
+  src: url('NotoSans-Black.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'CMR_extra_bold';
+  src: url('NotoSans-ExtraBold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'CMR_light';
+  src: url('NotoSans-Light.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}

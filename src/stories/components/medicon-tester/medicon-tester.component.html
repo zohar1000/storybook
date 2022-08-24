@@ -1,0 +1,54 @@
+<ng-container *ngIf="settings">
+
+  <header class="top-bar" [dir]="direction">
+    <div class="pivot-time">
+      <div *ngIf="isShowSettings" class="settings-action-buttons">
+        <div>
+          <button type="button" class="btn btn-success" (click)="onClickSaveSettings()">{{text.buttons.save}}</button>
+          <button type="button" class="btn btn-danger" (click)="onClickCancelSettings()">{{text.buttons.cancel}}</button>
+        </div>
+      </div>
+      <i *ngIf="!isShowSettings" class="bi bi-gear" (click)="onClickSettings()"></i>
+      <span>{{text.pivotTime.label}}</span>
+      <input [(ngModel)]="settings.pivotTime" (change)="onChangePivotTime($event)" class="pivot-input">
+      <button (click)="onClickResetTime($event)" type="button" class="btn btn-primary">{{text.pivotTime.button}}</button>
+    </div>
+    <div class="default-settings">
+      <button type="button" class="btn btn-warning" (click)="onClickDefaultSettings()">{{text.buttons.defaultSettings}}</button>
+    </div>
+  </header>
+
+  <div *ngIf="!isShowSettings && data" class="data">
+    <app-medicon
+      [direction]="direction"
+      [text]="text"
+      [data]="data"
+      (resolution)="onChangeResolution($event)"
+    ></app-medicon>
+  </div>
+
+  <div *ngIf="isShowSettings" class="settings">
+    <table class="settings-table">
+      <tr><td>Hours forward</td><td><input [(ngModel)]="settings.hoursForward" type="number"></td></tr>
+      <tr><td>Hours backward</td><td><input [(ngModel)]="settings.hoursBackward" type="number"></td></tr>
+      <tr><td>Refresh time</td><td><input [(ngModel)]="settings.refreshTime" type="number">minutes</td></tr>
+    </table>
+
+    <accordion class="settings-sections" [isAnimated]="true">
+      <accordion-group *ngFor="let section of settings.sections; let i=index"
+                       heading="{{text.graphSections[i].title}}"
+                       [panelClass]="accordionClass"
+                       [isOpen]="true">
+        <div class="form-check section-display">
+          <input class="form-check-input" type="checkbox" [(ngModel)]="section.isDisplay">&nbsp;&nbsp;Visible
+        </div>
+        <app-medicon-lister
+            [medications]="section.medications"
+            (change)="onChangeSectionMedications(i, $event)"
+            (deleteMedication)="onDeleteMedication(i, $event)"
+        ></app-medicon-lister>
+      </accordion-group>
+    </accordion>
+  </div>
+
+</ng-container>

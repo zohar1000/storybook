@@ -1,0 +1,58 @@
+<ng-container [ngTemplateOutlet]="header" [ngTemplateOutletContext]="{isTop: true}"></ng-container>
+
+<app-medicon-timeline-values
+    [timeline]="timeline"
+    [preTimelineWidth]="preTimelineWidth"
+    [timelineWidth]="timelineWidth">
+</app-medicon-timeline-values>
+
+<div #categories>
+  <app-medicon-category
+    *ngFor="let category of section.categories; let i=index"
+    [category]="category"
+    [timeline]="timeline"
+    [preTimelineWidth]="preTimelineWidth"
+    [timelineWidth]="timelineWidth"
+    [isLastCategory]="i+1===section.categories.length"
+    (expandCondense)="onExpandCondense()"
+  >
+  </app-medicon-category>
+</div>
+
+<app-medicon-timeline-values
+    [timeline]="timeline"
+    [preTimelineWidth]="preTimelineWidth"
+    [timelineWidth]="timelineWidth">
+</app-medicon-timeline-values>
+
+<ng-container [ngTemplateOutlet]="header" [ngTemplateOutletContext]="{isTop: false}"></ng-container>
+
+<ng-template #header let-isTop="isTop">
+  <div class="header" [class.top]="isTop" [class.bottom]="!isTop">
+    <div class="action-icons horizontal-left vertical-center">
+      <span class="legend-title"
+            [popover]="legendTemplate"
+            [placement]="'bottom'"
+            [container]="'body'"
+            [isOpen]="false"
+            [triggers]="'hover'">{{text.medicon.legend}}</span>
+      <span><i class="bi bi-plus-circle"></i></span>
+      <span><i class="bi bi-alarm"></i></span>
+    </div>
+    <div><span *ngIf="isTop" class="horizontal-center">{{section.name}}</span></div>
+    <div>&nbsp;</div>
+  </div>
+</ng-template>
+
+<ng-template #legendTemplate>
+  <div class="legend" [dir]="direction">
+    <ng-container *ngFor="let column of legendColumns; let i=index">
+      <ul>
+        <li *ngFor="let item of column">
+          <app-medicon-icon [type]="item.type" [position]="'aligned'"></app-medicon-icon>
+          <span>{{text.medicon.icons[item.type]}}</span>
+        </li>
+      </ul>
+    </ng-container>
+  </div>
+</ng-template>

@@ -1,6 +1,6 @@
 import { GraphMetadata } from '@models/graph-metadata.model';
-import { GraphType } from '../../app/shared/enums/graph-type.enum';
 import { GraphData } from '@models/graph-data.model';
+import { GraphType } from '@shared/enums/graph-type.enum';
 
 export const mockDataGraphLines: { metadata: GraphMetadata, data: GraphData } = {
   metadata: {

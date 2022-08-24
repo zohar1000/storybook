@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
+@import '~ngx-toastr/toastr';
+
 html, body {
   margin: 0;
   padding: 0;
@@ -7,6 +9,14 @@ html, body {
   background: #cccccc;
   display: block;
   min-height: 500px;
+}
+
+:root {
+  --action-icons-font-size: 1.3rem;
+}
+
+body.sb-show-main {
+  background: white !important;
 }
 
 .graph-container {
@@ -34,3 +44,43 @@ body.sb-show-main {
     display: block;
   }
 }
+
+.horizontal-start {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.horizontal-center {
+  display: flex;
+  justify-content: center;
+}
+
+.horizontal-end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.horizontal-left {
+  display: flex;
+  justify-content: left;
+}
+
+.horizontal-right {
+  display: flex;
+  justify-content: right;
+}
+
+.vertical-center {
+  display: flex;
+  align-items: center;
+}
+
+/***************************/
+/*    B O O T S T R A P    */
+/***************************/
+
+.popover {
+  max-width: unset !important;
+}
+
+

@@ -1,0 +1,26 @@
+<div>
+  <span>Medications: {{medications.length}}</span>
+  <button (click)="onClickAdd()" type="button" class="btn btn-success add-button">ADD</button>
+</div>
+
+
+<ng-template #itemTemplate let-medication="item" let-index="index">
+  <app-medicon-lister-item
+      [medication]="medication.value"
+      [index]="index"
+      (delete)="onDeleteMedication($event)"
+  ></app-medicon-lister-item>
+</ng-template>
+
+<div class="medication-table">
+  <bs-sortable
+      [(ngModel)]="medications"
+      [itemTemplate]="itemTemplate"
+      (onChange)="onChange($event)"
+      itemClass="sortable-item"
+      itemActiveClass="sortable-item-active"
+      placeholderItem=""
+      placeholderClass="placeholderStyle text-center"
+      wrapperClass="sortable-wrapper"
+  ></bs-sortable>
+</div>

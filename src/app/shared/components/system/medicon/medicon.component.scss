@@ -1,0 +1,56 @@
+$header-height: 3rem;
+
+.content {
+  display: block;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    height: $header-height;
+    align-items: center;
+    padding-inline: 2rem;
+    > div {
+      width: 30%;
+    }
+    .resolution {
+      > select {
+        margin-inline-start: 0.5rem;
+      }
+    }
+    .action-icons {
+      // padding-inline-start: 1rem;
+      font-size: var(--action-icons-font-size);
+      display: inline-flex;
+      align-items: center;
+      height: 100%;
+      i {
+        line-height: 1rem;
+        &:not(:last-child) {
+          margin-right: 4rem;
+        }
+      }
+      .paging-icons {
+        i {
+          margin-right: 1rem;
+          &.larger {
+             font-size: 1.5rem;
+          }
+          &.backward::before {
+            transform: scaleX(-1);
+            -ms-transform: scaleX(-1);
+          }
+        }
+      }
+    }
+  }
+
+  .sections {
+    :not(:last-child) {
+      margin-bottom: 1.5rem;
+    }
+    app-medications-section {
+      display: block;
+    }
+  }
+ }
+

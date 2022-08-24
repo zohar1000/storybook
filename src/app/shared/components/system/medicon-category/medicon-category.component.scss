@@ -1,0 +1,37 @@
+@import 'variables';
+
+.category {
+  display: flex;
+  align-items: center;
+
+  .expand-icon {
+    display: inline-block;
+  }
+
+  .frame {
+    width: 10px;
+    display: block;
+    border: none;
+    min-height: $medication-graph-height;
+    box-shadow: inset 0 0 0 1px white, inset -1px 0 0 1px white, inset 0 0 0 2px black;
+    z-index: 2;
+    .frame-line-filler {
+      display: flex;
+      flex-direction: column;
+      height: $medication-graph-height;
+    }
+  }
+
+  .medication {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    min-height: $medication-graph-height;
+    z-index: 1;
+    .medication-container {
+      width: 100%;
+      height: $medication-graph-height;
+    }
+  }
+}

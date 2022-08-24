@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="14" height="15" viewBox="0 0 14 15">
+    <g fill="none" fill-rule="evenodd">
+        <g fill="#B6B9C0">
+            <path d="M393 913c1.105 0 2 .895 2 2v11c0 1.105-.895 2-2 2h-10c-1.105 0-2-.895-2-2v-11c0-1.105.895-2 2-2h10zm.5 1.406h-11v12.188h11v-12.188zM388 923v1h-4v-1h4zm4-3v1h-8v-1h8zm0-3v1h-8v-1h8z" transform="translate(-381 -913) matrix(-1 0 0 1 776 0)"/>
+        </g>
+    </g>
+</svg>

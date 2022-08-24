@@ -1,0 +1,16 @@
+<svg width="29" height="16" viewBox="0 0 29 16" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <filter color-interpolation-filters="auto" id="a">
+            <feColorMatrix in="SourceGraphic" values="0 0 0 0 0.000000 0 0 0 0 0.569941 0 0 0 0 0.950203 0 0 0 1.000000 0"/>
+        </filter>
+        <filter color-interpolation-filters="auto" id="b">
+            <feColorMatrix in="SourceGraphic" values="0 0 0 0 0.309804 0 0 0 0 0.388235 0 0 0 0 0.498039 0 0 0 1.000000 0"/>
+        </filter>
+    </defs>
+    <g transform="translate(-283 -358)" filter="url(#a)" fill="none" fill-rule="evenodd">
+        <path d="M311.123 361.518h-4.14v-2.02c0-.275-.224-.64-.499-.64h-11.986c-.275 0-.534.294-.534.568v8.95c0 .275.259.569.534.569h1.527v4.558a.499.499 0 0 0 .499.497h11.953c.14 0 .252-.052.352-.146a.503.503 0 0 0 .146-.351v-2.569h2.148a.498.498 0 0 0 .498-.497v-8.421a.498.498 0 0 0-.498-.498zm-15.92 6.433V360h10.718v1.518h-7.405a.498.498 0 0 0-.498.498v1.957h-1.495a.498.498 0 0 0-.498.497v3.48h-.822zm12.6 3.835h-10.567v-6.669h10.567v6.67zm2.686-1.846h-1.514v-5.47a.498.498 0 0 0-.498-.497h-9.286v-1.34h11.298v7.307z" fill="#4F637F" fill-rule="nonzero"/>
+        <g filter="url(#b)" transform="translate(283.299 358.857)">
+            <path d="M.31 1.438h1.823l1.823 2 1.822-2H7.6l-3.645 4-3.645-4z" fill="#062B47"/>
+        </g>
+    </g>
+</svg>

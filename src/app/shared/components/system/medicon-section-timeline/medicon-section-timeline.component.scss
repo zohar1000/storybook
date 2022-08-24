@@ -1,0 +1,50 @@
+.header {
+  width: 100%;
+  height: 2.5rem;
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: 2rem;
+  > div {
+    width: 30%;
+  }
+  &.top {
+    background: #eeeeee;
+    margin-bottom: 1rem;
+  }
+  &.bottom {
+    margin-top: 1rem;
+  }
+  > .action-icons {
+    span {
+      width: 5.3rem !important;
+      display: inline-block;
+      //padding-inline-end: 4rem;
+      &.legend-title {
+        overflow: visible;
+        width: 5.3rem !important;
+      }
+      i {
+        font-size: var(--action-icons-font-size);
+      }
+    }
+  }
+}
+
+.legend {
+  padding-inline: 1rem;
+  display: inline-grid;
+  column-gap: 5rem;
+  grid-template-columns: auto auto;
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    li {
+      app-medicon-icon {
+        margin-inline-end: 1rem;
+      }
+    }
+  }
+}
+

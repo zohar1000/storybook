@@ -1,0 +1,16 @@
+.centered {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: yellow;
+  i {
+    position: absolute;
+  }
+}
+
+i {
+  &::before {
+     background: white;
+  }
+}
