@@ -1,9 +1,8 @@
-import { Component, Input, TemplateRef, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
 import { Direction } from '@stories/models/direction.model';
 import { TimelineResolution } from '@shared/enums/timeline-resolution.enum';
 import { GraphMetadata } from '@models/graph-metadata.model';
 import { GraphData } from '@models/graph-data.model';
-import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-medicine-tester',
@@ -18,50 +17,45 @@ export class MedicineTesterComponent {
   @Input() metadata: GraphMetadata;
   @Input() data: GraphData;
 
-  // config = {
-  //   pivotTime: '10:00'
-  // }
-  modalRef: BsModalRef;
+  LOCAL_STORAGE_KEY = 'medicationsConfig';
   isSettings = false;
+  accordionClass = 'settings-accordion';
+  config = {
+    pivotTime: '10:00',
+    hoursForward: 14,
+    hoursBackward: 5,
+    refreshTime: 2,
+    graphs: [
+      { isDisplay: true },
+      { isDisplay: false },
+      { isDisplay: true },
+      { isDisplay: true }
+    ]
+  }
+  prevConfig;
 
-  // config
-  pivotTime = '10:00';
-  hoursForward = 4;
-  hoursBackward = 4;
-  refreshTime = 1;
+  constructor() {
+    this.initConfig();
+    this.onClickSettings();
+  }
 
-  constructor(private modalService: BsModalService) {}
+  initConfig() {
+    const item = localStorage.getItem(this.LOCAL_STORAGE_KEY);
+    if (item) this.config = JSON.parse(item);
+  }
 
   onClickResetTime(e) {
-    this.pivotTime = new Intl.DateTimeFormat('en-GB', { timeStyle: 'short' }).format(new Date());
+    this.config.pivotTime = new Intl.DateTimeFormat('en-GB', { timeStyle: 'short' }).format(new Date());
   }
 
   onChangePivotTime(e: Event) {
-    this.pivotTime = (e.target as any).value;
-    if (this.pivotTime.length === 2) this.pivotTime += ':00';
+    this.config.pivotTime = (e.target as any).value;
+    if (this.config.pivotTime.length === 2) this.config.pivotTime += ':00';
   }
 
-  onClickSettings(template: TemplateRef<any>) {
-    console.log('onClickSettings');
+  onClickSettings() {
+    this.prevConfig = JSON.parse(JSON.stringify(this.config));
     this.isSettings = true;
-    return;
-    this.modalRef = this.modalService.show(template, { class: 'settings-modal' });
-    const subscription = this.modalService.onHide.subscribe((reason: string | any) => {
-      console.log('close reason:', typeof reason, reason);
-      // if (typeof reason !== 'string') {
-      //   reason = `onHide(), modalId is : ${reason.id}`;
-      // }
-      // const _reason = reason ? `, dismissed by ${reason}` : '';
-      // this.messages.push(`onHide event has been fired${_reason}`);
-      // console.log('subbscription1:', subscription.closed);
-      // setTimeout(() => console.log('subbscription2:', subscription.closed));
-      setTimeout(() => {
-        subscription.unsubscribe();
-        this.isSettings = false;
-      });
-      // setTimeout(() => console.log('subbscription3:', subscription.closed), 1000);
-      // setTimeout(() => subscription.unsubscribe(), 2000);
-    })
   }
 
   onChangeResolution(e) {
@@ -69,10 +63,17 @@ export class MedicineTesterComponent {
   }
 
   onClickSaveSettings() {
-
+    const item = JSON.stringify(this.config);
+    localStorage.setItem(this.LOCAL_STORAGE_KEY, item);
+    console.log(JSON.stringify(this.config, null, 2));
+    this.isSettings = false;
   }
 
   onClickCancelSettings() {
+    this.config = this.prevConfig;
     this.isSettings = false;
+    console.log(JSON.stringify(this.config, null, 2));
   }
+
+
 }

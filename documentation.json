@@ -2791,9 +2791,11 @@
         },
         {
             "name": "MedicineTesterComponent",
-            "id": "component-MedicineTesterComponent-3a4b757993766557610806628ad2541f5b73fce2e4f0576fa8123ae0672af8bf685bbc9d12b30d80f263e5bf73c1fcbf0d93b11f666a13f0853ca7b8904ec046",
+            "id": "component-MedicineTesterComponent-66bbba115c794390400dc050895fe9ebc358683fa6f622a873f11f9d3a23a9fec651b0e050046da70f9713f5af31020518568c5f9c56dade8e927e55231d6306",
             "file": "src/stories/components/medicine-tester/medicine-tester.component.ts",
-            "encapsulation": [],
+            "encapsulation": [
+                "ViewEncapsulation.None"
+            ],
             "entryComponents": [],
             "inputs": [],
             "outputs": [],
@@ -2812,7 +2814,7 @@
                     "name": "data",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 18,
+                    "line": 19,
                     "type": "GraphData",
                     "decorators": []
                 },
@@ -2820,7 +2822,7 @@
                     "name": "direction",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 14,
+                    "line": 15,
                     "type": "Direction",
                     "decorators": []
                 },
@@ -2828,7 +2830,7 @@
                     "name": "metadata",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 17,
+                    "line": 18,
                     "type": "GraphMetadata",
                     "decorators": []
                 },
@@ -2836,7 +2838,7 @@
                     "name": "resolution",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 16,
+                    "line": 17,
                     "type": "TimelineResolution",
                     "decorators": []
                 },
@@ -2844,13 +2846,73 @@
                     "name": "text",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 15,
+                    "line": 16,
                     "type": "any",
                     "decorators": []
                 }
             ],
             "outputsClass": [],
             "propertiesClass": [
+                {
+                    "name": "accordionClass",
+                    "defaultValue": "'settings-accordion'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 26
+                },
+                {
+                    "name": "graphSections",
+                    "defaultValue": "[1, 2]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 41
+                },
+                {
+                    "name": "graphSections2",
+                    "defaultValue": "[\n    { title: 'Graph section 1', isDisplay: true },\n    { title: 'Graph section 2', isDisplay: true },\n    { title: 'Graph section 3', isDisplay: true },\n    { title: 'Graph section 4', isDisplay: true }\n  ]",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 34
+                },
+                {
+                    "name": "hoursBackward",
+                    "defaultValue": "4",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 31
+                },
+                {
+                    "name": "hoursForward",
+                    "defaultValue": "4",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 30
+                },
+                {
+                    "name": "isSettings",
+                    "defaultValue": "true",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 25
+                },
                 {
                     "name": "modalRef",
                     "deprecated": false,
@@ -2868,7 +2930,17 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 23
+                    "line": 29
+                },
+                {
+                    "name": "refreshTime",
+                    "defaultValue": "1",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 32
                 }
             ],
             "methodsClass": [
@@ -2885,7 +2957,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 32,
+                    "line": 49,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2901,7 +2973,7 @@
                     ]
                 },
                 {
-                    "name": "onClickResetTime",
+                    "name": "onChangeResolution",
                     "args": [
                         {
                             "name": "e",
@@ -2913,7 +2985,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 28,
+                    "line": 58,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -2929,11 +3001,21 @@
                     ]
                 },
                 {
-                    "name": "onClickSettings",
+                    "name": "onClickCancelSettings",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 66,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "onClickResetTime",
                     "args": [
                         {
-                            "name": "template",
-                            "type": "TemplateRef<any>",
+                            "name": "e",
+                            "type": "",
                             "deprecated": false,
                             "deprecationMessage": ""
                         }
@@ -2941,13 +3023,13 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 37,
+                    "line": 45,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
                         {
-                            "name": "template",
-                            "type": "TemplateRef<any>",
+                            "name": "e",
+                            "type": "",
                             "deprecated": false,
                             "deprecationMessage": "",
                             "tagName": {
@@ -2955,6 +3037,26 @@
                             }
                         }
                     ]
+                },
+                {
+                    "name": "onClickSaveSettings",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 62,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "onClickSettings",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 54,
+                    "deprecated": false,
+                    "deprecationMessage": ""
                 }
             ],
             "deprecated": false,
@@ -2964,11 +3066,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, TemplateRef } from '@angular/core';\nimport { Direction } from '@stories/models/direction.model';\nimport { TimelineResolution } from '@shared/enums/timeline-resolution.enum';\nimport { GraphMetadata } from '@models/graph-metadata.model';\nimport { GraphData } from '@models/graph-data.model';\nimport { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';\n\n@Component({\n  selector: 'app-medicine-tester',\n  templateUrl: './medicine-tester.component.html',\n  styleUrls: ['./medicine-tester.component.scss']\n})\nexport class MedicineTesterComponent {\n  @Input() direction: Direction;\n  @Input() text: any;\n  @Input() resolution: TimelineResolution;\n  @Input() metadata: GraphMetadata;\n  @Input() data: GraphData;\n\n  // config = {\n  //   pivotTime: '10:00'\n  // }\n  pivotTime = '10:00'\n  modalRef: BsModalRef;\n\n  constructor(private modalService: BsModalService) {}\n\n  onClickResetTime(e) {\n    this.pivotTime = new Intl.DateTimeFormat('en-GB', { timeStyle: 'short' }).format(new Date());\n  }\n\n  onChangePivotTime(e: Event) {\n    this.pivotTime = (e.target as any).value;\n    if (this.pivotTime.length === 2) this.pivotTime += ':00';\n  }\n\n  onClickSettings(template: TemplateRef<any>) {\n    console.log('onClickSettings');\n    this.modalRef = this.modalService.show(template);\n  }\n}\n",
+            "sourceCode": "import { Component, Input, TemplateRef, ViewEncapsulation } from '@angular/core';\nimport { Direction } from '@stories/models/direction.model';\nimport { TimelineResolution } from '@shared/enums/timeline-resolution.enum';\nimport { GraphMetadata } from '@models/graph-metadata.model';\nimport { GraphData } from '@models/graph-data.model';\nimport { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';\n\n@Component({\n  selector: 'app-medicine-tester',\n  templateUrl: './medicine-tester.component.html',\n  styleUrls: ['./medicine-tester.component.scss'],\n  encapsulation: ViewEncapsulation.None\n})\nexport class MedicineTesterComponent {\n  @Input() direction: Direction;\n  @Input() text: any;\n  @Input() resolution: TimelineResolution;\n  @Input() metadata: GraphMetadata;\n  @Input() data: GraphData;\n\n  // config = {\n  //   pivotTime: '10:00'\n  // }\n  modalRef: BsModalRef;\n  isSettings = true;\n  accordionClass = 'settings-accordion';\n\n  // config\n  pivotTime = '10:00';\n  hoursForward = 4;\n  hoursBackward = 4;\n  refreshTime = 1;\n\n  graphSections2 = [\n    { title: 'Graph section 1', isDisplay: true },\n    { title: 'Graph section 2', isDisplay: true },\n    { title: 'Graph section 3', isDisplay: true },\n    { title: 'Graph section 4', isDisplay: true }\n  ]\n\n  graphSections = [1, 2];\n\n  constructor(private modalService: BsModalService) {}\n\n  onClickResetTime(e) {\n    this.pivotTime = new Intl.DateTimeFormat('en-GB', { timeStyle: 'short' }).format(new Date());\n  }\n\n  onChangePivotTime(e: Event) {\n    this.pivotTime = (e.target as any).value;\n    if (this.pivotTime.length === 2) this.pivotTime += ':00';\n  }\n\n  onClickSettings() {\n    this.isSettings = true;\n  }\n\n  onChangeResolution(e) {\n\n  }\n\n  onClickSaveSettings() {\n\n  }\n\n  onClickCancelSettings() {\n    this.isSettings = false;\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".top-bar {\n  background: black;\n  color: white;\n  height: 3rem;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding-inline: 1rem;\n\n  .pivot-time {\n    .bi-gear {\n      margin-inline-end: 2rem;\n    }\n    > input {\n      margin-inline-start: 0.8rem;\n      margin-inline-end: 2rem;\n      width: 4rem;\n    }\n  }\n\n  select {\n    margin-inline-start: 1rem;\n  }\n}\n",
+                    "data": "$top-bar-height: 3rem;\n\n.top-bar {\n  --top-bar-height: 6rem;\n  background: black;\n  color: white;\n  height: $top-bar-height; // var(----top-bar-height);\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding-inline-end: 1.5rem;\n  border-bottom: 3px solid black;\n\n  .pivot-time {\n    .bi-gear {\n      margin-inline-end: 2rem;\n      margin-inline-start: 1rem;\n    }\n    .settings-action-buttons {\n      padding-inline-end: 3rem;\n      display: inline-flex;\n      justify-content: flex-end;\n      background: white;\n       height: $top-bar-height;\n      margin-inline-end: 2rem;\n      align-items: center;\n      transition: all 2s linear;\n      button {\n        width: 5rem;\n        margin-inline-start: 2rem;\n        //padding-top: 0;\n        //padding-bottom: 0;\n      }\n    }\n    .pivot-time {\n      margin-inline-start: 0.8rem;\n      margin-inline-end: 2rem;\n      width: 4rem;\n    }\n  }\n\n  select {\n    margin-inline-start: 1rem;\n  }\n}\n\n.settings {\n  margin-top: 1rem;\n  padding: 1rem;\n  .settings-table {\n    input {\n      margin-inline-start: 1rem;\n      margin-inline-end: 0.5rem;\n      width: 3rem;\n    }\n  }\n  .settings-sections {\n    margin-top: 2rem;\n    .settings-accordion {\n      .panel-heading {\n        background: #337aa7;\n        display: flex;\n        justify-content: space-between;\n      }\n      .btn-link {\n        color: white;\n        text-decoration: none;\n      }\n      .panel-collapse {\n        background: white;\n      }\n    }\n  }\n}\n\ni {\n  cursor: pointer;\n}\n\n\n/*\n.settings-modal {\n  //background: red !important;\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  width: 100vW !important;\n  height: 100vh !important;\n  background: yellow;\n  margin: 0;\n  .modal-content {\n    width: 800px !important;\n  }\n}*/\n",
                     "styleUrl": "./medicine-tester.component.scss"
                 }
             ],
@@ -2986,7 +3088,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 24,
+                "line": 41,
                 "jsdoctags": [
                     {
                         "name": "modalService",
@@ -2999,7 +3101,7 @@
                     }
                 ]
             },
-            "templateData": "<header class=\"top-bar\" [dir]=\"direction\">\n  <div class=\"pivot-time\">\n    <i class=\"bi bi-gear\" (click)=\"onClickSettings()\"></i>\n    <span>Pivot Time:</span>\n    <input [(ngModel)]=\"pivotTime\" (change)=\"onChangePivotTime($event)\">\n    <button (click)=\"onClickResetTime($event)\" type=\"button\" class=\"btn btn-primary\">RESET TIME</button>\n  </div>\n  <div>\n    <span>{{text.resolution}}</span>\n    <select (change)=\"dd($event)\">\n      <option [value]=\"'1hour'\">1 שעות</option>\n      <option [value]=\"'2hours'\">2 שעות</option>\n      <option [value]=\"'4hours'\">4 שעות</option>\n    </select>\n  </div>\n</header>\n\n<ng-template #template>\n  <div class=\"modal-header\">\n    <h4 class=\"modal-title pull-left\">Modal</h4>\n    <button type=\"button\" class=\"close pull-right\" aria-label=\"Close\" (click)=\"modalRef.hide()\">\n      <span aria-hidden=\"true\">×</span>\n    </button>\n  </div>\n  <div class=\"modal-body\">\n    This is a sample modal dialog box.\n  </div>\n  <div class=\"modal-footer\">\n    <button type=\"button\" class=\"btn btn-default\" (click)=\"modalRef.hide()\">Close</button>\n  </div>\n</ng-template>\n\n"
+            "templateData": "<header class=\"top-bar\" [dir]=\"direction\">\n  <div class=\"pivot-time\">\n    <div *ngIf=\"isSettings\" class=\"settings-action-buttons\">\n      <div>\n        <button type=\"button\" class=\"btn btn-success\" (click)=\"onClickSaveSettings()\">Save</button>\n        <button type=\"button\" class=\"btn btn-warning\" (click)=\"onClickCancelSettings()\">cancel</button>\n      </div>\n    </div>\n    <i *ngIf=\"!isSettings\" class=\"bi bi-gear\" (click)=\"onClickSettings()\"></i>\n    <span>Pivot Time:</span>\n    <input [(ngModel)]=\"pivotTime\" (change)=\"onChangePivotTime($event)\" class=\"pivot-time\">\n    <button (click)=\"onClickResetTime($event)\" type=\"button\" class=\"btn btn-primary\">RESET TIME</button>\n  </div>\n  <div>\n    <span>{{text.resolution}}</span>\n    <select (change)=\"onChangeResolution($event)\">\n      <option [value]=\"'1hour'\">1 שעות</option>\n      <option [value]=\"'2hours'\">2 שעות</option>\n      <option [value]=\"'4hours'\">4 שעות</option>\n    </select>\n  </div>\n</header>\n\n\n<div *ngIf=\"isSettings\" class=\"settings\">\n  <table class=\"settings-table\">\n    <tr><td>Hours forward</td><td><input [(ngModel)]=\"hoursForward\" type=\"number\"></td></tr>\n    <tr><td>Hours backward</td><td><input [(ngModel)]=\"hoursBackward\" type=\"number\"></td></tr>\n    <tr><td>Refresh time</td><td><input [(ngModel)]=\"refreshTime\" type=\"number\">minutes</td></tr>\n  </table>\n\n  <accordion class=\"settings-sections\" [isAnimated]=\"true\">\n    <div *ngFor=\"let section of graphSections\">\n<!--      <accordion-group heading=\"{{section.title}}\" [panelClass]=\"accordionClass\">\n  &lt;!&ndash;      <div>{{section.title}}22</div>&ndash;&gt;\n  &lt;!&ndash;      <div class=\"form-check\">\n          <input class=\"form-check-input\" type=\"checkbox\" value=\"\" id=\"flexCheckDefault\">\n          <label class=\"form-check-label\" for=\"flexCheckDefault\">\n            Default checkbox\n          </label>\n        </div>&ndash;&gt;\n      </accordion-group>-->\n    </div>\n  </accordion>\n</div>\n\n"
         },
         {
             "name": "PageComponent",
@@ -3085,13 +3187,13 @@
     "modules": [
         {
             "name": "AppModule",
-            "id": "module-AppModule-51cb699ec5914292e7f50432da23ebdf35e5142b96cad593777ead69f885e9e5252d612fb6c69745499ab600077f20dd1be0e01afc198c7b5b674b2e18d650e8",
+            "id": "module-AppModule-4ab5b234f706d06ea18585ab3a5038a8d930746d7cb4c130c96e33d960c398e21e2a3226ed7e46e7dc44e97d253b87b2ef168f7bad29ea2be482c199b0c36125",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/app.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\n\nimport { AppRoutingModule } from './app-routing.module';\nimport { AppComponent } from './app.component';\nimport { ModalModule } from 'ngx-bootstrap/modal';\nimport { SharedModule } from '@shared/shared.module';\n\n@NgModule({\n  declarations: [\n    AppComponent\n  ],\n  imports: [\n    BrowserModule,\n    AppRoutingModule,\n    SharedModule,\n\n    ModalModule.forRoot()\n  ],\n  providers: [],\n  bootstrap: [AppComponent]\n})\nexport class AppModule { }\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\nimport { BsModalService } from 'ngx-bootstrap/modal';\n\nimport { AppRoutingModule } from './app-routing.module';\nimport { AppComponent } from './app.component';\nimport { ModalModule } from 'ngx-bootstrap/modal';\nimport { SharedModule } from '@shared/shared.module';\nimport { AccordionModule } from 'ngx-bootstrap/accordion';\nimport { BrowserAnimationsModule } from '@angular/platform-browser/animations';\n\n@NgModule({\n  declarations: [\n    AppComponent\n  ],\n  imports: [\n    BrowserModule,\n    AppRoutingModule,\n    SharedModule,\n\n    ModalModule.forRoot(),\n    AccordionModule.forRoot()\n  ],\n  providers: [],\n  bootstrap: [AppComponent]\n})\nexport class AppModule { }\n",
             "children": [
                 {
                     "type": "providers",
@@ -3172,13 +3274,13 @@
         },
         {
             "name": "SharedModule",
-            "id": "module-SharedModule-a055ed429d3a2966bc7c056cf35a69fb86d3b03d254b603e798aa4b560efff72d6856f5a51955a97a6ddaf61de633fe9dc0a1363b617c28731d6c4636a73434d",
+            "id": "module-SharedModule-2b295a8acd67203881134f2fecc0944d4fdec04d8d54f15d816489839c24b49ea71b38d69f9440b54e7e56ca23fb68cab50277d8fb036ebcf6c62c5481ae154d",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/shared/shared.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { NgxEchartsModule } from 'ngx-echarts';\nimport { GraphLinesComponent } from './components/graphs/graph-lines.component';\nimport { GraphPieComponent } from './components/graphs/graph-pie.component';\nimport { GraphTimelineCategoryComponent } from '@shared/components/graphs/graph-timeline-category.component';\nimport { GraphTimelineComponent } from '@shared/components/graphs/graph-timeline.component';\nimport { MedicineComponent } from './components/system/medicine/medicine.component';\nimport { FormsModule } from '@angular/forms';\nimport { BrowserModule } from '@angular/platform-browser';\nimport { ModalModule } from 'ngx-bootstrap/modal';\n\nconst declarations = [\n  GraphLinesComponent,\n  GraphPieComponent,\n  GraphTimelineComponent,\n  GraphTimelineCategoryComponent,\n  MedicineComponent\n];\n\nconst modules = [\n  CommonModule,\n  BrowserModule,\n  FormsModule,\n];\n\n@NgModule({\n  declarations,\n  imports: [\n    ...modules,\n    NgxEchartsModule.forRoot({\n      echarts: () => import('echarts')\n    })\n  ],\n  exports: [\n    ...declarations,\n    ...modules,\n    NgxEchartsModule,\n    ModalModule\n  ]\n})\nexport class SharedModule {}\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { NgxEchartsModule } from 'ngx-echarts';\nimport { GraphLinesComponent } from './components/graphs/graph-lines.component';\nimport { GraphPieComponent } from './components/graphs/graph-pie.component';\nimport { GraphTimelineCategoryComponent } from '@shared/components/graphs/graph-timeline-category.component';\nimport { GraphTimelineComponent } from '@shared/components/graphs/graph-timeline.component';\nimport { MedicineComponent } from './components/system/medicine/medicine.component';\nimport { FormsModule } from '@angular/forms';\nimport { BrowserModule } from '@angular/platform-browser';\nimport { ModalModule } from 'ngx-bootstrap/modal';\nimport { AccordionModule } from 'ngx-bootstrap/accordion';\nimport { BrowserAnimationsModule } from '@angular/platform-browser/animations';\n\nconst declarations = [\n  GraphLinesComponent,\n  GraphPieComponent,\n  GraphTimelineComponent,\n  GraphTimelineCategoryComponent,\n  MedicineComponent\n];\n\nconst modules = [\n  CommonModule,\n  BrowserModule,\n  FormsModule,\n  BrowserAnimationsModule,\n];\n\n@NgModule({\n  declarations,\n  imports: [\n    ...modules,\n    NgxEchartsModule.forRoot({\n      echarts: () => import('echarts')\n    })\n  ],\n  exports: [\n    ...declarations,\n    ...modules,\n    NgxEchartsModule,\n    ModalModule,\n    AccordionModule\n  ]\n})\nexport class SharedModule {}\n",
             "children": [
                 {
                     "type": "providers",
@@ -3369,7 +3471,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "[]",
-                "defaultValue": "[\n  CommonModule,\n  BrowserModule,\n  FormsModule,\n]"
+                "defaultValue": "[\n  CommonModule,\n  BrowserModule,\n  FormsModule,\n  BrowserAnimationsModule,\n]"
             },
             {
                 "name": "Primary",
@@ -3484,21 +3586,21 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/stories/graphs/pie.stories.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "Story<GraphPieComponent>",
-                "defaultValue": "(args: GraphPieComponent) => ({ props: args })"
-            },
-            {
-                "name": "Template",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/stories/graphs/medicine.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "Story<MedicineTesterComponent>",
                 "defaultValue": "(args: MedicineTesterComponent) => ({ props: args })"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/graphs/pie.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<GraphPieComponent>",
+                "defaultValue": "(args: GraphPieComponent) => ({ props: args })"
             },
             {
                 "name": "textEn",
@@ -3705,7 +3807,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "[]",
-                    "defaultValue": "[\n  CommonModule,\n  BrowserModule,\n  FormsModule,\n]"
+                    "defaultValue": "[\n  CommonModule,\n  BrowserModule,\n  FormsModule,\n  BrowserAnimationsModule,\n]"
                 }
             ],
             "src/environments/environment.prod.ts": [
@@ -4317,7 +4419,7 @@
                 "linktype": "component",
                 "name": "MedicineTesterComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/12",
+                "coverageCount": "0/22",
                 "status": "low"
             },
             {

@@ -1,13 +1,84 @@
-.settings-action-buttons {
-  padding: 12px 3rem;
+$top-bar-height: 3rem;
+
+.top-bar {
+  --top-bar-height: 6rem;
+  background: black;
+  color: white;
+  height: $top-bar-height; // var(----top-bar-height);
   display: flex;
-  justify-content: flex-end;
-  button {
-    width: 5rem;
-    margin-inline-start: 2rem;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline-end: 1.5rem;
+  border-bottom: 3px solid black;
+
+  .pivot-time {
+    .bi-gear {
+      margin-inline-end: 2rem;
+      margin-inline-start: 1rem;
+    }
+    .settings-action-buttons {
+      padding-inline-end: 3rem;
+      display: inline-flex;
+      justify-content: flex-end;
+      background: white;
+       height: $top-bar-height;
+      margin-inline-end: 2rem;
+      align-items: center;
+      transition: all 2s linear;
+      button {
+        width: 5rem;
+        margin-inline-start: 2rem;
+        //padding-top: 0;
+        //padding-bottom: 0;
+      }
+    }
+    .pivot-time {
+      margin-inline-start: 0.8rem;
+      margin-inline-end: 2rem;
+      width: 4rem;
+    }
+  }
+
+  select {
+    margin-inline-start: 1rem;
   }
 }
 
+.settings {
+  margin-top: 1rem;
+  padding: 1rem;
+  .settings-table {
+    input {
+      margin-inline-start: 1rem;
+      margin-inline-end: 0.5rem;
+      width: 3rem;
+    }
+  }
+  .settings-sections {
+    margin-top: 2rem;
+    .settings-accordion {
+      .panel-heading {
+        background: #337aa7;
+        display: flex;
+        justify-content: space-between;
+      }
+      .btn-link {
+        color: white;
+        text-decoration: none;
+      }
+      .panel-collapse {
+        background: white;
+      }
+    }
+  }
+}
+
+i {
+  cursor: pointer;
+}
+
+
+/*
 .settings-modal {
   //background: red !important;
   position: fixed;
@@ -21,41 +92,4 @@
   .modal-content {
     width: 800px !important;
   }
-}
-
-
-.top-bar {
-  background: black;
-  color: white;
-  height: 3rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-inline: 1rem;
-
-  .pivot-time {
-    .bi-gear {
-      margin-inline-end: 2rem;
-    }
-    > input {
-      margin-inline-start: 0.8rem;
-      margin-inline-end: 2rem;
-      width: 4rem;
-    }
-  }
-
-  select {
-    margin-inline-start: 1rem;
-  }
-}
-
-.settings {
-  padding: 1rem;
-  .settings-table {
-    input {
-      margin-inline-start: 1rem;
-      margin-inline-end: 0.5rem;
-      width: 3rem;
-    }
-  }
-}
+}*/

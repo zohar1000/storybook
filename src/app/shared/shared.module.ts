@@ -9,6 +9,8 @@ import { MedicineComponent } from './components/system/medicine/medicine.compone
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const declarations = [
   GraphLinesComponent,
@@ -22,6 +24,7 @@ const modules = [
   CommonModule,
   BrowserModule,
   FormsModule,
+  BrowserAnimationsModule,
 ];
 
 @NgModule({
@@ -36,7 +39,8 @@ const modules = [
     ...declarations,
     ...modules,
     NgxEchartsModule,
-    ModalModule
+    ModalModule,
+    AccordionModule
   ]
 })
 export class SharedModule {}
