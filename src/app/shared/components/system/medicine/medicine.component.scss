@@ -1,0 +1,17 @@
+//:host {
+//  box-sizing: border-box;
+//}
+
+.content {
+  height: 100vh;
+  background: white;
+  display: block;
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+    background: #eeeeee;
+  }
+ }
+

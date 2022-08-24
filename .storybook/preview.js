@@ -16,11 +16,19 @@ const globalViewports = {
 			width: '1000px',
 			height: '800px',
 		},
+	},
+	w1500h800: {
+		name: '1500x800',
+		styles: {
+			width: '1500px',
+			height: '800px'
+		},
 	}
 };
 
 export const parameters = {
-	actions: { argTypesRegex: "^on[A-Z].*" },
+	// angularLegacyRendering: true,
+	// actions: { argTypesRegex: "^on[A-Z].*" },
 	controls: {
 		matchers: {
 			color: /(background|color)$/i,
@@ -28,5 +36,5 @@ export const parameters = {
 		}
 	},
 	docs: { inlineStories: true },
-	viewport: { viewports: globalViewports }
+	viewport: { viewports: globalViewports, defaultViewport: 'w1500h800' }
 }

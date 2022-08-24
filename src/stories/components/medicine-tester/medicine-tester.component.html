@@ -1,0 +1,56 @@
+<div *ngIf="isSettings" class="settings-action-buttons">
+  <button type="button" class="btn btn-primary" (click)="onClickSaveSettings()">Save</button>
+  <button type="button" class="btn btn-warning" (click)="onClickCancelSettings()">cancel</button>
+</div>
+
+<ng-container [ngTemplateOutlet]="topBar"></ng-container>
+
+<div *ngIf="isSettings" class="settings">
+  <table class="settings-table">
+    <tr><td>Hours forward</td><td><input [(ngModel)]="hoursForward" type="number"></td></tr>
+    <tr><td>Hours backward</td><td><input [(ngModel)]="hoursBackward" type="number"></td></tr>
+    <tr><td>Refresh time</td><td><input [(ngModel)]="refreshTime" type="number">minutes</td></tr>
+  </table>
+
+
+</div>
+
+
+
+<ng-template #settingsModal>
+  <div class="settings-modal-old">
+    <ng-container [ngTemplateOutlet]="topBar"></ng-container>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Modal</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      This is a sample modal dialog box.
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default" (click)="modalRef.hide()">Close</button>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #topBar>
+  <header class="top-bar" [dir]="direction">
+    <div class="pivot-time">
+      <i class="bi bi-gear" (click)="onClickSettings(settingsModal)"></i>
+      <span>Pivot Time:</span>
+      <input [(ngModel)]="pivotTime" (change)="onChangePivotTime($event)">
+      <button (click)="onClickResetTime($event)" type="button" class="btn btn-primary">RESET TIME</button>
+    </div>
+    <div>
+      <span>{{text.resolution}}</span>
+      <select (change)="onChangeResolution($event)">
+        <option [value]="'1hour'">1 שעות</option>
+        <option [value]="'2hours'">2 שעות</option>
+        <option [value]="'4hours'">4 שעות</option>
+      </select>
+    </div>
+  </header>
+</ng-template>
+

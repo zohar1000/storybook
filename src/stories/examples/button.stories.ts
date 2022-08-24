@@ -7,9 +7,9 @@ export default {
   title: 'Examples/Button',
   component: Button,
   // More on argTypes: https://storybook.js.org/docs/angular/api/argtypes
-  argTypes: {
-    backgroundColor: { control: 'color' },
-  },
+  // argTypes: {
+  //   backgroundColor: { control: 'color' },
+  // },
 } as Meta;
 
 // More on component templates: https://storybook.js.org/docs/angular/writing-stories/introduction#using-args

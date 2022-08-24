@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="22" height="17" viewBox="0 0 22 17">
+    <g fill="none" fill-rule="evenodd">
+        <g stroke="#FFF" stroke-width="1.5">
+            <g>
+                <g transform="translate(-513 -297) translate(102 292) translate(411 5)">
+                    <rect width="20.5" height="15" x=".75" y=".75" rx="2"/>
+                    <path d="M.917 10.083L9.734 2.87c.736-.603 1.796-.603 2.532 0l8.817 7.213h0" transform="rotate(-180 11 5.958)"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,6 +1,6 @@
 import { moduleMetadata, Story, Meta } from '@storybook/angular';
 import { SharedModule } from '@shared/shared.module';
-import { GraphStoryArgs } from './graph-story-args.model';
+import { GraphStoryTemplate } from '../models/templates/graph-story-template.model';
 import { GraphPieComponent } from '@shared/components/graphs/graph-pie.component';
 import { mockDataGraphPie } from '@stories/mock-data/mock-data-graph-pie.const';
 
@@ -17,5 +17,5 @@ export default {
 
 const Template: Story<GraphPieComponent> = (args: GraphPieComponent) => ({ props: args });
 
-export const Regular: GraphStoryArgs = Template.bind({});
+export const Regular: GraphStoryTemplate = Template.bind({});
 Regular.args = mockDataGraphPie;

@@ -1,0 +1,61 @@
+.settings-action-buttons {
+  padding: 12px 3rem;
+  display: flex;
+  justify-content: flex-end;
+  button {
+    width: 5rem;
+    margin-inline-start: 2rem;
+  }
+}
+
+.settings-modal {
+  //background: red !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100vW !important;
+  height: 100vh !important;
+  background: yellow;
+  margin: 0;
+  .modal-content {
+    width: 800px !important;
+  }
+}
+
+
+.top-bar {
+  background: black;
+  color: white;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-inline: 1rem;
+
+  .pivot-time {
+    .bi-gear {
+      margin-inline-end: 2rem;
+    }
+    > input {
+      margin-inline-start: 0.8rem;
+      margin-inline-end: 2rem;
+      width: 4rem;
+    }
+  }
+
+  select {
+    margin-inline-start: 1rem;
+  }
+}
+
+.settings {
+  padding: 1rem;
+  .settings-table {
+    input {
+      margin-inline-start: 1rem;
+      margin-inline-end: 0.5rem;
+      width: 3rem;
+    }
+  }
+}

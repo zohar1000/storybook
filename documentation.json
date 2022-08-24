@@ -2,6 +2,29 @@
     "pipes": [],
     "interfaces": [
         {
+            "name": "ConcentratedDisplayStoryTemplate",
+            "id": "interface-ConcentratedDisplayStoryTemplate-8f00761a42ff09a24a6cbef4f1732d87999402882a38e4eb122f51585a930cb14f467c12d79cc677044f8d985abd15694c3ca68067ac008969b86fa755fbccd3",
+            "file": "src/stories/models/templates/concentrated-display-story-template.model.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { TimelineResolution } from '@shared/enums/timeline-resolution.enum';\nimport { Direction } from '@stories/models/direction.model';\n\nexport interface ConcentratedDisplayStoryTemplate {\n  args: {\n    direction: Direction;\n    text: any;\n    resolution: TimelineResolution;\n    // metadata: GraphMetadata;\n    // data: GraphData;\n  }\n}\n",
+            "properties": [
+                {
+                    "name": "args",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "literal type",
+                    "optional": false,
+                    "description": "",
+                    "line": 5
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 165,
+            "methods": []
+        },
+        {
             "name": "GraphData",
             "id": "interface-GraphData-c1117dd480c932e5c3566b0f9bc3088eda620998df1c062bcd3afac960121f64abce335ed8a8bfd17e16d7149f6da9be9712c7ccbd515940b635114f04f72968",
             "file": "src/app/shared/models/graph-data.model.ts",
@@ -102,13 +125,13 @@
             "methods": []
         },
         {
-            "name": "GraphStoryArgs",
-            "id": "interface-GraphStoryArgs-1e4dab5d16de0e22dfd8b51b900946c432018c06846d9ff7a72e4bcd40974d34f7b43dbd47ec2588fb9ac7721a40774f9541e7f3f98a6b8a3d9cfeae8ce0384d",
-            "file": "src/stories/graphs/graph-story-args.model.ts",
+            "name": "GraphStoryTemplate",
+            "id": "interface-GraphStoryTemplate-3c83ea486fb3cf93025f9cf527884a4330031bfcc6f5237ddff7fd71b94b5f76c7f34725749e7afe9facfd683479ebddba205d2c9fd0e0796572102adf6a0c56",
+            "file": "src/stories/models/templates/graph-story-template.model.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import { GraphMetadata } from '@models/graph-metadata.model';\nimport { GraphData } from '@models/graph-data.model';\n\nexport interface GraphStoryArgs {\n  args: {\n    metadata: GraphMetadata;\n    data: GraphData;\n  }\n}\n",
+            "sourceCode": "import { GraphMetadata } from '@models/graph-metadata.model';\nimport { GraphData } from '@models/graph-data.model';\n\nexport interface GraphStoryTemplate {\n  args: {\n    direction?: 'rtl' | 'ltr'\n    metadata: GraphMetadata;\n    data: GraphData;\n  }\n}\n",
             "properties": [
                 {
                     "name": "args",
@@ -1794,6 +1817,796 @@
             "extends": "BaseGraph"
         },
         {
+            "name": "GraphTimelineCategoryComponent",
+            "id": "component-GraphTimelineCategoryComponent-7d24c862cb262b85735747569ccef2e57ac4f62d916299658e76e4b23ef77eb232bb7b144ff0fe4fe0ec93116d076117148231fef2ea287a985298e6b3677f37",
+            "file": "src/app/shared/components/graphs/graph-timeline-category.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-graph-timeline-category",
+            "styleUrls": [],
+            "styles": [],
+            "template": "<div *ngIf=\"options\" #graph echarts class=\"graph-container\" [options]=\"options\" [ngStyle]=\"{height}\" (chartClick)=\"onGraphEvent($event)\"></div>",
+            "templateUrl": [],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "data",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "GraphData",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "BaseGraph"
+                    }
+                },
+                {
+                    "name": "metadata",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "GraphMetadata",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "BaseGraph"
+                    }
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "BORDER_RADIUS",
+                    "defaultValue": "10",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 18,
+                    "modifierKind": [
+                        144
+                    ],
+                    "inheritance": {
+                        "file": "BaseGraph"
+                    }
+                },
+                {
+                    "name": "elRefGraph",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "ElementRef",
+                    "optional": false,
+                    "description": "",
+                    "line": 13,
+                    "decorators": [
+                        {
+                            "name": "ViewChild",
+                            "stringifiedArguments": "'graph'"
+                        }
+                    ],
+                    "inheritance": {
+                        "file": "BaseGraph"
+                    }
+                },
+                {
+                    "name": "elRefGraphContainer",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "ElementRef",
+                    "optional": false,
+                    "description": "",
+                    "line": 12,
+                    "decorators": [
+                        {
+                            "name": "ViewChild",
+                            "stringifiedArguments": "'graphContainer'"
+                        }
+                    ],
+                    "inheritance": {
+                        "file": "BaseGraph"
+                    }
+                },
+                {
+                    "name": "FONT_STYLE",
+                    "defaultValue": "'Rubik'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 16,
+                    "modifierKind": [
+                        144
+                    ],
+                    "inheritance": {
+                        "file": "BaseGraph"
+                    }
+                },
+                {
+                    "name": "graph",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 20,
+                    "inheritance": {
+                        "file": "BaseGraph"
+                    }
+                },
+                {
+                    "name": "height",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 21,
+                    "inheritance": {
+                        "file": "BaseGraph"
+                    }
+                },
+                {
+                    "name": "options",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "echarts.EChartsOption",
+                    "optional": false,
+                    "description": "",
+                    "line": 19,
+                    "inheritance": {
+                        "file": "BaseGraph"
+                    }
+                },
+                {
+                    "name": "SPLIT_LINE_COLOR",
+                    "defaultValue": "'#eff1f4'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 17,
+                    "modifierKind": [
+                        144
+                    ],
+                    "inheritance": {
+                        "file": "BaseGraph"
+                    }
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "getLegend",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "echarts.LegendComponentOption",
+                    "typeParameters": [],
+                    "line": 17,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "BaseGraph"
+                    }
+                },
+                {
+                    "name": "getSeries",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "",
+                    "typeParameters": [],
+                    "line": 21,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "BaseGraph"
+                    }
+                },
+                {
+                    "name": "getTooltip",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "echarts.TooltipComponentOption",
+                    "typeParameters": [],
+                    "line": 14,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "BaseGraph"
+                    }
+                },
+                {
+                    "name": "getXAxis",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "echarts.XAXisComponentOption",
+                    "typeParameters": [],
+                    "line": 25,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        158
+                    ],
+                    "inheritance": {
+                        "file": "BaseGraph"
+                    }
+                },
+                {
+                    "name": "getYAxis",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "echarts.YAXisComponentOption",
+                    "typeParameters": [],
+                    "line": 33,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        158
+                    ],
+                    "inheritance": {
+                        "file": "BaseGraph"
+                    }
+                },
+                {
+                    "name": "onGraphEvent",
+                    "args": [
+                        {
+                            "name": "e",
+                            "type": "",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 39,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "e",
+                            "type": "",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "getGrid",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "echarts.GridComponentOption",
+                    "typeParameters": [],
+                    "line": 70,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "BaseGraph"
+                    }
+                },
+                {
+                    "name": "getOptions",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 43,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "BaseGraph"
+                    }
+                },
+                {
+                    "name": "getTitle",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "TitleComponentOption",
+                    "typeParameters": [],
+                    "line": 66,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "BaseGraph"
+                    }
+                },
+                {
+                    "name": "ngAfterViewInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 30,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "BaseGraph"
+                    }
+                },
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 25,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "BaseGraph"
+                    }
+                },
+                {
+                    "name": "setGraphHeight",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 74,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "BaseGraph"
+                    }
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { ChangeDetectorRef, Component, ViewContainerRef } from '@angular/core';\nimport { BaseGraph } from '../../base-classes/base-graph';\nimport * as echarts from 'echarts';\n\n@Component({\n  selector: 'app-graph-timeline-category',\n  template: `<div *ngIf=\"options\" #graph echarts class=\"graph-container\" [options]=\"options\" [ngStyle]=\"{height}\" (chartClick)=\"onGraphEvent($event)\"></div>`\n})\nexport class GraphTimelineCategoryComponent extends BaseGraph {\n  constructor(cdr: ChangeDetectorRef, vcr: ViewContainerRef) {\n    super(cdr, vcr);\n  }\n\n  getTooltip(): echarts.TooltipComponentOption {\n    return { trigger: 'axis' };\n  }\n  getLegend(): echarts.LegendComponentOption {\n    return this.data.legend;\n  }\n\n  getSeries(): echarts.LinesSeriesOption['data'] {\n    return this.data.series.data.map(item => ({ ...item, type: 'line', stack: 'Total' }));\n  }\n\n  override getXAxis(): echarts.XAXisComponentOption {\n    return {\n      type: 'category',\n      boundaryGap: false,\n      data: this.data.xAxis.data\n    };\n  }\n\n  override getYAxis(): echarts.YAXisComponentOption {\n    return {\n      type: 'value'\n    };\n  }\n\n  onGraphEvent(e) {\n    console.log(e);\n    const str = `line: ${e.seriesName}, column: ${e.name}, value: ${e.value}`;\n    alert(str);\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "cdr",
+                        "type": "ChangeDetectorRef",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "vcr",
+                        "type": "ViewContainerRef",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 9,
+                "jsdoctags": [
+                    {
+                        "name": "cdr",
+                        "type": "ChangeDetectorRef",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "vcr",
+                        "type": "ViewContainerRef",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "extends": "BaseGraph"
+        },
+        {
+            "name": "GraphTimelineComponent",
+            "id": "component-GraphTimelineComponent-cc0b5b22174100e1ca211110e9b54d453014df2bf49c9799d1a6f5c7d6bbd0a542f6d16e80e51fc15cf544235d46d907c004d4c0d851eb42a32484396e634953",
+            "file": "src/app/shared/components/graphs/graph-timeline.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-graph-timeline",
+            "styleUrls": [],
+            "styles": [],
+            "template": "<div *ngIf=\"options\" #graph echarts class=\"graph-container\" [options]=\"options\" [ngStyle]=\"{height}\" (chartClick)=\"onGraphEvent($event)\"></div>",
+            "templateUrl": [],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "data",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "GraphData",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "BaseGraph"
+                    }
+                },
+                {
+                    "name": "metadata",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "GraphMetadata",
+                    "decorators": [],
+                    "inheritance": {
+                        "file": "BaseGraph"
+                    }
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "BORDER_RADIUS",
+                    "defaultValue": "10",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 18,
+                    "modifierKind": [
+                        144
+                    ],
+                    "inheritance": {
+                        "file": "BaseGraph"
+                    }
+                },
+                {
+                    "name": "elRefGraph",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "ElementRef",
+                    "optional": false,
+                    "description": "",
+                    "line": 13,
+                    "decorators": [
+                        {
+                            "name": "ViewChild",
+                            "stringifiedArguments": "'graph'"
+                        }
+                    ],
+                    "inheritance": {
+                        "file": "BaseGraph"
+                    }
+                },
+                {
+                    "name": "elRefGraphContainer",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "ElementRef",
+                    "optional": false,
+                    "description": "",
+                    "line": 12,
+                    "decorators": [
+                        {
+                            "name": "ViewChild",
+                            "stringifiedArguments": "'graphContainer'"
+                        }
+                    ],
+                    "inheritance": {
+                        "file": "BaseGraph"
+                    }
+                },
+                {
+                    "name": "FONT_STYLE",
+                    "defaultValue": "'Rubik'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 16,
+                    "modifierKind": [
+                        144
+                    ],
+                    "inheritance": {
+                        "file": "BaseGraph"
+                    }
+                },
+                {
+                    "name": "graph",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 20,
+                    "inheritance": {
+                        "file": "BaseGraph"
+                    }
+                },
+                {
+                    "name": "height",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 21,
+                    "inheritance": {
+                        "file": "BaseGraph"
+                    }
+                },
+                {
+                    "name": "options",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "echarts.EChartsOption",
+                    "optional": false,
+                    "description": "",
+                    "line": 19,
+                    "inheritance": {
+                        "file": "BaseGraph"
+                    }
+                },
+                {
+                    "name": "SPLIT_LINE_COLOR",
+                    "defaultValue": "'#eff1f4'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 17,
+                    "modifierKind": [
+                        144
+                    ],
+                    "inheritance": {
+                        "file": "BaseGraph"
+                    }
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "getLegend",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "echarts.LegendComponentOption",
+                    "typeParameters": [],
+                    "line": 17,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "BaseGraph"
+                    }
+                },
+                {
+                    "name": "getSeries",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "",
+                    "typeParameters": [],
+                    "line": 21,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "BaseGraph"
+                    }
+                },
+                {
+                    "name": "getTooltip",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "echarts.TooltipComponentOption",
+                    "typeParameters": [],
+                    "line": 14,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "BaseGraph"
+                    }
+                },
+                {
+                    "name": "getXAxis",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "echarts.XAXisComponentOption",
+                    "typeParameters": [],
+                    "line": 25,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        158
+                    ],
+                    "inheritance": {
+                        "file": "BaseGraph"
+                    }
+                },
+                {
+                    "name": "getYAxis",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "echarts.YAXisComponentOption",
+                    "typeParameters": [],
+                    "line": 33,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "modifierKind": [
+                        158
+                    ],
+                    "inheritance": {
+                        "file": "BaseGraph"
+                    }
+                },
+                {
+                    "name": "onGraphEvent",
+                    "args": [
+                        {
+                            "name": "e",
+                            "type": "",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 39,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "e",
+                            "type": "",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "getGrid",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "echarts.GridComponentOption",
+                    "typeParameters": [],
+                    "line": 70,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "BaseGraph"
+                    }
+                },
+                {
+                    "name": "getOptions",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 43,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "BaseGraph"
+                    }
+                },
+                {
+                    "name": "getTitle",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "TitleComponentOption",
+                    "typeParameters": [],
+                    "line": 66,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "BaseGraph"
+                    }
+                },
+                {
+                    "name": "ngAfterViewInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 30,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "BaseGraph"
+                    }
+                },
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 25,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "BaseGraph"
+                    }
+                },
+                {
+                    "name": "setGraphHeight",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "any",
+                    "typeParameters": [],
+                    "line": 74,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "inheritance": {
+                        "file": "BaseGraph"
+                    }
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { ChangeDetectorRef, Component, ViewContainerRef } from '@angular/core';\nimport { BaseGraph } from '../../base-classes/base-graph';\nimport * as echarts from 'echarts';\n\n@Component({\n  selector: 'app-graph-timeline',\n  template: `<div *ngIf=\"options\" #graph echarts class=\"graph-container\" [options]=\"options\" [ngStyle]=\"{height}\" (chartClick)=\"onGraphEvent($event)\"></div>`\n})\nexport class GraphTimelineComponent extends BaseGraph {\n  constructor(cdr: ChangeDetectorRef, vcr: ViewContainerRef) {\n    super(cdr, vcr);\n  }\n\n  getTooltip(): echarts.TooltipComponentOption {\n    return { trigger: 'axis' };\n  }\n  getLegend(): echarts.LegendComponentOption {\n    return this.data.legend;\n  }\n\n  getSeries(): echarts.LinesSeriesOption['data'] {\n    return this.data.series.data.map(item => ({ ...item, type: 'line', stack: 'Total' }));\n  }\n\n  override getXAxis(): echarts.XAXisComponentOption {\n    return {\n      type: 'category',\n      boundaryGap: false,\n      data: this.data.xAxis.data\n    };\n  }\n\n  override getYAxis(): echarts.YAXisComponentOption {\n    return {\n      type: 'value'\n    };\n  }\n\n  onGraphEvent(e) {\n    console.log(e);\n    const str = `line: ${e.seriesName}, column: ${e.name}, value: ${e.value}`;\n    alert(str);\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": "",
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "cdr",
+                        "type": "ChangeDetectorRef",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    },
+                    {
+                        "name": "vcr",
+                        "type": "ViewContainerRef",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 9,
+                "jsdoctags": [
+                    {
+                        "name": "cdr",
+                        "type": "ChangeDetectorRef",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    },
+                    {
+                        "name": "vcr",
+                        "type": "ViewContainerRef",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "extends": "BaseGraph"
+        },
+        {
             "name": "HeaderComponent",
             "id": "component-HeaderComponent-ced03811a868a019668bbd072c79a5fd7d7d97b8424ea4476860b35c31731ce06430905dbf6f81e0ca830fc11065ce2bf13a6a834c7aa52a64b34ae66a6f0023",
             "file": "src/app/shared/components/header/header.component.ts",
@@ -1865,6 +2678,328 @@
                 }
             ],
             "stylesData": ""
+        },
+        {
+            "name": "MedicineComponent",
+            "id": "component-MedicineComponent-cfef33f48d2792a6f975ae47ef99616d424c932583b018b4c7d8ef12b192a6b7821bab9df83ffcd64fdbc39063f7b410bead8b4406b8ba451e95d6fb20809a9a",
+            "file": "src/app/shared/components/system/medicine/medicine.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-medicine",
+            "styleUrls": [
+                "./medicine.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./medicine.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "data",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 17,
+                    "type": "GraphData",
+                    "decorators": []
+                },
+                {
+                    "name": "direction",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "Direction",
+                    "decorators": []
+                },
+                {
+                    "name": "metadata",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 16,
+                    "type": "GraphMetadata",
+                    "decorators": []
+                },
+                {
+                    "name": "resolution",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "TimelineResolution",
+                    "decorators": []
+                },
+                {
+                    "name": "text",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "any",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [],
+            "methodsClass": [
+                {
+                    "name": "dd",
+                    "args": [
+                        {
+                            "name": "e",
+                            "type": "",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 19,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "e",
+                            "type": "",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input } from '@angular/core';\nimport { GraphMetadata } from '@models/graph-metadata.model';\nimport { GraphData } from '@models/graph-data.model';\nimport { Direction } from '@stories/models/direction.model';\nimport { TimelineResolution } from '@shared/enums/timeline-resolution.enum';\n\n@Component({\n  selector: 'app-medicine',\n  templateUrl: './medicine.component.html',\n  styleUrls: ['./medicine.component.scss']\n})\nexport class MedicineComponent {\n  @Input() direction: Direction;\n  @Input() text: any;\n  @Input() resolution: TimelineResolution;\n  @Input() metadata: GraphMetadata;\n  @Input() data: GraphData;\n\n  dd(e) {\n    console.log('e:', e);\n    alert('ss')\n  }\n\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "//:host {\n//  box-sizing: border-box;\n//}\n\n.content {\n  height: 100vh;\n  background: white;\n  display: block;\n\n  header {\n    display: flex;\n    justify-content: space-between;\n    padding: 0.5rem;\n    background: #eeeeee;\n  }\n }\n\n",
+                    "styleUrl": "./medicine.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "templateData": "<div class=\"content\" [dir]=\"direction\">\n  <header>\n    <div>\n      <span>{{text.resolution}}</span>\n      <select (change)=\"dd($event)\">\n        <option [value]=\"'1hour'\">1 שעות</option>\n        <option [value]=\"'2hours'\">2 שעות</option>\n        <option [value]=\"'4hours'\">4 שעות</option>\n      </select>\n    </div>\n    <div>22</div>\n    <div>33</div>\n  </header>\n\n<button (click)=\"dd($event)\">TEST</button>\n\n\n</div>\n\n"
+        },
+        {
+            "name": "MedicineTesterComponent",
+            "id": "component-MedicineTesterComponent-3a4b757993766557610806628ad2541f5b73fce2e4f0576fa8123ae0672af8bf685bbc9d12b30d80f263e5bf73c1fcbf0d93b11f666a13f0853ca7b8904ec046",
+            "file": "src/stories/components/medicine-tester/medicine-tester.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-medicine-tester",
+            "styleUrls": [
+                "./medicine-tester.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./medicine-tester.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "data",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 18,
+                    "type": "GraphData",
+                    "decorators": []
+                },
+                {
+                    "name": "direction",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "Direction",
+                    "decorators": []
+                },
+                {
+                    "name": "metadata",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 17,
+                    "type": "GraphMetadata",
+                    "decorators": []
+                },
+                {
+                    "name": "resolution",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 16,
+                    "type": "TimelineResolution",
+                    "decorators": []
+                },
+                {
+                    "name": "text",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "any",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "modalRef",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "BsModalRef",
+                    "optional": false,
+                    "description": "",
+                    "line": 24
+                },
+                {
+                    "name": "pivotTime",
+                    "defaultValue": "'10:00'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 23
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "onChangePivotTime",
+                    "args": [
+                        {
+                            "name": "e",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 32,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "e",
+                            "type": "Event",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "onClickResetTime",
+                    "args": [
+                        {
+                            "name": "e",
+                            "type": "",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 28,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "e",
+                            "type": "",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "onClickSettings",
+                    "args": [
+                        {
+                            "name": "template",
+                            "type": "TemplateRef<any>",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 37,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "template",
+                            "type": "TemplateRef<any>",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input, TemplateRef } from '@angular/core';\nimport { Direction } from '@stories/models/direction.model';\nimport { TimelineResolution } from '@shared/enums/timeline-resolution.enum';\nimport { GraphMetadata } from '@models/graph-metadata.model';\nimport { GraphData } from '@models/graph-data.model';\nimport { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';\n\n@Component({\n  selector: 'app-medicine-tester',\n  templateUrl: './medicine-tester.component.html',\n  styleUrls: ['./medicine-tester.component.scss']\n})\nexport class MedicineTesterComponent {\n  @Input() direction: Direction;\n  @Input() text: any;\n  @Input() resolution: TimelineResolution;\n  @Input() metadata: GraphMetadata;\n  @Input() data: GraphData;\n\n  // config = {\n  //   pivotTime: '10:00'\n  // }\n  pivotTime = '10:00'\n  modalRef: BsModalRef;\n\n  constructor(private modalService: BsModalService) {}\n\n  onClickResetTime(e) {\n    this.pivotTime = new Intl.DateTimeFormat('en-GB', { timeStyle: 'short' }).format(new Date());\n  }\n\n  onChangePivotTime(e: Event) {\n    this.pivotTime = (e.target as any).value;\n    if (this.pivotTime.length === 2) this.pivotTime += ':00';\n  }\n\n  onClickSettings(template: TemplateRef<any>) {\n    console.log('onClickSettings');\n    this.modalRef = this.modalService.show(template);\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".top-bar {\n  background: black;\n  color: white;\n  height: 3rem;\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding-inline: 1rem;\n\n  .pivot-time {\n    .bi-gear {\n      margin-inline-end: 2rem;\n    }\n    > input {\n      margin-inline-start: 0.8rem;\n      margin-inline-end: 2rem;\n      width: 4rem;\n    }\n  }\n\n  select {\n    margin-inline-start: 1rem;\n  }\n}\n",
+                    "styleUrl": "./medicine-tester.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "modalService",
+                        "type": "BsModalService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 24,
+                "jsdoctags": [
+                    {
+                        "name": "modalService",
+                        "type": "BsModalService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "templateData": "<header class=\"top-bar\" [dir]=\"direction\">\n  <div class=\"pivot-time\">\n    <i class=\"bi bi-gear\" (click)=\"onClickSettings()\"></i>\n    <span>Pivot Time:</span>\n    <input [(ngModel)]=\"pivotTime\" (change)=\"onChangePivotTime($event)\">\n    <button (click)=\"onClickResetTime($event)\" type=\"button\" class=\"btn btn-primary\">RESET TIME</button>\n  </div>\n  <div>\n    <span>{{text.resolution}}</span>\n    <select (change)=\"dd($event)\">\n      <option [value]=\"'1hour'\">1 שעות</option>\n      <option [value]=\"'2hours'\">2 שעות</option>\n      <option [value]=\"'4hours'\">4 שעות</option>\n    </select>\n  </div>\n</header>\n\n<ng-template #template>\n  <div class=\"modal-header\">\n    <h4 class=\"modal-title pull-left\">Modal</h4>\n    <button type=\"button\" class=\"close pull-right\" aria-label=\"Close\" (click)=\"modalRef.hide()\">\n      <span aria-hidden=\"true\">×</span>\n    </button>\n  </div>\n  <div class=\"modal-body\">\n    This is a sample modal dialog box.\n  </div>\n  <div class=\"modal-footer\">\n    <button type=\"button\" class=\"btn btn-default\" (click)=\"modalRef.hide()\">Close</button>\n  </div>\n</ng-template>\n\n"
         },
         {
             "name": "PageComponent",
@@ -1950,13 +3085,13 @@
     "modules": [
         {
             "name": "AppModule",
-            "id": "module-AppModule-9ef5ddf78821fda2a8dc596cbec67dbfcfcc594a685da753768b0f6cf394053c23da927d5efbccfa2debfdad22cb501eb006bd6053d21798dc5407bdb0e207d5",
+            "id": "module-AppModule-51cb699ec5914292e7f50432da23ebdf35e5142b96cad593777ead69f885e9e5252d612fb6c69745499ab600077f20dd1be0e01afc198c7b5b674b2e18d650e8",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/app.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\n\nimport { AppRoutingModule } from './app-routing.module';\nimport { AppComponent } from './app.component';\nimport { SharedModule } from './shared/shared.module';\n\n@NgModule({\n  declarations: [\n    AppComponent\n  ],\n  imports: [\n    BrowserModule,\n    AppRoutingModule,\n    SharedModule\n  ],\n  providers: [],\n  bootstrap: [AppComponent]\n})\nexport class AppModule { }\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { BrowserModule } from '@angular/platform-browser';\n\nimport { AppRoutingModule } from './app-routing.module';\nimport { AppComponent } from './app.component';\nimport { ModalModule } from 'ngx-bootstrap/modal';\nimport { SharedModule } from '@shared/shared.module';\n\n@NgModule({\n  declarations: [\n    AppComponent\n  ],\n  imports: [\n    BrowserModule,\n    AppRoutingModule,\n    SharedModule,\n\n    ModalModule.forRoot()\n  ],\n  providers: [],\n  bootstrap: [AppComponent]\n})\nexport class AppModule { }\n",
             "children": [
                 {
                     "type": "providers",
@@ -2037,13 +3172,13 @@
         },
         {
             "name": "SharedModule",
-            "id": "module-SharedModule-f69eb2562f438c34e30d42a0158c61fd8b04c99096920563c02d4d52c13ab69222ecf02ae9b02a285b9312bf839dfda27e6d736349f4a1c68c65e103d2f86c8c",
+            "id": "module-SharedModule-a055ed429d3a2966bc7c056cf35a69fb86d3b03d254b603e798aa4b560efff72d6856f5a51955a97a6ddaf61de633fe9dc0a1363b617c28731d6c4636a73434d",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/shared/shared.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { NgxEchartsModule } from 'ngx-echarts';\nimport { GraphLinesComponent } from './components/graphs/graph-lines.component';\nimport { GraphPieComponent } from './components/graphs/graph-pie.component';\n\nconst declarations = [\n  GraphLinesComponent,\n  GraphPieComponent\n];\n\n@NgModule({\n  declarations,\n  imports: [\n    CommonModule,\n    NgxEchartsModule.forRoot({\n      echarts: () => import('echarts')\n    })\n  ],\n  exports: [\n    ...declarations,\n    NgxEchartsModule,\n  ]\n})\nexport class SharedModule {}\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { NgxEchartsModule } from 'ngx-echarts';\nimport { GraphLinesComponent } from './components/graphs/graph-lines.component';\nimport { GraphPieComponent } from './components/graphs/graph-pie.component';\nimport { GraphTimelineCategoryComponent } from '@shared/components/graphs/graph-timeline-category.component';\nimport { GraphTimelineComponent } from '@shared/components/graphs/graph-timeline.component';\nimport { MedicineComponent } from './components/system/medicine/medicine.component';\nimport { FormsModule } from '@angular/forms';\nimport { BrowserModule } from '@angular/platform-browser';\nimport { ModalModule } from 'ngx-bootstrap/modal';\n\nconst declarations = [\n  GraphLinesComponent,\n  GraphPieComponent,\n  GraphTimelineComponent,\n  GraphTimelineCategoryComponent,\n  MedicineComponent\n];\n\nconst modules = [\n  CommonModule,\n  BrowserModule,\n  FormsModule,\n];\n\n@NgModule({\n  declarations,\n  imports: [\n    ...modules,\n    NgxEchartsModule.forRoot({\n      echarts: () => import('echarts')\n    })\n  ],\n  exports: [\n    ...declarations,\n    ...modules,\n    NgxEchartsModule,\n    ModalModule\n  ]\n})\nexport class SharedModule {}\n",
             "children": [
                 {
                     "type": "providers",
@@ -2057,6 +3192,15 @@
                         },
                         {
                             "name": "GraphPieComponent"
+                        },
+                        {
+                            "name": "GraphTimelineCategoryComponent"
+                        },
+                        {
+                            "name": "GraphTimelineComponent"
+                        },
+                        {
+                            "name": "MedicineComponent"
                         }
                     ]
                 },
@@ -2072,6 +3216,15 @@
                         },
                         {
                             "name": "GraphPieComponent"
+                        },
+                        {
+                            "name": "GraphTimelineCategoryComponent"
+                        },
+                        {
+                            "name": "GraphTimelineComponent"
+                        },
+                        {
+                            "name": "MedicineComponent"
                         }
                     ]
                 },
@@ -2106,7 +3259,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "[]",
-                "defaultValue": "[\n  GraphLinesComponent,\n  GraphPieComponent\n]"
+                "defaultValue": "[\n  GraphLinesComponent,\n  GraphPieComponent,\n  GraphTimelineComponent,\n  GraphTimelineCategoryComponent,\n  MedicineComponent\n]"
             },
             {
                 "name": "environment",
@@ -2179,6 +3332,16 @@
                 "defaultValue": "Template.bind({})"
             },
             {
+                "name": "Ltr",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/graphs/medicine.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "ConcentratedDisplayStoryTemplate",
+                "defaultValue": "Template.bind({})"
+            },
+            {
                 "name": "mockDataGraphLines",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -2199,6 +3362,16 @@
                 "defaultValue": "{\n  metadata: {\n    type: GraphType.LinesRegular,\n    height: '600px'\n  },\n  data: {\n    title: {\n      text: 'Pie Graph Example',\n    },\n    legend: {\n      data: ['Direct Visit', 'Union Ads', 'Search Engine']\n    },\n    series: {\n      data: [\n        { name: 'Direct Visit', value: 335 },\n        { name: 'Union Ads', value: 234 },\n        { name: 'Search Engine', value: 1548 }\n      ]\n    }\n  }\n}"
             },
             {
+                "name": "modules",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/app/shared/shared.module.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "[]",
+                "defaultValue": "[\n  CommonModule,\n  BrowserModule,\n  FormsModule,\n]"
+            },
+            {
                 "name": "Primary",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
@@ -2212,20 +3385,20 @@
                 "name": "Regular",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/stories/graphs/pie.stories.ts",
+                "file": "src/stories/graphs/lines.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "GraphStoryArgs",
+                "type": "GraphStoryTemplate",
                 "defaultValue": "Template.bind({})"
             },
             {
                 "name": "Regular",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/stories/graphs/lines.stories.ts",
+                "file": "src/stories/graphs/pie.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "GraphStoryArgs",
+                "type": "GraphStoryTemplate",
                 "defaultValue": "Template.bind({})"
             },
             {
@@ -2236,6 +3409,16 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "literal type"
+            },
+            {
+                "name": "Rtl",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/graphs/medicine.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "ConcentratedDisplayStoryTemplate",
+                "defaultValue": "Template.bind({})"
             },
             {
                 "name": "Secondary",
@@ -2261,6 +3444,16 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
+                "file": "src/stories/examples/button.stories.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "Story<Button>",
+                "defaultValue": "(args: Button) => ({\n  props: args,\n})"
+            },
+            {
+                "name": "Template",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
                 "file": "src/stories/examples/header.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
@@ -2281,11 +3474,11 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/stories/examples/button.stories.ts",
+                "file": "src/stories/graphs/lines.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<Button>",
-                "defaultValue": "(args: Button) => ({\n  props: args,\n})"
+                "type": "Story<GraphLinesComponent>",
+                "defaultValue": "(args: GraphLinesComponent) => ({ props: args })"
             },
             {
                 "name": "Template",
@@ -2301,15 +3494,46 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/stories/graphs/lines.stories.ts",
+                "file": "src/stories/graphs/medicine.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<GraphLinesComponent>",
-                "defaultValue": "(args: GraphLinesComponent) => ({ props: args })"
+                "type": "Story<MedicineTesterComponent>",
+                "defaultValue": "(args: MedicineTesterComponent) => ({ props: args })"
+            },
+            {
+                "name": "textEn",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/const/text-en.const.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "{\n  direction: 'ltr',\n  text: {\n    resolution: 'Resolution:'\n  }\n} as const"
+            },
+            {
+                "name": "textHe",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/stories/const/text-he.const.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "",
+                "defaultValue": "{\n  direction: 'rtl',\n  text: {\n    resolution: ':רזולוציה'\n  }\n} as const"
             }
         ],
         "functions": [],
         "typealiases": [
+            {
+                "name": "Direction",
+                "ctype": "miscellaneous",
+                "subtype": "typealias",
+                "rawtype": "\"rtl\" | \"ltr\"",
+                "file": "src/stories/models/direction.model.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "kind": 186
+            },
             {
                 "name": "EChartsOption",
                 "ctype": "miscellaneous",
@@ -2367,6 +3591,77 @@
                 "deprecationMessage": "",
                 "description": "",
                 "file": "src/app/shared/enums/graph-type.enum.ts"
+            },
+            {
+                "name": "TimelineResolution",
+                "childs": [
+                    {
+                        "name": "Minutes1",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "Minutes1"
+                    },
+                    {
+                        "name": "Minutes2",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "Minutes2"
+                    },
+                    {
+                        "name": "Minutes5",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "Minutes5"
+                    },
+                    {
+                        "name": "Minutes15",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "Minutes15"
+                    },
+                    {
+                        "name": "Minutes30",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "Minutes30"
+                    },
+                    {
+                        "name": "Hours1",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "Hours1"
+                    },
+                    {
+                        "name": "Hours2",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "Hours2"
+                    },
+                    {
+                        "name": "Hours4",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "Hours4"
+                    },
+                    {
+                        "name": "Hours8",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "Hours8"
+                    },
+                    {
+                        "name": "Hours24",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "Hours24"
+                    }
+                ],
+                "ctype": "miscellaneous",
+                "subtype": "enum",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "file": "src/app/shared/enums/timeline-resolution.enum.ts"
             }
         ],
         "groupedVariables": {
@@ -2400,7 +3695,17 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "[]",
-                    "defaultValue": "[\n  GraphLinesComponent,\n  GraphPieComponent\n]"
+                    "defaultValue": "[\n  GraphLinesComponent,\n  GraphPieComponent,\n  GraphTimelineComponent,\n  GraphTimelineCategoryComponent,\n  MedicineComponent\n]"
+                },
+                {
+                    "name": "modules",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/app/shared/shared.module.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "[]",
+                    "defaultValue": "[\n  CommonModule,\n  BrowserModule,\n  FormsModule,\n]"
                 }
             ],
             "src/environments/environment.prod.ts": [
@@ -2543,6 +3848,38 @@
                     "defaultValue": "(args: Page) => ({\n  props: args,\n})"
                 }
             ],
+            "src/stories/graphs/medicine.stories.ts": [
+                {
+                    "name": "Ltr",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/graphs/medicine.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "ConcentratedDisplayStoryTemplate",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Rtl",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/graphs/medicine.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "ConcentratedDisplayStoryTemplate",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/graphs/medicine.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<MedicineTesterComponent>",
+                    "defaultValue": "(args: MedicineTesterComponent) => ({ props: args })"
+                }
+            ],
             "src/stories/mock-data/mock-data-graph-lines.const.ts": [
                 {
                     "name": "mockDataGraphLines",
@@ -2567,6 +3904,28 @@
                     "defaultValue": "{\n  metadata: {\n    type: GraphType.LinesRegular,\n    height: '600px'\n  },\n  data: {\n    title: {\n      text: 'Pie Graph Example',\n    },\n    legend: {\n      data: ['Direct Visit', 'Union Ads', 'Search Engine']\n    },\n    series: {\n      data: [\n        { name: 'Direct Visit', value: 335 },\n        { name: 'Union Ads', value: 234 },\n        { name: 'Search Engine', value: 1548 }\n      ]\n    }\n  }\n}"
                 }
             ],
+            "src/stories/graphs/lines.stories.ts": [
+                {
+                    "name": "Regular",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/graphs/lines.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "GraphStoryTemplate",
+                    "defaultValue": "Template.bind({})"
+                },
+                {
+                    "name": "Template",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/stories/graphs/lines.stories.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Story<GraphLinesComponent>",
+                    "defaultValue": "(args: GraphLinesComponent) => ({ props: args })"
+                }
+            ],
             "src/stories/graphs/pie.stories.ts": [
                 {
                     "name": "Regular",
@@ -2575,7 +3934,7 @@
                     "file": "src/stories/graphs/pie.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "GraphStoryArgs",
+                    "type": "GraphStoryTemplate",
                     "defaultValue": "Template.bind({})"
                 },
                 {
@@ -2589,26 +3948,28 @@
                     "defaultValue": "(args: GraphPieComponent) => ({ props: args })"
                 }
             ],
-            "src/stories/graphs/lines.stories.ts": [
+            "src/stories/const/text-en.const.ts": [
                 {
-                    "name": "Regular",
+                    "name": "textEn",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/stories/graphs/lines.stories.ts",
+                    "file": "src/stories/const/text-en.const.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "GraphStoryArgs",
-                    "defaultValue": "Template.bind({})"
-                },
+                    "type": "",
+                    "defaultValue": "{\n  direction: 'ltr',\n  text: {\n    resolution: 'Resolution:'\n  }\n} as const"
+                }
+            ],
+            "src/stories/const/text-he.const.ts": [
                 {
-                    "name": "Template",
+                    "name": "textHe",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/stories/graphs/lines.stories.ts",
+                    "file": "src/stories/const/text-he.const.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "Story<GraphLinesComponent>",
-                    "defaultValue": "(args: GraphLinesComponent) => ({ props: args })"
+                    "type": "",
+                    "defaultValue": "{\n  direction: 'rtl',\n  text: {\n    resolution: ':רזולוציה'\n  }\n} as const"
                 }
             ]
         },
@@ -2638,9 +3999,95 @@
                     "description": "",
                     "file": "src/app/shared/enums/graph-type.enum.ts"
                 }
+            ],
+            "src/app/shared/enums/timeline-resolution.enum.ts": [
+                {
+                    "name": "TimelineResolution",
+                    "childs": [
+                        {
+                            "name": "Minutes1",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "Minutes1"
+                        },
+                        {
+                            "name": "Minutes2",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "Minutes2"
+                        },
+                        {
+                            "name": "Minutes5",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "Minutes5"
+                        },
+                        {
+                            "name": "Minutes15",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "Minutes15"
+                        },
+                        {
+                            "name": "Minutes30",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "Minutes30"
+                        },
+                        {
+                            "name": "Hours1",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "Hours1"
+                        },
+                        {
+                            "name": "Hours2",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "Hours2"
+                        },
+                        {
+                            "name": "Hours4",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "Hours4"
+                        },
+                        {
+                            "name": "Hours8",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "Hours8"
+                        },
+                        {
+                            "name": "Hours24",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "Hours24"
+                        }
+                    ],
+                    "ctype": "miscellaneous",
+                    "subtype": "enum",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "file": "src/app/shared/enums/timeline-resolution.enum.ts"
+                }
             ]
         },
         "groupedTypeAliases": {
+            "src/stories/models/direction.model.ts": [
+                {
+                    "name": "Direction",
+                    "ctype": "miscellaneous",
+                    "subtype": "typealias",
+                    "rawtype": "\"rtl\" | \"ltr\"",
+                    "file": "src/stories/models/direction.model.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "kind": 186
+                }
+            ],
             "src/app/shared/base-classes/base-graph.ts": [
                 {
                     "name": "EChartsOption",
@@ -2695,7 +4142,7 @@
         ]
     },
     "coverage": {
-        "count": 2,
+        "count": 1,
         "status": "low",
         "files": [
             {
@@ -2753,6 +4200,24 @@
                 "status": "low"
             },
             {
+                "filePath": "src/app/shared/components/graphs/graph-timeline-category.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "GraphTimelineCategoryComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/24",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/components/graphs/graph-timeline.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "GraphTimelineComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/24",
+                "status": "low"
+            },
+            {
                 "filePath": "src/app/shared/components/header/header.component.ts",
                 "type": "component",
                 "linktype": "component",
@@ -2768,6 +4233,15 @@
                 "name": "PageComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/5",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/components/system/medicine/medicine.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "MedicineComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/7",
                 "status": "low"
             },
             {
@@ -2808,6 +4282,16 @@
                 "status": "low"
             },
             {
+                "filePath": "src/app/shared/shared.module.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "modules",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
                 "filePath": "src/environments/environment.prod.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
@@ -2823,6 +4307,35 @@
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
                 "name": "environment",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/components/medicine-tester/medicine-tester.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "MedicineTesterComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/12",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/const/text-en.const.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "textEn",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/const/text-he.const.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "textHe",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
                 "status": "low"
@@ -2938,15 +4451,6 @@
                 "status": "low"
             },
             {
-                "filePath": "src/stories/graphs/graph-story-args.model.ts",
-                "type": "interface",
-                "linktype": "interface",
-                "name": "GraphStoryArgs",
-                "coveragePercent": 0,
-                "coverageCount": "0/2",
-                "status": "low"
-            },
-            {
                 "filePath": "src/stories/graphs/lines.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
@@ -2958,6 +4462,36 @@
             },
             {
                 "filePath": "src/stories/graphs/lines.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Template",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/graphs/medicine.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Ltr",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/graphs/medicine.stories.ts",
+                "type": "variable",
+                "linktype": "miscellaneous",
+                "linksubtype": "variable",
+                "name": "Rtl",
+                "coveragePercent": 0,
+                "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/graphs/medicine.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -3004,6 +4538,24 @@
                 "name": "mockDataGraphPie",
                 "coveragePercent": 0,
                 "coverageCount": "0/1",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/models/templates/concentrated-display-story-template.model.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "ConcentratedDisplayStoryTemplate",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
+                "status": "low"
+            },
+            {
+                "filePath": "src/stories/models/templates/graph-story-template.model.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "GraphStoryTemplate",
+                "coveragePercent": 0,
+                "coverageCount": "0/2",
                 "status": "low"
             },
             {

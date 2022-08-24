@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="22" height="15" viewBox="0 0 22 15">
+    <defs>
+        <path id="4cus3lftfa" d="M6 6.522c3.314 0 6 2.686 6 6v1.304H0v-1.304c0-3.314 2.686-6 6-6z"/>
+        <path id="7p4l5ixg3b" d="M6 6.522c3.314 0 6 2.686 6 6v1.304H0v-1.304c0-3.314 2.686-6 6-6z"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <g>
+                <g transform="translate(-301 -1168) translate(302 1168)">
+                    <g>
+                        <path fill="#FFF" stroke="#1A91EB" stroke-linejoin="square" stroke-width="1.5" d="M6 7.272c1.45 0 2.762.587 3.712 1.537.95.95 1.538 2.263 1.538 3.713h0v.554H.75v-.554c0-1.45.588-2.763 1.538-3.713C3.238 7.86 4.55 7.272 6 7.272z"/>
+                        <use stroke="#FFF" xlink:href="#4cus3lftfa"/>
+                    </g>
+                    <circle cx="6" cy="3.652" r="3.152" fill="#FFF" stroke="#1A91EB"/>
+                </g>
+                <g transform="translate(-301 -1168) translate(302 1168) translate(7.333)">
+                    <g>
+                        <path fill="#FFF" stroke="#1A91EB" stroke-linejoin="square" stroke-width="1.5" d="M6 7.272c1.45 0 2.762.587 3.712 1.537.95.95 1.538 2.263 1.538 3.713h0v.554H.75v-.554c0-1.45.588-2.763 1.538-3.713C3.238 7.86 4.55 7.272 6 7.272z"/>
+                        <use stroke="#FFF" xlink:href="#7p4l5ixg3b"/>
+                    </g>
+                    <circle cx="6" cy="3.652" r="3.152" fill="#FFF" stroke="#1A91EB"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
