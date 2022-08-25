@@ -12,6 +12,8 @@ $top-bar-height: 3rem;
   border-bottom: 3px solid black;
 
   .pivot-time {
+    display: flex;
+    align-items: center;
     .bi-gear {
       margin-inline-end: 2rem;
       margin-inline-start: 1rem;
@@ -24,7 +26,7 @@ $top-bar-height: 3rem;
        height: $top-bar-height;
       margin-inline-end: 2rem;
       align-items: center;
-      transition: all 2s linear;
+      // transition: all 2s linear;
       button {
         width: 5rem;
         margin-inline-start: 2rem;
@@ -32,10 +34,11 @@ $top-bar-height: 3rem;
         //padding-bottom: 0;
       }
     }
-    .pivot-time {
+    .pivot-input {
       margin-inline-start: 0.8rem;
       margin-inline-end: 2rem;
       width: 4rem;
+
     }
   }
 
@@ -47,11 +50,24 @@ $top-bar-height: 3rem;
 .settings {
   margin-top: 1rem;
   padding: 1rem;
-  .settings-table {
-    input {
-      margin-inline-start: 1rem;
-      margin-inline-end: 0.5rem;
-      width: 3rem;
+  .setting-props {
+    display: flex;
+    justify-content: space-between;
+    .settings-language {
+      label {
+        opacity: 0.5;
+        height: 2.5rem;
+        &.active {
+          opacity: 1;
+        }
+      }
+    }
+    .settings-table {
+      input {
+        margin-inline-start: 1rem;
+        margin-inline-end: 0.5rem;
+        width: 3rem;
+      }
     }
   }
   .settings-sections {

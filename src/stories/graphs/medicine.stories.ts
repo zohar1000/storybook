@@ -24,7 +24,9 @@ export default {
 const Template: Story<MedicineTesterComponent> = (args: MedicineTesterComponent) => ({ props: args });
 
 export const Rtl: ConcentratedDisplayStoryTemplate = Template.bind({});
-Rtl.args = { ...textHe, resolution: TimelineResolution.Hours1 }
+// Rtl.args = { ...textHe, resolution: TimelineResolution.Hours1 }
+Rtl.args = { }
 
 export const Ltr: ConcentratedDisplayStoryTemplate = Template.bind({});
-Ltr.args = { ...textEn, resolution: TimelineResolution.Hours1 }
+// Ltr.args = { ...textEn, resolution: TimelineResolution.Hours1 }
+Ltr.args = { }

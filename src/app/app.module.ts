@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { SharedModule } from '@shared/shared.module';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
 @NgModule({
   declarations: [
@@ -19,7 +19,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     SharedModule,
 
     ModalModule.forRoot(),
-    AccordionModule.forRoot()
+    AccordionModule.forRoot(),
+    ButtonsModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

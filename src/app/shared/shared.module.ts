@@ -11,6 +11,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
 
 const declarations = [
   GraphLinesComponent,
@@ -40,7 +41,8 @@ const modules = [
     ...modules,
     NgxEchartsModule,
     ModalModule,
-    AccordionModule
+    AccordionModule,
+    ButtonsModule
   ]
 })
 export class SharedModule {}

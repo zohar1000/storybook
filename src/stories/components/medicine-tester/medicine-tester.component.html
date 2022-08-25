@@ -2,32 +2,36 @@
   <div class="pivot-time">
     <div *ngIf="isSettings" class="settings-action-buttons">
       <div>
-        <button type="button" class="btn btn-success" (click)="onClickSaveSettings()">Save</button>
-        <button type="button" class="btn btn-warning" (click)="onClickCancelSettings()">cancel</button>
+        <button type="button" class="btn btn-success" (click)="onClickSaveSettings()">{{text.buttons.save}}</button>
+        <button type="button" class="btn btn-warning" (click)="onClickCancelSettings()">{{text.buttons.cancel}}</button>
       </div>
     </div>
     <i *ngIf="!isSettings" class="bi bi-gear" (click)="onClickSettings()"></i>
-    <span>Pivot Time:</span>
-    <input [(ngModel)]="config.pivotTime" (change)="onChangePivotTime($event)" class="pivot-time">
-    <button (click)="onClickResetTime($event)" type="button" class="btn btn-primary">RESET TIME</button>
+    <span>{{text.pivotTime.label}}</span>
+    <input [(ngModel)]="config.pivotTime" (change)="onChangePivotTime($event)" class="pivot-input">
+    <button (click)="onClickResetTime($event)" type="button" class="btn btn-primary">{{text.pivotTime.button}}</button>
   </div>
   <div>
-    <span>{{text.resolution}}</span>
-    <select (change)="onChangeResolution($event)">
-      <option [value]="'1hour'">1 שעות</option>
-      <option [value]="'2hours'">2 שעות</option>
-      <option [value]="'4hours'">4 שעות</option>
+    <span>{{text.resolution.label}}</span>
+    <select [(ngModel)]="config.resolution" (change)="onChangeResolution($event)">
+      <option *ngFor="let option of text.resolution.options" [value]="option.value">{{option.label}}</option>
     </select>
   </div>
 </header>
 
 
 <div *ngIf="isSettings" class="settings">
-  <table class="settings-table">
-    <tr><td>Hours forward</td><td><input [(ngModel)]="config.hoursForward" type="number"></td></tr>
-    <tr><td>Hours backward</td><td><input [(ngModel)]="config.hoursBackward" type="number"></td></tr>
-    <tr><td>Refresh time</td><td><input [(ngModel)]="config.refreshTime" type="number">minutes</td></tr>
-  </table>
+  <div class="setting-props">
+    <table class="settings-table">
+      <tr><td>Hours forward</td><td><input [(ngModel)]="config.hoursForward" type="number"></td></tr>
+      <tr><td>Hours backward</td><td><input [(ngModel)]="config.hoursBackward" type="number"></td></tr>
+      <tr><td>Refresh time</td><td><input [(ngModel)]="config.refreshTime" type="number">minutes</td></tr>
+    </table>
+    <div class="settings-language btn-group" btnRadioGroup [(ngModel)]="config.languageCode">
+      <label class="btn btn-success" btnRadio="en">English</label>
+      <label class="btn btn-success" btnRadio="he">עברית</label>
+    </div>
+  </div>
 
   <accordion class="settings-sections" [isAnimated]="true">
     <accordion-group *ngFor="let graph of config.graphs; let i=index" heading="{{text.graphSections[i].title}}" [panelClass]="accordionClass">

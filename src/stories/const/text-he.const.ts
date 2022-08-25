@@ -1,7 +1,22 @@
 export const textHe = {
   direction: 'rtl',
   text: {
-    resolution: ':רזולוציה',
+    buttons: {
+      save: 'שמירה',
+      cancel: 'ביטול'
+    },
+    pivotTime: {
+      label: 'שעת ציר',
+      button: 'זמן נוכחי'
+    },
+    resolution: {
+      label: 'רזולוציה',
+      options: [
+        { value: '1hour', label: 'שעה' },
+        { value: '2hour', label: '2 שעות' },
+        { value: '4hour', label: '4 שעות' }
+      ]
+    },
     graphSections: [
       { title: 'חלק 1' },
       { title: 'חלק 2' },
