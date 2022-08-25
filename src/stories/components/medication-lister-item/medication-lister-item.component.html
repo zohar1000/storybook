@@ -1,1 +1,23 @@
-<div>{{medication | json}}</div>
+<div class="medication-row" [class.first]="index===0">
+  <div class="prop category">
+    <span class="label">Category</span>
+    <select [(ngModel)]="medication.categoryId" (change)="onChangeCategory($event)">
+      <option *ngFor="let option of MedicationCategories" [value]="option.id">{{option.label}}</option>
+    </select>
+  </div>
+
+  <div class="prop medication">
+    <span class="label">Medication</span>
+    <select [ngModel]="medication.id" (change)="onChangeMedication($event)">
+      <option *ngFor="let item of categoryMedications" [value]="item.id">{{item.name}}</option>
+    </select>
+  </div>
+
+  <div class="prop execution">
+    <span class="label">Type</span>
+    <select [(ngModel)]="medication.type" (change)="stopPropagation($event)">
+      <option [value]="ExecutionType.OneTime">One Time</option>
+      <option [value]="ExecutionType.Periodic">Periodic</option>
+    </select>
+  </div>
+</div>

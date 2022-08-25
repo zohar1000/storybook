@@ -82,8 +82,15 @@ $top-bar-height: 3rem;
         color: white;
         text-decoration: none;
       }
-      .panel-collapse {
+      .panel-body {
         background: white;
+        position: relative;
+        padding-top: 0.5rem;
+        .section-display {
+          position: absolute;
+          top: 0.5rem;
+          right: 1rem;
+        }
       }
     }
   }

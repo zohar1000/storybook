@@ -1,5 +1,8 @@
-.row {
+.medication-table {
   background: yellow;
   //height: 100px;
   display: block;
+  list-style: none;
+  padding: 0; /* Remove padding */
+  margin: 0.5rem 0 0 0; /* Remove margins */
 }

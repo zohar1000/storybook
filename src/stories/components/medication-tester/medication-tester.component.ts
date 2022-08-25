@@ -67,7 +67,7 @@ debugger;
     const item = JSON.stringify(this.settings);
     localStorage.setItem(this.LOCAL_STORAGE_KEY, item);
     this.setTextLanguage();
-    // console.log('saving to ls:', JSON.stringify(this.settings, null, 2));
+    console.log('saving to ls:', JSON.stringify(this.settings.graphs[0].medications, null, 2));
   }
 
   getFromLocalStorage() {
@@ -88,6 +88,10 @@ debugger;
     return typeof this.prevSettings;
   }
 
+  onChangeGraphMedications(medications, i) {
+    this.settings.graphs[i].medications = medications;
+  }
+
   getDefaultSettings() {
     return {
       languageCode: 'en',
@@ -100,7 +104,8 @@ debugger;
         {
           isDisplay: true,
           medications: [
-            { id: 10, type: ExecutionType.OneTime, categoryId: 1 }
+            { id: 10, type: ExecutionType.OneTime, categoryId: 1 },
+            { id: 11, type: ExecutionType.OneTime, categoryId: 1 },
           ]
         },
         {

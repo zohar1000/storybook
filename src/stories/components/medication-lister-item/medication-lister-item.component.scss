@@ -1,0 +1,25 @@
+.medication-row {
+  //padding-inline: 1rem;
+  //background: brown;
+  padding-inline: 1rem;
+  border: 1px solid black;
+  border-top: none;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  &.first {
+    border-top: 1px solid black;
+  }
+}
+
+.prop {
+  display: inline-flex;
+  margin-inline-end: 2rem;
+  .label {
+    margin-inline-end: 0.6rem;
+  }
+}
+
+.category {
+  //background: cyan;
+}
