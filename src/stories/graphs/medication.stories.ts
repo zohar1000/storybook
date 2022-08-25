@@ -1,27 +1,35 @@
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
 import { SharedModule } from '@shared/shared.module';
 import { ConcentratedDisplayStoryTemplate } from '@stories/models/templates/concentrated-display-story-template.model';
-import { textEn } from '@stories/const/text-en.const';
-import { textHe } from '@stories/const/text-he.const';
-import { TimelineResolution } from '@shared/enums/timeline-resolution.enum';
-import { MedicineTesterComponent } from '@stories/components/medicine-tester/medicine-tester.component';
+import { MedicationTesterComponent } from '@stories/components/medication-tester/medication-tester.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
+import { MedicationListerComponent } from '@stories/components/medication-lister/medication-lister.component';
+import { MedicationListerItemComponent } from '@stories/components/medication-lister-item/medication-lister-item.component';
 
 export default {
   title: 'רכיבים/תצוגה מרוכזת',
-  component: MedicineTesterComponent,
+  component: MedicationTesterComponent,
   parameters: {
     layout: 'fullscreen'
   },
+  argTypes: {
+    argName: {
+      isSettings: true
+    }
+  },
   decorators: [
     moduleMetadata({
+      declarations: [
+        MedicationListerComponent,
+        MedicationListerItemComponent
+      ],
       imports: [SharedModule],
       providers: [BsModalService]
     })
   ],
 } as Meta;
 
-const Template: Story<MedicineTesterComponent> = (args: MedicineTesterComponent) => ({ props: args });
+const Template: Story<MedicationTesterComponent> = (args: MedicationTesterComponent) => ({ props: args });
 
 export const Rtl: ConcentratedDisplayStoryTemplate = Template.bind({});
 // Rtl.args = { ...textHe, resolution: TimelineResolution.Hours1 }

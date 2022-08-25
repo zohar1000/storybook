@@ -5,20 +5,21 @@ import { GraphLinesComponent } from './components/graphs/graph-lines.component';
 import { GraphPieComponent } from './components/graphs/graph-pie.component';
 import { GraphTimelineCategoryComponent } from '@shared/components/graphs/graph-timeline-category.component';
 import { GraphTimelineComponent } from '@shared/components/graphs/graph-timeline.component';
-import { MedicineComponent } from './components/system/medicine/medicine.component';
+import { MedicationComponent } from '@shared/components/system/medication/medication.component';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { SortableModule } from 'ngx-bootstrap/sortable';
 
 const declarations = [
   GraphLinesComponent,
   GraphPieComponent,
   GraphTimelineComponent,
   GraphTimelineCategoryComponent,
-  MedicineComponent
+  MedicationComponent
 ];
 
 const modules = [
@@ -42,7 +43,8 @@ const modules = [
     NgxEchartsModule,
     ModalModule,
     AccordionModule,
-    ButtonsModule
+    ButtonsModule,
+    SortableModule
   ]
 })
 export class SharedModule {}

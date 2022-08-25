@@ -1,5 +1,3 @@
-import { TimelineResolution } from '@shared/enums/timeline-resolution.enum';
-import { Direction } from '@stories/models/direction.model';
 
 export interface ConcentratedDisplayStoryTemplate {
   args: {

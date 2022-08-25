@@ -5,11 +5,11 @@ import { Direction } from '@stories/models/direction.model';
 import { TimelineResolution } from '@shared/enums/timeline-resolution.enum';
 
 @Component({
-  selector: 'app-medicine',
-  templateUrl: './medicine.component.html',
-  styleUrls: ['./medicine.component.scss']
+  selector: 'app-medication',
+  templateUrl: './medication.component.html',
+  styleUrls: ['./medication.component.scss']
 })
-export class MedicineComponent {
+export class MedicationComponent {
   @Input() direction: Direction;
   @Input() text: any;
   @Input() resolution: TimelineResolution;

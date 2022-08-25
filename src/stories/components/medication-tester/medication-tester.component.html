@@ -1,3 +1,5 @@
+<ng-container *ngIf="settings">
+
 <header class="top-bar" [dir]="direction">
   <div class="pivot-time">
     <div *ngIf="isSettings" class="settings-action-buttons">
@@ -8,12 +10,12 @@
     </div>
     <i *ngIf="!isSettings" class="bi bi-gear" (click)="onClickSettings()"></i>
     <span>{{text.pivotTime.label}}</span>
-    <input [(ngModel)]="config.pivotTime" (change)="onChangePivotTime($event)" class="pivot-input">
+    <input [(ngModel)]="settings.pivotTime" (change)="onChangePivotTime($event)" class="pivot-input">
     <button (click)="onClickResetTime($event)" type="button" class="btn btn-primary">{{text.pivotTime.button}}</button>
   </div>
   <div>
     <span>{{text.resolution.label}}</span>
-    <select [(ngModel)]="config.resolution" (change)="onChangeResolution($event)">
+    <select [(ngModel)]="settings.resolution" (change)="onChangeResolution($event)">
       <option *ngFor="let option of text.resolution.options" [value]="option.value">{{option.label}}</option>
     </select>
   </div>
@@ -23,22 +25,27 @@
 <div *ngIf="isSettings" class="settings">
   <div class="setting-props">
     <table class="settings-table">
-      <tr><td>Hours forward</td><td><input [(ngModel)]="config.hoursForward" type="number"></td></tr>
-      <tr><td>Hours backward</td><td><input [(ngModel)]="config.hoursBackward" type="number"></td></tr>
-      <tr><td>Refresh time</td><td><input [(ngModel)]="config.refreshTime" type="number">minutes</td></tr>
+      <tr><td>Hours forward</td><td><input [(ngModel)]="settings.hoursForward" type="number"></td></tr>
+      <tr><td>Hours backward</td><td><input [(ngModel)]="settings.hoursBackward" type="number"></td></tr>
+      <tr><td>Refresh time</td><td><input [(ngModel)]="settings.refreshTime" type="number">minutes</td></tr>
     </table>
-    <div class="settings-language btn-group" btnRadioGroup [(ngModel)]="config.languageCode">
+    <div class="settings-language btn-group" btnRadioGroup [(ngModel)]="settings.languageCode">
       <label class="btn btn-success" btnRadio="en">English</label>
       <label class="btn btn-success" btnRadio="he">עברית</label>
     </div>
   </div>
 
   <accordion class="settings-sections" [isAnimated]="true">
-    <accordion-group *ngFor="let graph of config.graphs; let i=index" heading="{{text.graphSections[i].title}}" [panelClass]="accordionClass">
+    <accordion-group *ngFor="let graph of settings.graphs; let i=index"
+                     heading="{{text.graphSections[i].title}}"
+                     [panelClass]="accordionClass"
+                     [isOpen]="true">
       <div class="form-check">
         <input class="form-check-input" type="checkbox" [(ngModel)]="graph.isDisplay">Visible
       </div>
+      <app-medication-lister [medications]="graph.medications"></app-medication-lister>
     </accordion-group>
   </accordion>
 </div>
 
+</ng-container>
