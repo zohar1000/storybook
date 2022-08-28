@@ -50,24 +50,11 @@ $top-bar-height: 3rem;
 .settings {
   margin-top: 1rem;
   padding: 1rem;
-  .setting-props {
-    display: flex;
-    justify-content: space-between;
-    .settings-language {
-      label {
-        opacity: 0.5;
-        height: 2.5rem;
-        &.active {
-          opacity: 1;
-        }
-      }
-    }
-    .settings-table {
-      input {
-        margin-inline-start: 1rem;
-        margin-inline-end: 0.5rem;
-        width: 3rem;
-      }
+  .settings-table {
+    input {
+      margin-inline-start: 1rem;
+      margin-inline-end: 0.5rem;
+      width: 3rem;
     }
   }
   .settings-sections {

@@ -1,23 +1,24 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Medication } from '@stories/models/medication.model';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { Medication, MedicationPeriodic } from '@stories/models/medication.model';
 import { MedicationCategories } from '@stories/const/medication-categories.const';
-import { Medications } from '@stories/const/medications.const';
+import { medications } from '@stories/const/medications.const';
 import { ExecutionType } from '@stories/enums/execution-type.enum';
 
 @Component({
   selector: 'app-medication-lister-item',
   templateUrl: './medication-lister-item.component.html',
-  styleUrls: ['./medication-lister-item.component.scss']
+  styleUrls: ['./medication-lister-item.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MedicationListerItemComponent implements OnInit {
   @Input() medication: Medication;
   @Input() index: number;
   MedicationCategories = MedicationCategories;
-  Medications = Medications;
+  medications = medications;
   ExecutionType = ExecutionType;
   categoryMedications = [];
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit(): void {
     this.setCategoryMedication();
@@ -46,8 +47,14 @@ export class MedicationListerItemComponent implements OnInit {
 
   setCategoryMedication() {
     console.log('this.categoryMedications START:', this.medication.categoryId);
-    this.categoryMedications = Medications.filter(medication => medication.categoryId === this.medication.categoryId);
+    this.categoryMedications = this.medications.filter(medication => medication.categoryId === this.medication.categoryId);
     console.log('this.categoryMedications:', this.categoryMedications);
   }
 
+  onChangeTime(e, i) {
+    this.stopPropagation(e);
+    setTimeout(() => {
+      (this.medication as MedicationPeriodic).times[i] = e.target.value;
+    });
+  }
 }

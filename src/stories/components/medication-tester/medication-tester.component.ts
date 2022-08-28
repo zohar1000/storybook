@@ -1,7 +1,4 @@
-import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
-import { textEn } from '@stories/const/text-en.const';
-import { textHe } from '@stories/const/text-he.const';
-import { ExecutionType } from '@stories/enums/execution-type.enum';
+import { ChangeDetectorRef, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-medication-tester',
@@ -10,25 +7,27 @@ import { ExecutionType } from '@stories/enums/execution-type.enum';
   encapsulation: ViewEncapsulation.None
 })
 export class MedicationTesterComponent implements OnInit {
-  text: any;
+  @Input() text: any;
+  @Input() direction: string;
+  @Input() defaultSettings;
   settings;
-  direction: string;
   LOCAL_STORAGE_KEY = 'medicationsConfig';
   isSettings = false;
   accordionClass = 'settings-accordion';
   prevSettings;
 
+  constructor(private cdr: ChangeDetectorRef) {}
+
   ngOnInit() {
     setTimeout(() => {
-      this.initConfig();
-      this.setTextLanguage();
+      this.initSettings();
       this.onClickSettings();
     }, 50);
   }
 
-  initConfig() {
+  initSettings() {
     const item = this.getFromLocalStorage();
-    this.settings = item ? JSON.parse(item) : this.settings = this.getDefaultSettings();
+    this.settings = item ? JSON.parse(item) : JSON.parse(JSON.stringify(this.defaultSettings));
   }
 
   onClickResetTime(e) {
@@ -66,7 +65,6 @@ debugger;
   saveToLocalStorage() {
     const item = JSON.stringify(this.settings);
     localStorage.setItem(this.LOCAL_STORAGE_KEY, item);
-    this.setTextLanguage();
     console.log('saving to ls:', JSON.stringify(this.settings.graphs[0].medications, null, 2));
   }
 
@@ -74,10 +72,8 @@ debugger;
     return localStorage.getItem(this.LOCAL_STORAGE_KEY);
   }
 
-  setTextLanguage() {
-    const text = this.settings.languageCode === 'en' ? textEn : textHe;
-    this.text = text.text;
-    this.direction = text.direction;
+  clearLocalStorage() {
+    return localStorage.removeItem(this.LOCAL_STORAGE_KEY);
   }
 
   getConfig() {
@@ -92,35 +88,12 @@ debugger;
     this.settings.graphs[i].medications = medications;
   }
 
-  getDefaultSettings() {
-    return {
-      languageCode: 'en',
-      resolution: '1hour',
-      pivotTime: '10:00',
-      hoursForward: 14,
-      hoursBackward: 5,
-      refreshTime: 2,
-      graphs: [
-        {
-          isDisplay: true,
-          medications: [
-            { id: 10, type: ExecutionType.OneTime, categoryId: 1 },
-            { id: 11, type: ExecutionType.OneTime, categoryId: 1 },
-          ]
-        },
-        {
-          isDisplay: false,
-          medications: []
-        },
-        {
-          isDisplay: true,
-          medications: []
-        },
-        {
-          isDisplay: true,
-          medications: []
-        }
-      ]
+  onClickDefaultSettings() {
+    const isClear = confirm('are you sure');
+    if (isClear) {
+      this.clearLocalStorage();
+      this.settings = JSON.parse(JSON.stringify(this.defaultSettings));
+      this.cdr.detectChanges();
     }
   }
 }

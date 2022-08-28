@@ -1,4 +1,4 @@
-export const Medications = [
+export const medications = [
   { id: 10, name: 'Medication 10', categoryId: 1 },
   { id: 11, name: 'Medication 11', categoryId: 1 },
   { id: 12, name: 'Medication 12', categoryId: 1 },

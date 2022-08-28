@@ -1,4 +1,4 @@
 export enum ExecutionType {
   Periodic = 'Periodic',
-  OneTime = 'OneTime'
+  Continuous = 'Continuous'
 }

@@ -3,7 +3,8 @@ export const textHe = {
   text: {
     buttons: {
       save: 'שמירה',
-      cancel: 'ביטול'
+      cancel: 'ביטול',
+      defaultSettings: 'איפוס הגדרות'
     },
     pivotTime: {
       label: 'שעת ציר',

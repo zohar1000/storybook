@@ -5,13 +5,16 @@
     <div *ngIf="isSettings" class="settings-action-buttons">
       <div>
         <button type="button" class="btn btn-success" (click)="onClickSaveSettings()">{{text.buttons.save}}</button>
-        <button type="button" class="btn btn-warning" (click)="onClickCancelSettings()">{{text.buttons.cancel}}</button>
+        <button type="button" class="btn btn-danger" (click)="onClickCancelSettings()">{{text.buttons.cancel}}</button>
       </div>
     </div>
     <i *ngIf="!isSettings" class="bi bi-gear" (click)="onClickSettings()"></i>
     <span>{{text.pivotTime.label}}</span>
     <input [(ngModel)]="settings.pivotTime" (change)="onChangePivotTime($event)" class="pivot-input">
     <button (click)="onClickResetTime($event)" type="button" class="btn btn-primary">{{text.pivotTime.button}}</button>
+  </div>
+  <div class="default-settings">
+    <button type="button" class="btn btn-warning" (click)="onClickDefaultSettings()">{{text.buttons.defaultSettings}}</button>
   </div>
   <div>
     <span>{{text.resolution.label}}</span>
@@ -23,17 +26,11 @@
 
 
 <div *ngIf="isSettings" class="settings">
-  <div class="setting-props">
-    <table class="settings-table">
-      <tr><td>Hours forward</td><td><input [(ngModel)]="settings.hoursForward" type="number"></td></tr>
-      <tr><td>Hours backward</td><td><input [(ngModel)]="settings.hoursBackward" type="number"></td></tr>
-      <tr><td>Refresh time</td><td><input [(ngModel)]="settings.refreshTime" type="number">minutes</td></tr>
-    </table>
-    <div class="settings-language btn-group" btnRadioGroup [(ngModel)]="settings.languageCode">
-      <label class="btn btn-success" btnRadio="en">English</label>
-      <label class="btn btn-success" btnRadio="he">עברית</label>
-    </div>
-  </div>
+  <table class="settings-table">
+    <tr><td>Hours forward</td><td><input [(ngModel)]="settings.hoursForward" type="number"></td></tr>
+    <tr><td>Hours backward</td><td><input [(ngModel)]="settings.hoursBackward" type="number"></td></tr>
+    <tr><td>Refresh time</td><td><input [(ngModel)]="settings.refreshTime" type="number">minutes</td></tr>
+  </table>
 
   <accordion class="settings-sections" [isAnimated]="true">
     <accordion-group *ngFor="let graph of settings.graphs; let i=index"

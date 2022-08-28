@@ -3,7 +3,8 @@ export const textEn = {
   text: {
     buttons: {
       save: 'Save',
-      cancel: 'cancel'
+      cancel: 'cancel',
+      defaultSettings: 'Reset to Default Settings'
     },
     pivotTime: {
       label: 'Pivot time',

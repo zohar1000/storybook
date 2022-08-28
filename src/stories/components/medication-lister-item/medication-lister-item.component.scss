@@ -1,22 +1,28 @@
+$border-color: #aaaaaa;
+
 .medication-row {
   //padding-inline: 1rem;
   //background: brown;
   padding-inline: 1rem;
-  border: 1px solid black;
+  border: 1px solid $border-color;
   border-top: none;
   padding: 6px;
   display: flex;
   align-items: center;
   &.first {
-    border-top: 1px solid black;
+    border-top: 1px solid $border-color;
   }
 }
 
 .prop {
   display: inline-flex;
+  align-items: center;
   margin-inline-end: 2rem;
   .label {
     margin-inline-end: 0.6rem;
+  }
+  > input {
+    width: 5rem;
   }
 }
 

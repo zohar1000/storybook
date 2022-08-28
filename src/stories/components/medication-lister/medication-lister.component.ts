@@ -1,11 +1,12 @@
-import { AfterViewInit, Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 import { Subject, Subscription } from 'rxjs';
 import { distinct, debounceTime, skip } from 'rxjs/operators';
 
 @Component({
   selector: 'app-medication-lister',
   templateUrl: './medication-lister.component.html',
-  styleUrls: ['./medication-lister.component.scss']
+  styleUrls: ['./medication-lister.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MedicationListerComponent implements AfterViewInit, OnDestroy {
   @Input() medications;
@@ -29,7 +30,6 @@ export class MedicationListerComponent implements AfterViewInit, OnDestroy {
   }
 
   onChange(value) {
-    // console.log('value:', value);
     this.medications$.next(value);
   }
 
