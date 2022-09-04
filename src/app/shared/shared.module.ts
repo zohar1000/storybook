@@ -16,6 +16,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { MedicationsConcentratedComponent } from '@shared/components/system/medications-concentrated/medications-concentrated.component';
 import { MedicationsSectionComponent } from './components/system/medications-section/medications-section.component';
 import { MedicationsCategoryComponent } from './components/system/medications-category/medications-category.component';
+import { MedicationGraphComponent } from './components/system/medication-graph/medication-graph.component';
 
 const declarations = [
   GraphLinesComponent,
@@ -24,7 +25,8 @@ const declarations = [
   GraphTimelineCategoryComponent,
   MedicationsConcentratedComponent,
   MedicationsSectionComponent,
-  MedicationsCategoryComponent
+  MedicationsCategoryComponent,
+  MedicationGraphComponent
 ];
 
 const modules = [

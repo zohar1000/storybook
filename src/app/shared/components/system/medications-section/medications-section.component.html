@@ -1,5 +1,7 @@
-<p>{{section.name}}</p>
+<div>{{section.name}}</div>
 
-<app-medications-category *ngFor="let category of section.categories" [category]="category">
-
-</app-medications-category>
+<div class="categories-container">
+  <app-medications-category *ngFor="let category of section.categories"
+    [category]="category">
+  </app-medications-category>
+</div>

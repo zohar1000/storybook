@@ -17,10 +17,10 @@
     <div></div>
   </div>
 
-  <div *ngFor="let section of data.sections">
-    <app-medications-section [section]="section"></app-medications-section>
+  <div class="sections">
+    <app-medications-section *ngFor="let section of data.sections"
+      [section]="section">
+    </app-medications-section>
   </div>
-
-
 </div>
 

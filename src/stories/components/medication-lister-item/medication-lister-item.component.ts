@@ -38,7 +38,7 @@ export class MedicationListerItemComponent implements OnInit {
 
   onChangeMedication(e) {
     this.medication.id = Number(e.target.value);
-    console.log('onChangeMedication:', e.target.value);
+    this.medication.name = this.medications.find(medication => medication.id === this.medication.id).name;
     e.stopPropagation();
   }
 
@@ -47,9 +47,7 @@ export class MedicationListerItemComponent implements OnInit {
   }
 
   setCategoryMedication() {
-    console.log('this.categoryMedications START:', this.medication.categoryId);
     this.categoryMedications = this.medications.filter(medication => medication.categoryId === this.medication.categoryId);
-    console.log('this.categoryMedications:', this.categoryMedications);
   }
 
   onChangeTime(e, i) {

@@ -1,0 +1,23 @@
+@import 'variables';
+
+.graph-line {
+  display: flex;
+  align-items: center;
+  height: $medication-graph-height;
+  width: 100%;
+
+  .name {
+    width: 15rem;
+  }
+
+  .graph {
+    border-top: 1px solid gray;
+    border-right: 1px solid gray;
+    border-left: 1px solid gray;
+    //border-bottom: 1px solid gray;
+    height: 100%;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+  }
+}

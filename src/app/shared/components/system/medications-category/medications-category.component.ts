@@ -8,10 +8,18 @@ import { MedicationsCategory } from '@models/medications-concentrated-data.model
 })
 export class MedicationsCategoryComponent implements OnInit {
   @Input() category: MedicationsCategory;
+  isExpanded = true;
 
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  onClickExpand() {
+    this.isExpanded = true;
+  }
+
+  onClickCondense() {
+    this.isExpanded = false;
+  }
 }

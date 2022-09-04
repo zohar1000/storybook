@@ -21,13 +21,13 @@
     }
   }
 
-
-
-  header {
-    display: flex;
-    justify-content: space-between;
-    padding: 0.5rem;
-    background: #eeeeee;
+  .sections {
+    :not(:last-child) {
+      margin-bottom: 1.5rem;
+    }
+    app-medications-section {
+      display: block;
+    }
   }
  }
 

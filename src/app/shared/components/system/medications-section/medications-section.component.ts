@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MedicationsSection } from '@models/medications-concentrated-data.model';
 
 @Component({
@@ -6,12 +6,6 @@ import { MedicationsSection } from '@models/medications-concentrated-data.model'
   templateUrl: './medications-section.component.html',
   styleUrls: ['./medications-section.component.scss']
 })
-export class MedicationsSectionComponent implements OnInit {
+export class MedicationsSectionComponent {
   @Input() section: MedicationsSection;
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }

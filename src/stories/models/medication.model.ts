@@ -2,6 +2,7 @@ import { ExecutionType } from '@stories/enums/execution-type.enum';
 
 export interface Medication {
   id: number;
+  name: string;
   categoryId: number;
   type: ExecutionType;
   timingType?: any;

@@ -1,0 +1,9 @@
+.categories-container {
+  //:not(:last-child) {
+  //  margin-bottom: 2px;
+  //}
+  app-medications-category {
+    display: block;
+  }
+}
+

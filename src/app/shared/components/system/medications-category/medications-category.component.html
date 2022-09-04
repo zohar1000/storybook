@@ -1,3 +1,22 @@
-<p>{{category.name}}</p>
+<div class="category">
+  <div class="expand-icon">
+    <i class="bi bi-plus" *ngIf="!isExpanded" (click)="onClickExpand()"></i>
+    <i class="bi bi-dash" *ngIf="isExpanded" (click)="onClickCondense()"></i>
+  </div>
 
+  <div class="frame">
+    <ng-container *ngIf="isExpanded">
+      <div *ngFor="let medication of category.medications" class="frame-line-filler"></div>
+    </ng-container>
+  </div>
 
+  <div class="medications">
+    <ng-container *ngIf="!isExpanded">CONTRACTED</ng-container>
+    <ng-container *ngIf="isExpanded">
+      <div *ngFor="let medication of category.medications" class="medication-container">
+        <app-medication-graph [medication]="medication"></app-medication-graph>
+      </div>
+    </ng-container>
+  </div>
+
+</div>
