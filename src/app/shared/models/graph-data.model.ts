@@ -8,13 +8,13 @@ export interface GraphData {
   title: {
     text: string;
   },
-  legend: {
+  legend?: {
     data: string[];
   },
   xAxis?: {
     data: string[];
   },
-  series: {
+  series?: {
     data: GraphSeriesDataLines | GraphSeriesDataPie;
   }
 }

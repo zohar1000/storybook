@@ -1,0 +1,26 @@
+<div class="content">
+  <div class="header">
+    <div class="action">
+      <i class="bi bi-printer print"></i>
+    </div>
+    <div class="title">
+      {{data.title.fromTime}}&nbsp; -&nbsp; {{data.title.toTime}}
+    </div>
+    <div class="resolution">
+
+    </div>
+  </div>
+
+  <div class="header sub-header">
+    <div>{{text.medicationsConcentrated.legend}}</div>
+    <div>{{text.medicationsConcentrated.title}}</div>
+    <div></div>
+  </div>
+
+  <div *ngFor="let section of data.sections">
+    <app-medications-section [section]="section"></app-medications-section>
+  </div>
+
+
+</div>
+

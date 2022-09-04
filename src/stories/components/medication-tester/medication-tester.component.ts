@@ -1,5 +1,8 @@
 import { ChangeDetectorRef, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { Settings } from '@stories/models/settings.model';
+import { ToastrService } from 'ngx-toastr';
+import { MedicationsCategory, MedicationsConcentratedData, MedicationsSection } from '@models/medications-concentrated-data.model';
+import { Direction } from '@stories/models/direction.model';
 
 @Component({
   selector: 'app-medication-tester',
@@ -9,20 +12,22 @@ import { Settings } from '@stories/models/settings.model';
 })
 export class MedicationTesterComponent implements OnInit {
   @Input() text: any;
-  @Input() direction: string;
+  @Input() direction: Direction;
   @Input() defaultSettings;
   settings: Settings;
   LOCAL_STORAGE_KEY = 'medicationsConfig';
   isShowSettings = false;
   accordionClass = 'settings-accordion';
   prevSettings;
+  data: MedicationsConcentratedData;
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor(private cdr: ChangeDetectorRef, private toastr: ToastrService) {}
 
   ngOnInit() {
     setTimeout(() => {
       this.initSettings();
       // this.onClickSettings();
+      this.buildData();
     }, 50);
   }
 
@@ -65,7 +70,8 @@ export class MedicationTesterComponent implements OnInit {
   saveToLocalStorage() {
     const item = JSON.stringify(this.settings);
     localStorage.setItem(this.LOCAL_STORAGE_KEY, item);
-    console.log('saving to ls:', JSON.stringify(this.settings.sections[0].medications, null, 2));
+    this.toastr.success('Settings were saved');
+    this.buildData();
   }
 
   getFromLocalStorage() {
@@ -77,7 +83,6 @@ export class MedicationTesterComponent implements OnInit {
   }
 
   onChangeSectionMedications(sectionIndex, medications) {
-console.log('onChangeSectionMedications:', sectionIndex, medications);
     this.settings.sections[sectionIndex].medications = medications;
   }
 
@@ -94,5 +99,38 @@ console.log('onChangeSectionMedications:', sectionIndex, medications);
     const medications = this.settings.sections[sectionIndex].medications;
     this.settings.sections[sectionIndex].medications = medications.filter(medication => medication.id !== medicationId);
     this.cdr.detectChanges();
+  }
+
+  buildData() {
+    const getCategories = (medications): MedicationsCategory[] => {
+      const categories = {};
+      medications.forEach(medication => {
+        if (!categories[medication.categoryId]) categories[medication.categoryId] = [];
+        categories[medication.categoryId].push(medication);
+      });
+      const keys = Object.keys(categories);
+      return keys.map((key, i) => ({
+        id: Number(key),
+        name: `category ${key}`,
+        medications: categories[key]
+      }));
+    }
+
+    const getSection = (section, i): MedicationsSection => {
+      return {
+        id: 1,
+        name: `section ${i + 1}`,
+        isDisplay: section.isDisplay,
+        categories: getCategories(section.medications)
+      }
+    }
+
+    this.data = {
+      title: {
+        fromTime: '2022-01-01 10:00',
+        toTime: '2022-01-02 17:00',
+      },
+      sections: this.settings.sections.map((section, i) => getSection(section, i))
+    }
   }
 }

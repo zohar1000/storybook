@@ -7,12 +7,18 @@
   //background: white;
   display: block;
 
-  .title {
+  .header {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     height: 3rem;
-    align-items: flex-end;
-    text-decoration: underline;
+    align-items: center;
+    padding-inline: 1rem;
+    .print {
+      font-size: 2rem;
+    }
+    &.sub-header {
+      background: #eeeeee;
+    }
   }
 
 

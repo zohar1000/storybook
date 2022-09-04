@@ -1,6 +1,6 @@
 import { GraphMetadata } from '@models/graph-metadata.model';
-import { GraphType } from '../../app/shared/enums/graph-type.enum';
 import { GraphData } from '@models/graph-data.model';
+import { GraphType } from '@shared/enums/graph-type.enum';
 
 export const mockDataGraphPie: { metadata: GraphMetadata, data: GraphData } = {
   metadata: {
@@ -9,7 +9,7 @@ export const mockDataGraphPie: { metadata: GraphMetadata, data: GraphData } = {
   },
   data: {
     title: {
-      text: 'Pie Graph Example',
+      text: 'Pie Graph Example'
     },
     legend: {
       data: ['Direct Visit', 'Union Ads', 'Search Engine']

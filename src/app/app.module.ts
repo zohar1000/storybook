@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { BsModalService } from 'ngx-bootstrap/modal';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -19,10 +18,11 @@ import { SortableModule } from 'ngx-bootstrap/sortable';
     AppRoutingModule,
     SharedModule,
 
+    // bootstrap
     ModalModule.forRoot(),
     AccordionModule.forRoot(),
     ButtonsModule.forRoot(),
-    SortableModule.forRoot()
+    SortableModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent]

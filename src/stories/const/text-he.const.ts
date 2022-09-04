@@ -23,6 +23,10 @@ export const textHe = {
       { title: 'חלק 2' },
       { title: 'חלק 3' },
       { title: 'חלק 4' }
-    ]
+    ],
+    medicationsConcentrated: {
+      title: 'תרופות',
+      legend: 'מקרא'
+    }
   }
 } as const;

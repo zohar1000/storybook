@@ -23,6 +23,10 @@ export const textEn = {
       { title: 'Section 2' },
       { title: 'Section 3' },
       { title: 'Section 4' }
-    ]
+    ],
+    medicationsConcentrated: {
+      title: 'Medications',
+      legend: 'Legend'
+    }
   }
 } as const;

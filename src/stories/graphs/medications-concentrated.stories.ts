@@ -8,6 +8,7 @@ import { MedicationListerItemComponent } from '@stories/components/medication-li
 import { textHe } from '@stories/const/text-he.const';
 import { textEn } from '@stories/const/text-en.const';
 import { defaultSettings } from '@stories/const/default-settings.const';
+import { ToastrService } from 'ngx-toastr';
 
 export default {
   title: 'רכיבים/תצוגה מרוכזת',
@@ -27,15 +28,15 @@ export default {
         MedicationListerItemComponent
       ],
       imports: [SharedModule],
-      providers: [BsModalService]
+      providers: [BsModalService, ToastrService]
     })
   ],
 } as Meta;
 
 const Template: Story<MedicationTesterComponent> = (args: MedicationTesterComponent) => ({ props: args });
 
-export const Rtl: ConcentratedDisplayStoryTemplate = Template.bind({});
-Rtl.args = { ...textHe, defaultSettings }
+export const עברית: ConcentratedDisplayStoryTemplate = Template.bind({});
+עברית.args = { ...textHe, defaultSettings }
 
-export const Ltr: ConcentratedDisplayStoryTemplate = Template.bind({});
-Ltr.args = { ...textEn, defaultSettings }
+export const English: ConcentratedDisplayStoryTemplate = Template.bind({});
+English.args = { ...textEn, defaultSettings }
