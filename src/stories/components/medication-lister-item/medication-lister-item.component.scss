@@ -12,6 +12,14 @@ $border-color: #aaaaaa;
   &.first {
     border-top: 1px solid $border-color;
   }
+  .medication {
+    flex-grow: 1;
+  }
+  .delete {
+    width: 2rem;
+    display: block;
+    text-align: right;
+  }
 }
 
 .prop {

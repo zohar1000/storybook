@@ -1,9 +1,14 @@
-<div>Medications: {{medications.length}}</div>
+<div>
+  <span>Medications: {{medications.length}}</span>
+  <button (click)="onClickAdd()" type="button" class="btn btn-success add-button">ADD</button>
+</div>
+
 
 <ng-template #itemTemplate let-medication="item" let-index="index">
   <app-medication-lister-item
       [medication]="medication.value"
       [index]="index"
+      (delete)="onDeleteMedication($event)"
   ></app-medication-lister-item>
 </ng-template>
 

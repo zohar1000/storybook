@@ -7,7 +7,7 @@ export const defaultSettings = {
   hoursForward: 14,
   hoursBackward: 5,
   refreshTime: 2,
-  graphs: [
+  sections: [
     {
       isDisplay: true,
       medications: [

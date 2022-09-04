@@ -9,6 +9,10 @@ html, body {
   min-height: 500px;
 }
 
+body.sb-show-main {
+  background: white !important;
+}
+
 .graph-container {
   height: inherit !important;
 }

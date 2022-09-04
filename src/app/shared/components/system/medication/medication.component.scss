@@ -3,9 +3,19 @@
 //}
 
 .content {
-  height: 100vh;
-  background: white;
+  //height: 100vh;
+  //background: white;
   display: block;
+
+  .title {
+    display: flex;
+    justify-content: center;
+    height: 3rem;
+    align-items: flex-end;
+    text-decoration: underline;
+  }
+
+
 
   header {
     display: flex;

@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
-import { Medication, MedicationPeriodic } from '@stories/models/medication.model';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Medication } from '@stories/models/medication.model';
 import { MedicationCategories } from '@stories/const/medication-categories.const';
 import { medications } from '@stories/const/medications.const';
 import { ExecutionType } from '@stories/enums/execution-type.enum';
@@ -13,6 +13,7 @@ import { ExecutionType } from '@stories/enums/execution-type.enum';
 export class MedicationListerItemComponent implements OnInit {
   @Input() medication: Medication;
   @Input() index: number;
+  @Output() delete = new EventEmitter<number>()
   MedicationCategories = MedicationCategories;
   medications = medications;
   ExecutionType = ExecutionType;
@@ -54,7 +55,17 @@ export class MedicationListerItemComponent implements OnInit {
   onChangeTime(e, i) {
     this.stopPropagation(e);
     setTimeout(() => {
-      (this.medication as MedicationPeriodic).times[i] = e.target.value;
+      this.medication.times[i] = e.target.value;
     });
+  }
+
+
+  onClickDelete() {
+    let isConfirm = false;
+    const item = this.medications.find(medication => medication.id === this.medication.id);
+    if (item) isConfirm = confirm(`are you sure you want to delete "${item.name}"?`);
+    if (!item || isConfirm) {
+      this.delete.emit(this.medication.id);
+    }
   }
 }

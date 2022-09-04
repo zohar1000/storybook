@@ -1,5 +1,9 @@
 $top-bar-height: 3rem;
 
+:host {
+  background: red;
+}
+
 .top-bar {
   --top-bar-height: 6rem;
   background: black;
@@ -45,6 +49,10 @@ $top-bar-height: 3rem;
   select {
     margin-inline-start: 1rem;
   }
+}
+
+.data {
+  //padding: 1rem;
 }
 
 .settings {

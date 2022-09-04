@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { Settings } from '@stories/models/settings.model';
 
 @Component({
   selector: 'app-medication-tester',
@@ -10,9 +11,9 @@ export class MedicationTesterComponent implements OnInit {
   @Input() text: any;
   @Input() direction: string;
   @Input() defaultSettings;
-  settings;
+  settings: Settings;
   LOCAL_STORAGE_KEY = 'medicationsConfig';
-  isSettings = false;
+  isShowSettings = false;
   accordionClass = 'settings-accordion';
   prevSettings;
 
@@ -21,7 +22,7 @@ export class MedicationTesterComponent implements OnInit {
   ngOnInit() {
     setTimeout(() => {
       this.initSettings();
-      this.onClickSettings();
+      // this.onClickSettings();
     }, 50);
   }
 
@@ -43,7 +44,7 @@ export class MedicationTesterComponent implements OnInit {
 
   onClickSettings() {
     this.prevSettings = JSON.parse(JSON.stringify(this.settings));
-    this.isSettings = true;
+    this.isShowSettings = true;
   }
 
   onChangeResolution(e) {
@@ -52,20 +53,19 @@ export class MedicationTesterComponent implements OnInit {
 
   onClickSaveSettings() {
     this.saveToLocalStorage();
-    this.isSettings = false;
+    this.isShowSettings = false;
   }
 
   onClickCancelSettings() {
-debugger;
     this.settings = this.prevSettings;
-    this.isSettings = false;
+    this.isShowSettings = false;
     console.log(JSON.stringify(this.settings, null, 2));
   }
 
   saveToLocalStorage() {
     const item = JSON.stringify(this.settings);
     localStorage.setItem(this.LOCAL_STORAGE_KEY, item);
-    console.log('saving to ls:', JSON.stringify(this.settings.graphs[0].medications, null, 2));
+    console.log('saving to ls:', JSON.stringify(this.settings.sections[0].medications, null, 2));
   }
 
   getFromLocalStorage() {
@@ -76,16 +76,9 @@ debugger;
     return localStorage.removeItem(this.LOCAL_STORAGE_KEY);
   }
 
-  getConfig() {
-    return typeof this.settings;
-  }
-
-  getPrevConfig() {
-    return typeof this.prevSettings;
-  }
-
-  onChangeGraphMedications(medications, i) {
-    this.settings.graphs[i].medications = medications;
+  onChangeSectionMedications(sectionIndex, medications) {
+console.log('onChangeSectionMedications:', sectionIndex, medications);
+    this.settings.sections[sectionIndex].medications = medications;
   }
 
   onClickDefaultSettings() {
@@ -95,5 +88,11 @@ debugger;
       this.settings = JSON.parse(JSON.stringify(this.defaultSettings));
       this.cdr.detectChanges();
     }
+  }
+
+  onDeleteMedication(sectionIndex, medicationId) {
+    const medications = this.settings.sections[sectionIndex].medications;
+    this.settings.sections[sectionIndex].medications = medications.filter(medication => medication.id !== medicationId);
+    this.cdr.detectChanges();
   }
 }
