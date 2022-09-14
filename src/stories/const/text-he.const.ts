@@ -13,19 +13,25 @@ export const textHe = {
     resolution: {
       label: 'רזולוציה',
       options: [
-        { value: '1hour', label: 'שעה' },
-        { value: '2hour', label: '2 שעות' },
-        { value: '4hour', label: '4 שעות' }
+        { value: '1m', label: 'דקה 1' },
+        { value: '2m', label: '2 דקות' },
+        { value: '5m', label: '5 דקות' },
+        { value: '15m', label: '15 דקות' },
+        { value: '30m', label: '30 דקות' },
+        { value: '1h', label: 'שעה 1' },
+        { value: '2h', label: '2 שעות' },
+        { value: '4h', label: '4 שעות' },
+        { value: '8h', label: '8 שעות' },
+        { value: '24h', label: '24 שעות' }
       ]
     },
     graphSections: [
-      { title: 'חלק 1' },
-      { title: 'חלק 2' },
-      { title: 'חלק 3' },
-      { title: 'חלק 4' }
+      { title: 'תרופות' },
+      { title: 'פעולות' },
+      { title: 'מדדים' },
+      { title: 'מדדים בטבלה' }
     ],
     medicationsConcentrated: {
-      title: 'תרופות',
       legend: 'מקרא'
     }
   }

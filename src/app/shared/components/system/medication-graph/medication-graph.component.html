@@ -1,11 +1,29 @@
 <!--<p>medication-graph works! {{medication.id}}</p>-->
 
-<div class="graph-line">
-  <div class="name">
-    {{medication.name}}
+<div class="graph-line" #graphLine>
+  <div class="name" #name>
+    <ng-container *ngIf="!isCondensedCategory">
+      {{medication.name}}
+    </ng-container>
   </div>
 
-  <div class="graph">
-    GRAPH
+  <div class="graph-container" #graphContainer>
+    <div class="graph">
+      <div class="vertical-lines-container">
+        <ng-container *ngFor="let part of [].constructor(parts); let i=index">
+          <ng-container
+              [ngTemplateOutlet]="verticalLines"
+              [ngTemplateOutletContext]="{isLast: i===parts, value: timeline.xAxisValues[i]}"
+          ></ng-container>
+        </ng-container>
+      </div>
+    </div>
   </div>
 </div>
+
+<ng-template #verticalLines let-isLast="isLast" let-value="value" >
+  <div class="vertical-lines-part-container">
+    <div class="vertical-lines-part"></div>
+    <div *ngIf="isLast" class="x-axis-footer-value">{{value}}</div>
+  </div>
+</ng-template>

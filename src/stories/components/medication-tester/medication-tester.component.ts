@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { Settings } from '@stories/models/settings.model';
 import { ToastrService } from 'ngx-toastr';
-import { MedicationsCategory, MedicationsConcentratedData, MedicationsSection } from '@models/medications-concentrated-data.model';
+import { MedicationsCategory, MedicationsConcentratedData, MedicationsSection, MedicationTimeline } from '@models/medications-concentrated-data.model';
 import { Direction } from '@stories/models/direction.model';
 
 @Component({
@@ -15,7 +15,7 @@ export class MedicationTesterComponent implements OnInit {
   @Input() direction: Direction;
   @Input() defaultSettings;
   settings: Settings;
-  LOCAL_STORAGE_KEY = 'medicationsConfig';
+  LOCAL_STORAGE_KEY = 'medicationsSettings';
   isShowSettings = false;
   accordionClass = 'settings-accordion';
   prevSettings;
@@ -52,7 +52,8 @@ export class MedicationTesterComponent implements OnInit {
     this.isShowSettings = true;
   }
 
-  onChangeResolution(e) {
+  onChangeResolution(resolution) {
+    this.settings.resolution = resolution;
     this.saveToLocalStorage();
   }
 
@@ -64,7 +65,6 @@ export class MedicationTesterComponent implements OnInit {
   onClickCancelSettings() {
     this.settings = this.prevSettings;
     this.isShowSettings = false;
-    console.log(JSON.stringify(this.settings, null, 2));
   }
 
   saveToLocalStorage() {
@@ -119,7 +119,7 @@ export class MedicationTesterComponent implements OnInit {
     const getSection = (section, i): MedicationsSection => {
       return {
         id: 1,
-        name: `section ${i + 1}`,
+        name: this.text.graphSections[i].title,
         isDisplay: section.isDisplay,
         categories: getCategories(section.medications)
       }
@@ -130,7 +130,30 @@ export class MedicationTesterComponent implements OnInit {
         fromTime: '2022-01-01 10:00',
         toTime: '2022-01-02 17:00',
       },
-      sections: this.settings.sections.map((section, i) => getSection(section, i))
+      resolution: this.settings.resolution,
+      sections: this.settings.sections.map((section, i) => getSection(section, i)),
+      timeline: this.getTimeline()
+    }
+
+    console.log('pivot time:', this.settings.pivotTime);
+    this.getTimeline();
+  }
+
+  getTimeline(): MedicationTimeline {
+    const currHour = Number(this.settings.pivotTime.substring(0, 2));
+    const hours = [];
+    for (let i = -6; i <= 6; i++) {
+      let hour = currHour + i;
+      if (hour < 0) hour += 24;
+      hours.push(String(hour).padStart(2, '0') + ':00');
+    }
+    console.log('hours:', hours);
+    return {
+      range: {
+        fromTime: hours[0],
+        toTime: hours[12]
+      },
+      xAxisValues: hours
     }
   }
 }

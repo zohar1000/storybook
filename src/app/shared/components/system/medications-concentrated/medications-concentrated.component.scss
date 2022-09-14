@@ -13,6 +13,11 @@
     height: 3rem;
     align-items: center;
     padding-inline: 1rem;
+    .resolution {
+      > select {
+        margin-inline-start: 0.5rem;
+      }
+    }
     .print {
       font-size: 2rem;
     }

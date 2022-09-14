@@ -6,8 +6,11 @@
     <div class="title">
       {{data.title.fromTime}}&nbsp; -&nbsp; {{data.title.toTime}}
     </div>
-    <div class="resolution">
-
+    <div class="resolution" [dir]="direction">
+      <span>{{text.resolution.label}}</span>
+      <select [(ngModel)]="data.resolution" (change)="onChangeResolution()">
+        <option *ngFor="let option of text.resolution.options" [value]="option.value">{{option.label}}</option>
+      </select>
     </div>
   </div>
 
@@ -17,9 +20,10 @@
     <div></div>
   </div>
 
-  <div class="sections">
+  <div #sections class="sections">
     <app-medications-section *ngFor="let section of data.sections"
-      [section]="section">
+      [section]="section"
+      [timeline]="data.timeline">
     </app-medications-section>
   </div>
 </div>

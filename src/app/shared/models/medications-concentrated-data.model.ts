@@ -1,11 +1,14 @@
 import { Medication } from '@stories/models/medication.model';
+import { TimelineResolution } from '@shared/enums/timeline-resolution.enum';
 
 export interface MedicationsConcentratedData {
   title: {
     fromTime: string;
     toTime: string;
   },
-  sections: MedicationsSection[]
+  resolution: TimelineResolution;
+  sections: MedicationsSection[],
+  timeline: MedicationTimeline
 }
 
 export interface MedicationsSection {
@@ -19,4 +22,12 @@ export interface MedicationsCategory {
   id: number;
   name: string;
   medications: Medication[]
+}
+
+export interface MedicationTimeline {
+  range: {
+    fromTime: string;
+    toTime: string;
+  }
+  xAxisValues: string[];
 }

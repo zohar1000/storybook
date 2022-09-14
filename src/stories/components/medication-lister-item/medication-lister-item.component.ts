@@ -28,7 +28,6 @@ export class MedicationListerItemComponent implements OnInit {
   onChangeCategory(e) {
     const categoryId = Number(e.target.value);
     if (categoryId !== this.medication.categoryId) {
-      console.log('onChangeCategory:', this.medication.categoryId, '==>', categoryId);
       this.medication.categoryId = Number(e.target.value);
       this.medication.id = 0;
       this.setCategoryMedication();

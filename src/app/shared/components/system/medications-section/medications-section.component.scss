@@ -1,9 +1,37 @@
-.categories-container {
-  //:not(:last-child) {
-  //  margin-bottom: 2px;
-  //}
-  app-medications-category {
-    display: block;
+.title {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.content {
+  padding-inline-end: 2rem;
+  .categories-container {
+    app-medications-category {
+      display: block;
+    }
+  }
+  .x-axis-timeline {
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    line-height: 1.5rem;
+    height: 1.5rem;
+    //overflow-x: hidden;
+    .x-axis-timeline-values {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      position: absolute;
+      > div {
+        text-align: center;
+        width: 100%;
+      }
+      &.top {
+        // align-items: flex-end;
+      }
+    }
   }
 }
+
 

@@ -5,19 +5,51 @@
   align-items: center;
   height: $medication-graph-height;
   width: 100%;
-
+  justify-content: space-between;
   .name {
     width: 15rem;
   }
 
-  .graph {
-    border-top: 1px solid gray;
-    border-right: 1px solid gray;
-    border-left: 1px solid gray;
-    //border-bottom: 1px solid gray;
-    height: 100%;
-    flex-grow: 1;
-    display: flex;
-    align-items: center;
+  .graph-container {
+    position: relative;
+    .graph {
+      border-top: 1px solid gray;
+      border-right: 1px solid gray;
+      border-left: 1px solid gray;
+      //border-bottom: 1px solid gray;
+      height: 100%;
+      flex-grow: 1;
+      display: flex;
+      align-items: center;
+      &.section-graph-odd {
+        background: white;
+      }
+      &.section-graph-even {
+        background: #eeeeee;
+      }
+      &.last-section-graph {
+        border-bottom: 1px solid gray;
+      }
+    }
+  }
+}
+
+.vertical-lines-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  .vertical-lines-part-container {
+    display: block;
+    width: 100%;
+    height: $medication-graph-height;
+    position: relative;
+    &:not(:last-child) {
+      border-right: 1px solid black;
+    }
+    .x-axis-footer-value {
+      position: absolute;
+      left: -1rem;
+      bottom: -2rem;
+    }
   }
 }

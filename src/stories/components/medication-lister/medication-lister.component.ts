@@ -41,6 +41,7 @@ export class MedicationListerComponent implements AfterViewInit, OnDestroy {
   onClickAdd() {
     const medication: Medication = {
       id: 0,
+      name: '',
       categoryId: 0,
       type: undefined,
       timingType: undefined,

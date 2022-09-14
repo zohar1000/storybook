@@ -11,10 +11,20 @@
   </div>
 
   <div class="medications">
-    <ng-container *ngIf="!isExpanded">CONTRACTED</ng-container>
+    <ng-container *ngIf="!isExpanded">
+      <app-medication-graph
+          [isCondensedCategory]="true"
+          [timeline]="timeline"
+          (timelineWidth)="onTimelineWidth($event, 0)"
+      ></app-medication-graph>
+    </ng-container>
     <ng-container *ngIf="isExpanded">
-      <div *ngFor="let medication of category.medications" class="medication-container">
-        <app-medication-graph [medication]="medication"></app-medication-graph>
+      <div *ngFor="let medication of category.medications; let i=index" class="medication-container">
+        <app-medication-graph
+            [medication]="medication"
+            [timeline]="timeline"
+            (timelineWidth)="onTimelineWidth($event, i)"
+        ></app-medication-graph>
       </div>
     </ng-container>
   </div>
