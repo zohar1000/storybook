@@ -11,6 +11,7 @@ export class MedicationsCategoryComponent implements OnInit {
   @Input() timeline: MedicationTimeline;
   @Input() preTimelineWidth = 0;
   @Input() timelineWidth = 0;
+  @Input() isLastCategory = false;
   @Output() expandCondense = new EventEmitter();
   @Output() backgroundColored = new EventEmitter();
   readonly expandIconWidth = 15;

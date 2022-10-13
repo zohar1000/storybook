@@ -8,7 +8,7 @@
       [ngTemplateOutletContext]="{isTop:true}">
     </ng-container>
 
-    <div #categories class="categories-container">
+    <div class="categories-container">
         <ng-container [ngSwitch]="section.type">
           <app-medications-section-timeline
               *ngSwitchCase="MedicationsSectionType.Timeline"

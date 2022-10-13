@@ -6,7 +6,7 @@
   </div>
 
   <div class="graph-container" [style.width.px]="timelineWidth">
-    <div class="graph">
+    <div class="graph" [class.show-bottom-border]="isShowBottomBorder">
       <div class="vertical-lines-container">
         <ng-container *ngFor="let part of [].constructor(parts); let i=index">
           <ng-container

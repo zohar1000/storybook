@@ -15,6 +15,7 @@ export class MedicationGraphComponent implements OnInit {
   @Input() medicationNameWidth: number;
   @Input() timelineWidth: number;
   @Input() isCondensedCategory = false;
+  @Input() isShowBottomBorder = false;
   parts;
 
   constructor(private renderer: Renderer2) {}

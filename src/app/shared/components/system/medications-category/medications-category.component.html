@@ -17,6 +17,7 @@
           [timeline]="timeline"
           [medicationNameWidth]="medicationNameWidth"
           [timelineWidth]="timelineWidth"
+          [isShowBottomBorder]="isLastCategory"
       ></app-medication-graph>
     </ng-container>
     <ng-container *ngIf="isExpanded">
@@ -26,6 +27,7 @@
             [timeline]="timeline"
             [medicationNameWidth]="medicationNameWidth"
             [timelineWidth]="timelineWidth"
+            [isShowBottomBorder]="isLastCategory && i+1===category.medications.length"
         ></app-medication-graph>
       </div>
     </ng-container>
