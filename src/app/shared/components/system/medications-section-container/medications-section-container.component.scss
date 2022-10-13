@@ -5,7 +5,6 @@
 }
 
 .content {
-  padding-inline-end: 2rem;
   .categories-container {
     app-medications-category {
       display: block;
@@ -17,7 +16,6 @@
     position: relative;
     line-height: 1.5rem;
     height: 1.5rem;
-    //overflow-x: hidden;
     .x-axis-timeline-values {
       display: flex;
       flex-direction: row;

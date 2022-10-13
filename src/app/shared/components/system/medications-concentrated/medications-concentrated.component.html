@@ -1,4 +1,4 @@
-<div class="content">
+<div #content class="content">
   <div class="header">
     <div class="action">
       <i class="bi bi-printer print"></i>
@@ -20,11 +20,13 @@
     <div></div>
   </div>
 
-  <div #sections class="sections">
-    <app-medications-section *ngFor="let section of data.sections"
+  <div *ngIf="timelineWidth" #sections class="sections">
+    <app-medications-section-container *ngFor="let section of data.sections"
       [section]="section"
-      [timeline]="data.timeline">
-    </app-medications-section>
+      [timeline]="data.timeline"
+      [preTimelineWidth]="preTimelineWidth"
+      [timelineWidth]="timelineWidth">
+    </app-medications-section-container>
   </div>
 </div>
 

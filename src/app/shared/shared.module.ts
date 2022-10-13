@@ -14,9 +14,10 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { SortableModule } from 'ngx-bootstrap/sortable';
 import { ToastrModule } from 'ngx-toastr';
 import { MedicationsConcentratedComponent } from '@shared/components/system/medications-concentrated/medications-concentrated.component';
-import { MedicationsSectionComponent } from './components/system/medications-section/medications-section.component';
+import { MedicationsSectionContainerComponent } from './components/system/medications-section-container/medications-section-container.component';
 import { MedicationsCategoryComponent } from './components/system/medications-category/medications-category.component';
 import { MedicationGraphComponent } from './components/system/medication-graph/medication-graph.component';
+import { MedicationsSectionTimelineComponent } from './components/system/medications-section-timeline/medications-section-timeline.component';
 
 const declarations = [
   GraphLinesComponent,
@@ -24,7 +25,8 @@ const declarations = [
   GraphTimelineComponent,
   GraphTimelineCategoryComponent,
   MedicationsConcentratedComponent,
-  MedicationsSectionComponent,
+  MedicationsSectionContainerComponent,
+  MedicationsSectionTimelineComponent,
   MedicationsCategoryComponent,
   MedicationGraphComponent
 ];

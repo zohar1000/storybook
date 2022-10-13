@@ -1,21 +1,22 @@
 <div class="category">
-  <div class="expand-icon">
+  <div class="expand-icon" [style.width.px]="expandIconWidth">
     <i class="bi bi-plus" *ngIf="!isExpanded" (click)="onClickExpand()"></i>
     <i class="bi bi-dash" *ngIf="isExpanded" (click)="onClickCondense()"></i>
   </div>
 
-  <div class="frame">
+  <div class="frame" [style.width.px]="frameWidth">
     <ng-container *ngIf="isExpanded">
       <div *ngFor="let medication of category.medications" class="frame-line-filler"></div>
     </ng-container>
   </div>
 
-  <div class="medications">
+  <div class="medication" [style.width.px]="medicationNameWidth + timelineWidth">
     <ng-container *ngIf="!isExpanded">
       <app-medication-graph
           [isCondensedCategory]="true"
           [timeline]="timeline"
-          (timelineWidth)="onTimelineWidth($event, 0)"
+          [medicationNameWidth]="medicationNameWidth"
+          [timelineWidth]="timelineWidth"
       ></app-medication-graph>
     </ng-container>
     <ng-container *ngIf="isExpanded">
@@ -23,10 +24,10 @@
         <app-medication-graph
             [medication]="medication"
             [timeline]="timeline"
-            (timelineWidth)="onTimelineWidth($event, i)"
+            [medicationNameWidth]="medicationNameWidth"
+            [timelineWidth]="timelineWidth"
         ></app-medication-graph>
       </div>
     </ng-container>
   </div>
-
 </div>

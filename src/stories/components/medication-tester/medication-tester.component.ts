@@ -119,6 +119,7 @@ export class MedicationTesterComponent implements OnInit {
     const getSection = (section, i): MedicationsSection => {
       return {
         id: 1,
+        type: section.type,
         name: this.text.graphSections[i].title,
         isDisplay: section.isDisplay,
         categories: getCategories(section.medications)
@@ -135,7 +136,7 @@ export class MedicationTesterComponent implements OnInit {
       timeline: this.getTimeline()
     }
 
-    console.log('pivot time:', this.settings.pivotTime);
+    // console.log('pivot time:', this.settings.pivotTime);
     this.getTimeline();
   }
 
@@ -147,7 +148,7 @@ export class MedicationTesterComponent implements OnInit {
       if (hour < 0) hour += 24;
       hours.push(String(hour).padStart(2, '0') + ':00');
     }
-    console.log('hours:', hours);
+    // console.log('hours:', hours);
     return {
       range: {
         fromTime: hours[0],

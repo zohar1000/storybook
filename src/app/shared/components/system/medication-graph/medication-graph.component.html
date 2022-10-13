@@ -1,13 +1,11 @@
-<!--<p>medication-graph works! {{medication.id}}</p>-->
-
 <div class="graph-line" #graphLine>
-  <div class="name" #name>
+  <div class="name" #name [style.width.px]="medicationNameWidth">
     <ng-container *ngIf="!isCondensedCategory">
       {{medication.name}}
     </ng-container>
   </div>
 
-  <div class="graph-container" #graphContainer>
+  <div class="graph-container" [style.width.px]="timelineWidth">
     <div class="graph">
       <div class="vertical-lines-container">
         <ng-container *ngFor="let part of [].constructor(parts); let i=index">

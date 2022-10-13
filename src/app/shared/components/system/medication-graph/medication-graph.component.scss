@@ -4,11 +4,6 @@
   display: flex;
   align-items: center;
   height: $medication-graph-height;
-  width: 100%;
-  justify-content: space-between;
-  .name {
-    width: 15rem;
-  }
 
   .graph-container {
     position: relative;

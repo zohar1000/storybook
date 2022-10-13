@@ -1,0 +1,9 @@
+<app-medications-category
+  *ngFor="let category of section.categories; let i=index"
+  [category]="category"
+  [timeline]="timeline"
+  [preTimelineWidth]="preTimelineWidth"
+  [timelineWidth]="timelineWidth"
+  (expandCondense)="onExpandCondense()"
+>
+</app-medications-category>

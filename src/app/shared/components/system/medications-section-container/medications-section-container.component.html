@@ -1,0 +1,44 @@
+<div class="title">{{section.name}}</div>
+
+<div class="content">
+  <ng-container *ngIf="timelineWidth">
+
+    <ng-container
+      [ngTemplateOutlet]="xAxisTimelineTemplate"
+      [ngTemplateOutletContext]="{isTop:true}">
+    </ng-container>
+
+    <div #categories class="categories-container">
+        <ng-container [ngSwitch]="section.type">
+          <app-medications-section-timeline
+              *ngSwitchCase="MedicationsSectionType.Timeline"
+              [section]="section"
+              [timeline]="timeline"
+              [preTimelineWidth]="preTimelineWidth"
+              [timelineWidth]="timelineWidth">
+          </app-medications-section-timeline>
+        </ng-container>
+    </div>
+
+    <ng-container
+        [ngTemplateOutlet]="xAxisTimelineTemplate"
+        [ngTemplateOutletContext]="{isTop:false}">
+    </ng-container>
+
+  </ng-container>
+
+</div>
+
+<ng-template #xAxisTimelineTemplate let-isTop="isTop">
+  <div class="x-axis-timeline"
+      [style.width.px]="timelineWidth"
+      [style.margin-left.px]="preTimelineWidth">
+    <div #xAxisTimeline
+         class="x-axis-timeline-values"
+         [style.width.px]="timelineValuesWidth"
+         [style.right.px]="timelineValuesRight"
+         [ngClass]="isTop ? 'top' : 'bottom'">
+      <div *ngFor="let value of timeline.xAxisValues">{{value}}</div>
+    </div>
+  </div>
+</ng-template>

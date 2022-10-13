@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MedicationsCategory, MedicationTimeline } from '@models/medications-concentrated-data.model';
 
 @Component({
@@ -6,13 +6,21 @@ import { MedicationsCategory, MedicationTimeline } from '@models/medications-con
   templateUrl: './medications-category.component.html',
   styleUrls: ['./medications-category.component.scss']
 })
-export class MedicationsCategoryComponent {
+export class MedicationsCategoryComponent implements OnInit {
   @Input() category: MedicationsCategory;
   @Input() timeline: MedicationTimeline;
+  @Input() preTimelineWidth = 0;
+  @Input() timelineWidth = 0;
   @Output() expandCondense = new EventEmitter();
   @Output() backgroundColored = new EventEmitter();
-  @Output() timelineWidth = new EventEmitter<number>();
+  readonly expandIconWidth = 15;
+  readonly frameWidth = 10;
+  medicationNameWidth;
   isExpanded = true;
+
+  ngOnInit() {
+    this.medicationNameWidth = this.preTimelineWidth - this.expandIconWidth - this.frameWidth;
+  }
 
   onClickExpand() {
     this.emitExpandCondense(true);
@@ -25,10 +33,5 @@ export class MedicationsCategoryComponent {
   emitExpandCondense(isExpanded) {
     this.isExpanded = isExpanded;
     setTimeout(() => this.expandCondense.emit());  // timeout b/c dom hasn't changed yet
-  }
-
-  onTimelineWidth(width, graphIx) {
-    console.log('width:', width, graphIx);
-    if (graphIx === 0) this.timelineWidth.emit(width);
   }
 }
