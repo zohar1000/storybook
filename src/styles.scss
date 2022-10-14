@@ -11,6 +11,10 @@ html, body {
   min-height: 500px;
 }
 
+:root {
+  --action-icons-font-size: 1.3rem;
+}
+
 body.sb-show-main {
   background: white !important;
 }
@@ -39,4 +43,34 @@ body.sb-show-main {
     background: white !important;
     display: block;
   }
+}
+
+.horizontal-start {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.horizontal-center {
+  display: flex;
+  justify-content: center;
+}
+
+.horizontal-end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.horizontal-left {
+  display: flex;
+  justify-content: left;
+}
+
+.horizontal-right {
+  display: flex;
+  justify-content: right;
+}
+
+.vertical-center {
+  display: flex;
+  align-items: center;
 }

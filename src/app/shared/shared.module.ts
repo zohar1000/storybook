@@ -18,6 +18,7 @@ import { MedicationsSectionContainerComponent } from './components/system/medica
 import { MedicationsCategoryComponent } from './components/system/medications-category/medications-category.component';
 import { MedicationGraphComponent } from './components/system/medication-graph/medication-graph.component';
 import { MedicationsSectionTimelineComponent } from './components/system/medications-section-timeline/medications-section-timeline.component';
+import { TimelineValuesComponent } from './components/system/timeline-values/timeline-values.component';
 
 const declarations = [
   GraphLinesComponent,
@@ -28,7 +29,8 @@ const declarations = [
   MedicationsSectionContainerComponent,
   MedicationsSectionTimelineComponent,
   MedicationsCategoryComponent,
-  MedicationGraphComponent
+  MedicationGraphComponent,
+  TimelineValuesComponent
 ];
 
 const modules = [

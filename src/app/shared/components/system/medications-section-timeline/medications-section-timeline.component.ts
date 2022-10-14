@@ -8,6 +8,7 @@ import { MedicationsSection, MedicationTimeline } from '@models/medications-conc
 })
 export class MedicationsSectionTimelineComponent implements AfterViewInit {
   @ViewChild('categories') elRefCategories: ElementRef;
+  @Input() text;
   @Input() section: MedicationsSection;
   @Input() timeline: MedicationTimeline;
   @Input() preTimelineWidth = 0;

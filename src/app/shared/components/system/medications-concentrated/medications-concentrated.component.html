@@ -1,12 +1,21 @@
 <div #content class="content">
   <div class="header">
-    <div class="action">
+    <div class="action-icons horizontal-left">
       <i class="bi bi-printer print"></i>
+      <i class="bi bi-arrow-clockwise"></i>
+      <span class="paging-icons">
+        <i class="bi bi-fast-forward backward larger"></i>
+        <i class="bi bi-caret-left"></i>
+        <i class="bi bi-caret-right"></i>
+        <i class="bi bi-fast-forward larger"></i>
+      </span>
     </div>
-    <div class="title">
+
+    <div class="title horizontal-center">
       {{data.title.fromTime}}&nbsp; -&nbsp; {{data.title.toTime}}
     </div>
-    <div class="resolution" [dir]="direction">
+
+    <div class="resolution horizontal-right vertical-center" [dir]="direction">
       <span>{{text.resolution.label}}</span>
       <select [(ngModel)]="data.resolution" (change)="onChangeResolution()">
         <option *ngFor="let option of text.resolution.options" [value]="option.value">{{option.label}}</option>
@@ -14,14 +23,9 @@
     </div>
   </div>
 
-  <div class="header sub-header">
-    <div>{{text.medicationsConcentrated.legend}}</div>
-    <div>{{text.medicationsConcentrated.title}}</div>
-    <div></div>
-  </div>
-
-  <div *ngIf="timelineWidth" #sections class="sections">
+  <div *ngIf="timelineWidth" class="sections">
     <app-medications-section-container *ngFor="let section of data.sections"
+      [text]="text"
       [section]="section"
       [timeline]="data.timeline"
       [preTimelineWidth]="preTimelineWidth"

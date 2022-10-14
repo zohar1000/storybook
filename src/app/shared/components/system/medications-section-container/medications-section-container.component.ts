@@ -8,6 +8,7 @@ import { MedicationsSectionType } from '@shared/enums/medications-section-type.e
   styleUrls: ['./medications-section-container.component.scss']
 })
 export class MedicationsSectionContainerComponent implements OnInit {
+  @Input() text;
   @Input() section: MedicationsSection;
   @Input() timeline: MedicationTimeline;
   @Input() preTimelineWidth = 0;

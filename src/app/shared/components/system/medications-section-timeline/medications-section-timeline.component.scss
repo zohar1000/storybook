@@ -1,0 +1,32 @@
+.header {
+  width: 100%;
+  height: 2.5rem;
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: 2rem;
+  > div {
+    width: 30%;
+  }
+  &.top {
+    background: #eeeeee;
+    margin-bottom: 1rem;
+  }
+  &.bottom {
+    margin-top: 1rem;
+  }
+  > .action-icons {
+    span {
+      width: 5.3rem !important;
+      display: inline-block;
+      //padding-inline-end: 4rem;
+      i {
+        font-size: var(--action-icons-font-size);
+      }
+    }
+  }
+}
+
+//&.sub-header {
+//  background: #eeeeee;
+//}
