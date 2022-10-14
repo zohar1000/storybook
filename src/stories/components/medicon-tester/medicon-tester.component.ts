@@ -1,9 +1,11 @@
 import { ChangeDetectorRef, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { Settings } from '@stories/models/settings.model';
 import { ToastrService } from 'ngx-toastr';
-import { MedicationsCategory, MediconData, MedicationsSection, MedicationTimeline } from '@models/medicon-data.model';
+import { MedicationsCategory, MedicationsSection, MedicationTimeline, MediconData } from '@models/medicon-data.model';
 import { Direction } from '@stories/models/direction.model';
 import { MedicationCategories } from '@stories/const/medication-categories.const';
+import { TimeDisplayType } from '@shared/enums/time-display-type.enum';
+import { TimelineResolutionValues } from '@shared/consts/timeline-resolution-values.const';
 
 @Component({
   selector: 'app-medicon-tester',
@@ -14,7 +16,7 @@ import { MedicationCategories } from '@stories/const/medication-categories.const
 export class MediconTesterComponent implements OnInit {
   @Input() text: any;
   @Input() direction: Direction;
-  @Input() defaultSettings;
+  @Input() defaultSettings: Settings;
   settings: Settings;
   LOCAL_STORAGE_KEY = 'medicationsSettings';
   isShowSettings = false;
@@ -92,6 +94,8 @@ export class MediconTesterComponent implements OnInit {
     if (isClear) {
       this.clearLocalStorage();
       this.settings = JSON.parse(JSON.stringify(this.defaultSettings));
+      this.buildData();
+      this.toastr.success('Settings were saved');
       this.cdr.detectChanges();
     }
   }
@@ -138,25 +142,84 @@ export class MediconTesterComponent implements OnInit {
       timeline: this.getTimeline()
     }
 
-    this.getTimeline();
-console.log('this.data:', this.data);
+    // this.getTimeline();
+// console.log('this.data:', this.data);
   }
 
   getTimeline(): MedicationTimeline {
-    const currHour = Number(this.settings.pivotTime.substring(0, 2));
-    const hours = [];
-    for (let i = -6; i <= 6; i++) {
-      let hour = currHour + i;
-      if (hour < 0) hour += 24;
-      hours.push(String(hour).padStart(2, '0') + ':00');
+    const item = TimelineResolutionValues[this.settings.resolution];
+    const now = Date.now();
+console.log('now:', new Date(now), new Date(now).toISOString());
+    const offset = (new Date()).getTimezoneOffset();
+console.log('offset:',offset);
+    const localNow = now; //  - (60000 * offset);
+console.log('localNow:', new Date(localNow), new Date(localNow).toISOString());
+    const roundBy = 60000 * item.minutes;
+console.log('reduced minutes:', (localNow % roundBy) / 60000);
+    const roundedLocalNow = localNow - (localNow % roundBy);
+console.log('roundedLocalNow:', new Date(roundedLocalNow), new Date(roundedLocalNow).toISOString());
+    const timeFormatOptionsDate = { year: '2-digit', month: '2-digit', day: 'numeric' } as const;
+    const timeFormatOptionsDateTime = { year: '2-digit', month: '2-digit', day: 'numeric', hour: '2-digit', minute: '2-digit' } as const;
+    const startTime = roundedLocalNow - (6 * roundBy);
+    const endTime = roundedLocalNow + (6 * roundBy);
+    const values = [];
+    let interval = 0;
+    for (let time = startTime; time <= endTime; time += roundBy) {
+      let isoTime;
+      const localTime = new Date(time);
+      switch(item.type) {
+        case TimeDisplayType.Time:
+          isoTime = localTime.toISOString();
+          values.push(isoTime.substring(11, 16));
+          break;
+        case TimeDisplayType.Date:
+          values.push(localTime.toLocaleDateString(this.settings.locale, timeFormatOptionsDate));
+          break;
+        case TimeDisplayType.DateTime:
+          if (++interval % 2 === 0) {
+            // values.push('');
+          } else {
+            isoTime = localTime.toLocaleString(this.settings.locale, timeFormatOptionsDateTime);
+            values.push(isoTime.substring(0, 8) + ' ' + isoTime.substring(10, 15));
+          }
+          break;
+      }
     }
-    // console.log('hours:', hours);
+
+    // for (let i = -6; i <= 6; i++) {
+    //   let value = currHour + i;
+    //   if (hour < 0) hour += 24;
+    //   values.push(String(hour).padStart(2, '0') + ':00');
+    // }
+    // switch(item.type) {
+    //   case TimeDisplayType.Time:
+    //     const currHour = Number(this.settings.pivotTime.substring(0, 2));
+
+    // }
+
+
+
+    // switch(item.type) {
+    //   case TimeDisplayType.Time:
+    //     const currHour = Number(this.settings.pivotTime.substring(0, 2));
+    //     for (let i = -6; i <= 6; i++) {
+    //       let hour = currHour + i;
+    //       if (hour < 0) hour += 24;
+    //       values.push(String(hour).padStart(2, '0') + ':00');
+    //     }
+    // }
+
+    // const timelineDisplayType: TimeDisplayType = TimelineResolutionValues[]
+
+    console.log('values:', values);
     return {
       range: {
-        fromTime: hours[0],
-        toTime: hours[12]
+        fromTime: values[0],
+        toTime: values[12]
       },
-      xAxisValues: hours
+      xAxisValues: values,
+      subDivision: item.subDivision,
+      interval: item.interval
     }
   }
 }

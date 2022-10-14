@@ -11,10 +11,10 @@
   <div class="graph-container" [style.width.px]="timelineWidth">
     <div class="graph" [class.show-bottom-border]="isShowBottomBorder">
       <div class="vertical-lines-container">
-        <ng-container *ngFor="let part of [].constructor(parts); let i=index">
+        <ng-container *ngFor="let part of [].constructor(PARTS); let i=index">
           <ng-container
               [ngTemplateOutlet]="verticalLines"
-              [ngTemplateOutletContext]="{isLast: i===parts, value: timeline.xAxisValues[i]}"
+              [ngTemplateOutletContext]="{isLast: i===PARTS, value: timeline.xAxisValues[i]}"
           ></ng-container>
         </ng-container>
       </div>

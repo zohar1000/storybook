@@ -33,4 +33,6 @@ export interface MedicationTimeline {
     toTime: string;
   }
   xAxisValues: string[];
+  subDivision: number;
+  interval: number;
 }

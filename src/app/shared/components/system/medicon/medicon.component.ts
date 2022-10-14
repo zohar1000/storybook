@@ -31,7 +31,8 @@ export class MediconComponent implements AfterViewInit {
     const contentWidth = this.elContent.nativeElement.offsetWidth;
     const timelineWidth = Math.floor(contentWidth * this.TIMELINE_WIDTH_PCT);
     this.preTimelineWidth = contentWidth - timelineWidth;
-    this.timelineWidth =  Math.floor(timelineWidth * this.TIMELINE_WIDTH_REDUCTION_PCT);
+    // this.timelineWidth =  Math.floor(timelineWidth * this.TIMELINE_WIDTH_REDUCTION_PCT);
+    this.timelineWidth =  Math.floor(timelineWidth) - 70;
     this.cdr.detectChanges();
   }
 

@@ -1,14 +1,16 @@
 import { ExecutionType } from '@stories/enums/execution-type.enum';
 import { MedicationsSectionType } from '@shared/enums/medications-section-type.enum';
 import { TimelineResolution } from '@shared/enums/timeline-resolution.enum';
+import { Settings } from '@stories/models/settings.model';
 
-export const defaultSettings = {
+export const defaultSettings: Settings = {
   languageCode: 'en',
   resolution: TimelineResolution.Hours1,
   pivotTime: '10:00',
   hoursForward: 14,
   hoursBackward: 5,
   refreshTime: 2,
+  locale: 'he-il',
   sections: [
     {
       isDisplay: true,

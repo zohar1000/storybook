@@ -14,7 +14,7 @@ export class MediconTimelineValuesComponent implements OnInit {
   timelineValuesRight;
 
   ngOnInit() {
-    const valueWidth = this.timelineWidth / 12;
+    const valueWidth = this.timelineWidth / (this.timeline.xAxisValues.length - 1);
     this.timelineValuesWidth = valueWidth * this.timeline.xAxisValues.length;
     this.timelineValuesRight = -valueWidth / 2;
   }

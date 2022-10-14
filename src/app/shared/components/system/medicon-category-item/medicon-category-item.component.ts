@@ -7,7 +7,7 @@ import { MedicationTimeline } from '@models/medicon-data.model';
   templateUrl: './medicon-category-item.component.html',
   styleUrls: ['./medicon-category-item.component.scss']
 })
-export class MediconCategoryItemComponent implements OnInit {
+export class MediconCategoryItemComponent {
   @ViewChild('graphLine') elRefGraphLine;
   @ViewChild('name') elRefName;
   @Input() medication: Medication;
@@ -18,9 +18,5 @@ export class MediconCategoryItemComponent implements OnInit {
   @Input() isShowBottomBorder = false;
   @Input() categoryName = '';
   @Input() categoryColor = '';
-  parts;
-
-  ngOnInit() {
-    this.parts = this.timeline.xAxisValues.length - 1;
-  }
+  readonly PARTS = 12;
 }
