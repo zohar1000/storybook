@@ -19,12 +19,12 @@
   </header>
 
   <div *ngIf="!isShowSettings && data" class="data">
-    <app-medications-concentrated
+    <app-medicon
       [direction]="direction"
       [text]="text"
       [data]="data"
       (resolution)="onChangeResolution($event)"
-    ></app-medications-concentrated>
+    ></app-medicon>
   </div>
 
   <div *ngIf="isShowSettings" class="settings">
@@ -42,11 +42,11 @@
         <div class="form-check section-display">
           <input class="form-check-input" type="checkbox" [(ngModel)]="section.isDisplay">&nbsp;&nbsp;Visible
         </div>
-        <app-medication-lister
+        <app-medicon-lister
             [medications]="section.medications"
             (change)="onChangeSectionMedications(i, $event)"
             (deleteMedication)="onDeleteMedication(i, $event)"
-        ></app-medication-lister>
+        ></app-medicon-lister>
       </accordion-group>
     </accordion>
   </div>

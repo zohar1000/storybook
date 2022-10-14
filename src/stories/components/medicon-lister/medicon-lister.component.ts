@@ -4,12 +4,12 @@ import { distinct, debounceTime, skip } from 'rxjs/operators';
 import { Medication } from '@stories/models/medication.model';
 
 @Component({
-  selector: 'app-medication-lister',
-  templateUrl: './medication-lister.component.html',
-  styleUrls: ['./medication-lister.component.scss'],
+  selector: 'app-medicon-lister',
+  templateUrl: './medicon-lister.component.html',
+  styleUrls: ['./medicon-lister.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MedicationListerComponent implements AfterViewInit, OnDestroy {
+export class MediconListerComponent implements AfterViewInit, OnDestroy {
   @Input() medications;
   @Output() change = new EventEmitter();
   @Output() deleteMedication = new EventEmitter<number>();

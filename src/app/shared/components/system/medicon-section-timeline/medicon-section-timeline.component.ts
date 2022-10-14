@@ -1,12 +1,12 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { MedicationsSection, MedicationTimeline } from '@models/medications-concentrated-data.model';
+import { MedicationsSection, MedicationTimeline } from '@models/medicon-data.model';
 
 @Component({
-  selector: 'app-medications-section-timeline',
-  templateUrl: './medications-section-timeline.component.html',
-  styleUrls: ['./medications-section-timeline.component.scss']
+  selector: 'app-medicon-section-timeline',
+  templateUrl: './medicon-section-timeline.component.html',
+  styleUrls: ['./medicon-section-timeline.component.scss']
 })
-export class MedicationsSectionTimelineComponent implements AfterViewInit {
+export class MediconSectionTimelineComponent implements AfterViewInit {
   @ViewChild('categories') elRefCategories: ElementRef;
   @Input() text;
   @Input() section: MedicationsSection;

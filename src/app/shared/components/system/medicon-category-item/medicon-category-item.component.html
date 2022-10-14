@@ -3,6 +3,9 @@
     <ng-container *ngIf="!isCondensedCategory">
       {{medication.name}}
     </ng-container>
+    <ng-container *ngIf="isCondensedCategory">
+      <span [style.color]="categoryColor">{{categoryName}}</span>
+    </ng-container>
   </div>
 
   <div class="graph-container" [style.width.px]="timelineWidth">

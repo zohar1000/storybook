@@ -5,12 +5,12 @@ import { medications } from '@stories/const/medications.const';
 import { ExecutionType } from '@stories/enums/execution-type.enum';
 
 @Component({
-  selector: 'app-medication-lister-item',
-  templateUrl: './medication-lister-item.component.html',
-  styleUrls: ['./medication-lister-item.component.scss'],
+  selector: 'app-medicon-lister-item',
+  templateUrl: './medicon-lister-item.component.html',
+  styleUrls: ['./medicon-lister-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MedicationListerItemComponent implements OnInit {
+export class MediconListerItemComponent implements OnInit {
   @Input() medication: Medication;
   @Input() index: number;
   @Output() delete = new EventEmitter<number>()

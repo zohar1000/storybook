@@ -2,14 +2,14 @@
   <ng-container *ngIf="timelineWidth">
     <div class="categories-container">
         <ng-container [ngSwitch]="section.type">
-          <app-medications-section-timeline
+          <app-medicon-section-timeline
               *ngSwitchCase="MedicationsSectionType.Timeline"
               [text]="text"
               [section]="section"
               [timeline]="timeline"
               [preTimelineWidth]="preTimelineWidth"
               [timelineWidth]="timelineWidth">
-          </app-medications-section-timeline>
+          </app-medicon-section-timeline>
         </ng-container>
     </div>
   </ng-container>

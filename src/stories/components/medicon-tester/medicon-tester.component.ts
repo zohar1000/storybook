@@ -1,16 +1,17 @@
 import { ChangeDetectorRef, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { Settings } from '@stories/models/settings.model';
 import { ToastrService } from 'ngx-toastr';
-import { MedicationsCategory, MedicationsConcentratedData, MedicationsSection, MedicationTimeline } from '@models/medications-concentrated-data.model';
+import { MedicationsCategory, MediconData, MedicationsSection, MedicationTimeline } from '@models/medicon-data.model';
 import { Direction } from '@stories/models/direction.model';
+import { MedicationCategories } from '@stories/const/medication-categories.const';
 
 @Component({
-  selector: 'app-medication-tester',
-  templateUrl: './medication-tester.component.html',
-  styleUrls: ['./medication-tester.component.scss'],
+  selector: 'app-medicon-tester',
+  templateUrl: './medicon-tester.component.html',
+  styleUrls: ['./medicon-tester.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class MedicationTesterComponent implements OnInit {
+export class MediconTesterComponent implements OnInit {
   @Input() text: any;
   @Input() direction: Direction;
   @Input() defaultSettings;
@@ -19,7 +20,7 @@ export class MedicationTesterComponent implements OnInit {
   isShowSettings = false;
   accordionClass = 'settings-accordion';
   prevSettings;
-  data: MedicationsConcentratedData;
+  data: MediconData;
 
   constructor(private cdr: ChangeDetectorRef, private toastr: ToastrService) {}
 
@@ -108,11 +109,12 @@ export class MedicationTesterComponent implements OnInit {
         if (!categories[medication.categoryId]) categories[medication.categoryId] = [];
         categories[medication.categoryId].push(medication);
       });
-      const keys = Object.keys(categories);
-      return keys.map((key, i) => ({
-        id: Number(key),
-        name: `category ${key}`,
-        medications: categories[key]
+      const ids = Object.keys(categories).map(id => Number(id));
+      return ids.map(id => ({
+        id: id,
+        name: `category ${id}`,
+        color: MedicationCategories.find(item => item.id === id).color,
+        medications: categories[id]
       }));
     }
 
@@ -136,8 +138,8 @@ export class MedicationTesterComponent implements OnInit {
       timeline: this.getTimeline()
     }
 
-    // console.log('pivot time:', this.settings.pivotTime);
     this.getTimeline();
+console.log('this.data:', this.data);
   }
 
   getTimeline(): MedicationTimeline {

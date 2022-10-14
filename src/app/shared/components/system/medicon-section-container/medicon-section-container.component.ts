@@ -1,13 +1,13 @@
 import { Component, ElementRef, Input, OnInit, Output, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
-import { MedicationsSection, MedicationTimeline } from '@models/medications-concentrated-data.model';
+import { MedicationsSection, MedicationTimeline } from '@models/medicon-data.model';
 import { MedicationsSectionType } from '@shared/enums/medications-section-type.enum';
 
 @Component({
-  selector: 'app-medications-section-container',
-  templateUrl: './medications-section-container.component.html',
-  styleUrls: ['./medications-section-container.component.scss']
+  selector: 'app-medicon-section-container',
+  templateUrl: './medicon-section-container.component.html',
+  styleUrls: ['./medicon-section-container.component.scss']
 })
-export class MedicationsSectionContainerComponent implements OnInit {
+export class MediconSectionContainerComponent implements OnInit {
   @Input() text;
   @Input() section: MedicationsSection;
   @Input() timeline: MedicationTimeline;

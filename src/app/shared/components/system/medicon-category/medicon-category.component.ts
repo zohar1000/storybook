@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { MedicationsCategory, MedicationTimeline } from '@models/medications-concentrated-data.model';
+import { MedicationsCategory, MedicationTimeline } from '@models/medicon-data.model';
 
 @Component({
-  selector: 'app-medications-category',
-  templateUrl: './medications-category.component.html',
-  styleUrls: ['./medications-category.component.scss']
+  selector: 'app-medicon-category',
+  templateUrl: './medicon-category.component.html',
+  styleUrls: ['./medicon-category.component.scss']
 })
-export class MedicationsCategoryComponent implements OnInit {
+export class MediconCategoryComponent implements OnInit {
   @Input() category: MedicationsCategory;
   @Input() timeline: MedicationTimeline;
   @Input() preTimelineWidth = 0;

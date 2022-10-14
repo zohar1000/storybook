@@ -1,18 +1,18 @@
 import { Meta, moduleMetadata, Story } from '@storybook/angular';
 import { SharedModule } from '@shared/shared.module';
 import { ConcentratedDisplayStoryTemplate } from '@stories/models/templates/concentrated-display-story-template.model';
-import { MedicationTesterComponent } from '@stories/components/medication-tester/medication-tester.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { MedicationListerComponent } from '@stories/components/medication-lister/medication-lister.component';
-import { MedicationListerItemComponent } from '@stories/components/medication-lister-item/medication-lister-item.component';
 import { textHe } from '@stories/const/text-he.const';
 import { textEn } from '@stories/const/text-en.const';
 import { defaultSettings } from '@stories/const/default-settings.const';
 import { ToastrService } from 'ngx-toastr';
+import { MediconTesterComponent } from '@stories/components/medicon-tester/medicon-tester.component';
+import { MediconListerComponent } from '@stories/components/medicon-lister/medicon-lister.component';
+import { MediconListerItemComponent } from '@stories/components/medicon-lister-item/medicon-lister-item.component';
 
 export default {
   title: 'רכיבים/תצוגה מרוכזת',
-  component: MedicationTesterComponent,
+  component: MediconTesterComponent,
   parameters: {
     layout: 'fullscreen'
   },
@@ -24,8 +24,8 @@ export default {
   decorators: [
     moduleMetadata({
       declarations: [
-        MedicationListerComponent,
-        MedicationListerItemComponent
+        MediconListerComponent,
+        MediconListerItemComponent
       ],
       imports: [SharedModule],
       providers: [BsModalService, ToastrService]
@@ -33,7 +33,7 @@ export default {
   ],
 } as Meta;
 
-const Template: Story<MedicationTesterComponent> = (args: MedicationTesterComponent) => ({ props: args });
+const Template: Story<MediconTesterComponent> = (args: MediconTesterComponent) => ({ props: args });
 
 export const עברית: ConcentratedDisplayStoryTemplate = Template.bind({});
 עברית.args = { ...textHe, defaultSettings }

@@ -2,19 +2,19 @@ import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, 
 import { GraphMetadata } from '@models/graph-metadata.model';
 import { Direction } from '@stories/models/direction.model';
 import { TimelineResolution } from '@shared/enums/timeline-resolution.enum';
-import { MedicationsConcentratedData } from '@models/medications-concentrated-data.model';
+import { MediconData } from '@models/medicon-data.model';
 
 @Component({
-  selector: 'app-medications-concentrated',
-  templateUrl: './medications-concentrated.component.html',
-  styleUrls: ['./medications-concentrated.component.scss']
+  selector: 'app-medicon',
+  templateUrl: './medicon.component.html',
+  styleUrls: ['./medicon.component.scss']
 })
-export class MedicationsConcentratedComponent implements AfterViewInit {
+export class MediconComponent implements AfterViewInit {
   @ViewChild('content') elContent: ElementRef;
   @Input() direction: Direction;
   @Input() text: any;
   @Input() metadata: GraphMetadata;
-  @Input() data: MedicationsConcentratedData;
+  @Input() data: MediconData;
   @Output() resolution = new EventEmitter<TimelineResolution>();
   readonly TIMELINE_WIDTH_PCT = 0.8;  // total width for graph on the right side - 80%
   readonly TIMELINE_WIDTH_REDUCTION_PCT = 0.95;  // take off 5% to display the right most hour

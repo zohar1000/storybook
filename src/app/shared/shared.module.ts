@@ -13,24 +13,24 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { SortableModule } from 'ngx-bootstrap/sortable';
 import { ToastrModule } from 'ngx-toastr';
-import { MedicationsConcentratedComponent } from '@shared/components/system/medications-concentrated/medications-concentrated.component';
-import { MedicationsSectionContainerComponent } from './components/system/medications-section-container/medications-section-container.component';
-import { MedicationsCategoryComponent } from './components/system/medications-category/medications-category.component';
-import { MedicationGraphComponent } from './components/system/medication-graph/medication-graph.component';
-import { MedicationsSectionTimelineComponent } from './components/system/medications-section-timeline/medications-section-timeline.component';
-import { TimelineValuesComponent } from './components/system/timeline-values/timeline-values.component';
+import { MediconComponent } from '@shared/components/system/medicon/medicon.component';
+import { MediconCategoryComponent } from '@shared/components/system/medicon-category/medicon-category.component';
+import { MediconCategoryItemComponent } from '@shared/components/system/medicon-category-item/medicon-category-item.component';
+import { MediconSectionContainerComponent } from '@shared/components/system/medicon-section-container/medicon-section-container.component';
+import { MediconSectionTimelineComponent } from '@shared/components/system/medicon-section-timeline/medicon-section-timeline.component';
+import { MediconTimelineValuesComponent } from '@shared/components/system/medicon-timeline-values/medicon-timeline-values.component';
 
 const declarations = [
   GraphLinesComponent,
   GraphPieComponent,
   GraphTimelineComponent,
   GraphTimelineCategoryComponent,
-  MedicationsConcentratedComponent,
-  MedicationsSectionContainerComponent,
-  MedicationsSectionTimelineComponent,
-  MedicationsCategoryComponent,
-  MedicationGraphComponent,
-  TimelineValuesComponent
+  MediconComponent,
+  MediconCategoryComponent,
+  MediconCategoryItemComponent,
+  MediconSectionContainerComponent,
+  MediconSectionTimelineComponent,
+  MediconTimelineValuesComponent
 ];
 
 const modules = [

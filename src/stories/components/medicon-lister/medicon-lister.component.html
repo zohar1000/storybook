@@ -5,11 +5,11 @@
 
 
 <ng-template #itemTemplate let-medication="item" let-index="index">
-  <app-medication-lister-item
+  <app-medicon-lister-item
       [medication]="medication.value"
       [index]="index"
       (delete)="onDeleteMedication($event)"
-  ></app-medication-lister-item>
+  ></app-medicon-lister-item>
 </ng-template>
 
 <div class="medication-table">

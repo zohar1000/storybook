@@ -1,13 +1,13 @@
 <ng-container [ngTemplateOutlet]="header" [ngTemplateOutletContext]="{isTop: true}"></ng-container>
 
-<app-timeline-values
+<app-medicon-timeline-values
     [timeline]="timeline"
     [preTimelineWidth]="preTimelineWidth"
     [timelineWidth]="timelineWidth">
-</app-timeline-values>
+</app-medicon-timeline-values>
 
 <div #categories>
-  <app-medications-category
+  <app-medicon-category
     *ngFor="let category of section.categories; let i=index"
     [category]="category"
     [timeline]="timeline"
@@ -16,14 +16,14 @@
     [isLastCategory]="i+1===section.categories.length"
     (expandCondense)="onExpandCondense()"
   >
-  </app-medications-category>
+  </app-medicon-category>
 </div>
 
-<app-timeline-values
+<app-medicon-timeline-values
     [timeline]="timeline"
     [preTimelineWidth]="preTimelineWidth"
     [timelineWidth]="timelineWidth">
-</app-timeline-values>
+</app-medicon-timeline-values>
 
 <ng-container [ngTemplateOutlet]="header" [ngTemplateOutletContext]="{isTop: false}"></ng-container>
 

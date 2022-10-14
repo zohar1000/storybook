@@ -24,13 +24,13 @@
   </div>
 
   <div *ngIf="timelineWidth" class="sections">
-    <app-medications-section-container *ngFor="let section of data.sections"
+    <app-medicon-section-container *ngFor="let section of data.sections"
       [text]="text"
       [section]="section"
       [timeline]="data.timeline"
       [preTimelineWidth]="preTimelineWidth"
       [timelineWidth]="timelineWidth">
-    </app-medications-section-container>
+    </app-medicon-section-container>
   </div>
 </div>
 

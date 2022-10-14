@@ -2,7 +2,7 @@ import { Medication } from '@stories/models/medication.model';
 import { TimelineResolution } from '@shared/enums/timeline-resolution.enum';
 import { MedicationsSectionType } from '@shared/enums/medications-section-type.enum';
 
-export interface MedicationsConcentratedData {
+export interface MediconData {
   title: {
     fromTime: string;
     toTime: string;
@@ -23,6 +23,7 @@ export interface MedicationsSection {
 export interface MedicationsCategory {
   id: number;
   name: string;
+  color: string;
   medications: Medication[]
 }
 

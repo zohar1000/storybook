@@ -12,23 +12,25 @@
 
   <div class="medication" [style.width.px]="medicationNameWidth + timelineWidth">
     <ng-container *ngIf="!isExpanded">
-      <app-medication-graph
+      <app-medicon-category-item
           [isCondensedCategory]="true"
           [timeline]="timeline"
           [medicationNameWidth]="medicationNameWidth"
           [timelineWidth]="timelineWidth"
           [isShowBottomBorder]="isLastCategory"
-      ></app-medication-graph>
+          [categoryName]="category.name"
+          [categoryColor]="category.color"
+      ></app-medicon-category-item>
     </ng-container>
     <ng-container *ngIf="isExpanded">
       <div *ngFor="let medication of category.medications; let i=index" class="medication-container">
-        <app-medication-graph
+        <app-medicon-category-item
             [medication]="medication"
             [timeline]="timeline"
             [medicationNameWidth]="medicationNameWidth"
             [timelineWidth]="timelineWidth"
             [isShowBottomBorder]="isLastCategory && i+1===category.medications.length"
-        ></app-medication-graph>
+        ></app-medicon-category-item>
       </div>
     </ng-container>
   </div>

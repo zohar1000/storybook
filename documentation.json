@@ -244,13 +244,22 @@
         },
         {
             "name": "MedicationsCategory",
-            "id": "interface-MedicationsCategory-8339cb1ebef033e5c77603161a0764f07be3e2e0788196155252fc8298d63d95e500c239f6bcece8b8e67d2d6be5c84eb087c2a20023884ab9fd69e369d32fb7",
-            "file": "src/app/shared/models/medications-concentrated-data.model.ts",
+            "id": "interface-MedicationsCategory-e884bd774a9be61a4fb14a731392eeaf41cdbbb5cf44569cf8bb6c705be7d2e69cb309d2619c43bc5e35cef3b4fb56626f7a255d33017a3fdffc1db1ebb3e9f1",
+            "file": "src/app/shared/models/medicon-data.model.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import { Medication } from '@stories/models/medication.model';\nimport { TimelineResolution } from '@shared/enums/timeline-resolution.enum';\nimport { MedicationsSectionType } from '@shared/enums/medications-section-type.enum';\n\nexport interface MedicationsConcentratedData {\n  title: {\n    fromTime: string;\n    toTime: string;\n  },\n  resolution: TimelineResolution;\n  sections: MedicationsSection[],\n  timeline: MedicationTimeline\n}\n\nexport interface MedicationsSection {\n  id: number;\n  type: MedicationsSectionType;\n  name: string;\n  isDisplay: boolean;\n  categories: MedicationsCategory[];\n}\n\nexport interface MedicationsCategory {\n  id: number;\n  name: string;\n  medications: Medication[]\n}\n\nexport interface MedicationTimeline {\n  range: {\n    fromTime: string;\n    toTime: string;\n  }\n  xAxisValues: string[];\n}\n",
+            "sourceCode": "import { Medication } from '@stories/models/medication.model';\nimport { TimelineResolution } from '@shared/enums/timeline-resolution.enum';\nimport { MedicationsSectionType } from '@shared/enums/medications-section-type.enum';\n\nexport interface MediconData {\n  title: {\n    fromTime: string;\n    toTime: string;\n  },\n  resolution: TimelineResolution;\n  sections: MedicationsSection[],\n  timeline: MedicationTimeline\n}\n\nexport interface MedicationsSection {\n  id: number;\n  type: MedicationsSectionType;\n  name: string;\n  isDisplay: boolean;\n  categories: MedicationsCategory[];\n}\n\nexport interface MedicationsCategory {\n  id: number;\n  name: string;\n  color: string;\n  medications: Medication[]\n}\n\nexport interface MedicationTimeline {\n  range: {\n    fromTime: string;\n    toTime: string;\n  }\n  xAxisValues: string[];\n}\n",
             "properties": [
+                {
+                    "name": "color",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 26
+                },
                 {
                     "name": "id",
                     "deprecated": false,
@@ -267,7 +276,7 @@
                     "type": "Medication[]",
                     "optional": false,
                     "description": "",
-                    "line": 26
+                    "line": 27
                 },
                 {
                     "name": "name",
@@ -284,63 +293,13 @@
             "methods": []
         },
         {
-            "name": "MedicationsConcentratedData",
-            "id": "interface-MedicationsConcentratedData-8339cb1ebef033e5c77603161a0764f07be3e2e0788196155252fc8298d63d95e500c239f6bcece8b8e67d2d6be5c84eb087c2a20023884ab9fd69e369d32fb7",
-            "file": "src/app/shared/models/medications-concentrated-data.model.ts",
-            "deprecated": false,
-            "deprecationMessage": "",
-            "type": "interface",
-            "sourceCode": "import { Medication } from '@stories/models/medication.model';\nimport { TimelineResolution } from '@shared/enums/timeline-resolution.enum';\nimport { MedicationsSectionType } from '@shared/enums/medications-section-type.enum';\n\nexport interface MedicationsConcentratedData {\n  title: {\n    fromTime: string;\n    toTime: string;\n  },\n  resolution: TimelineResolution;\n  sections: MedicationsSection[],\n  timeline: MedicationTimeline\n}\n\nexport interface MedicationsSection {\n  id: number;\n  type: MedicationsSectionType;\n  name: string;\n  isDisplay: boolean;\n  categories: MedicationsCategory[];\n}\n\nexport interface MedicationsCategory {\n  id: number;\n  name: string;\n  medications: Medication[]\n}\n\nexport interface MedicationTimeline {\n  range: {\n    fromTime: string;\n    toTime: string;\n  }\n  xAxisValues: string[];\n}\n",
-            "properties": [
-                {
-                    "name": "resolution",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "TimelineResolution",
-                    "optional": false,
-                    "description": "",
-                    "line": 10
-                },
-                {
-                    "name": "sections",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "MedicationsSection[]",
-                    "optional": false,
-                    "description": "",
-                    "line": 11
-                },
-                {
-                    "name": "timeline",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "MedicationTimeline",
-                    "optional": false,
-                    "description": "",
-                    "line": 12
-                },
-                {
-                    "name": "title",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "literal type",
-                    "optional": false,
-                    "description": "",
-                    "line": 6
-                }
-            ],
-            "indexSignatures": [],
-            "kind": 165,
-            "methods": []
-        },
-        {
             "name": "MedicationsSection",
-            "id": "interface-MedicationsSection-8339cb1ebef033e5c77603161a0764f07be3e2e0788196155252fc8298d63d95e500c239f6bcece8b8e67d2d6be5c84eb087c2a20023884ab9fd69e369d32fb7",
-            "file": "src/app/shared/models/medications-concentrated-data.model.ts",
+            "id": "interface-MedicationsSection-e884bd774a9be61a4fb14a731392eeaf41cdbbb5cf44569cf8bb6c705be7d2e69cb309d2619c43bc5e35cef3b4fb56626f7a255d33017a3fdffc1db1ebb3e9f1",
+            "file": "src/app/shared/models/medicon-data.model.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import { Medication } from '@stories/models/medication.model';\nimport { TimelineResolution } from '@shared/enums/timeline-resolution.enum';\nimport { MedicationsSectionType } from '@shared/enums/medications-section-type.enum';\n\nexport interface MedicationsConcentratedData {\n  title: {\n    fromTime: string;\n    toTime: string;\n  },\n  resolution: TimelineResolution;\n  sections: MedicationsSection[],\n  timeline: MedicationTimeline\n}\n\nexport interface MedicationsSection {\n  id: number;\n  type: MedicationsSectionType;\n  name: string;\n  isDisplay: boolean;\n  categories: MedicationsCategory[];\n}\n\nexport interface MedicationsCategory {\n  id: number;\n  name: string;\n  medications: Medication[]\n}\n\nexport interface MedicationTimeline {\n  range: {\n    fromTime: string;\n    toTime: string;\n  }\n  xAxisValues: string[];\n}\n",
+            "sourceCode": "import { Medication } from '@stories/models/medication.model';\nimport { TimelineResolution } from '@shared/enums/timeline-resolution.enum';\nimport { MedicationsSectionType } from '@shared/enums/medications-section-type.enum';\n\nexport interface MediconData {\n  title: {\n    fromTime: string;\n    toTime: string;\n  },\n  resolution: TimelineResolution;\n  sections: MedicationsSection[],\n  timeline: MedicationTimeline\n}\n\nexport interface MedicationsSection {\n  id: number;\n  type: MedicationsSectionType;\n  name: string;\n  isDisplay: boolean;\n  categories: MedicationsCategory[];\n}\n\nexport interface MedicationsCategory {\n  id: number;\n  name: string;\n  color: string;\n  medications: Medication[]\n}\n\nexport interface MedicationTimeline {\n  range: {\n    fromTime: string;\n    toTime: string;\n  }\n  xAxisValues: string[];\n}\n",
             "properties": [
                 {
                     "name": "categories",
@@ -394,12 +353,12 @@
         },
         {
             "name": "MedicationTimeline",
-            "id": "interface-MedicationTimeline-8339cb1ebef033e5c77603161a0764f07be3e2e0788196155252fc8298d63d95e500c239f6bcece8b8e67d2d6be5c84eb087c2a20023884ab9fd69e369d32fb7",
-            "file": "src/app/shared/models/medications-concentrated-data.model.ts",
+            "id": "interface-MedicationTimeline-e884bd774a9be61a4fb14a731392eeaf41cdbbb5cf44569cf8bb6c705be7d2e69cb309d2619c43bc5e35cef3b4fb56626f7a255d33017a3fdffc1db1ebb3e9f1",
+            "file": "src/app/shared/models/medicon-data.model.ts",
             "deprecated": false,
             "deprecationMessage": "",
             "type": "interface",
-            "sourceCode": "import { Medication } from '@stories/models/medication.model';\nimport { TimelineResolution } from '@shared/enums/timeline-resolution.enum';\nimport { MedicationsSectionType } from '@shared/enums/medications-section-type.enum';\n\nexport interface MedicationsConcentratedData {\n  title: {\n    fromTime: string;\n    toTime: string;\n  },\n  resolution: TimelineResolution;\n  sections: MedicationsSection[],\n  timeline: MedicationTimeline\n}\n\nexport interface MedicationsSection {\n  id: number;\n  type: MedicationsSectionType;\n  name: string;\n  isDisplay: boolean;\n  categories: MedicationsCategory[];\n}\n\nexport interface MedicationsCategory {\n  id: number;\n  name: string;\n  medications: Medication[]\n}\n\nexport interface MedicationTimeline {\n  range: {\n    fromTime: string;\n    toTime: string;\n  }\n  xAxisValues: string[];\n}\n",
+            "sourceCode": "import { Medication } from '@stories/models/medication.model';\nimport { TimelineResolution } from '@shared/enums/timeline-resolution.enum';\nimport { MedicationsSectionType } from '@shared/enums/medications-section-type.enum';\n\nexport interface MediconData {\n  title: {\n    fromTime: string;\n    toTime: string;\n  },\n  resolution: TimelineResolution;\n  sections: MedicationsSection[],\n  timeline: MedicationTimeline\n}\n\nexport interface MedicationsSection {\n  id: number;\n  type: MedicationsSectionType;\n  name: string;\n  isDisplay: boolean;\n  categories: MedicationsCategory[];\n}\n\nexport interface MedicationsCategory {\n  id: number;\n  name: string;\n  color: string;\n  medications: Medication[]\n}\n\nexport interface MedicationTimeline {\n  range: {\n    fromTime: string;\n    toTime: string;\n  }\n  xAxisValues: string[];\n}\n",
             "properties": [
                 {
                     "name": "range",
@@ -408,7 +367,7 @@
                     "type": "literal type",
                     "optional": false,
                     "description": "",
-                    "line": 30
+                    "line": 31
                 },
                 {
                     "name": "xAxisValues",
@@ -417,7 +376,57 @@
                     "type": "string[]",
                     "optional": false,
                     "description": "",
-                    "line": 34
+                    "line": 35
+                }
+            ],
+            "indexSignatures": [],
+            "kind": 165,
+            "methods": []
+        },
+        {
+            "name": "MediconData",
+            "id": "interface-MediconData-e884bd774a9be61a4fb14a731392eeaf41cdbbb5cf44569cf8bb6c705be7d2e69cb309d2619c43bc5e35cef3b4fb56626f7a255d33017a3fdffc1db1ebb3e9f1",
+            "file": "src/app/shared/models/medicon-data.model.ts",
+            "deprecated": false,
+            "deprecationMessage": "",
+            "type": "interface",
+            "sourceCode": "import { Medication } from '@stories/models/medication.model';\nimport { TimelineResolution } from '@shared/enums/timeline-resolution.enum';\nimport { MedicationsSectionType } from '@shared/enums/medications-section-type.enum';\n\nexport interface MediconData {\n  title: {\n    fromTime: string;\n    toTime: string;\n  },\n  resolution: TimelineResolution;\n  sections: MedicationsSection[],\n  timeline: MedicationTimeline\n}\n\nexport interface MedicationsSection {\n  id: number;\n  type: MedicationsSectionType;\n  name: string;\n  isDisplay: boolean;\n  categories: MedicationsCategory[];\n}\n\nexport interface MedicationsCategory {\n  id: number;\n  name: string;\n  color: string;\n  medications: Medication[]\n}\n\nexport interface MedicationTimeline {\n  range: {\n    fromTime: string;\n    toTime: string;\n  }\n  xAxisValues: string[];\n}\n",
+            "properties": [
+                {
+                    "name": "resolution",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "TimelineResolution",
+                    "optional": false,
+                    "description": "",
+                    "line": 10
+                },
+                {
+                    "name": "sections",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "MedicationsSection[]",
+                    "optional": false,
+                    "description": "",
+                    "line": 11
+                },
+                {
+                    "name": "timeline",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "MedicationTimeline",
+                    "optional": false,
+                    "description": "",
+                    "line": 12
+                },
+                {
+                    "name": "title",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "literal type",
+                    "optional": false,
+                    "description": "",
+                    "line": 6
                 }
             ],
             "indexSignatures": [],
@@ -3034,30 +3043,266 @@
             "stylesData": ""
         },
         {
-            "name": "MedicationGraphComponent",
-            "id": "component-MedicationGraphComponent-cecefec37ff8fcfe09c9b3fa3c9dfb5b1715bfcaae9a7996173a379a876ccada7ccec130eb8cf7caec40b6d4c68834a265db814118739680b4a68145c8ce2bc8",
-            "file": "src/app/shared/components/system/medication-graph/medication-graph.component.ts",
+            "name": "MediconCategoryComponent",
+            "id": "component-MediconCategoryComponent-d4998896dea499021e53a41bc401690749b3ac1894b54f71b05b1c031866c53d728b8343795e5e8720c62371c6e993cd185972746e769fe81d951aa987120390",
+            "file": "src/app/shared/components/system/medicon-category/medicon-category.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
             "outputs": [],
             "providers": [],
-            "selector": "app-medication-graph",
+            "selector": "app-medicon-category",
             "styleUrls": [
-                "./medication-graph.component.scss"
+                "./medicon-category.component.scss"
             ],
             "styles": [],
             "templateUrl": [
-                "./medication-graph.component.html"
+                "./medicon-category.component.html"
             ],
             "viewProviders": [],
             "inputsClass": [
+                {
+                    "name": "category",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 10,
+                    "type": "MedicationsCategory",
+                    "decorators": []
+                },
+                {
+                    "name": "isLastCategory",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "preTimelineWidth",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "number",
+                    "decorators": []
+                },
+                {
+                    "name": "timeline",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 11,
+                    "type": "MedicationTimeline",
+                    "decorators": []
+                },
+                {
+                    "name": "timelineWidth",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "number",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "backgroundColored",
+                    "defaultValue": "new EventEmitter()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 16,
+                    "type": "EventEmitter"
+                },
+                {
+                    "name": "expandCondense",
+                    "defaultValue": "new EventEmitter()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [
+                {
+                    "name": "expandIconWidth",
+                    "defaultValue": "15",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 17,
+                    "modifierKind": [
+                        144
+                    ]
+                },
+                {
+                    "name": "frameWidth",
+                    "defaultValue": "10",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 18,
+                    "modifierKind": [
+                        144
+                    ]
+                },
+                {
+                    "name": "isExpanded",
+                    "defaultValue": "true",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 20
+                },
+                {
+                    "name": "medicationNameWidth",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 19
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "emitExpandCondense",
+                    "args": [
+                        {
+                            "name": "isExpanded",
+                            "type": "",
+                            "deprecated": false,
+                            "deprecationMessage": ""
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 34,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "isExpanded",
+                            "type": "",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 22,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "onClickCondense",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 30,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "onClickExpand",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 26,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';\nimport { MedicationsCategory, MedicationTimeline } from '@models/medicon-data.model';\n\n@Component({\n  selector: 'app-medicon-category',\n  templateUrl: './medicon-category.component.html',\n  styleUrls: ['./medicon-category.component.scss']\n})\nexport class MediconCategoryComponent implements OnInit {\n  @Input() category: MedicationsCategory;\n  @Input() timeline: MedicationTimeline;\n  @Input() preTimelineWidth = 0;\n  @Input() timelineWidth = 0;\n  @Input() isLastCategory = false;\n  @Output() expandCondense = new EventEmitter();\n  @Output() backgroundColored = new EventEmitter();\n  readonly expandIconWidth = 15;\n  readonly frameWidth = 10;\n  medicationNameWidth;\n  isExpanded = true;\n\n  ngOnInit() {\n    this.medicationNameWidth = this.preTimelineWidth - this.expandIconWidth - this.frameWidth;\n  }\n\n  onClickExpand() {\n    this.emitExpandCondense(true);\n  }\n\n  onClickCondense() {\n    this.emitExpandCondense(false);\n  }\n\n  emitExpandCondense(isExpanded) {\n    this.isExpanded = isExpanded;\n    setTimeout(() => this.expandCondense.emit());  // timeout b/c dom hasn't changed yet\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "@import 'variables';\n\n.category {\n  display: flex;\n  align-items: center;\n\n  .expand-icon {\n    display: inline-block;\n  }\n\n  .frame {\n    width: 10px;\n    display: block;\n    border: none;\n    min-height: $medication-graph-height;\n    box-shadow: inset 0 0 0 1px white, inset -1px 0 0 1px white, inset 0 0 0 2px black;\n    z-index: 2;\n    .frame-line-filler {\n      display: flex;\n      flex-direction: column;\n      height: $medication-graph-height;\n    }\n  }\n\n  .medication {\n    flex-grow: 1;\n    display: flex;\n    justify-content: center;\n    flex-direction: column;\n    min-height: $medication-graph-height;\n    z-index: 1;\n    .medication-container {\n      width: 100%;\n      height: $medication-graph-height;\n    }\n  }\n}\n",
+                    "styleUrl": "./medicon-category.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<div class=\"category\">\n  <div class=\"expand-icon\" [style.width.px]=\"expandIconWidth\">\n    <i class=\"bi bi-plus\" *ngIf=\"!isExpanded\" (click)=\"onClickExpand()\"></i>\n    <i class=\"bi bi-dash\" *ngIf=\"isExpanded\" (click)=\"onClickCondense()\"></i>\n  </div>\n\n  <div class=\"frame\" [style.width.px]=\"frameWidth\">\n    <ng-container *ngIf=\"isExpanded\">\n      <div *ngFor=\"let medication of category.medications\" class=\"frame-line-filler\"></div>\n    </ng-container>\n  </div>\n\n  <div class=\"medication\" [style.width.px]=\"medicationNameWidth + timelineWidth\">\n    <ng-container *ngIf=\"!isExpanded\">\n      <app-medicon-category-item\n          [isCondensedCategory]=\"true\"\n          [timeline]=\"timeline\"\n          [medicationNameWidth]=\"medicationNameWidth\"\n          [timelineWidth]=\"timelineWidth\"\n          [isShowBottomBorder]=\"isLastCategory\"\n          [categoryName]=\"category.name\"\n          [categoryColor]=\"category.color\"\n      ></app-medicon-category-item>\n    </ng-container>\n    <ng-container *ngIf=\"isExpanded\">\n      <div *ngFor=\"let medication of category.medications; let i=index\" class=\"medication-container\">\n        <app-medicon-category-item\n            [medication]=\"medication\"\n            [timeline]=\"timeline\"\n            [medicationNameWidth]=\"medicationNameWidth\"\n            [timelineWidth]=\"timelineWidth\"\n            [isShowBottomBorder]=\"isLastCategory && i+1===category.medications.length\"\n        ></app-medicon-category-item>\n      </div>\n    </ng-container>\n  </div>\n</div>\n"
+        },
+        {
+            "name": "MediconCategoryItemComponent",
+            "id": "component-MediconCategoryItemComponent-62161fa4af914450fe8bab260222e358d1a77819b7b70fa7a54709019e264144dd3709ac78a4054de68d1255d933fba99d6e428e23ac384161767123f0dd7e28",
+            "file": "src/app/shared/components/system/medicon-category-item/medicon-category-item.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-medicon-category-item",
+            "styleUrls": [
+                "./medicon-category-item.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./medicon-category-item.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "categoryColor",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 20,
+                    "type": "string",
+                    "decorators": []
+                },
+                {
+                    "name": "categoryName",
+                    "defaultValue": "''",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 19,
+                    "type": "string",
+                    "decorators": []
+                },
                 {
                     "name": "isCondensedCategory",
                     "defaultValue": "false",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "line": 17,
+                    "type": "boolean",
+                    "decorators": []
+                },
+                {
+                    "name": "isShowBottomBorder",
+                    "defaultValue": "false",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 18,
                     "type": "boolean",
                     "decorators": []
                 },
@@ -3133,7 +3378,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 18
+                    "line": 21
                 }
             ],
             "methodsClass": [
@@ -3143,7 +3388,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 22,
+                    "line": 25,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -3155,12 +3400,12 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnInit, Renderer2, ViewChild } from '@angular/core';\nimport { Medication } from '@stories/models/medication.model';\nimport { MedicationTimeline } from '@models/medications-concentrated-data.model';\n\n@Component({\n  selector: 'app-medication-graph',\n  templateUrl: './medication-graph.component.html',\n  styleUrls: ['./medication-graph.component.scss']\n})\nexport class MedicationGraphComponent implements OnInit {\n  @ViewChild('graphLine') elRefGraphLine;\n  @ViewChild('name') elRefName;\n  @Input() medication: Medication;\n  @Input() timeline: MedicationTimeline;\n  @Input() medicationNameWidth: number;\n  @Input() timelineWidth: number;\n  @Input() isCondensedCategory = false;\n  parts;\n\n  constructor(private renderer: Renderer2) {}\n\n  ngOnInit() {\n    this.parts = this.timeline.xAxisValues.length - 1;\n  }\n}\n",
+            "sourceCode": "import { Component, Input, OnInit, Renderer2, ViewChild } from '@angular/core';\nimport { Medication } from '@stories/models/medication.model';\nimport { MedicationTimeline } from '@models/medicon-data.model';\n\n@Component({\n  selector: 'app-medicon-category-item',\n  templateUrl: './medicon-category-item.component.html',\n  styleUrls: ['./medicon-category-item.component.scss']\n})\nexport class MediconCategoryItemComponent implements OnInit {\n  @ViewChild('graphLine') elRefGraphLine;\n  @ViewChild('name') elRefName;\n  @Input() medication: Medication;\n  @Input() timeline: MedicationTimeline;\n  @Input() medicationNameWidth: number;\n  @Input() timelineWidth: number;\n  @Input() isCondensedCategory = false;\n  @Input() isShowBottomBorder = false;\n  @Input() categoryName = '';\n  @Input() categoryColor = '';\n  parts;\n\n  constructor(private renderer: Renderer2) {}\n\n  ngOnInit() {\n    this.parts = this.timeline.xAxisValues.length - 1;\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@import 'variables';\n\n.graph-line {\n  display: flex;\n  align-items: center;\n  height: $medication-graph-height;\n\n  .graph-container {\n    position: relative;\n    .graph {\n      border-top: 1px solid gray;\n      border-right: 1px solid gray;\n      border-left: 1px solid gray;\n      //border-bottom: 1px solid gray;\n      height: 100%;\n      flex-grow: 1;\n      display: flex;\n      align-items: center;\n      &.section-graph-odd {\n        background: white;\n      }\n      &.section-graph-even {\n        background: #eeeeee;\n      }\n      &.last-section-graph {\n        border-bottom: 1px solid gray;\n      }\n    }\n  }\n}\n\n.vertical-lines-container {\n  display: flex;\n  width: 100%;\n  justify-content: space-evenly;\n  .vertical-lines-part-container {\n    display: block;\n    width: 100%;\n    height: $medication-graph-height;\n    position: relative;\n    &:not(:last-child) {\n      border-right: 1px solid black;\n    }\n    .x-axis-footer-value {\n      position: absolute;\n      left: -1rem;\n      bottom: -2rem;\n    }\n  }\n}\n",
-                    "styleUrl": "./medication-graph.component.scss"
+                    "data": "@import 'variables';\n\n.graph-line {\n  display: flex;\n  align-items: center;\n  height: $medication-graph-height;\n\n  .graph-container {\n    position: relative;\n    .graph {\n      border-top: 1px solid gray;\n      border-right: 1px solid gray;\n      border-left: 1px solid gray;\n      height: 100%;\n      flex-grow: 1;\n      display: flex;\n      align-items: center;\n      &.show-bottom-border {\n        border-bottom: 1px solid gray;\n      }\n      &.section-graph-odd {\n        background: white;\n      }\n      &.section-graph-even {\n        background: #eeeeee;\n      }\n      &.last-section-graph {\n        border-bottom: 1px solid gray;\n      }\n    }\n  }\n}\n\n.vertical-lines-container {\n  display: flex;\n  width: 100%;\n  justify-content: space-evenly;\n  .vertical-lines-part-container {\n    display: block;\n    width: 100%;\n    height: $medication-graph-height;\n    position: relative;\n    &:not(:last-child) {\n      border-right: 1px solid black;\n    }\n    .x-axis-footer-value {\n      position: absolute;\n      left: -1rem;\n      bottom: -2rem;\n    }\n  }\n}\n",
+                    "styleUrl": "./medicon-category-item.component.scss"
                 }
             ],
             "stylesData": "",
@@ -3177,7 +3422,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 18,
+                "line": 21,
                 "jsdoctags": [
                     {
                         "name": "renderer",
@@ -3193,25 +3438,229 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<div class=\"graph-line\" #graphLine>\n  <div class=\"name\" #name [style.width.px]=\"medicationNameWidth\">\n    <ng-container *ngIf=\"!isCondensedCategory\">\n      {{medication.name}}\n    </ng-container>\n  </div>\n\n  <div class=\"graph-container\" [style.width.px]=\"timelineWidth\">\n    <div class=\"graph\">\n      <div class=\"vertical-lines-container\">\n        <ng-container *ngFor=\"let part of [].constructor(parts); let i=index\">\n          <ng-container\n              [ngTemplateOutlet]=\"verticalLines\"\n              [ngTemplateOutletContext]=\"{isLast: i===parts, value: timeline.xAxisValues[i]}\"\n          ></ng-container>\n        </ng-container>\n      </div>\n    </div>\n  </div>\n</div>\n\n<ng-template #verticalLines let-isLast=\"isLast\" let-value=\"value\" >\n  <div class=\"vertical-lines-part-container\">\n    <div class=\"vertical-lines-part\"></div>\n    <div *ngIf=\"isLast\" class=\"x-axis-footer-value\">{{value}}</div>\n  </div>\n</ng-template>\n"
+            "templateData": "<div class=\"graph-line\" #graphLine>\n  <div class=\"name\" #name [style.width.px]=\"medicationNameWidth\">\n    <ng-container *ngIf=\"!isCondensedCategory\">\n      {{medication.name}}\n    </ng-container>\n    <ng-container *ngIf=\"isCondensedCategory\">\n      <span [style.color]=\"categoryColor\">{{categoryName}}</span>\n    </ng-container>\n  </div>\n\n  <div class=\"graph-container\" [style.width.px]=\"timelineWidth\">\n    <div class=\"graph\" [class.show-bottom-border]=\"isShowBottomBorder\">\n      <div class=\"vertical-lines-container\">\n        <ng-container *ngFor=\"let part of [].constructor(parts); let i=index\">\n          <ng-container\n              [ngTemplateOutlet]=\"verticalLines\"\n              [ngTemplateOutletContext]=\"{isLast: i===parts, value: timeline.xAxisValues[i]}\"\n          ></ng-container>\n        </ng-container>\n      </div>\n    </div>\n  </div>\n</div>\n\n<ng-template #verticalLines let-isLast=\"isLast\" let-value=\"value\" >\n  <div class=\"vertical-lines-part-container\">\n    <div class=\"vertical-lines-part\"></div>\n    <div *ngIf=\"isLast\" class=\"x-axis-footer-value\">{{value}}</div>\n  </div>\n</ng-template>\n"
         },
         {
-            "name": "MedicationListerComponent",
-            "id": "component-MedicationListerComponent-c20f3659f8d92111b0b26f5c9aba526817360d04b056dc284bc54891283eb888acfd5331b3a45017e6c481be464609f0971f6c34528b842d974ede087e226ebc",
-            "file": "src/stories/components/medication-lister/medication-lister.component.ts",
+            "name": "MediconComponent",
+            "id": "component-MediconComponent-1e7e228abb11d086cbefeb9ef5a7955468520abfb2d46096bb028643a960877eabc1624ec08addc8ef2fe2dbcae339f223b6853de42072a28691031217ce73a4",
+            "file": "src/app/shared/components/system/medicon/medicon.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-medicon",
+            "styleUrls": [
+                "./medicon.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./medicon.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "data",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 17,
+                    "type": "MediconData",
+                    "decorators": []
+                },
+                {
+                    "name": "direction",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "Direction",
+                    "decorators": []
+                },
+                {
+                    "name": "metadata",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 16,
+                    "type": "GraphMetadata",
+                    "decorators": []
+                },
+                {
+                    "name": "text",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "any",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "resolution",
+                    "defaultValue": "new EventEmitter<TimelineResolution>()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 18,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [
+                {
+                    "name": "elContent",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "ElementRef",
+                    "optional": false,
+                    "description": "",
+                    "line": 13,
+                    "decorators": [
+                        {
+                            "name": "ViewChild",
+                            "stringifiedArguments": "'content'"
+                        }
+                    ]
+                },
+                {
+                    "name": "preTimelineWidth",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 21
+                },
+                {
+                    "name": "TIMELINE_WIDTH_PCT",
+                    "defaultValue": "0.8",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 19,
+                    "modifierKind": [
+                        144
+                    ]
+                },
+                {
+                    "name": "TIMELINE_WIDTH_REDUCTION_PCT",
+                    "defaultValue": "0.95",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 20,
+                    "modifierKind": [
+                        144
+                    ]
+                },
+                {
+                    "name": "timelineWidth",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "number",
+                    "optional": false,
+                    "description": "",
+                    "line": 22
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "ngAfterViewInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 26,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "onChangeResolution",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 38,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "setTimelineWidth",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 30,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';\nimport { GraphMetadata } from '@models/graph-metadata.model';\nimport { Direction } from '@stories/models/direction.model';\nimport { TimelineResolution } from '@shared/enums/timeline-resolution.enum';\nimport { MediconData } from '@models/medicon-data.model';\n\n@Component({\n  selector: 'app-medicon',\n  templateUrl: './medicon.component.html',\n  styleUrls: ['./medicon.component.scss']\n})\nexport class MediconComponent implements AfterViewInit {\n  @ViewChild('content') elContent: ElementRef;\n  @Input() direction: Direction;\n  @Input() text: any;\n  @Input() metadata: GraphMetadata;\n  @Input() data: MediconData;\n  @Output() resolution = new EventEmitter<TimelineResolution>();\n  readonly TIMELINE_WIDTH_PCT = 0.8;  // total width for graph on the right side - 80%\n  readonly TIMELINE_WIDTH_REDUCTION_PCT = 0.95;  // take off 5% to display the right most hour\n  preTimelineWidth = 0;\n  timelineWidth = 0;\n\n  constructor(private cdr: ChangeDetectorRef) {}\n\n  ngAfterViewInit() {\n    this.setTimelineWidth();\n  }\n\n  setTimelineWidth() {\n    const contentWidth = this.elContent.nativeElement.offsetWidth;\n    const timelineWidth = Math.floor(contentWidth * this.TIMELINE_WIDTH_PCT);\n    this.preTimelineWidth = contentWidth - timelineWidth;\n    this.timelineWidth =  Math.floor(timelineWidth * this.TIMELINE_WIDTH_REDUCTION_PCT);\n    this.cdr.detectChanges();\n  }\n\n  onChangeResolution() {\n    this.resolution.emit(this.data.resolution);\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": "$header-height: 3rem;\n\n.content {\n  display: block;\n\n  .header {\n    display: flex;\n    justify-content: space-between;\n    height: $header-height;\n    align-items: center;\n    padding-inline: 2rem;\n    > div {\n      width: 30%;\n    }\n    .resolution {\n      > select {\n        margin-inline-start: 0.5rem;\n      }\n    }\n    .action-icons {\n      // padding-inline-start: 1rem;\n      font-size: var(--action-icons-font-size);\n      display: inline-flex;\n      align-items: center;\n      height: 100%;\n      i {\n        line-height: 1rem;\n        &:not(:last-child) {\n          margin-right: 4rem;\n        }\n      }\n      .paging-icons {\n        i {\n          margin-right: 1rem;\n          &.larger {\n             font-size: 1.5rem;\n          }\n          &.backward::before {\n            transform: scaleX(-1);\n            -ms-transform: scaleX(-1);\n          }\n        }\n      }\n    }\n  }\n\n  .sections {\n    :not(:last-child) {\n      margin-bottom: 1.5rem;\n    }\n    app-medications-section {\n      display: block;\n    }\n  }\n }\n\n",
+                    "styleUrl": "./medicon.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "constructorObj": {
+                "name": "constructor",
+                "description": "",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "args": [
+                    {
+                        "name": "cdr",
+                        "type": "ChangeDetectorRef",
+                        "deprecated": false,
+                        "deprecationMessage": ""
+                    }
+                ],
+                "line": 22,
+                "jsdoctags": [
+                    {
+                        "name": "cdr",
+                        "type": "ChangeDetectorRef",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
+                    }
+                ]
+            },
+            "implements": [
+                "AfterViewInit"
+            ],
+            "templateData": "<div #content class=\"content\">\n  <div class=\"header\">\n    <div class=\"action-icons horizontal-left\">\n      <i class=\"bi bi-printer print\"></i>\n      <i class=\"bi bi-arrow-clockwise\"></i>\n      <span class=\"paging-icons\">\n        <i class=\"bi bi-fast-forward backward larger\"></i>\n        <i class=\"bi bi-caret-left\"></i>\n        <i class=\"bi bi-caret-right\"></i>\n        <i class=\"bi bi-fast-forward larger\"></i>\n      </span>\n    </div>\n\n    <div class=\"title horizontal-center\">\n      {{data.title.fromTime}}&nbsp; -&nbsp; {{data.title.toTime}}\n    </div>\n\n    <div class=\"resolution horizontal-right vertical-center\" [dir]=\"direction\">\n      <span>{{text.resolution.label}}</span>\n      <select [(ngModel)]=\"data.resolution\" (change)=\"onChangeResolution()\">\n        <option *ngFor=\"let option of text.resolution.options\" [value]=\"option.value\">{{option.label}}</option>\n      </select>\n    </div>\n  </div>\n\n  <div *ngIf=\"timelineWidth\" class=\"sections\">\n    <app-medicon-section-container *ngFor=\"let section of data.sections\"\n      [text]=\"text\"\n      [section]=\"section\"\n      [timeline]=\"data.timeline\"\n      [preTimelineWidth]=\"preTimelineWidth\"\n      [timelineWidth]=\"timelineWidth\">\n    </app-medicon-section-container>\n  </div>\n</div>\n\n"
+        },
+        {
+            "name": "MediconListerComponent",
+            "id": "component-MediconListerComponent-675e6c93226554e57e4ef54eedbcc7b0cd64368eef687cb94d2ffe92c091ca112c8e860e9db5c6d2c904f66cd20279e1808c480f618d4edeb3b8df0293348bb7",
+            "file": "src/stories/components/medicon-lister/medicon-lister.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
             "outputs": [],
             "providers": [],
-            "selector": "app-medication-lister",
+            "selector": "app-medicon-lister",
             "styleUrls": [
-                "./medication-lister.component.scss"
+                "./medicon-lister.component.scss"
             ],
             "styles": [],
             "templateUrl": [
-                "./medication-lister.component.html"
+                "./medicon-lister.component.html"
             ],
             "viewProviders": [],
             "inputsClass": [
@@ -3368,12 +3817,12 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';\nimport { Subject, Subscription } from 'rxjs';\nimport { distinct, debounceTime, skip } from 'rxjs/operators';\nimport { Medication } from '@stories/models/medication.model';\n\n@Component({\n  selector: 'app-medication-lister',\n  templateUrl: './medication-lister.component.html',\n  styleUrls: ['./medication-lister.component.scss'],\n  changeDetection: ChangeDetectionStrategy.OnPush\n})\nexport class MedicationListerComponent implements AfterViewInit, OnDestroy {\n  @Input() medications;\n  @Output() change = new EventEmitter();\n  @Output() deleteMedication = new EventEmitter<number>();\n  medications$ = new Subject();\n  subscription: Subscription;\n  isAfterViewInit = false;\n\n  constructor(private cdr: ChangeDetectorRef) {}\n\n  ngAfterViewInit(): void {\n    this.isAfterViewInit = true;\n    this.subscription = this.medications$.pipe(\n      debounceTime(200),\n      distinct()\n    ).subscribe(value => {\n      this.change.emit(value);\n    });\n  }\n\n  ngOnDestroy() {\n    if (this.subscription && !this.subscription.closed) this.subscription.unsubscribe();\n  }\n\n  onChange(value) {\n    if (this.isAfterViewInit) this.medications$.next(value);\n    if (this.isAfterViewInit) console.log('onChange:', value, ', isAfterViewInit:', this.isAfterViewInit);\n  }\n\n  onClickAdd() {\n    const medication: Medication = {\n      id: 0,\n      name: '',\n      categoryId: 0,\n      type: undefined,\n      timingType: undefined,\n      orderTime: 0,\n      executionTime: 0,\n      duration: 0,\n      times: ['', '', '']\n    };\n    this.medications.unshift(medication);\n    this.medications = [...this.medications];\n    this.onChange(this.medications);\n    this.cdr.detectChanges();\n  }\n\n  onDeleteMedication(id) {\n    this.deleteMedication.emit(id);\n  }\n}\n",
+            "sourceCode": "import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';\nimport { Subject, Subscription } from 'rxjs';\nimport { distinct, debounceTime, skip } from 'rxjs/operators';\nimport { Medication } from '@stories/models/medication.model';\n\n@Component({\n  selector: 'app-medicon-lister',\n  templateUrl: './medicon-lister.component.html',\n  styleUrls: ['./medicon-lister.component.scss'],\n  changeDetection: ChangeDetectionStrategy.OnPush\n})\nexport class MediconListerComponent implements AfterViewInit, OnDestroy {\n  @Input() medications;\n  @Output() change = new EventEmitter();\n  @Output() deleteMedication = new EventEmitter<number>();\n  medications$ = new Subject();\n  subscription: Subscription;\n  isAfterViewInit = false;\n\n  constructor(private cdr: ChangeDetectorRef) {}\n\n  ngAfterViewInit(): void {\n    this.isAfterViewInit = true;\n    this.subscription = this.medications$.pipe(\n      debounceTime(200),\n      distinct()\n    ).subscribe(value => {\n      this.change.emit(value);\n    });\n  }\n\n  ngOnDestroy() {\n    if (this.subscription && !this.subscription.closed) this.subscription.unsubscribe();\n  }\n\n  onChange(value) {\n    if (this.isAfterViewInit) this.medications$.next(value);\n    if (this.isAfterViewInit) console.log('onChange:', value, ', isAfterViewInit:', this.isAfterViewInit);\n  }\n\n  onClickAdd() {\n    const medication: Medication = {\n      id: 0,\n      name: '',\n      categoryId: 0,\n      type: undefined,\n      timingType: undefined,\n      orderTime: 0,\n      executionTime: 0,\n      duration: 0,\n      times: ['', '', '']\n    };\n    this.medications.unshift(medication);\n    this.medications = [...this.medications];\n    this.onChange(this.medications);\n    this.cdr.detectChanges();\n  }\n\n  onDeleteMedication(id) {\n    this.deleteMedication.emit(id);\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
                     "data": ".medication-table {\n   background: #f0f0f0;\n  //height: 100px;\n  display: block;\n  list-style: none;\n  padding: 0; /* Remove padding */\n  margin: 0.5rem 0 0 0; /* Remove margins */\n}\n\n.add-button {\n  padding: 0 0.5rem;\n  font-size: 0.8rem;\n  margin-inline-start: 2rem;\n}\n",
-                    "styleUrl": "./medication-lister.component.scss"
+                    "styleUrl": "./medicon-lister.component.scss"
                 }
             ],
             "stylesData": "",
@@ -3407,25 +3856,25 @@
                 "AfterViewInit",
                 "OnDestroy"
             ],
-            "templateData": "<div>\n  <span>Medications: {{medications.length}}</span>\n  <button (click)=\"onClickAdd()\" type=\"button\" class=\"btn btn-success add-button\">ADD</button>\n</div>\n\n\n<ng-template #itemTemplate let-medication=\"item\" let-index=\"index\">\n  <app-medication-lister-item\n      [medication]=\"medication.value\"\n      [index]=\"index\"\n      (delete)=\"onDeleteMedication($event)\"\n  ></app-medication-lister-item>\n</ng-template>\n\n<div class=\"medication-table\">\n  <bs-sortable\n      [(ngModel)]=\"medications\"\n      [itemTemplate]=\"itemTemplate\"\n      (onChange)=\"onChange($event)\"\n      itemClass=\"sortable-item\"\n      itemActiveClass=\"sortable-item-active\"\n      placeholderItem=\"\"\n      placeholderClass=\"placeholderStyle text-center\"\n      wrapperClass=\"sortable-wrapper\"\n  ></bs-sortable>\n</div>\n"
+            "templateData": "<div>\n  <span>Medications: {{medications.length}}</span>\n  <button (click)=\"onClickAdd()\" type=\"button\" class=\"btn btn-success add-button\">ADD</button>\n</div>\n\n\n<ng-template #itemTemplate let-medication=\"item\" let-index=\"index\">\n  <app-medicon-lister-item\n      [medication]=\"medication.value\"\n      [index]=\"index\"\n      (delete)=\"onDeleteMedication($event)\"\n  ></app-medicon-lister-item>\n</ng-template>\n\n<div class=\"medication-table\">\n  <bs-sortable\n      [(ngModel)]=\"medications\"\n      [itemTemplate]=\"itemTemplate\"\n      (onChange)=\"onChange($event)\"\n      itemClass=\"sortable-item\"\n      itemActiveClass=\"sortable-item-active\"\n      placeholderItem=\"\"\n      placeholderClass=\"placeholderStyle text-center\"\n      wrapperClass=\"sortable-wrapper\"\n  ></bs-sortable>\n</div>\n"
         },
         {
-            "name": "MedicationListerItemComponent",
-            "id": "component-MedicationListerItemComponent-d3c46c7dfc2de3ddd6b2599abbf1cef3e3b68a0f5ec358118cce04932b30310d063888ed32dcd31142cf6997a55214dd587137e6f71f71ec513e11a50e412cfb",
-            "file": "src/stories/components/medication-lister-item/medication-lister-item.component.ts",
+            "name": "MediconListerItemComponent",
+            "id": "component-MediconListerItemComponent-f94d5ef56e58944db5326c2c789bc43a662be9977bb11004616f03ad83564d9a3a20f6ac97cc15185f77c72a30ce868e5b05422ed7ac3a4975a2421da6e17614",
+            "file": "src/stories/components/medicon-lister-item/medicon-lister-item.component.ts",
             "changeDetection": "ChangeDetectionStrategy.OnPush",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
             "outputs": [],
             "providers": [],
-            "selector": "app-medication-lister-item",
+            "selector": "app-medicon-lister-item",
             "styleUrls": [
-                "./medication-lister-item.component.scss"
+                "./medicon-lister-item.component.scss"
             ],
             "styles": [],
             "templateUrl": [
-                "./medication-lister-item.component.html"
+                "./medicon-lister-item.component.html"
             ],
             "viewProviders": [],
             "inputsClass": [
@@ -3664,12 +4113,12 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';\nimport { Medication } from '@stories/models/medication.model';\nimport { MedicationCategories } from '@stories/const/medication-categories.const';\nimport { medications } from '@stories/const/medications.const';\nimport { ExecutionType } from '@stories/enums/execution-type.enum';\n\n@Component({\n  selector: 'app-medication-lister-item',\n  templateUrl: './medication-lister-item.component.html',\n  styleUrls: ['./medication-lister-item.component.scss'],\n  changeDetection: ChangeDetectionStrategy.OnPush\n})\nexport class MedicationListerItemComponent implements OnInit {\n  @Input() medication: Medication;\n  @Input() index: number;\n  @Output() delete = new EventEmitter<number>()\n  MedicationCategories = MedicationCategories;\n  medications = medications;\n  ExecutionType = ExecutionType;\n  categoryMedications = [];\n\n  constructor() {}\n\n  ngOnInit(): void {\n    this.setCategoryMedication();\n  }\n\n  onChangeCategory(e) {\n    const categoryId = Number(e.target.value);\n    if (categoryId !== this.medication.categoryId) {\n      this.medication.categoryId = Number(e.target.value);\n      this.medication.id = 0;\n      this.setCategoryMedication();\n    }\n    e.stopPropagation();\n  }\n\n  onChangeMedication(e) {\n    this.medication.id = Number(e.target.value);\n    this.medication.name = this.medications.find(medication => medication.id === this.medication.id).name;\n    e.stopPropagation();\n  }\n\n  stopPropagation(e) {\n    e.stopPropagation();\n  }\n\n  setCategoryMedication() {\n    this.categoryMedications = this.medications.filter(medication => medication.categoryId === this.medication.categoryId);\n  }\n\n  onChangeTime(e, i) {\n    this.stopPropagation(e);\n    setTimeout(() => {\n      this.medication.times[i] = e.target.value;\n    });\n  }\n\n\n  onClickDelete() {\n    let isConfirm = false;\n    const item = this.medications.find(medication => medication.id === this.medication.id);\n    if (item) isConfirm = confirm(`are you sure you want to delete \"${item.name}\"?`);\n    if (!item || isConfirm) {\n      this.delete.emit(this.medication.id);\n    }\n  }\n}\n",
+            "sourceCode": "import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';\nimport { Medication } from '@stories/models/medication.model';\nimport { MedicationCategories } from '@stories/const/medication-categories.const';\nimport { medications } from '@stories/const/medications.const';\nimport { ExecutionType } from '@stories/enums/execution-type.enum';\n\n@Component({\n  selector: 'app-medicon-lister-item',\n  templateUrl: './medicon-lister-item.component.html',\n  styleUrls: ['./medicon-lister-item.component.scss'],\n  changeDetection: ChangeDetectionStrategy.OnPush\n})\nexport class MediconListerItemComponent implements OnInit {\n  @Input() medication: Medication;\n  @Input() index: number;\n  @Output() delete = new EventEmitter<number>()\n  MedicationCategories = MedicationCategories;\n  medications = medications;\n  ExecutionType = ExecutionType;\n  categoryMedications = [];\n\n  constructor() {}\n\n  ngOnInit(): void {\n    this.setCategoryMedication();\n  }\n\n  onChangeCategory(e) {\n    const categoryId = Number(e.target.value);\n    if (categoryId !== this.medication.categoryId) {\n      this.medication.categoryId = Number(e.target.value);\n      this.medication.id = 0;\n      this.setCategoryMedication();\n    }\n    e.stopPropagation();\n  }\n\n  onChangeMedication(e) {\n    this.medication.id = Number(e.target.value);\n    this.medication.name = this.medications.find(medication => medication.id === this.medication.id).name;\n    e.stopPropagation();\n  }\n\n  stopPropagation(e) {\n    e.stopPropagation();\n  }\n\n  setCategoryMedication() {\n    this.categoryMedications = this.medications.filter(medication => medication.categoryId === this.medication.categoryId);\n  }\n\n  onChangeTime(e, i) {\n    this.stopPropagation(e);\n    setTimeout(() => {\n      this.medication.times[i] = e.target.value;\n    });\n  }\n\n\n  onClickDelete() {\n    let isConfirm = false;\n    const item = this.medications.find(medication => medication.id === this.medication.id);\n    if (item) isConfirm = confirm(`are you sure you want to delete \"${item.name}\"?`);\n    if (!item || isConfirm) {\n      this.delete.emit(this.medication.id);\n    }\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
                     "data": "$border-color: #aaaaaa;\n\n.medication-row {\n  //padding-inline: 1rem;\n  //background: brown;\n  padding-inline: 1rem;\n  border: 1px solid $border-color;\n  border-top: none;\n  padding: 6px;\n  display: flex;\n  align-items: center;\n  &.first {\n    border-top: 1px solid $border-color;\n  }\n  .medication {\n    flex-grow: 1;\n  }\n  .delete {\n    width: 2rem;\n    display: block;\n    text-align: right;\n  }\n}\n\n.prop {\n  display: inline-flex;\n  align-items: center;\n  margin-inline-end: 2rem;\n  .label {\n    margin-inline-end: 0.6rem;\n  }\n  > input {\n    width: 5rem;\n  }\n}\n\n.category {\n  //background: cyan;\n}\n",
-                    "styleUrl": "./medication-lister-item.component.scss"
+                    "styleUrl": "./medicon-lister-item.component.scss"
                 }
             ],
             "stylesData": "",
@@ -3687,425 +4136,21 @@
             "templateData": "<div class=\"medication-row\" [class.first]=\"index===0\">\n  <div class=\"medication\">\n    <div class=\"prop category\">\n      <span class=\"label\">Category</span>\n      <select [(ngModel)]=\"medication.categoryId\" (change)=\"onChangeCategory($event)\">\n        <option *ngFor=\"let option of MedicationCategories\" [value]=\"option.id\">{{option.label}}</option>\n      </select>\n    </div>\n\n    <div class=\"prop medication\">\n      <span class=\"label\">Medication</span>\n      <select [ngModel]=\"medication.id\" (change)=\"onChangeMedication($event)\">\n        <option *ngFor=\"let item of categoryMedications\" [value]=\"item.id\">{{item.name}}</option>\n      </select>\n    </div>\n\n    <div class=\"prop execution\">\n      <span class=\"label\">Type</span>\n      <select [(ngModel)]=\"medication.type\" (change)=\"stopPropagation($event)\">\n        <option [value]=\"ExecutionType.Continuous\">Continuous</option>\n        <option [value]=\"ExecutionType.Periodic\">Periodic</option>\n      </select>\n    </div>\n\n\n    <!--     C O N T I N U O U S     -->\n    <ng-container *ngIf=\"medication.type===ExecutionType.Continuous\">\n      <div class=\"prop\">\n        <span class=\"label\">Relative minutes:</span>\n      </div>\n\n      <div class=\"prop\">\n        <span class=\"label\">Order Time</span>\n        <input type=\"text\" [(ngModel)]=\"medication.orderTime\" (change)=\"stopPropagation($event)\">\n      </div>\n\n      <div class=\"prop\">\n        <span class=\"label\">Execution Time</span>\n        <input type=\"number\" [(ngModel)]=\"medication.executionTime\" (change)=\"stopPropagation($event)\">\n      </div>\n\n      <div class=\"prop\">\n        <span class=\"label\">Duration</span>\n        <input type=\"number\" [(ngModel)]=\"medication.duration\" (change)=\"stopPropagation($event)\">\n      </div>\n    </ng-container>\n\n\n    <!--     P E R I O D I C     -->\n    <ng-container *ngIf=\"medication.type===ExecutionType.Periodic\">\n      <div class=\"prop periodic\">\n        <span class=\"label\">Times</span>\n\n        <!-- not using *ngFor b/c bootstrap sortable throws error when -->\n        <!-- typing in input field since it is not designed for typing -->\n        <input type=\"text\" [value]=\"medication.times[0]\"\n               (change)=\"onChangeTime($event, 0)\"\n               (keydown)=\"onChangeTime($event, 0)\"\n               (paste)=\"onChangeTime($event, 0)\"\n        >\n        <input type=\"text\" [value]=\"medication.times[1]\"\n               (change)=\"onChangeTime($event, 1)\"\n               (keydown)=\"onChangeTime($event, 1)\"\n               (paste)=\"onChangeTime($event, 1)\"\n        >\n        <input type=\"text\" [value]=\"medication.times[2]\"\n               (change)=\"onChangeTime($event, 2)\"\n               (keydown)=\"onChangeTime($event, 2)\"\n               (paste)=\"onChangeTime($event, 2)\"\n        >\n      </div>\n    </ng-container>\n  </div>\n\n  <div class=\"delete\">\n    <i class=\"bi bi-trash\" (click)=\"onClickDelete()\"></i>\n  </div>\n</div>\n"
         },
         {
-            "name": "MedicationsCategoryComponent",
-            "id": "component-MedicationsCategoryComponent-139055357367aeab19a6ae3f16f8c936049b54126405efac71aa7d5e15d70b3b41e0d25dba64711fe8689e8df421bd6fbc60ef7975d13f22f990ba594bc87d0c",
-            "file": "src/app/shared/components/system/medications-category/medications-category.component.ts",
+            "name": "MediconSectionContainerComponent",
+            "id": "component-MediconSectionContainerComponent-dc756750fecff42b7c706cf7f09105f757526a3848cfad888c0f85c9dc9ef59b1bfba4bcae2e72719640abb852001d3c49aa193cf535183bf25169403e9d0b3b",
+            "file": "src/app/shared/components/system/medicon-section-container/medicon-section-container.component.ts",
             "encapsulation": [],
             "entryComponents": [],
             "inputs": [],
             "outputs": [],
             "providers": [],
-            "selector": "app-medications-category",
+            "selector": "app-medicon-section-container",
             "styleUrls": [
-                "./medications-category.component.scss"
+                "./medicon-section-container.component.scss"
             ],
             "styles": [],
             "templateUrl": [
-                "./medications-category.component.html"
-            ],
-            "viewProviders": [],
-            "inputsClass": [
-                {
-                    "name": "category",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 10,
-                    "type": "MedicationsCategory",
-                    "decorators": []
-                },
-                {
-                    "name": "preTimelineWidth",
-                    "defaultValue": "0",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 12,
-                    "type": "number",
-                    "decorators": []
-                },
-                {
-                    "name": "timeline",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 11,
-                    "type": "MedicationTimeline",
-                    "decorators": []
-                },
-                {
-                    "name": "timelineWidth",
-                    "defaultValue": "0",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 13,
-                    "type": "number",
-                    "decorators": []
-                }
-            ],
-            "outputsClass": [
-                {
-                    "name": "backgroundColored",
-                    "defaultValue": "new EventEmitter()",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 15,
-                    "type": "EventEmitter"
-                },
-                {
-                    "name": "expandCondense",
-                    "defaultValue": "new EventEmitter()",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 14,
-                    "type": "EventEmitter"
-                }
-            ],
-            "propertiesClass": [
-                {
-                    "name": "expandIconWidth",
-                    "defaultValue": "15",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "number",
-                    "optional": false,
-                    "description": "",
-                    "line": 16,
-                    "modifierKind": [
-                        144
-                    ]
-                },
-                {
-                    "name": "frameWidth",
-                    "defaultValue": "10",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "number",
-                    "optional": false,
-                    "description": "",
-                    "line": 17,
-                    "modifierKind": [
-                        144
-                    ]
-                },
-                {
-                    "name": "isExpanded",
-                    "defaultValue": "true",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 19
-                },
-                {
-                    "name": "medicationNameWidth",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 18
-                }
-            ],
-            "methodsClass": [
-                {
-                    "name": "emitExpandCondense",
-                    "args": [
-                        {
-                            "name": "isExpanded",
-                            "type": "",
-                            "deprecated": false,
-                            "deprecationMessage": ""
-                        }
-                    ],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 33,
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "jsdoctags": [
-                        {
-                            "name": "isExpanded",
-                            "type": "",
-                            "deprecated": false,
-                            "deprecationMessage": "",
-                            "tagName": {
-                                "text": "param"
-                            }
-                        }
-                    ]
-                },
-                {
-                    "name": "ngOnInit",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 21,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                },
-                {
-                    "name": "onClickCondense",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 29,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                },
-                {
-                    "name": "onClickExpand",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 25,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                }
-            ],
-            "deprecated": false,
-            "deprecationMessage": "",
-            "hostBindings": [],
-            "hostListeners": [],
-            "description": "",
-            "rawdescription": "\n",
-            "type": "component",
-            "sourceCode": "import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';\nimport { MedicationsCategory, MedicationTimeline } from '@models/medications-concentrated-data.model';\n\n@Component({\n  selector: 'app-medications-category',\n  templateUrl: './medications-category.component.html',\n  styleUrls: ['./medications-category.component.scss']\n})\nexport class MedicationsCategoryComponent implements OnInit {\n  @Input() category: MedicationsCategory;\n  @Input() timeline: MedicationTimeline;\n  @Input() preTimelineWidth = 0;\n  @Input() timelineWidth = 0;\n  @Output() expandCondense = new EventEmitter();\n  @Output() backgroundColored = new EventEmitter();\n  readonly expandIconWidth = 15;\n  readonly frameWidth = 10;\n  medicationNameWidth;\n  isExpanded = true;\n\n  ngOnInit() {\n    this.medicationNameWidth = this.preTimelineWidth - this.expandIconWidth - this.frameWidth;\n  }\n\n  onClickExpand() {\n    this.emitExpandCondense(true);\n  }\n\n  onClickCondense() {\n    this.emitExpandCondense(false);\n  }\n\n  emitExpandCondense(isExpanded) {\n    this.isExpanded = isExpanded;\n    setTimeout(() => this.expandCondense.emit());  // timeout b/c dom hasn't changed yet\n  }\n}\n",
-            "assetsDirs": [],
-            "styleUrlsData": [
-                {
-                    "data": "@import 'variables';\n\n.category {\n  display: flex;\n  align-items: center;\n\n  .expand-icon {\n    display: inline-block;\n  }\n\n  .frame {\n    width: 10px;\n    display: block;\n    border: none;\n    min-height: $medication-graph-height;\n    box-shadow: inset 0 0 0 1px white, inset -1px 0 0 1px white, inset 0 0 0 2px black;\n    z-index: 2;\n    .frame-line-filler {\n      display: flex;\n      flex-direction: column;\n      height: $medication-graph-height;\n    }\n  }\n\n  .medication {\n    flex-grow: 1;\n    display: flex;\n    justify-content: center;\n    flex-direction: column;\n    min-height: $medication-graph-height;\n    z-index: 1;\n    .medication-container {\n      width: 100%;\n      height: $medication-graph-height;\n    }\n  }\n}\n",
-                    "styleUrl": "./medications-category.component.scss"
-                }
-            ],
-            "stylesData": "",
-            "implements": [
-                "OnInit"
-            ],
-            "templateData": "<div class=\"category\">\n  <div class=\"expand-icon\" [style.width.px]=\"expandIconWidth\">\n    <i class=\"bi bi-plus\" *ngIf=\"!isExpanded\" (click)=\"onClickExpand()\"></i>\n    <i class=\"bi bi-dash\" *ngIf=\"isExpanded\" (click)=\"onClickCondense()\"></i>\n  </div>\n\n  <div class=\"frame\" [style.width.px]=\"frameWidth\">\n    <ng-container *ngIf=\"isExpanded\">\n      <div *ngFor=\"let medication of category.medications\" class=\"frame-line-filler\"></div>\n    </ng-container>\n  </div>\n\n  <div class=\"medication\" [style.width.px]=\"medicationNameWidth + timelineWidth\">\n    <ng-container *ngIf=\"!isExpanded\">\n      <app-medication-graph\n          [isCondensedCategory]=\"true\"\n          [timeline]=\"timeline\"\n          [medicationNameWidth]=\"medicationNameWidth\"\n          [timelineWidth]=\"timelineWidth\"\n      ></app-medication-graph>\n    </ng-container>\n    <ng-container *ngIf=\"isExpanded\">\n      <div *ngFor=\"let medication of category.medications; let i=index\" class=\"medication-container\">\n        <app-medication-graph\n            [medication]=\"medication\"\n            [timeline]=\"timeline\"\n            [medicationNameWidth]=\"medicationNameWidth\"\n            [timelineWidth]=\"timelineWidth\"\n        ></app-medication-graph>\n      </div>\n    </ng-container>\n  </div>\n</div>\n"
-        },
-        {
-            "name": "MedicationsConcentratedComponent",
-            "id": "component-MedicationsConcentratedComponent-4aa0ad4190f77547fa24351cf36dbb429c2929a81e2417ed8f602dce724138ec034976bbd19e3254d3a762a9b33ee3beb1a11023b8ac79012c4349f9c90bedb9",
-            "file": "src/app/shared/components/system/medications-concentrated/medications-concentrated.component.ts",
-            "encapsulation": [],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "app-medications-concentrated",
-            "styleUrls": [
-                "./medications-concentrated.component.scss"
-            ],
-            "styles": [],
-            "templateUrl": [
-                "./medications-concentrated.component.html"
-            ],
-            "viewProviders": [],
-            "inputsClass": [
-                {
-                    "name": "data",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 17,
-                    "type": "MedicationsConcentratedData",
-                    "decorators": []
-                },
-                {
-                    "name": "direction",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 14,
-                    "type": "Direction",
-                    "decorators": []
-                },
-                {
-                    "name": "metadata",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 16,
-                    "type": "GraphMetadata",
-                    "decorators": []
-                },
-                {
-                    "name": "text",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 15,
-                    "type": "any",
-                    "decorators": []
-                }
-            ],
-            "outputsClass": [
-                {
-                    "name": "resolution",
-                    "defaultValue": "new EventEmitter<TimelineResolution>()",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 18,
-                    "type": "EventEmitter"
-                }
-            ],
-            "propertiesClass": [
-                {
-                    "name": "elContent",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "ElementRef",
-                    "optional": false,
-                    "description": "",
-                    "line": 13,
-                    "decorators": [
-                        {
-                            "name": "ViewChild",
-                            "stringifiedArguments": "'content'"
-                        }
-                    ]
-                },
-                {
-                    "name": "preTimelineWidth",
-                    "defaultValue": "0",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "number",
-                    "optional": false,
-                    "description": "",
-                    "line": 21
-                },
-                {
-                    "name": "TIMELINE_WIDTH_PCT",
-                    "defaultValue": "0.8",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "number",
-                    "optional": false,
-                    "description": "",
-                    "line": 19,
-                    "modifierKind": [
-                        144
-                    ]
-                },
-                {
-                    "name": "TIMELINE_WIDTH_REDUCTION_PCT",
-                    "defaultValue": "0.95",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "number",
-                    "optional": false,
-                    "description": "",
-                    "line": 20,
-                    "modifierKind": [
-                        144
-                    ]
-                },
-                {
-                    "name": "timelineWidth",
-                    "defaultValue": "0",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "number",
-                    "optional": false,
-                    "description": "",
-                    "line": 22
-                }
-            ],
-            "methodsClass": [
-                {
-                    "name": "ngAfterViewInit",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 26,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                },
-                {
-                    "name": "onChangeResolution",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 38,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                },
-                {
-                    "name": "setTimelineWidth",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 30,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                }
-            ],
-            "deprecated": false,
-            "deprecationMessage": "",
-            "hostBindings": [],
-            "hostListeners": [],
-            "description": "",
-            "rawdescription": "\n",
-            "type": "component",
-            "sourceCode": "import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';\nimport { GraphMetadata } from '@models/graph-metadata.model';\nimport { Direction } from '@stories/models/direction.model';\nimport { TimelineResolution } from '@shared/enums/timeline-resolution.enum';\nimport { MedicationsConcentratedData } from '@models/medications-concentrated-data.model';\n\n@Component({\n  selector: 'app-medications-concentrated',\n  templateUrl: './medications-concentrated.component.html',\n  styleUrls: ['./medications-concentrated.component.scss']\n})\nexport class MedicationsConcentratedComponent implements AfterViewInit {\n  @ViewChild('content') elContent: ElementRef;\n  @Input() direction: Direction;\n  @Input() text: any;\n  @Input() metadata: GraphMetadata;\n  @Input() data: MedicationsConcentratedData;\n  @Output() resolution = new EventEmitter<TimelineResolution>();\n  readonly TIMELINE_WIDTH_PCT = 0.8;  // total width for graph on the right side - 80%\n  readonly TIMELINE_WIDTH_REDUCTION_PCT = 0.95;  // take off 5% to display the right most hour\n  preTimelineWidth = 0;\n  timelineWidth = 0;\n\n  constructor(private cdr: ChangeDetectorRef) {}\n\n  ngAfterViewInit() {\n    this.setTimelineWidth();\n  }\n\n  setTimelineWidth() {\n    const contentWidth = this.elContent.nativeElement.offsetWidth;\n    const timelineWidth = Math.floor(contentWidth * this.TIMELINE_WIDTH_PCT);\n    this.preTimelineWidth = contentWidth - timelineWidth;\n    this.timelineWidth =  Math.floor(timelineWidth * this.TIMELINE_WIDTH_REDUCTION_PCT);\n    this.cdr.detectChanges();\n  }\n\n  onChangeResolution() {\n    this.resolution.emit(this.data.resolution);\n  }\n}\n",
-            "assetsDirs": [],
-            "styleUrlsData": [
-                {
-                    "data": ".content {\n  display: block;\n\n  .header {\n    display: flex;\n    justify-content: space-between;\n    height: 3rem;\n    align-items: center;\n    padding-inline: 1rem;\n    .resolution {\n      > select {\n        margin-inline-start: 0.5rem;\n      }\n    }\n    .print {\n      font-size: 2rem;\n    }\n    &.sub-header {\n      background: #eeeeee;\n    }\n  }\n\n  .sections {\n    :not(:last-child) {\n      margin-bottom: 1.5rem;\n    }\n    app-medications-section {\n      display: block;\n    }\n  }\n }\n\n",
-                    "styleUrl": "./medications-concentrated.component.scss"
-                }
-            ],
-            "stylesData": "",
-            "constructorObj": {
-                "name": "constructor",
-                "description": "",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "args": [
-                    {
-                        "name": "cdr",
-                        "type": "ChangeDetectorRef",
-                        "deprecated": false,
-                        "deprecationMessage": ""
-                    }
-                ],
-                "line": 22,
-                "jsdoctags": [
-                    {
-                        "name": "cdr",
-                        "type": "ChangeDetectorRef",
-                        "deprecated": false,
-                        "deprecationMessage": "",
-                        "tagName": {
-                            "text": "param"
-                        }
-                    }
-                ]
-            },
-            "implements": [
-                "AfterViewInit"
-            ],
-            "templateData": "<div #content class=\"content\">\n  <div class=\"header\">\n    <div class=\"action\">\n      <i class=\"bi bi-printer print\"></i>\n    </div>\n    <div class=\"title\">\n      {{data.title.fromTime}}&nbsp; -&nbsp; {{data.title.toTime}}\n    </div>\n    <div class=\"resolution\" [dir]=\"direction\">\n      <span>{{text.resolution.label}}</span>\n      <select [(ngModel)]=\"data.resolution\" (change)=\"onChangeResolution()\">\n        <option *ngFor=\"let option of text.resolution.options\" [value]=\"option.value\">{{option.label}}</option>\n      </select>\n    </div>\n  </div>\n\n  <div class=\"header sub-header\">\n    <div>{{text.medicationsConcentrated.legend}}</div>\n    <div>{{text.medicationsConcentrated.title}}</div>\n    <div></div>\n  </div>\n\n  <div *ngIf=\"timelineWidth\" #sections class=\"sections\">\n    <app-medications-section-container *ngFor=\"let section of data.sections\"\n      [section]=\"section\"\n      [timeline]=\"data.timeline\"\n      [preTimelineWidth]=\"preTimelineWidth\"\n      [timelineWidth]=\"timelineWidth\">\n    </app-medications-section-container>\n  </div>\n</div>\n\n"
-        },
-        {
-            "name": "MedicationsSectionContainerComponent",
-            "id": "component-MedicationsSectionContainerComponent-d2a0f0229c2e02b49dc8acc11a7417f19f071b45f0ddef3f884d5b3308ad7d7acfe1f5f3913b7e812326c3f492d8544c99d68d230923457fbe21cb19aeade30a",
-            "file": "src/app/shared/components/system/medications-section-container/medications-section-container.component.ts",
-            "encapsulation": [],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "app-medications-section-container",
-            "styleUrls": [
-                "./medications-section-container.component.scss"
-            ],
-            "styles": [],
-            "templateUrl": [
-                "./medications-section-container.component.html"
+                "./medicon-section-container.component.html"
             ],
             "viewProviders": [],
             "inputsClass": [
@@ -4124,6 +4169,14 @@
                     "deprecationMessage": "",
                     "line": 12,
                     "type": "MedicationsSection",
+                    "decorators": []
+                },
+                {
+                    "name": "text",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 11,
+                    "type": "any",
                     "decorators": []
                 },
                 {
@@ -4146,21 +4199,6 @@
             ],
             "outputsClass": [],
             "propertiesClass": [
-                {
-                    "name": "elRefCategories",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "ElementRef",
-                    "optional": false,
-                    "description": "",
-                    "line": 11,
-                    "decorators": [
-                        {
-                            "name": "ViewChild",
-                            "stringifiedArguments": "'categories'"
-                        }
-                    ]
-                },
                 {
                     "name": "MedicationsSectionType",
                     "defaultValue": "MedicationsSectionType",
@@ -4197,7 +4235,139 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 22,
+                    "line": 20,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, ElementRef, Input, OnInit, Output, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';\nimport { MedicationsSection, MedicationTimeline } from '@models/medicon-data.model';\nimport { MedicationsSectionType } from '@shared/enums/medications-section-type.enum';\n\n@Component({\n  selector: 'app-medicon-section-container',\n  templateUrl: './medicon-section-container.component.html',\n  styleUrls: ['./medicon-section-container.component.scss']\n})\nexport class MediconSectionContainerComponent implements OnInit {\n  @Input() text;\n  @Input() section: MedicationsSection;\n  @Input() timeline: MedicationTimeline;\n  @Input() preTimelineWidth = 0;\n  @Input() timelineWidth = 0;\n  MedicationsSectionType = MedicationsSectionType;\n  timelineValuesWidth;\n  timelineValuesRight;\n\n  ngOnInit() {\n    const valueWidth = this.timelineWidth / 12;\n    this.timelineValuesWidth = valueWidth * this.timeline.xAxisValues.length;\n    this.timelineValuesRight = -valueWidth / 2;\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".title {\n  display: flex;\n  justify-content: center;\n  margin-bottom: 1rem;\n}\n",
+                    "styleUrl": "./medicon-section-container.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "<div class=\"content\">\n  <ng-container *ngIf=\"timelineWidth\">\n    <div class=\"categories-container\">\n        <ng-container [ngSwitch]=\"section.type\">\n          <app-medicon-section-timeline\n              *ngSwitchCase=\"MedicationsSectionType.Timeline\"\n              [text]=\"text\"\n              [section]=\"section\"\n              [timeline]=\"timeline\"\n              [preTimelineWidth]=\"preTimelineWidth\"\n              [timelineWidth]=\"timelineWidth\">\n          </app-medicon-section-timeline>\n        </ng-container>\n    </div>\n  </ng-container>\n</div>\n"
+        },
+        {
+            "name": "MediconSectionTimelineComponent",
+            "id": "component-MediconSectionTimelineComponent-68b2e324824ba113c2727790abf0bfd9e3ff23e327bbb475a612370aa22eff6dc9281a643dcb01657688ccb643df0cfe2a4f0b11fc5099f52960dadc2bc08076",
+            "file": "src/app/shared/components/system/medicon-section-timeline/medicon-section-timeline.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-medicon-section-timeline",
+            "styleUrls": [
+                "./medicon-section-timeline.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./medicon-section-timeline.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "preTimelineWidth",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 14,
+                    "type": "number",
+                    "decorators": []
+                },
+                {
+                    "name": "section",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "MedicationsSection",
+                    "decorators": []
+                },
+                {
+                    "name": "text",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 11,
+                    "type": "any",
+                    "decorators": []
+                },
+                {
+                    "name": "timeline",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 13,
+                    "type": "MedicationTimeline",
+                    "decorators": []
+                },
+                {
+                    "name": "timelineWidth",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 15,
+                    "type": "number",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [
+                {
+                    "name": "backgroundColored",
+                    "defaultValue": "new EventEmitter()",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 16,
+                    "type": "EventEmitter"
+                }
+            ],
+            "propertiesClass": [
+                {
+                    "name": "elRefCategories",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "ElementRef",
+                    "optional": false,
+                    "description": "",
+                    "line": 10,
+                    "decorators": [
+                        {
+                            "name": "ViewChild",
+                            "stringifiedArguments": "'categories'"
+                        }
+                    ]
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "ngAfterViewInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 20,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "onExpandCondense",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 24,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -4219,12 +4389,12 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';\nimport { MedicationsSection, MedicationTimeline } from '@models/medications-concentrated-data.model';\nimport { MedicationsSectionType } from '@shared/enums/medications-section-type.enum';\n\n@Component({\n  selector: 'app-medications-section-container',\n  templateUrl: './medications-section-container.component.html',\n  styleUrls: ['./medications-section-container.component.scss']\n})\nexport class MedicationsSectionContainerComponent implements OnInit {\n  @ViewChild('categories') elRefCategories: ElementRef;\n  @Input() section: MedicationsSection;\n  @Input() timeline: MedicationTimeline;\n  @Input() preTimelineWidth = 0;\n  @Input() timelineWidth = 0;\n  MedicationsSectionType = MedicationsSectionType;\n  timelineValuesWidth;\n  timelineValuesRight;\n\n  constructor(private cdr: ChangeDetectorRef) {}\n\n  ngOnInit() {\n    const valueWidth = this.timelineWidth / 12;\n    this.timelineValuesWidth = valueWidth * this.timeline.xAxisValues.length;\n    this.timelineValuesRight = -valueWidth / 2;\n  }\n\n  setCategoriesBackgroundColor() {\n    const graphElements = this.elRefCategories.nativeElement.getElementsByClassName('graph');\n    const pairClasses = ['section-graph-odd', 'section-graph-even'];\n    let pairIx = 0;\n    let elementIx = 0;\n    for (let element of graphElements) {\n      element.classList.remove('section-graph-odd');\n      element.classList.remove('section-graph-even');\n      element.classList.add(pairClasses[pairIx]);\n      pairIx = 1 - pairIx;\n      ++elementIx === graphElements.length ? element.classList.add('last-section-graph') : element.classList.remove('last-section-graph');\n    }\n    this.cdr.detectChanges();\n  }\n\n  // onExpandCondense() {\n  //   this.setCategoriesBackgroundColor();\n  // }\n\n  // onTimelineWidth(width, categoryIx) {\n  //   if (categoryIx === 0) {\n  //     console.log('section width:', width, categoryIx);\n  //     this.timelineWidth = width;\n  //   }\n  // }\n}\n",
+            "sourceCode": "import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';\nimport { MedicationsSection, MedicationTimeline } from '@models/medicon-data.model';\n\n@Component({\n  selector: 'app-medicon-section-timeline',\n  templateUrl: './medicon-section-timeline.component.html',\n  styleUrls: ['./medicon-section-timeline.component.scss']\n})\nexport class MediconSectionTimelineComponent implements AfterViewInit {\n  @ViewChild('categories') elRefCategories: ElementRef;\n  @Input() text;\n  @Input() section: MedicationsSection;\n  @Input() timeline: MedicationTimeline;\n  @Input() preTimelineWidth = 0;\n  @Input() timelineWidth = 0;\n  @Output() backgroundColored = new EventEmitter();\n\n  constructor(private cdr: ChangeDetectorRef) {}\n\n  ngAfterViewInit() {\n    this.setCategoriesBackgroundColor();\n  }\n\n  onExpandCondense() {\n    this.setCategoriesBackgroundColor();\n  }\n\n  setCategoriesBackgroundColor() {\n    const graphElements = this.elRefCategories.nativeElement.getElementsByClassName('graph');\n    const pairClasses = ['section-graph-odd', 'section-graph-even'];\n    let pairIx = 0;\n    let elementIx = 0;\n    for (let element of graphElements) {\n      element.classList.remove('section-graph-odd');\n      element.classList.remove('section-graph-even');\n      element.classList.add(pairClasses[pairIx]);\n      pairIx = 1 - pairIx;\n      ++elementIx === graphElements.length ? element.classList.add('last-section-graph') : element.classList.remove('last-section-graph');\n    }\n    this.cdr.detectChanges();\n  }\n\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".title {\n  display: flex;\n  justify-content: center;\n  margin-bottom: 1rem;\n}\n\n.content {\n  .categories-container {\n    app-medications-category {\n      display: block;\n    }\n  }\n  .x-axis-timeline {\n    display: flex;\n    justify-content: flex-end;\n    position: relative;\n    line-height: 1.5rem;\n    height: 1.5rem;\n    .x-axis-timeline-values {\n      display: flex;\n      flex-direction: row;\n      justify-content: space-between;\n      position: absolute;\n      > div {\n        text-align: center;\n        width: 100%;\n      }\n      &.top {\n        // align-items: flex-end;\n      }\n    }\n  }\n}\n\n\n",
-                    "styleUrl": "./medications-section-container.component.scss"
+                    "data": ".header {\n  width: 100%;\n  height: 2.5rem;\n  display: inline-flex;\n  justify-content: space-between;\n  align-items: center;\n  padding-inline: 2rem;\n  > div {\n    width: 30%;\n  }\n  &.top {\n    background: #eeeeee;\n    margin-bottom: 1rem;\n  }\n  &.bottom {\n    margin-top: 1rem;\n  }\n  > .action-icons {\n    span {\n      width: 5.3rem !important;\n      display: inline-block;\n      //padding-inline-end: 4rem;\n      i {\n        font-size: var(--action-icons-font-size);\n      }\n    }\n  }\n}\n\n//&.sub-header {\n//  background: #eeeeee;\n//}\n",
+                    "styleUrl": "./medicon-section-timeline.component.scss"
                 }
             ],
             "stylesData": "",
@@ -4241,7 +4411,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 18,
+                "line": 16,
                 "jsdoctags": [
                     {
                         "name": "cdr",
@@ -4255,109 +4425,14 @@
                 ]
             },
             "implements": [
-                "OnInit"
+                "AfterViewInit"
             ],
-            "templateData": "<div class=\"title\">{{section.name}}</div>\n\n<div class=\"content\">\n  <ng-container *ngIf=\"timelineWidth\">\n\n    <ng-container\n      [ngTemplateOutlet]=\"xAxisTimelineTemplate\"\n      [ngTemplateOutletContext]=\"{isTop:true}\">\n    </ng-container>\n\n    <div #categories class=\"categories-container\">\n        <ng-container [ngSwitch]=\"section.type\">\n          <app-medications-section-timeline\n              *ngSwitchCase=\"MedicationsSectionType.Timeline\"\n              [section]=\"section\"\n              [timeline]=\"timeline\"\n              [preTimelineWidth]=\"preTimelineWidth\"\n              [timelineWidth]=\"timelineWidth\">\n          </app-medications-section-timeline>\n        </ng-container>\n    </div>\n\n    <ng-container\n        [ngTemplateOutlet]=\"xAxisTimelineTemplate\"\n        [ngTemplateOutletContext]=\"{isTop:false}\">\n    </ng-container>\n\n  </ng-container>\n\n</div>\n\n<ng-template #xAxisTimelineTemplate let-isTop=\"isTop\">\n  <div class=\"x-axis-timeline\"\n      [style.width.px]=\"timelineWidth\"\n      [style.margin-left.px]=\"preTimelineWidth\">\n    <div #xAxisTimeline\n         class=\"x-axis-timeline-values\"\n         [style.width.px]=\"timelineValuesWidth\"\n         [style.right.px]=\"timelineValuesRight\"\n         [ngClass]=\"isTop ? 'top' : 'bottom'\">\n      <div *ngFor=\"let value of timeline.xAxisValues\">{{value}}</div>\n    </div>\n  </div>\n</ng-template>\n"
+            "templateData": "<ng-container [ngTemplateOutlet]=\"header\" [ngTemplateOutletContext]=\"{isTop: true}\"></ng-container>\n\n<app-medicon-timeline-values\n    [timeline]=\"timeline\"\n    [preTimelineWidth]=\"preTimelineWidth\"\n    [timelineWidth]=\"timelineWidth\">\n</app-medicon-timeline-values>\n\n<div #categories>\n  <app-medicon-category\n    *ngFor=\"let category of section.categories; let i=index\"\n    [category]=\"category\"\n    [timeline]=\"timeline\"\n    [preTimelineWidth]=\"preTimelineWidth\"\n    [timelineWidth]=\"timelineWidth\"\n    [isLastCategory]=\"i+1===section.categories.length\"\n    (expandCondense)=\"onExpandCondense()\"\n  >\n  </app-medicon-category>\n</div>\n\n<app-medicon-timeline-values\n    [timeline]=\"timeline\"\n    [preTimelineWidth]=\"preTimelineWidth\"\n    [timelineWidth]=\"timelineWidth\">\n</app-medicon-timeline-values>\n\n<ng-container [ngTemplateOutlet]=\"header\" [ngTemplateOutletContext]=\"{isTop: false}\"></ng-container>\n\n<ng-template #header let-isTop=\"isTop\">\n  <div class=\"header\" [class.top]=\"isTop\" [class.bottom]=\"!isTop\">\n    <div class=\"action-icons horizontal-left vertical-center\">\n      <span>{{text.medicationsConcentrated.legend}}</span>\n      <span><i class=\"bi bi-plus-circle\"></i></span>\n      <span><i class=\"bi bi-alarm\"></i></span>\n    </div>\n    <div><span *ngIf=\"isTop\" class=\"horizontal-center\">{{section.name}}</span></div>\n    <div>&nbsp;</div>\n  </div>\n</ng-template>\n"
         },
         {
-            "name": "MedicationsSectionTimelineComponent",
-            "id": "component-MedicationsSectionTimelineComponent-f199cb621c2feb5ff3d538b06d738d02958072b8cc72075def04af0563c31eade9d16c155aa1472b40bd4935181153194aca844fa0de976493cad6da9900fdc6",
-            "file": "src/app/shared/components/system/medications-section-timeline/medications-section-timeline.component.ts",
-            "encapsulation": [],
-            "entryComponents": [],
-            "inputs": [],
-            "outputs": [],
-            "providers": [],
-            "selector": "app-medications-section-timeline",
-            "styleUrls": [
-                "./medications-section-timeline.component.scss"
-            ],
-            "styles": [],
-            "templateUrl": [
-                "./medications-section-timeline.component.html"
-            ],
-            "viewProviders": [],
-            "inputsClass": [
-                {
-                    "name": "preTimelineWidth",
-                    "defaultValue": "0",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 12,
-                    "type": "number",
-                    "decorators": []
-                },
-                {
-                    "name": "section",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 10,
-                    "type": "MedicationsSection",
-                    "decorators": []
-                },
-                {
-                    "name": "timeline",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 11,
-                    "type": "MedicationTimeline",
-                    "decorators": []
-                },
-                {
-                    "name": "timelineWidth",
-                    "defaultValue": "0",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 13,
-                    "type": "number",
-                    "decorators": []
-                }
-            ],
-            "outputsClass": [
-                {
-                    "name": "backgroundColored",
-                    "defaultValue": "new EventEmitter()",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "line": 14,
-                    "type": "EventEmitter"
-                }
-            ],
-            "propertiesClass": [],
-            "methodsClass": [
-                {
-                    "name": "onExpandCondense",
-                    "args": [],
-                    "optional": false,
-                    "returnType": "void",
-                    "typeParameters": [],
-                    "line": 16,
-                    "deprecated": false,
-                    "deprecationMessage": ""
-                }
-            ],
-            "deprecated": false,
-            "deprecationMessage": "",
-            "hostBindings": [],
-            "hostListeners": [],
-            "description": "",
-            "rawdescription": "\n",
-            "type": "component",
-            "sourceCode": "import { Component, EventEmitter, Input, Output } from '@angular/core';\nimport { MedicationsSection, MedicationTimeline } from '@models/medications-concentrated-data.model';\n\n@Component({\n  selector: 'app-medications-section-timeline',\n  templateUrl: './medications-section-timeline.component.html',\n  styleUrls: ['./medications-section-timeline.component.scss']\n})\nexport class MedicationsSectionTimelineComponent {\n  @Input() section: MedicationsSection;\n  @Input() timeline: MedicationTimeline;\n  @Input() preTimelineWidth = 0;\n  @Input() timelineWidth = 0;\n  @Output() backgroundColored = new EventEmitter();\n\n  onExpandCondense() {\n\n  }\n}\n",
-            "assetsDirs": [],
-            "styleUrlsData": [
-                {
-                    "data": "",
-                    "styleUrl": "./medications-section-timeline.component.scss"
-                }
-            ],
-            "stylesData": "",
-            "templateData": "<app-medications-category\n  *ngFor=\"let category of section.categories; let i=index\"\n  [category]=\"category\"\n  [timeline]=\"timeline\"\n  [preTimelineWidth]=\"preTimelineWidth\"\n  [timelineWidth]=\"timelineWidth\"\n  (expandCondense)=\"onExpandCondense()\"\n>\n</app-medications-category>\n"
-        },
-        {
-            "name": "MedicationTesterComponent",
-            "id": "component-MedicationTesterComponent-104b152f3439bc0e568929efd105ae42eeff75b9092195b6b861383f942bfab03ab5e67405022b2a8e0f15bbe446f5bf1a438348e2b42811f03e746973367a29",
-            "file": "src/stories/components/medication-tester/medication-tester.component.ts",
+            "name": "MediconTesterComponent",
+            "id": "component-MediconTesterComponent-8b97a427ccb556c4778dc1c20ae78a13f14542799c5ae60260e251e07bc5a5f705c32e635ea16ec854ded3491ec36b975439eaaa212f9af2365ef4171a1def08",
+            "file": "src/stories/components/medicon-tester/medicon-tester.component.ts",
             "encapsulation": [
                 "ViewEncapsulation.None"
             ],
@@ -4365,13 +4440,13 @@
             "inputs": [],
             "outputs": [],
             "providers": [],
-            "selector": "app-medication-tester",
+            "selector": "app-medicon-tester",
             "styleUrls": [
-                "./medication-tester.component.scss"
+                "./medicon-tester.component.scss"
             ],
             "styles": [],
             "templateUrl": [
-                "./medication-tester.component.html"
+                "./medicon-tester.component.html"
             ],
             "viewProviders": [],
             "inputsClass": [
@@ -4379,7 +4454,7 @@
                     "name": "defaultSettings",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 16,
+                    "line": 17,
                     "type": "any",
                     "decorators": []
                 },
@@ -4387,7 +4462,7 @@
                     "name": "direction",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 15,
+                    "line": 16,
                     "type": "Direction",
                     "decorators": []
                 },
@@ -4395,7 +4470,7 @@
                     "name": "text",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 14,
+                    "line": 15,
                     "type": "any",
                     "decorators": []
                 }
@@ -4410,16 +4485,16 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 20
+                    "line": 21
                 },
                 {
                     "name": "data",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "MedicationsConcentratedData",
+                    "type": "MediconData",
                     "optional": false,
                     "description": "",
-                    "line": 22
+                    "line": 23
                 },
                 {
                     "name": "isShowSettings",
@@ -4429,7 +4504,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 19
+                    "line": 20
                 },
                 {
                     "name": "LOCAL_STORAGE_KEY",
@@ -4439,7 +4514,7 @@
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 18
+                    "line": 19
                 },
                 {
                     "name": "prevSettings",
@@ -4448,7 +4523,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 21
+                    "line": 22
                 },
                 {
                     "name": "settings",
@@ -4457,7 +4532,7 @@
                     "type": "Settings",
                     "optional": false,
                     "description": "",
-                    "line": 17
+                    "line": 18
                 }
             ],
             "methodsClass": [
@@ -4467,7 +4542,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 104,
+                    "line": 105,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -4477,7 +4552,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 81,
+                    "line": 82,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -4487,7 +4562,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 77,
+                    "line": 78,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -4497,7 +4572,7 @@
                     "optional": false,
                     "returnType": "MedicationTimeline",
                     "typeParameters": [],
-                    "line": 143,
+                    "line": 144,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -4507,7 +4582,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 34,
+                    "line": 35,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -4517,7 +4592,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 26,
+                    "line": 27,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -4534,7 +4609,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 44,
+                    "line": 45,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -4562,7 +4637,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 55,
+                    "line": 56,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -4596,7 +4671,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 85,
+                    "line": 86,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -4626,7 +4701,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 65,
+                    "line": 66,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -4636,7 +4711,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 89,
+                    "line": 90,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -4653,7 +4728,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 39,
+                    "line": 40,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -4674,7 +4749,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 60,
+                    "line": 61,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -4684,7 +4759,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 50,
+                    "line": 51,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -4707,7 +4782,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 98,
+                    "line": 99,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -4737,7 +4812,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 70,
+                    "line": 71,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -4749,12 +4824,12 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { ChangeDetectorRef, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';\nimport { Settings } from '@stories/models/settings.model';\nimport { ToastrService } from 'ngx-toastr';\nimport { MedicationsCategory, MedicationsConcentratedData, MedicationsSection, MedicationTimeline } from '@models/medications-concentrated-data.model';\nimport { Direction } from '@stories/models/direction.model';\n\n@Component({\n  selector: 'app-medication-tester',\n  templateUrl: './medication-tester.component.html',\n  styleUrls: ['./medication-tester.component.scss'],\n  encapsulation: ViewEncapsulation.None\n})\nexport class MedicationTesterComponent implements OnInit {\n  @Input() text: any;\n  @Input() direction: Direction;\n  @Input() defaultSettings;\n  settings: Settings;\n  LOCAL_STORAGE_KEY = 'medicationsSettings';\n  isShowSettings = false;\n  accordionClass = 'settings-accordion';\n  prevSettings;\n  data: MedicationsConcentratedData;\n\n  constructor(private cdr: ChangeDetectorRef, private toastr: ToastrService) {}\n\n  ngOnInit() {\n    setTimeout(() => {\n      this.initSettings();\n      // this.onClickSettings();\n      this.buildData();\n    }, 50);\n  }\n\n  initSettings() {\n    const item = this.getFromLocalStorage();\n    this.settings = item ? JSON.parse(item) : JSON.parse(JSON.stringify(this.defaultSettings));\n  }\n\n  onClickResetTime(e) {\n    this.settings.pivotTime = new Intl.DateTimeFormat('en-GB', { timeStyle: 'short' }).format(new Date());\n    this.saveToLocalStorage();\n  }\n\n  onChangePivotTime(e: Event) {\n    this.settings.pivotTime = (e.target as any).value;\n    if (this.settings.pivotTime.length === 2) this.settings.pivotTime += ':00';\n    this.saveToLocalStorage();\n  }\n\n  onClickSettings() {\n    this.prevSettings = JSON.parse(JSON.stringify(this.settings));\n    this.isShowSettings = true;\n  }\n\n  onChangeResolution(resolution) {\n    this.settings.resolution = resolution;\n    this.saveToLocalStorage();\n  }\n\n  onClickSaveSettings() {\n    this.saveToLocalStorage();\n    this.isShowSettings = false;\n  }\n\n  onClickCancelSettings() {\n    this.settings = this.prevSettings;\n    this.isShowSettings = false;\n  }\n\n  saveToLocalStorage() {\n    const item = JSON.stringify(this.settings);\n    localStorage.setItem(this.LOCAL_STORAGE_KEY, item);\n    this.toastr.success('Settings were saved');\n    this.buildData();\n  }\n\n  getFromLocalStorage() {\n    return localStorage.getItem(this.LOCAL_STORAGE_KEY);\n  }\n\n  clearLocalStorage() {\n    return localStorage.removeItem(this.LOCAL_STORAGE_KEY);\n  }\n\n  onChangeSectionMedications(sectionIndex, medications) {\n    this.settings.sections[sectionIndex].medications = medications;\n  }\n\n  onClickDefaultSettings() {\n    const isClear = confirm('are you sure');\n    if (isClear) {\n      this.clearLocalStorage();\n      this.settings = JSON.parse(JSON.stringify(this.defaultSettings));\n      this.cdr.detectChanges();\n    }\n  }\n\n  onDeleteMedication(sectionIndex, medicationId) {\n    const medications = this.settings.sections[sectionIndex].medications;\n    this.settings.sections[sectionIndex].medications = medications.filter(medication => medication.id !== medicationId);\n    this.cdr.detectChanges();\n  }\n\n  buildData() {\n    const getCategories = (medications): MedicationsCategory[] => {\n      const categories = {};\n      medications.forEach(medication => {\n        if (!categories[medication.categoryId]) categories[medication.categoryId] = [];\n        categories[medication.categoryId].push(medication);\n      });\n      const keys = Object.keys(categories);\n      return keys.map((key, i) => ({\n        id: Number(key),\n        name: `category ${key}`,\n        medications: categories[key]\n      }));\n    }\n\n    const getSection = (section, i): MedicationsSection => {\n      return {\n        id: 1,\n        type: section.type,\n        name: this.text.graphSections[i].title,\n        isDisplay: section.isDisplay,\n        categories: getCategories(section.medications)\n      }\n    }\n\n    this.data = {\n      title: {\n        fromTime: '2022-01-01 10:00',\n        toTime: '2022-01-02 17:00',\n      },\n      resolution: this.settings.resolution,\n      sections: this.settings.sections.map((section, i) => getSection(section, i)),\n      timeline: this.getTimeline()\n    }\n\n    // console.log('pivot time:', this.settings.pivotTime);\n    this.getTimeline();\n  }\n\n  getTimeline(): MedicationTimeline {\n    const currHour = Number(this.settings.pivotTime.substring(0, 2));\n    const hours = [];\n    for (let i = -6; i <= 6; i++) {\n      let hour = currHour + i;\n      if (hour < 0) hour += 24;\n      hours.push(String(hour).padStart(2, '0') + ':00');\n    }\n    // console.log('hours:', hours);\n    return {\n      range: {\n        fromTime: hours[0],\n        toTime: hours[12]\n      },\n      xAxisValues: hours\n    }\n  }\n}\n",
+            "sourceCode": "import { ChangeDetectorRef, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';\nimport { Settings } from '@stories/models/settings.model';\nimport { ToastrService } from 'ngx-toastr';\nimport { MedicationsCategory, MediconData, MedicationsSection, MedicationTimeline } from '@models/medicon-data.model';\nimport { Direction } from '@stories/models/direction.model';\nimport { MedicationCategories } from '@stories/const/medication-categories.const';\n\n@Component({\n  selector: 'app-medicon-tester',\n  templateUrl: './medicon-tester.component.html',\n  styleUrls: ['./medicon-tester.component.scss'],\n  encapsulation: ViewEncapsulation.None\n})\nexport class MediconTesterComponent implements OnInit {\n  @Input() text: any;\n  @Input() direction: Direction;\n  @Input() defaultSettings;\n  settings: Settings;\n  LOCAL_STORAGE_KEY = 'medicationsSettings';\n  isShowSettings = false;\n  accordionClass = 'settings-accordion';\n  prevSettings;\n  data: MediconData;\n\n  constructor(private cdr: ChangeDetectorRef, private toastr: ToastrService) {}\n\n  ngOnInit() {\n    setTimeout(() => {\n      this.initSettings();\n      // this.onClickSettings();\n      this.buildData();\n    }, 50);\n  }\n\n  initSettings() {\n    const item = this.getFromLocalStorage();\n    this.settings = item ? JSON.parse(item) : JSON.parse(JSON.stringify(this.defaultSettings));\n  }\n\n  onClickResetTime(e) {\n    this.settings.pivotTime = new Intl.DateTimeFormat('en-GB', { timeStyle: 'short' }).format(new Date());\n    this.saveToLocalStorage();\n  }\n\n  onChangePivotTime(e: Event) {\n    this.settings.pivotTime = (e.target as any).value;\n    if (this.settings.pivotTime.length === 2) this.settings.pivotTime += ':00';\n    this.saveToLocalStorage();\n  }\n\n  onClickSettings() {\n    this.prevSettings = JSON.parse(JSON.stringify(this.settings));\n    this.isShowSettings = true;\n  }\n\n  onChangeResolution(resolution) {\n    this.settings.resolution = resolution;\n    this.saveToLocalStorage();\n  }\n\n  onClickSaveSettings() {\n    this.saveToLocalStorage();\n    this.isShowSettings = false;\n  }\n\n  onClickCancelSettings() {\n    this.settings = this.prevSettings;\n    this.isShowSettings = false;\n  }\n\n  saveToLocalStorage() {\n    const item = JSON.stringify(this.settings);\n    localStorage.setItem(this.LOCAL_STORAGE_KEY, item);\n    this.toastr.success('Settings were saved');\n    this.buildData();\n  }\n\n  getFromLocalStorage() {\n    return localStorage.getItem(this.LOCAL_STORAGE_KEY);\n  }\n\n  clearLocalStorage() {\n    return localStorage.removeItem(this.LOCAL_STORAGE_KEY);\n  }\n\n  onChangeSectionMedications(sectionIndex, medications) {\n    this.settings.sections[sectionIndex].medications = medications;\n  }\n\n  onClickDefaultSettings() {\n    const isClear = confirm('are you sure');\n    if (isClear) {\n      this.clearLocalStorage();\n      this.settings = JSON.parse(JSON.stringify(this.defaultSettings));\n      this.cdr.detectChanges();\n    }\n  }\n\n  onDeleteMedication(sectionIndex, medicationId) {\n    const medications = this.settings.sections[sectionIndex].medications;\n    this.settings.sections[sectionIndex].medications = medications.filter(medication => medication.id !== medicationId);\n    this.cdr.detectChanges();\n  }\n\n  buildData() {\n    const getCategories = (medications): MedicationsCategory[] => {\n      const categories = {};\n      medications.forEach(medication => {\n        if (!categories[medication.categoryId]) categories[medication.categoryId] = [];\n        categories[medication.categoryId].push(medication);\n      });\n      const ids = Object.keys(categories).map(id => Number(id));\n      return ids.map(id => ({\n        id: id,\n        name: `category ${id}`,\n        color: MedicationCategories.find(item => item.id === id).color,\n        medications: categories[id]\n      }));\n    }\n\n    const getSection = (section, i): MedicationsSection => {\n      return {\n        id: 1,\n        type: section.type,\n        name: this.text.graphSections[i].title,\n        isDisplay: section.isDisplay,\n        categories: getCategories(section.medications)\n      }\n    }\n\n    this.data = {\n      title: {\n        fromTime: '2022-01-01 10:00',\n        toTime: '2022-01-02 17:00',\n      },\n      resolution: this.settings.resolution,\n      sections: this.settings.sections.map((section, i) => getSection(section, i)),\n      timeline: this.getTimeline()\n    }\n\n    this.getTimeline();\n  }\n\n  getTimeline(): MedicationTimeline {\n    const currHour = Number(this.settings.pivotTime.substring(0, 2));\n    const hours = [];\n    for (let i = -6; i <= 6; i++) {\n      let hour = currHour + i;\n      if (hour < 0) hour += 24;\n      hours.push(String(hour).padStart(2, '0') + ':00');\n    }\n    // console.log('hours:', hours);\n    return {\n      range: {\n        fromTime: hours[0],\n        toTime: hours[12]\n      },\n      xAxisValues: hours\n    }\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
                     "data": "$top-bar-height: 3rem;\n\n.top-bar {\n  background: black;\n  color: white;\n  height: $top-bar-height; // var(----top-bar-height);\n  display: flex;\n  align-items: center;\n  justify-content: space-between;\n  padding-inline-end: 1.5rem;\n  border-bottom: 3px solid black;\n\n  .pivot-time {\n    display: flex;\n    align-items: center;\n    .bi-gear {\n      margin-inline-end: 2rem;\n      margin-inline-start: 1rem;\n    }\n    .settings-action-buttons {\n      padding-inline-end: 3rem;\n      display: inline-flex;\n      justify-content: flex-end;\n      background: white;\n       height: $top-bar-height;\n      margin-inline-end: 2rem;\n      align-items: center;\n      // transition: all 2s linear;\n      button {\n        width: 5rem;\n        margin-inline-start: 2rem;\n        //padding-top: 0;\n        //padding-bottom: 0;\n      }\n    }\n    .pivot-input {\n      margin-inline-start: 0.8rem;\n      margin-inline-end: 2rem;\n      width: 4rem;\n    }\n  }\n\n  select {\n    margin-inline-start: 1rem;\n  }\n}\n\n.data {\n  //padding: 1rem;\n}\n\n.settings {\n  margin-top: 1rem;\n  padding: 1rem;\n  .settings-table {\n    input {\n      margin-inline-start: 1rem;\n      margin-inline-end: 0.5rem;\n      width: 3rem;\n    }\n  }\n  .settings-sections {\n    margin-top: 2rem;\n    .settings-accordion {\n      .panel-heading {\n        background: #337aa7;\n        display: flex;\n        justify-content: space-between;\n      }\n      .btn-link {\n        color: white;\n        text-decoration: none;\n      }\n      .panel-body {\n        background: white;\n        position: relative;\n        padding-top: 0.5rem;\n        .section-display {\n          position: absolute;\n          top: 0.5rem;\n          right: 1rem;\n        }\n      }\n    }\n  }\n}\n\ni {\n  cursor: pointer;\n}\n\n\n/*\n.settings-modal {\n  //background: red !important;\n  position: fixed;\n  top: 0;\n  left: 0;\n  right: 0;\n  width: 100vW !important;\n  height: 100vh !important;\n  background: yellow;\n  margin: 0;\n  .modal-content {\n    width: 800px !important;\n  }\n}*/\n",
-                    "styleUrl": "./medication-tester.component.scss"
+                    "styleUrl": "./medicon-tester.component.scss"
                 }
             ],
             "stylesData": "",
@@ -4777,7 +4852,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 22,
+                "line": 23,
                 "jsdoctags": [
                     {
                         "name": "cdr",
@@ -4802,7 +4877,107 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<ng-container *ngIf=\"settings\">\n\n  <header class=\"top-bar\" [dir]=\"direction\">\n    <div class=\"pivot-time\">\n      <div *ngIf=\"isShowSettings\" class=\"settings-action-buttons\">\n        <div>\n          <button type=\"button\" class=\"btn btn-success\" (click)=\"onClickSaveSettings()\">{{text.buttons.save}}</button>\n          <button type=\"button\" class=\"btn btn-danger\" (click)=\"onClickCancelSettings()\">{{text.buttons.cancel}}</button>\n        </div>\n      </div>\n      <i *ngIf=\"!isShowSettings\" class=\"bi bi-gear\" (click)=\"onClickSettings()\"></i>\n      <span>{{text.pivotTime.label}}</span>\n      <input [(ngModel)]=\"settings.pivotTime\" (change)=\"onChangePivotTime($event)\" class=\"pivot-input\">\n      <button (click)=\"onClickResetTime($event)\" type=\"button\" class=\"btn btn-primary\">{{text.pivotTime.button}}</button>\n    </div>\n    <div class=\"default-settings\">\n      <button type=\"button\" class=\"btn btn-warning\" (click)=\"onClickDefaultSettings()\">{{text.buttons.defaultSettings}}</button>\n    </div>\n  </header>\n\n  <div *ngIf=\"!isShowSettings && data\" class=\"data\">\n    <app-medications-concentrated\n      [direction]=\"direction\"\n      [text]=\"text\"\n      [data]=\"data\"\n      (resolution)=\"onChangeResolution($event)\"\n    ></app-medications-concentrated>\n  </div>\n\n  <div *ngIf=\"isShowSettings\" class=\"settings\">\n    <table class=\"settings-table\">\n      <tr><td>Hours forward</td><td><input [(ngModel)]=\"settings.hoursForward\" type=\"number\"></td></tr>\n      <tr><td>Hours backward</td><td><input [(ngModel)]=\"settings.hoursBackward\" type=\"number\"></td></tr>\n      <tr><td>Refresh time</td><td><input [(ngModel)]=\"settings.refreshTime\" type=\"number\">minutes</td></tr>\n    </table>\n\n    <accordion class=\"settings-sections\" [isAnimated]=\"true\">\n      <accordion-group *ngFor=\"let section of settings.sections; let i=index\"\n                       heading=\"{{text.graphSections[i].title}}\"\n                       [panelClass]=\"accordionClass\"\n                       [isOpen]=\"true\">\n        <div class=\"form-check section-display\">\n          <input class=\"form-check-input\" type=\"checkbox\" [(ngModel)]=\"section.isDisplay\">&nbsp;&nbsp;Visible\n        </div>\n        <app-medication-lister\n            [medications]=\"section.medications\"\n            (change)=\"onChangeSectionMedications(i, $event)\"\n            (deleteMedication)=\"onDeleteMedication(i, $event)\"\n        ></app-medication-lister>\n      </accordion-group>\n    </accordion>\n  </div>\n\n</ng-container>\n"
+            "templateData": "<ng-container *ngIf=\"settings\">\n\n  <header class=\"top-bar\" [dir]=\"direction\">\n    <div class=\"pivot-time\">\n      <div *ngIf=\"isShowSettings\" class=\"settings-action-buttons\">\n        <div>\n          <button type=\"button\" class=\"btn btn-success\" (click)=\"onClickSaveSettings()\">{{text.buttons.save}}</button>\n          <button type=\"button\" class=\"btn btn-danger\" (click)=\"onClickCancelSettings()\">{{text.buttons.cancel}}</button>\n        </div>\n      </div>\n      <i *ngIf=\"!isShowSettings\" class=\"bi bi-gear\" (click)=\"onClickSettings()\"></i>\n      <span>{{text.pivotTime.label}}</span>\n      <input [(ngModel)]=\"settings.pivotTime\" (change)=\"onChangePivotTime($event)\" class=\"pivot-input\">\n      <button (click)=\"onClickResetTime($event)\" type=\"button\" class=\"btn btn-primary\">{{text.pivotTime.button}}</button>\n    </div>\n    <div class=\"default-settings\">\n      <button type=\"button\" class=\"btn btn-warning\" (click)=\"onClickDefaultSettings()\">{{text.buttons.defaultSettings}}</button>\n    </div>\n  </header>\n\n  <div *ngIf=\"!isShowSettings && data\" class=\"data\">\n    <app-medicon\n      [direction]=\"direction\"\n      [text]=\"text\"\n      [data]=\"data\"\n      (resolution)=\"onChangeResolution($event)\"\n    ></app-medicon>\n  </div>\n\n  <div *ngIf=\"isShowSettings\" class=\"settings\">\n    <table class=\"settings-table\">\n      <tr><td>Hours forward</td><td><input [(ngModel)]=\"settings.hoursForward\" type=\"number\"></td></tr>\n      <tr><td>Hours backward</td><td><input [(ngModel)]=\"settings.hoursBackward\" type=\"number\"></td></tr>\n      <tr><td>Refresh time</td><td><input [(ngModel)]=\"settings.refreshTime\" type=\"number\">minutes</td></tr>\n    </table>\n\n    <accordion class=\"settings-sections\" [isAnimated]=\"true\">\n      <accordion-group *ngFor=\"let section of settings.sections; let i=index\"\n                       heading=\"{{text.graphSections[i].title}}\"\n                       [panelClass]=\"accordionClass\"\n                       [isOpen]=\"true\">\n        <div class=\"form-check section-display\">\n          <input class=\"form-check-input\" type=\"checkbox\" [(ngModel)]=\"section.isDisplay\">&nbsp;&nbsp;Visible\n        </div>\n        <app-medicon-lister\n            [medications]=\"section.medications\"\n            (change)=\"onChangeSectionMedications(i, $event)\"\n            (deleteMedication)=\"onDeleteMedication(i, $event)\"\n        ></app-medicon-lister>\n      </accordion-group>\n    </accordion>\n  </div>\n\n</ng-container>\n"
+        },
+        {
+            "name": "MediconTimelineValuesComponent",
+            "id": "component-MediconTimelineValuesComponent-bcf495a385ca3751baf0b9a166c6b7fd023b3866c49292edb6ed3fd611cabf5c214ad34bd8e7121b589bca341fda55b74545adc1abe9224b62e5f8a71c57f6c1",
+            "file": "src/app/shared/components/system/medicon-timeline-values/medicon-timeline-values.component.ts",
+            "encapsulation": [],
+            "entryComponents": [],
+            "inputs": [],
+            "outputs": [],
+            "providers": [],
+            "selector": "app-medicon-timeline-values",
+            "styleUrls": [
+                "./medicon-timeline-values.component.scss"
+            ],
+            "styles": [],
+            "templateUrl": [
+                "./medicon-timeline-values.component.html"
+            ],
+            "viewProviders": [],
+            "inputsClass": [
+                {
+                    "name": "preTimelineWidth",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 11,
+                    "type": "number",
+                    "decorators": []
+                },
+                {
+                    "name": "timeline",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 10,
+                    "type": "MedicationTimeline",
+                    "decorators": []
+                },
+                {
+                    "name": "timelineWidth",
+                    "defaultValue": "0",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "line": 12,
+                    "type": "number",
+                    "decorators": []
+                }
+            ],
+            "outputsClass": [],
+            "propertiesClass": [
+                {
+                    "name": "timelineValuesRight",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 14
+                },
+                {
+                    "name": "timelineValuesWidth",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 13
+                }
+            ],
+            "methodsClass": [
+                {
+                    "name": "ngOnInit",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 16,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                }
+            ],
+            "deprecated": false,
+            "deprecationMessage": "",
+            "hostBindings": [],
+            "hostListeners": [],
+            "description": "",
+            "rawdescription": "\n",
+            "type": "component",
+            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\nimport { MedicationTimeline } from '@models/medicon-data.model';\n\n@Component({\n  selector: 'app-medicon-timeline-values',\n  templateUrl: './medicon-timeline-values.component.html',\n  styleUrls: ['./medicon-timeline-values.component.scss']\n})\nexport class MediconTimelineValuesComponent implements OnInit {\n  @Input() timeline: MedicationTimeline;\n  @Input() preTimelineWidth = 0;\n  @Input() timelineWidth = 0;\n  timelineValuesWidth;\n  timelineValuesRight;\n\n  ngOnInit() {\n    const valueWidth = this.timelineWidth / 12;\n    this.timelineValuesWidth = valueWidth * this.timeline.xAxisValues.length;\n    this.timelineValuesRight = -valueWidth / 2;\n  }\n}\n",
+            "assetsDirs": [],
+            "styleUrlsData": [
+                {
+                    "data": ".x-axis-timeline {\n  display: flex;\n  justify-content: flex-end;\n  position: relative;\n  line-height: 1.5rem;\n  height: 1.5rem;\n  .x-axis-timeline-values {\n    display: flex;\n    flex-direction: row;\n    justify-content: space-between;\n    position: absolute;\n    > div {\n      text-align: center;\n      width: 100%;\n    }\n    &.top {\n      // align-items: flex-end;\n    }\n  }\n}\n",
+                    "styleUrl": "./medicon-timeline-values.component.scss"
+                }
+            ],
+            "stylesData": "",
+            "implements": [
+                "OnInit"
+            ],
+            "templateData": "  <div class=\"x-axis-timeline\"\n       [style.width.px]=\"timelineWidth\"\n       [style.margin-left.px]=\"preTimelineWidth\">\n    <div class=\"x-axis-timeline-values\"\n         [style.width.px]=\"timelineValuesWidth\"\n         [style.right.px]=\"timelineValuesRight\">\n      <div *ngFor=\"let value of timeline.xAxisValues\">{{value}}</div>\n    </div>\n  </div>\n"
         },
         {
             "name": "PageComponent",
@@ -4975,13 +5150,13 @@
         },
         {
             "name": "SharedModule",
-            "id": "module-SharedModule-fbada5f6abb9083f9e6a4e49ce08c41c6fc9059a14f2d3e6a80a4fe37ce08669cf4c5cc70728d7578f92034ddf7df68d68c764a7535bae675f3ebbdeece3c557",
+            "id": "module-SharedModule-0b236eea34bdea91bee2abe803c38c94af280dfdd592e10cd676bbaf318b044355e21348d983821086b2b0f048a19463253bca2bbdc9fe393547d367e90dcea1",
             "description": "",
             "deprecationMessage": "",
             "deprecated": false,
             "file": "src/app/shared/shared.module.ts",
             "methods": [],
-            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { NgxEchartsModule } from 'ngx-echarts';\nimport { GraphLinesComponent } from './components/graphs/graph-lines.component';\nimport { GraphPieComponent } from './components/graphs/graph-pie.component';\nimport { GraphTimelineCategoryComponent } from '@shared/components/graphs/graph-timeline-category.component';\nimport { GraphTimelineComponent } from '@shared/components/graphs/graph-timeline.component';\nimport { FormsModule } from '@angular/forms';\nimport { BrowserModule } from '@angular/platform-browser';\nimport { ModalModule } from 'ngx-bootstrap/modal';\nimport { AccordionModule } from 'ngx-bootstrap/accordion';\nimport { BrowserAnimationsModule } from '@angular/platform-browser/animations';\nimport { ButtonsModule } from 'ngx-bootstrap/buttons';\nimport { SortableModule } from 'ngx-bootstrap/sortable';\nimport { ToastrModule } from 'ngx-toastr';\nimport { MedicationsConcentratedComponent } from '@shared/components/system/medications-concentrated/medications-concentrated.component';\nimport { MedicationsSectionContainerComponent } from './components/system/medications-section-container/medications-section-container.component';\nimport { MedicationsCategoryComponent } from './components/system/medications-category/medications-category.component';\nimport { MedicationGraphComponent } from './components/system/medication-graph/medication-graph.component';\nimport { MedicationsSectionTimelineComponent } from './components/system/medications-section-timeline/medications-section-timeline.component';\n\nconst declarations = [\n  GraphLinesComponent,\n  GraphPieComponent,\n  GraphTimelineComponent,\n  GraphTimelineCategoryComponent,\n  MedicationsConcentratedComponent,\n  MedicationsSectionContainerComponent,\n  MedicationsSectionTimelineComponent,\n  MedicationsCategoryComponent,\n  MedicationGraphComponent\n];\n\nconst modules = [\n  CommonModule,\n  BrowserModule,\n  FormsModule,\n  BrowserAnimationsModule,\n];\n\n@NgModule({\n  declarations,\n  imports: [\n    ...modules,\n    NgxEchartsModule.forRoot({\n      echarts: () => import('echarts')\n    }),\n\n    // toastr\n    ToastrModule.forRoot({\n      timeOut: 2000\n    })\n  ],\n  exports: [\n    ...declarations,\n    ...modules,\n    NgxEchartsModule,\n\n    // bootstrap\n    ModalModule,\n    AccordionModule,\n    ButtonsModule,\n    SortableModule,\n\n    // toastr\n    ToastrModule\n  ]\n})\nexport class SharedModule {}\n",
+            "sourceCode": "import { NgModule } from '@angular/core';\nimport { CommonModule } from '@angular/common';\nimport { NgxEchartsModule } from 'ngx-echarts';\nimport { GraphLinesComponent } from './components/graphs/graph-lines.component';\nimport { GraphPieComponent } from './components/graphs/graph-pie.component';\nimport { GraphTimelineCategoryComponent } from '@shared/components/graphs/graph-timeline-category.component';\nimport { GraphTimelineComponent } from '@shared/components/graphs/graph-timeline.component';\nimport { FormsModule } from '@angular/forms';\nimport { BrowserModule } from '@angular/platform-browser';\nimport { ModalModule } from 'ngx-bootstrap/modal';\nimport { AccordionModule } from 'ngx-bootstrap/accordion';\nimport { BrowserAnimationsModule } from '@angular/platform-browser/animations';\nimport { ButtonsModule } from 'ngx-bootstrap/buttons';\nimport { SortableModule } from 'ngx-bootstrap/sortable';\nimport { ToastrModule } from 'ngx-toastr';\nimport { MediconComponent } from '@shared/components/system/medicon/medicon.component';\nimport { MediconCategoryComponent } from '@shared/components/system/medicon-category/medicon-category.component';\nimport { MediconCategoryItemComponent } from '@shared/components/system/medicon-category-item/medicon-category-item.component';\nimport { MediconSectionContainerComponent } from '@shared/components/system/medicon-section-container/medicon-section-container.component';\nimport { MediconSectionTimelineComponent } from '@shared/components/system/medicon-section-timeline/medicon-section-timeline.component';\nimport { MediconTimelineValuesComponent } from '@shared/components/system/medicon-timeline-values/medicon-timeline-values.component';\n\nconst declarations = [\n  GraphLinesComponent,\n  GraphPieComponent,\n  GraphTimelineComponent,\n  GraphTimelineCategoryComponent,\n  MediconComponent,\n  MediconCategoryComponent,\n  MediconCategoryItemComponent,\n  MediconSectionContainerComponent,\n  MediconSectionTimelineComponent,\n  MediconTimelineValuesComponent\n];\n\nconst modules = [\n  CommonModule,\n  BrowserModule,\n  FormsModule,\n  BrowserAnimationsModule,\n];\n\n@NgModule({\n  declarations,\n  imports: [\n    ...modules,\n    NgxEchartsModule.forRoot({\n      echarts: () => import('echarts')\n    }),\n\n    // toastr\n    ToastrModule.forRoot({\n      timeOut: 2000\n    })\n  ],\n  exports: [\n    ...declarations,\n    ...modules,\n    NgxEchartsModule,\n\n    // bootstrap\n    ModalModule,\n    AccordionModule,\n    ButtonsModule,\n    SortableModule,\n\n    // toastr\n    ToastrModule\n  ]\n})\nexport class SharedModule {}\n",
             "children": [
                 {
                     "type": "providers",
@@ -5003,19 +5178,22 @@
                             "name": "GraphTimelineComponent"
                         },
                         {
-                            "name": "MedicationGraphComponent"
+                            "name": "MediconCategoryComponent"
                         },
                         {
-                            "name": "MedicationsCategoryComponent"
+                            "name": "MediconCategoryItemComponent"
                         },
                         {
-                            "name": "MedicationsConcentratedComponent"
+                            "name": "MediconComponent"
                         },
                         {
-                            "name": "MedicationsSectionContainerComponent"
+                            "name": "MediconSectionContainerComponent"
                         },
                         {
-                            "name": "MedicationsSectionTimelineComponent"
+                            "name": "MediconSectionTimelineComponent"
+                        },
+                        {
+                            "name": "MediconTimelineValuesComponent"
                         }
                     ]
                 },
@@ -5039,19 +5217,22 @@
                             "name": "GraphTimelineComponent"
                         },
                         {
-                            "name": "MedicationGraphComponent"
+                            "name": "MediconCategoryComponent"
                         },
                         {
-                            "name": "MedicationsCategoryComponent"
+                            "name": "MediconCategoryItemComponent"
                         },
                         {
-                            "name": "MedicationsConcentratedComponent"
+                            "name": "MediconComponent"
                         },
                         {
-                            "name": "MedicationsSectionContainerComponent"
+                            "name": "MediconSectionContainerComponent"
                         },
                         {
-                            "name": "MedicationsSectionTimelineComponent"
+                            "name": "MediconSectionTimelineComponent"
+                        },
+                        {
+                            "name": "MediconTimelineValuesComponent"
                         }
                     ]
                 },
@@ -5072,7 +5253,7 @@
                 "name": "עברית",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/stories/graphs/medications-concentrated.stories.ts",
+                "file": "src/stories/graphs/medicon.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "ConcentratedDisplayStoryTemplate",
@@ -5096,7 +5277,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "[]",
-                "defaultValue": "[\n  GraphLinesComponent,\n  GraphPieComponent,\n  GraphTimelineComponent,\n  GraphTimelineCategoryComponent,\n  MedicationsConcentratedComponent,\n  MedicationsSectionContainerComponent,\n  MedicationsSectionTimelineComponent,\n  MedicationsCategoryComponent,\n  MedicationGraphComponent\n]"
+                "defaultValue": "[\n  GraphLinesComponent,\n  GraphPieComponent,\n  GraphTimelineComponent,\n  GraphTimelineCategoryComponent,\n  MediconComponent,\n  MediconCategoryComponent,\n  MediconCategoryItemComponent,\n  MediconSectionContainerComponent,\n  MediconSectionTimelineComponent,\n  MediconTimelineValuesComponent\n]"
             },
             {
                 "name": "defaultSettings",
@@ -5106,27 +5287,17 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
-                "defaultValue": "{\n  languageCode: 'en',\n  resolution: '1hour',\n  pivotTime: '10:00',\n  hoursForward: 14,\n  hoursBackward: 5,\n  refreshTime: 2,\n  sections: [\n    {\n      isDisplay: true,\n      type: MedicationsSectionType.Timeline,\n      medications: [\n        { id: 10, name: 'Medication 10', categoryId: 1, type: ExecutionType.Continuous, timingType: null, times: ['', '', ''], orderTime: 10, executionTime: 20, duration: 480 },\n        { id: 11, name: 'Medication 11', categoryId: 1, type: ExecutionType.Periodic, timingType: null, times: ['08:00', '14:00', '20:00'], orderTime: 0, executionTime: 0, duration: 0 },\n      ]\n    }\n  ]\n}"
+                "defaultValue": "{\n  languageCode: 'en',\n  resolution: TimelineResolution.Hours1,\n  pivotTime: '10:00',\n  hoursForward: 14,\n  hoursBackward: 5,\n  refreshTime: 2,\n  sections: [\n    {\n      isDisplay: true,\n      type: MedicationsSectionType.Timeline,\n      medications: [\n        { id: 10, name: 'Medication 10', categoryId: 1, type: ExecutionType.Continuous, timingType: null, times: ['', '', ''], orderTime: 10, executionTime: 20, duration: 480 },\n        { id: 11, name: 'Medication 11', categoryId: 1, type: ExecutionType.Periodic, timingType: null, times: ['08:00', '14:00', '20:00'], orderTime: 0, executionTime: 0, duration: 0 },\n        { id: 12, name: 'Medication 15', categoryId: 1, type: ExecutionType.Continuous, timingType: null, times: ['', '', ''], orderTime: 5, executionTime: 10, duration: 100 },\n        { id: 20, name: 'Medication 22', categoryId: 2, type: ExecutionType.Periodic, timingType: null, times: ['09:00', '10:00', '11:00'], orderTime: 0, executionTime: 0, duration: 0 },\n        { id: 30, name: 'Medication 32', categoryId: 3, type: ExecutionType.Periodic, timingType: null, times: ['11:00', '11:10', '11:20'], orderTime: 0, executionTime: 0, duration: 0 },\n        { id: 31, name: 'Medication 31', categoryId: 3, type: ExecutionType.Continuous, timingType: null, times: ['', '', ''], orderTime: 10, executionTime: 30, duration: 200 },\n      ]\n    }\n  ]\n}"
             },
             {
                 "name": "English",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/stories/graphs/medications-concentrated.stories.ts",
+                "file": "src/stories/graphs/medicon.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "ConcentratedDisplayStoryTemplate",
                 "defaultValue": "Template.bind({})"
-            },
-            {
-                "name": "environment",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
-                "file": "src/environments/environment.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "object",
-                "defaultValue": "{\n  production: false\n}"
             },
             {
                 "name": "environment",
@@ -5137,6 +5308,16 @@
                 "deprecationMessage": "",
                 "type": "object",
                 "defaultValue": "{\n  production: true\n}"
+            },
+            {
+                "name": "environment",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/environments/environment.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\n  production: false\n}"
             },
             {
                 "name": "Large",
@@ -5196,7 +5377,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "[]",
-                "defaultValue": "[\n  { id: 1, label: 'Category 1' },\n  { id: 2, label: 'Category 2' },\n  { id: 3, label: 'Category 3' },\n  { id: 4, label: 'Category 4' },\n  { id: 5, label: 'Category 5' },\n  { id: 6, label: 'Category 6' },\n  { id: 7, label: 'Category 7' },\n  { id: 8, label: 'Category 8' },\n  { id: 9, label: 'Category 9' }\n]"
+                "defaultValue": "[\n  { id: 1, label: 'Category 1', color: '#F72585' },\n  { id: 2, label: 'Category 2', color: '#AE2012' },\n  { id: 3, label: 'Category 3', color: '#3A0CA3' },\n  { id: 4, label: 'Category 4', color: '#EE9B00' },\n  { id: 5, label: 'Category 5', color: '#4CC9F0' },\n  { id: 6, label: 'Category 6', color: '#7209B7' },\n  { id: 7, label: 'Category 7', color: '#4361EE' },\n  { id: 8, label: 'Category 8', color: '#9B2226' },\n  { id: 9, label: 'Category 9', color: '#000000' }\n]"
             },
             {
                 "name": "medications",
@@ -5341,11 +5522,11 @@
                 "name": "Template",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/stories/graphs/medications-concentrated.stories.ts",
+                "file": "src/stories/graphs/medicon.stories.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
-                "type": "Story<MedicationTesterComponent>",
-                "defaultValue": "(args: MedicationTesterComponent) => ({ props: args })"
+                "type": "Story<MediconTesterComponent>",
+                "defaultValue": "(args: MediconTesterComponent) => ({ props: args })"
             },
             {
                 "name": "Template",
@@ -5562,12 +5743,12 @@
             }
         ],
         "groupedVariables": {
-            "src/stories/graphs/medications-concentrated.stories.ts": [
+            "src/stories/graphs/medicon.stories.ts": [
                 {
                     "name": "עברית",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/stories/graphs/medications-concentrated.stories.ts",
+                    "file": "src/stories/graphs/medicon.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "ConcentratedDisplayStoryTemplate",
@@ -5577,7 +5758,7 @@
                     "name": "English",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/stories/graphs/medications-concentrated.stories.ts",
+                    "file": "src/stories/graphs/medicon.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "ConcentratedDisplayStoryTemplate",
@@ -5587,11 +5768,11 @@
                     "name": "Template",
                     "ctype": "miscellaneous",
                     "subtype": "variable",
-                    "file": "src/stories/graphs/medications-concentrated.stories.ts",
+                    "file": "src/stories/graphs/medicon.stories.ts",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "Story<MedicationTesterComponent>",
-                    "defaultValue": "(args: MedicationTesterComponent) => ({ props: args })"
+                    "type": "Story<MediconTesterComponent>",
+                    "defaultValue": "(args: MediconTesterComponent) => ({ props: args })"
                 }
             ],
             "src/test.ts": [
@@ -5624,7 +5805,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "[]",
-                    "defaultValue": "[\n  GraphLinesComponent,\n  GraphPieComponent,\n  GraphTimelineComponent,\n  GraphTimelineCategoryComponent,\n  MedicationsConcentratedComponent,\n  MedicationsSectionContainerComponent,\n  MedicationsSectionTimelineComponent,\n  MedicationsCategoryComponent,\n  MedicationGraphComponent\n]"
+                    "defaultValue": "[\n  GraphLinesComponent,\n  GraphPieComponent,\n  GraphTimelineComponent,\n  GraphTimelineCategoryComponent,\n  MediconComponent,\n  MediconCategoryComponent,\n  MediconCategoryItemComponent,\n  MediconSectionContainerComponent,\n  MediconSectionTimelineComponent,\n  MediconTimelineValuesComponent\n]"
                 },
                 {
                     "name": "modules",
@@ -5646,19 +5827,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "object",
-                    "defaultValue": "{\n  languageCode: 'en',\n  resolution: '1hour',\n  pivotTime: '10:00',\n  hoursForward: 14,\n  hoursBackward: 5,\n  refreshTime: 2,\n  sections: [\n    {\n      isDisplay: true,\n      type: MedicationsSectionType.Timeline,\n      medications: [\n        { id: 10, name: 'Medication 10', categoryId: 1, type: ExecutionType.Continuous, timingType: null, times: ['', '', ''], orderTime: 10, executionTime: 20, duration: 480 },\n        { id: 11, name: 'Medication 11', categoryId: 1, type: ExecutionType.Periodic, timingType: null, times: ['08:00', '14:00', '20:00'], orderTime: 0, executionTime: 0, duration: 0 },\n      ]\n    }\n  ]\n}"
-                }
-            ],
-            "src/environments/environment.ts": [
-                {
-                    "name": "environment",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/environments/environment.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "object",
-                    "defaultValue": "{\n  production: false\n}"
+                    "defaultValue": "{\n  languageCode: 'en',\n  resolution: TimelineResolution.Hours1,\n  pivotTime: '10:00',\n  hoursForward: 14,\n  hoursBackward: 5,\n  refreshTime: 2,\n  sections: [\n    {\n      isDisplay: true,\n      type: MedicationsSectionType.Timeline,\n      medications: [\n        { id: 10, name: 'Medication 10', categoryId: 1, type: ExecutionType.Continuous, timingType: null, times: ['', '', ''], orderTime: 10, executionTime: 20, duration: 480 },\n        { id: 11, name: 'Medication 11', categoryId: 1, type: ExecutionType.Periodic, timingType: null, times: ['08:00', '14:00', '20:00'], orderTime: 0, executionTime: 0, duration: 0 },\n        { id: 12, name: 'Medication 15', categoryId: 1, type: ExecutionType.Continuous, timingType: null, times: ['', '', ''], orderTime: 5, executionTime: 10, duration: 100 },\n        { id: 20, name: 'Medication 22', categoryId: 2, type: ExecutionType.Periodic, timingType: null, times: ['09:00', '10:00', '11:00'], orderTime: 0, executionTime: 0, duration: 0 },\n        { id: 30, name: 'Medication 32', categoryId: 3, type: ExecutionType.Periodic, timingType: null, times: ['11:00', '11:10', '11:20'], orderTime: 0, executionTime: 0, duration: 0 },\n        { id: 31, name: 'Medication 31', categoryId: 3, type: ExecutionType.Continuous, timingType: null, times: ['', '', ''], orderTime: 10, executionTime: 30, duration: 200 },\n      ]\n    }\n  ]\n}"
                 }
             ],
             "src/environments/environment.prod.ts": [
@@ -5671,6 +5840,18 @@
                     "deprecationMessage": "",
                     "type": "object",
                     "defaultValue": "{\n  production: true\n}"
+                }
+            ],
+            "src/environments/environment.ts": [
+                {
+                    "name": "environment",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/environments/environment.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\n  production: false\n}"
                 }
             ],
             "src/stories/examples/button.stories.ts": [
@@ -5798,7 +5979,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "[]",
-                    "defaultValue": "[\n  { id: 1, label: 'Category 1' },\n  { id: 2, label: 'Category 2' },\n  { id: 3, label: 'Category 3' },\n  { id: 4, label: 'Category 4' },\n  { id: 5, label: 'Category 5' },\n  { id: 6, label: 'Category 6' },\n  { id: 7, label: 'Category 7' },\n  { id: 8, label: 'Category 8' },\n  { id: 9, label: 'Category 9' }\n]"
+                    "defaultValue": "[\n  { id: 1, label: 'Category 1', color: '#F72585' },\n  { id: 2, label: 'Category 2', color: '#AE2012' },\n  { id: 3, label: 'Category 3', color: '#3A0CA3' },\n  { id: 4, label: 'Category 4', color: '#EE9B00' },\n  { id: 5, label: 'Category 5', color: '#4CC9F0' },\n  { id: 6, label: 'Category 6', color: '#7209B7' },\n  { id: 7, label: 'Category 7', color: '#4361EE' },\n  { id: 8, label: 'Category 8', color: '#9B2226' },\n  { id: 9, label: 'Category 9', color: '#000000' }\n]"
                 }
             ],
             "src/stories/const/medications.const.ts": [
@@ -6213,48 +6394,57 @@
                 "status": "low"
             },
             {
-                "filePath": "src/app/shared/components/system/medication-graph/medication-graph.component.ts",
+                "filePath": "src/app/shared/components/system/medicon-category-item/medicon-category-item.component.ts",
                 "type": "component",
                 "linktype": "component",
-                "name": "MedicationGraphComponent",
+                "name": "MediconCategoryItemComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/11",
+                "coverageCount": "0/14",
                 "status": "low"
             },
             {
-                "filePath": "src/app/shared/components/system/medications-category/medications-category.component.ts",
+                "filePath": "src/app/shared/components/system/medicon-category/medicon-category.component.ts",
                 "type": "component",
                 "linktype": "component",
-                "name": "MedicationsCategoryComponent",
+                "name": "MediconCategoryComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/15",
+                "coverageCount": "0/16",
                 "status": "low"
             },
             {
-                "filePath": "src/app/shared/components/system/medications-concentrated/medications-concentrated.component.ts",
+                "filePath": "src/app/shared/components/system/medicon-section-container/medicon-section-container.component.ts",
                 "type": "component",
                 "linktype": "component",
-                "name": "MedicationsConcentratedComponent",
+                "name": "MediconSectionContainerComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/15",
+                "coverageCount": "0/10",
                 "status": "low"
             },
             {
-                "filePath": "src/app/shared/components/system/medications-section-container/medications-section-container.component.ts",
+                "filePath": "src/app/shared/components/system/medicon-section-timeline/medicon-section-timeline.component.ts",
                 "type": "component",
                 "linktype": "component",
-                "name": "MedicationsSectionContainerComponent",
+                "name": "MediconSectionTimelineComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/12",
                 "status": "low"
             },
             {
-                "filePath": "src/app/shared/components/system/medications-section-timeline/medications-section-timeline.component.ts",
+                "filePath": "src/app/shared/components/system/medicon-timeline-values/medicon-timeline-values.component.ts",
                 "type": "component",
                 "linktype": "component",
-                "name": "MedicationsSectionTimelineComponent",
+                "name": "MediconTimelineValuesComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/7",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/components/system/medicon/medicon.component.ts",
+                "type": "component",
+                "linktype": "component",
+                "name": "MediconComponent",
+                "coveragePercent": 0,
+                "coverageCount": "0/15",
                 "status": "low"
             },
             {
@@ -6276,25 +6466,16 @@
                 "status": "low"
             },
             {
-                "filePath": "src/app/shared/models/medications-concentrated-data.model.ts",
+                "filePath": "src/app/shared/models/medicon-data.model.ts",
                 "type": "interface",
                 "linktype": "interface",
                 "name": "MedicationsCategory",
-                "coveragePercent": 0,
-                "coverageCount": "0/4",
-                "status": "low"
-            },
-            {
-                "filePath": "src/app/shared/models/medications-concentrated-data.model.ts",
-                "type": "interface",
-                "linktype": "interface",
-                "name": "MedicationsConcentratedData",
                 "coveragePercent": 0,
                 "coverageCount": "0/5",
                 "status": "low"
             },
             {
-                "filePath": "src/app/shared/models/medications-concentrated-data.model.ts",
+                "filePath": "src/app/shared/models/medicon-data.model.ts",
                 "type": "interface",
                 "linktype": "interface",
                 "name": "MedicationsSection",
@@ -6303,12 +6484,21 @@
                 "status": "low"
             },
             {
-                "filePath": "src/app/shared/models/medications-concentrated-data.model.ts",
+                "filePath": "src/app/shared/models/medicon-data.model.ts",
                 "type": "interface",
                 "linktype": "interface",
                 "name": "MedicationTimeline",
                 "coveragePercent": 0,
                 "coverageCount": "0/3",
+                "status": "low"
+            },
+            {
+                "filePath": "src/app/shared/models/medicon-data.model.ts",
+                "type": "interface",
+                "linktype": "interface",
+                "name": "MediconData",
+                "coveragePercent": 0,
+                "coverageCount": "0/5",
                 "status": "low"
             },
             {
@@ -6361,28 +6551,28 @@
                 "status": "low"
             },
             {
-                "filePath": "src/stories/components/medication-lister-item/medication-lister-item.component.ts",
+                "filePath": "src/stories/components/medicon-lister-item/medicon-lister-item.component.ts",
                 "type": "component",
                 "linktype": "component",
-                "name": "MedicationListerItemComponent",
+                "name": "MediconListerItemComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/16",
                 "status": "low"
             },
             {
-                "filePath": "src/stories/components/medication-lister/medication-lister.component.ts",
+                "filePath": "src/stories/components/medicon-lister/medicon-lister.component.ts",
                 "type": "component",
                 "linktype": "component",
-                "name": "MedicationListerComponent",
+                "name": "MediconListerComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/13",
                 "status": "low"
             },
             {
-                "filePath": "src/stories/components/medication-tester/medication-tester.component.ts",
+                "filePath": "src/stories/components/medicon-tester/medicon-tester.component.ts",
                 "type": "component",
                 "linktype": "component",
-                "name": "MedicationTesterComponent",
+                "name": "MediconTesterComponent",
                 "coveragePercent": 0,
                 "coverageCount": "0/27",
                 "status": "low"
@@ -6568,7 +6758,7 @@
                 "status": "low"
             },
             {
-                "filePath": "src/stories/graphs/medications-concentrated.stories.ts",
+                "filePath": "src/stories/graphs/medicon.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -6578,7 +6768,7 @@
                 "status": "low"
             },
             {
-                "filePath": "src/stories/graphs/medications-concentrated.stories.ts",
+                "filePath": "src/stories/graphs/medicon.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
@@ -6588,7 +6778,7 @@
                 "status": "low"
             },
             {
-                "filePath": "src/stories/graphs/medications-concentrated.stories.ts",
+                "filePath": "src/stories/graphs/medicon.stories.ts",
                 "type": "variable",
                 "linktype": "miscellaneous",
                 "linksubtype": "variable",
