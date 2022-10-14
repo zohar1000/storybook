@@ -141,27 +141,28 @@ export class MediconTesterComponent implements OnInit {
       sections: this.settings.sections.map((section, i) => getSection(section, i)),
       timeline: this.getTimeline()
     }
-
-    // this.getTimeline();
-// console.log('this.data:', this.data);
   }
 
   getTimeline(): MedicationTimeline {
+    const ONE_HOUR_IN_MS = 3600000; // 1000 * 60 * 60
+    const ONE_DAY_IN_MS = 86400000; // 1000 * 60 * 60 * 24
+    const TimeFormatOptions = {
+      date: { year: '2-digit', month: '2-digit', day: 'numeric' } as const,
+      time: { hour: '2-digit', minute: '2-digit' } as const,
+      dateTime: { year: '2-digit', month: '2-digit', day: 'numeric', hour: '2-digit', minute: '2-digit' } as const
+    }
     const item = TimelineResolutionValues[this.settings.resolution];
     const now = Date.now();
-console.log('now:', new Date(now), new Date(now).toISOString());
-    const offset = (new Date()).getTimezoneOffset();
-console.log('offset:',offset);
-    const localNow = now; //  - (60000 * offset);
-console.log('localNow:', new Date(localNow), new Date(localNow).toISOString());
+    const dayStartTime = now - (now % ONE_DAY_IN_MS);
+    const pivotHour = Number(this.settings.pivotTime.substring(0, 2));
+    const pivotMinutes = Number(this.settings.pivotTime.substring(3, 5));
+    const pivotTime = dayStartTime + (pivotHour * ONE_HOUR_IN_MS) + pivotMinutes * 60000;
     const roundBy = 60000 * item.minutes;
-console.log('reduced minutes:', (localNow % roundBy) / 60000);
-    const roundedLocalNow = localNow - (localNow % roundBy);
-console.log('roundedLocalNow:', new Date(roundedLocalNow), new Date(roundedLocalNow).toISOString());
-    const timeFormatOptionsDate = { year: '2-digit', month: '2-digit', day: 'numeric' } as const;
-    const timeFormatOptionsDateTime = { year: '2-digit', month: '2-digit', day: 'numeric', hour: '2-digit', minute: '2-digit' } as const;
-    const startTime = roundedLocalNow - (6 * roundBy);
-    const endTime = roundedLocalNow + (6 * roundBy);
+    const roundedPivotTime = pivotTime - (pivotTime % roundBy);
+    const offset = (new Date()).getTimezoneOffset() * 60000;
+    const roundedPivotLocalTime = roundedPivotTime + offset;
+    const startTime = roundedPivotLocalTime - (6 * roundBy);
+    const endTime = roundedPivotLocalTime + (6 * roundBy);
     const values = [];
     let interval = 0;
     for (let time = startTime; time <= endTime; time += roundBy) {
@@ -169,49 +170,19 @@ console.log('roundedLocalNow:', new Date(roundedLocalNow), new Date(roundedLocal
       const localTime = new Date(time);
       switch(item.type) {
         case TimeDisplayType.Time:
-          isoTime = localTime.toISOString();
-          values.push(isoTime.substring(11, 16));
+          values.push(localTime.toLocaleTimeString(this.settings.locale, TimeFormatOptions.time));
           break;
         case TimeDisplayType.Date:
-          values.push(localTime.toLocaleDateString(this.settings.locale, timeFormatOptionsDate));
+          values.push(localTime.toLocaleDateString(this.settings.locale, TimeFormatOptions.date));
           break;
         case TimeDisplayType.DateTime:
-          if (++interval % 2 === 0) {
-            // values.push('');
-          } else {
-            isoTime = localTime.toLocaleString(this.settings.locale, timeFormatOptionsDateTime);
+          if (++interval % 2 !== 0) {
+            isoTime = localTime.toLocaleString(this.settings.locale, TimeFormatOptions.dateTime);
             values.push(isoTime.substring(0, 8) + ' ' + isoTime.substring(10, 15));
           }
           break;
       }
     }
-
-    // for (let i = -6; i <= 6; i++) {
-    //   let value = currHour + i;
-    //   if (hour < 0) hour += 24;
-    //   values.push(String(hour).padStart(2, '0') + ':00');
-    // }
-    // switch(item.type) {
-    //   case TimeDisplayType.Time:
-    //     const currHour = Number(this.settings.pivotTime.substring(0, 2));
-
-    // }
-
-
-
-    // switch(item.type) {
-    //   case TimeDisplayType.Time:
-    //     const currHour = Number(this.settings.pivotTime.substring(0, 2));
-    //     for (let i = -6; i <= 6; i++) {
-    //       let hour = currHour + i;
-    //       if (hour < 0) hour += 24;
-    //       values.push(String(hour).padStart(2, '0') + ':00');
-    //     }
-    // }
-
-    // const timelineDisplayType: TimeDisplayType = TimelineResolutionValues[]
-
-    console.log('values:', values);
     return {
       range: {
         fromTime: values[0],
