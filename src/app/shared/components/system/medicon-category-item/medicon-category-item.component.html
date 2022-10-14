@@ -1,5 +1,5 @@
 <div class="graph-line" #graphLine>
-  <div class="name" #name [style.width.px]="medicationNameWidth">
+  <div class="name vertical-center" #name [style.width.px]="medicationNameWidth">
     <ng-container *ngIf="!isCondensedCategory">
       {{medication.name}}
     </ng-container>
@@ -24,7 +24,10 @@
 
 <ng-template #verticalLines let-isLast="isLast" let-value="value" >
   <div class="vertical-lines-part-container">
-    <div class="vertical-lines-part"></div>
-    <div *ngIf="isLast" class="x-axis-footer-value">{{value}}</div>
+    <div class="vertical-lines-part">
+      <div class="sub-divisions">
+        <div *ngFor="let line of [].constructor(subDivisionLines)" class="sub-division-line"></div>
+      </div>
+    </div>
   </div>
 </ng-template>

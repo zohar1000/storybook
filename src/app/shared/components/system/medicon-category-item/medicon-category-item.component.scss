@@ -4,6 +4,10 @@
   display: flex;
   align-items: center;
   height: $medication-graph-height;
+  .name {
+    height: $medication-graph-height;
+    overflow-y: hidden;
+  }
 
   .graph-container {
     position: relative;
@@ -43,10 +47,15 @@
     &:not(:last-child) {
       border-right: 1px solid black;
     }
-    .x-axis-footer-value {
-      position: absolute;
-      left: -1rem;
-      bottom: -2rem;
+    .sub-divisions {
+      display: flex;
+      justify-content: space-evenly;
+      .sub-division-line {
+        height: $medication-graph-height;
+        width: 1px;
+        display: block;
+        background: #dddddd;
+      }
     }
   }
 }
