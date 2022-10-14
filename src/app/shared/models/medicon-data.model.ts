@@ -35,4 +35,5 @@ export interface MedicationTimeline {
   xAxisValues: string[];
   subDivision: number;
   interval: number;
+  pivotTimePositionPct: number
 }

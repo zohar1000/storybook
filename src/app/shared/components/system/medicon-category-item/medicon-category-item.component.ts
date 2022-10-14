@@ -20,10 +20,10 @@ export class MediconCategoryItemComponent implements OnInit {
   @Input() categoryColor = '';
   readonly PARTS = 12;
   subDivisionLines;
+  pivotTimePositionX;
 
   ngOnInit() {
     this.subDivisionLines = this.timeline.subDivision - 1;
-console.log('OnInit:', this.medication);
-console.log('timeline:', this.timeline);
+    this.pivotTimePositionX = this.timeline.pivotTimePositionPct * this.timelineWidth;
   }
 }

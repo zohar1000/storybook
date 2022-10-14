@@ -31,6 +31,13 @@
       &.last-section-graph {
         border-bottom: 1px solid gray;
       }
+      .pivot-line {
+        position: absolute;
+        height: $medication-graph-height;
+        width: 2px;
+        display: block;
+        background: red;
+      }
     }
   }
 }

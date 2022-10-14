@@ -190,7 +190,8 @@ export class MediconTesterComponent implements OnInit {
       },
       xAxisValues: values,
       subDivision: item.subDivision,
-      interval: item.interval
+      interval: item.interval,
+      pivotTimePositionPct: (pivotTime + offset - startTime) / (endTime - startTime)
     }
   }
 }
