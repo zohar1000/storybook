@@ -4,7 +4,7 @@
       {{medication.name}}
     </ng-container>
     <ng-container *ngIf="isCondensedCategory">
-      <span [style.color]="categoryColor">{{categoryName}}</span>
+      <span [style.color]="category.color">{{category.name}}</span>
     </ng-container>
   </div>
 
@@ -19,6 +19,14 @@
         </ng-container>
       </div>
       <div class="pivot-line" [style.left.px]="pivotTimePositionX"></div>
+      <app-medicon-execution-continuous
+          *ngIf="medication.type===ExecutionType.Continuous"
+          class="execution continuous"
+      ></app-medicon-execution-continuous>
+      <app-medicon-execution-periodic
+          *ngIf="medication.type===ExecutionType.Periodic"
+          class="execution periodic"
+      ></app-medicon-execution-periodic>
     </div>
   </div>
 </div>

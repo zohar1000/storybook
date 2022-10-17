@@ -31,8 +31,23 @@ export const textEn = {
       { title: 'Metrics' },
       { title: 'Table Metrics' }
     ],
-    medicationsConcentrated: {
-      legend: 'Legend'
+    medicon: {
+      legend: 'Legend',
+      icons: {
+        command: 'Command',
+        rateChangeCommand: 'Rate change command',
+        execution: 'Execution',
+        report: 'Report',
+        notGiven: 'Not given',
+        notExecuted: 'Not Executed',
+        rateChange: 'Rate Change',
+        dosageDecrease: 'Dosage Decrease',
+        dosageIncrease: 'Dosage Increase',
+        delay: 'Delay',
+        cancelDelay: 'Cancel delay',
+        stop: 'Stop',
+        executionTime: 'planned Execution time'
+      }
     }
   }
 } as const;

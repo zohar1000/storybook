@@ -19,6 +19,10 @@ import { MediconCategoryItemComponent } from '@shared/components/system/medicon-
 import { MediconSectionContainerComponent } from '@shared/components/system/medicon-section-container/medicon-section-container.component';
 import { MediconSectionTimelineComponent } from '@shared/components/system/medicon-section-timeline/medicon-section-timeline.component';
 import { MediconTimelineValuesComponent } from '@shared/components/system/medicon-timeline-values/medicon-timeline-values.component';
+import { MediconExecutionPeriodicComponent } from './components/system/medicon-execution-periodic/medicon-execution-periodic.component';
+import { MediconExecutionContinuousComponent } from './components/system/medicon-execution-continuous/medicon-execution-continuous.component';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { PopoverModule } from 'ngx-bootstrap/popover';
 
 const declarations = [
   GraphLinesComponent,
@@ -28,6 +32,8 @@ const declarations = [
   MediconComponent,
   MediconCategoryComponent,
   MediconCategoryItemComponent,
+  MediconExecutionPeriodicComponent,
+  MediconExecutionContinuousComponent,
   MediconSectionContainerComponent,
   MediconSectionTimelineComponent,
   MediconTimelineValuesComponent
@@ -40,32 +46,48 @@ const modules = [
   BrowserAnimationsModule,
 ];
 
+const importModules = [
+  // bootstrap
+  ModalModule,
+  AccordionModule,
+  ButtonsModule,
+  PopoverModule.forRoot(),
+  SortableModule,
+  TooltipModule.forRoot(),
+  // echarts
+  NgxEchartsModule.forRoot({
+    echarts: () => import('echarts')
+  }),
+  // toastr
+  ToastrModule.forRoot({
+    timeOut: 2000
+  })
+];
+
+const exportModules = [
+  // bootstrap
+  ModalModule,
+  AccordionModule,
+  ButtonsModule,
+  PopoverModule,
+  SortableModule,
+  TooltipModule,
+  // echarts
+  NgxEchartsModule,
+  // toastr
+  ToastrModule
+];
+
 @NgModule({
   declarations,
   imports: [
     ...modules,
-    NgxEchartsModule.forRoot({
-      echarts: () => import('echarts')
-    }),
-
-    // toastr
-    ToastrModule.forRoot({
-      timeOut: 2000
-    })
+    ...importModules
   ],
   exports: [
     ...declarations,
     ...modules,
-    NgxEchartsModule,
-
-    // bootstrap
-    ModalModule,
-    AccordionModule,
-    ButtonsModule,
-    SortableModule,
-
-    // toastr
-    ToastrModule
+    exportModules
   ]
 })
 export class SharedModule {}

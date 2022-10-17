@@ -31,12 +31,21 @@
       &.last-section-graph {
         border-bottom: 1px solid gray;
       }
-      .pivot-line {
+      .vertical-lines-container {
+        z-index: 1;
+      }
+      .pivot-line, .execution {
         position: absolute;
         height: $medication-graph-height;
-        width: 2px;
         display: block;
+      }
+      .pivot-line {
+        width: 2px;
         background: red;
+        z-index: 2;
+      }
+      .execution {
+        z-index: 3;
       }
     }
   }

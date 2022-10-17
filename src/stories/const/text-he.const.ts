@@ -31,8 +31,23 @@ export const textHe = {
       { title: 'מדדים' },
       { title: 'מדדים בטבלה' }
     ],
-    medicationsConcentrated: {
-      legend: 'מקרא'
+    medicon: {
+      legend: 'מקרא',
+      icons: {
+        command: 'הוראה',
+        rateChangeCommand: 'הוראה לשינוי קצב',
+        execution: 'ביצוע',
+        report: 'דיווח',
+        notGiven: 'אי מתן',
+        notExecuted: 'לא בוצע',
+        rateChange: 'שינוי קצב',
+        dosageDecrease: 'הורדת מינון',
+        dosageIncrease: 'העלאת מינון',
+        delay: 'השהיה',
+        cancelDelay: 'ביטול השהיה',
+        stop: 'עצירה',
+        executionTime: 'מועד ביצוע / החלפת שקית מתוכנן'
+      }
     }
   }
 } as const;

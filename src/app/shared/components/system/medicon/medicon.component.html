@@ -25,6 +25,7 @@
 
   <div *ngIf="timelineWidth" class="sections">
     <app-medicon-section-container *ngFor="let section of data.sections"
+      [direction]="direction"
       [text]="text"
       [section]="section"
       [timeline]="data.timeline"

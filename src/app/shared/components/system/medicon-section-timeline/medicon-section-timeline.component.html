@@ -30,11 +30,28 @@
 <ng-template #header let-isTop="isTop">
   <div class="header" [class.top]="isTop" [class.bottom]="!isTop">
     <div class="action-icons horizontal-left vertical-center">
-      <span>{{text.medicationsConcentrated.legend}}</span>
+      <span class="legend-title"
+            [popover]="legendTemplate"
+            [placement]="'bottom'"
+            [container]="'body'"
+            [triggers]="'hover'">{{text.medicon.legend}}</span>
       <span><i class="bi bi-plus-circle"></i></span>
       <span><i class="bi bi-alarm"></i></span>
     </div>
     <div><span *ngIf="isTop" class="horizontal-center">{{section.name}}</span></div>
     <div>&nbsp;</div>
+  </div>
+</ng-template>
+
+<ng-template #legendTemplate>
+  <div class="legend" [dir]="direction">
+    <ng-container *ngFor="let column of legendIcons; let i=index">
+      <ul>
+        <li *ngFor="let item of column | keyvalue">
+          <i class="bi bi-square"></i>
+          <span>{{text.medicon.icons[item.key]}}</span>
+        </li>
+      </ul>
+    </ng-container>
   </div>
 </ng-template>

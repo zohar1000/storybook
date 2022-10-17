@@ -4,6 +4,7 @@
         <ng-container [ngSwitch]="section.type">
           <app-medicon-section-timeline
               *ngSwitchCase="MedicationsSectionType.Timeline"
+              [direction]="direction"
               [text]="text"
               [section]="section"
               [timeline]="timeline"

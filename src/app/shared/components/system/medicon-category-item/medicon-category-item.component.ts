@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Medication } from '@stories/models/medication.model';
-import { MedicationTimeline } from '@models/medicon-data.model';
+import { MedicationsCategory, MedicationTimeline } from '@models/medicon-data.model';
+import { ExecutionType } from '@stories/enums/execution-type.enum';
 
 @Component({
   selector: 'app-medicon-category-item',
@@ -10,15 +11,15 @@ import { MedicationTimeline } from '@models/medicon-data.model';
 export class MediconCategoryItemComponent implements OnInit {
   @ViewChild('graphLine') elRefGraphLine;
   @ViewChild('name') elRefName;
+  @Input() category: MedicationsCategory;
   @Input() medication: Medication;
   @Input() timeline: MedicationTimeline;
   @Input() medicationNameWidth: number;
   @Input() timelineWidth: number;
   @Input() isCondensedCategory = false;
   @Input() isShowBottomBorder = false;
-  @Input() categoryName = '';
-  @Input() categoryColor = '';
   readonly PARTS = 12;
+  ExecutionType = ExecutionType;
   subDivisionLines;
   pivotTimePositionX;
 

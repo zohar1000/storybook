@@ -8,12 +8,30 @@ import { MedicationsSection, MedicationTimeline } from '@models/medicon-data.mod
 })
 export class MediconSectionTimelineComponent implements AfterViewInit {
   @ViewChild('categories') elRefCategories: ElementRef;
+  @Input() direction;
   @Input() text;
   @Input() section: MedicationsSection;
   @Input() timeline: MedicationTimeline;
   @Input() preTimelineWidth = 0;
   @Input() timelineWidth = 0;
   @Output() backgroundColored = new EventEmitter();
+  readonly legendIcons = [
+    { command: 'bi-square',
+      rateChangeCommand: 'bi-square',
+      execution: 'bi-square',
+      report: 'bi-square',
+      notGiven: 'bi-square',
+      notExecuted: 'bi-square'
+    }, {
+      rateChange: 'bi-square',
+      dosageDecrease: 'bi-square',
+      dosageIncrease: 'bi-square',
+      delay: 'bi-square',
+      cancelDelay: 'bi-square',
+      stop: 'bi-square',
+      executionTime: 'bi-square'
+    }
+  ]
 
   constructor(private cdr: ChangeDetectorRef) {}
 

@@ -20,6 +20,10 @@
       width: 5.3rem !important;
       display: inline-block;
       //padding-inline-end: 4rem;
+      &.legend-title {
+        overflow: visible;
+        width: 5.3rem !important;
+      }
       i {
         font-size: var(--action-icons-font-size);
       }
@@ -27,6 +31,20 @@
   }
 }
 
-//&.sub-header {
-//  background: #eeeeee;
-//}
+.legend {
+  padding-inline: 1rem;
+  display: inline-grid;
+  column-gap: 5rem;
+  grid-template-columns: auto auto;
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    li {
+      i {
+        margin-inline-end: 1rem;
+      }
+    }
+  }
+}
+
