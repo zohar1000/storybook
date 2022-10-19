@@ -38,7 +38,7 @@ export const textHe = {
         rateChangeCommand: 'הוראה לשינוי קצב',
         execution: 'ביצוע',
         report: 'דיווח',
-        notGiven: 'אי מתן',
+        notAdministered: 'אי מתן',
         notExecuted: 'לא בוצע',
         rateChange: 'שינוי קצב',
         dosageDecrease: 'הורדת מינון',

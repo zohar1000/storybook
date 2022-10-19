@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { MedicationsCategory, MedicationTimeline } from '@models/medicon-data.model';
+import { MedicationsCategory, MediconTimeline } from '@models/medicon-data.model';
 
 @Component({
   selector: 'app-medicon-category',
@@ -8,7 +8,7 @@ import { MedicationsCategory, MedicationTimeline } from '@models/medicon-data.mo
 })
 export class MediconCategoryComponent implements OnInit {
   @Input() category: MedicationsCategory;
-  @Input() timeline: MedicationTimeline;
+  @Input() timeline: MediconTimeline;
   @Input() preTimelineWidth = 0;
   @Input() timelineWidth = 0;
   @Input() isLastCategory = false;

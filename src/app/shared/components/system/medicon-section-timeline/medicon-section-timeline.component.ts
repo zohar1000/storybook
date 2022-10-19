@@ -1,5 +1,5 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
-import { MedicationsSection, MedicationTimeline } from '@models/medicon-data.model';
+import { MediconSection, MediconTimeline } from '@models/medicon-data.model';
 
 @Component({
   selector: 'app-medicon-section-timeline',
@@ -10,8 +10,8 @@ export class MediconSectionTimelineComponent implements AfterViewInit {
   @ViewChild('categories') elRefCategories: ElementRef;
   @Input() direction;
   @Input() text;
-  @Input() section: MedicationsSection;
-  @Input() timeline: MedicationTimeline;
+  @Input() section: MediconSection;
+  @Input() timeline: MediconTimeline;
   @Input() preTimelineWidth = 0;
   @Input() timelineWidth = 0;
   @Output() backgroundColored = new EventEmitter();
@@ -20,7 +20,7 @@ export class MediconSectionTimelineComponent implements AfterViewInit {
       rateChangeCommand: 'bi-square',
       execution: 'bi-square',
       report: 'bi-square',
-      notGiven: 'bi-square',
+      notAdministered: 'bi-square',
       notExecuted: 'bi-square'
     }, {
       rateChange: 'bi-square',

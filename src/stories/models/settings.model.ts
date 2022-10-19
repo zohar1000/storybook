@@ -1,6 +1,6 @@
 import { Medication } from '@stories/models/medication.model';
 import { TimelineResolution } from '@shared/enums/timeline-resolution.enum';
-import { MedicationsSectionType } from '@shared/enums/medications-section-type.enum';
+import { MediconSectionType } from '@shared/enums/medicon-section-type.enum';
 
 export interface Settings {
   languageCode: string;
@@ -12,7 +12,7 @@ export interface Settings {
   locale: string;
   sections: [{
     isDisplay: boolean;
-    type: MedicationsSectionType,
+    type: MediconSectionType,
     medications: Medication[]
   }];
 }

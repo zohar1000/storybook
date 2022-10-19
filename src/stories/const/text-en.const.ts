@@ -38,7 +38,7 @@ export const textEn = {
         rateChangeCommand: 'Rate change command',
         execution: 'Execution',
         report: 'Report',
-        notGiven: 'Not given',
+        notAdministered: 'Not Administered',
         notExecuted: 'Not Executed',
         rateChange: 'Rate Change',
         dosageDecrease: 'Dosage Decrease',

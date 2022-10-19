@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MedicationTimeline } from '@models/medicon-data.model';
+import { MediconTimeline } from '@models/medicon-data.model';
 
 @Component({
   selector: 'app-medicon-timeline-values',
@@ -7,7 +7,7 @@ import { MedicationTimeline } from '@models/medicon-data.model';
   styleUrls: ['./medicon-timeline-values.component.scss']
 })
 export class MediconTimelineValuesComponent implements OnInit {
-  @Input() timeline: MedicationTimeline;
+  @Input() timeline: MediconTimeline;
   @Input() preTimelineWidth = 0;
   @Input() timelineWidth = 0;
   timelineValuesWidth;

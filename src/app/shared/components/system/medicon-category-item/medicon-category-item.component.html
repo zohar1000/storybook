@@ -19,14 +19,19 @@
         </ng-container>
       </div>
       <div class="pivot-line" [style.left.px]="pivotTimePositionX"></div>
-      <app-medicon-execution-continuous
-          *ngIf="medication.type===ExecutionType.Continuous"
-          class="execution continuous"
-      ></app-medicon-execution-continuous>
-      <app-medicon-execution-periodic
-          *ngIf="medication.type===ExecutionType.Periodic"
-          class="execution periodic"
-      ></app-medicon-execution-periodic>
+      <div class="execution">
+        <app-medicon-execution-continuous
+            *ngIf="medication.type===ExecutionType.Continuous"
+            class="continuous"
+            [timeline]="timeline"
+            [medication]="medication"
+            [timelineWidth]="timelineWidth"
+        ></app-medicon-execution-continuous>
+        <app-medicon-execution-periodic
+            *ngIf="medication.type===ExecutionType.Periodic"
+            class="periodic"
+        ></app-medicon-execution-periodic>
+      </div>
     </div>
   </div>
 </div>

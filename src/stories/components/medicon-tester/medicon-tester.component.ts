@@ -1,11 +1,12 @@
 import { ChangeDetectorRef, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { Settings } from '@stories/models/settings.model';
 import { ToastrService } from 'ngx-toastr';
-import { MedicationsCategory, MedicationsSection, MedicationTimeline, MediconData } from '@models/medicon-data.model';
+import { MedicationsCategory, MediconSection, MediconTimeline, MediconData } from '@models/medicon-data.model';
 import { Direction } from '@stories/models/direction.model';
 import { MedicationCategories } from '@stories/const/medication-categories.const';
 import { TimeDisplayType } from '@shared/enums/time-display-type.enum';
 import { TimelineResolutionValues } from '@shared/consts/timeline-resolution-values.const';
+import { TimeService } from '@shared/services/time.service';
 
 @Component({
   selector: 'app-medicon-tester',
@@ -24,7 +25,10 @@ export class MediconTesterComponent implements OnInit {
   prevSettings;
   data: MediconData;
 
-  constructor(private cdr: ChangeDetectorRef, private toastr: ToastrService) {}
+  constructor(
+    private cdr: ChangeDetectorRef,
+    private toastr: ToastrService,
+    private timeService: TimeService) {}
 
   ngOnInit() {
     setTimeout(() => {
@@ -46,7 +50,9 @@ export class MediconTesterComponent implements OnInit {
 
   onChangePivotTime(e: Event) {
     this.settings.pivotTime = (e.target as any).value;
+    if (this.settings.pivotTime.length === 1) this.settings.pivotTime = '0' + this.settings.pivotTime;
     if (this.settings.pivotTime.length === 2) this.settings.pivotTime += ':00';
+    if (this.settings.pivotTime.length === 4) this.settings.pivotTime = '0' + this.settings.pivotTime;
     this.saveToLocalStorage();
   }
 
@@ -122,7 +128,7 @@ export class MediconTesterComponent implements OnInit {
       }));
     }
 
-    const getSection = (section, i): MedicationsSection => {
+    const getSection = (section, i): MediconSection => {
       return {
         id: 1,
         type: section.type,
@@ -143,55 +149,35 @@ export class MediconTesterComponent implements OnInit {
     }
   }
 
-  getTimeline(): MedicationTimeline {
-    const ONE_HOUR_IN_MS = 3600000; // 1000 * 60 * 60
-    const ONE_DAY_IN_MS = 86400000; // 1000 * 60 * 60 * 24
-    const TimeFormatOptions = {
-      date: { year: '2-digit', month: '2-digit', day: 'numeric' } as const,
-      time: { hour: '2-digit', minute: '2-digit' } as const,
-      dateTime: { year: '2-digit', month: '2-digit', day: 'numeric', hour: '2-digit', minute: '2-digit' } as const
-    }
+  getTimeline(): MediconTimeline {
     const item = TimelineResolutionValues[this.settings.resolution];
-    const now = Date.now();
-    const dayStartTime = now - (now % ONE_DAY_IN_MS);
-    const pivotHour = Number(this.settings.pivotTime.substring(0, 2));
-    const pivotMinutes = Number(this.settings.pivotTime.substring(3, 5));
-    const pivotTime = dayStartTime + (pivotHour * ONE_HOUR_IN_MS) + pivotMinutes * 60000;
+    const pivotEpoch = this.timeService.getMidnightEpoch(this.settings.pivotTime);
     const roundBy = 60000 * item.minutes;
-    const roundedPivotTime = pivotTime - (pivotTime % roundBy);
-    const offset = (new Date()).getTimezoneOffset() * 60000;
-    const roundedPivotLocalTime = roundedPivotTime + offset;
-    const startTime = roundedPivotLocalTime - (6 * roundBy);
-    const endTime = roundedPivotLocalTime + (6 * roundBy);
+    const roundedPivotEpoch = pivotEpoch - (pivotEpoch % roundBy);
+    const roundedPivotLocalEpoch = this.timeService.getLocalEpoch(roundedPivotEpoch);
+    const tlStartEpoch = roundedPivotLocalEpoch - (6 * roundBy);
+    const elEndEpoch = roundedPivotLocalEpoch + (6 * roundBy);
     const values = [];
     let interval = 0;
-    for (let time = startTime; time <= endTime; time += roundBy) {
-      let isoTime;
-      const localTime = new Date(time);
-      switch(item.type) {
-        case TimeDisplayType.Time:
-          values.push(localTime.toLocaleTimeString(this.settings.locale, TimeFormatOptions.time));
-          break;
-        case TimeDisplayType.Date:
-          values.push(localTime.toLocaleDateString(this.settings.locale, TimeFormatOptions.date));
-          break;
-        case TimeDisplayType.DateTime:
-          if (++interval % 2 !== 0) {
-            isoTime = localTime.toLocaleString(this.settings.locale, TimeFormatOptions.dateTime);
-            values.push(isoTime.substring(0, 8) + ' ' + isoTime.substring(10, 15));
-          }
-          break;
+    for (let time = tlStartEpoch; time <= elEndEpoch; time += roundBy) {
+      if (item.type !== TimeDisplayType.DateTime || ++interval % 2 !== 0) {
+        values.push(this.timeService.getFormattedTime(item.type, time));
       }
     }
     return {
+      pivotTime: {
+        epoch: this.timeService.getLocalEpoch(pivotEpoch),
+        iso: this.timeService.getLocalIso(pivotEpoch)
+      },
       range: {
         fromTime: values[0],
-        toTime: values[12]
+        fromEpoch: tlStartEpoch,
+        toTime: values[12],
+        toEpoch: elEndEpoch
       },
       xAxisValues: values,
       subDivision: item.subDivision,
-      interval: item.interval,
-      pivotTimePositionPct: (pivotTime + offset - startTime) / (endTime - startTime)
+      interval: item.interval
     }
   }
 }

@@ -1,6 +1,6 @@
 import { Component, ElementRef, Input, OnInit, Output, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
-import { MedicationsSection, MedicationTimeline } from '@models/medicon-data.model';
-import { MedicationsSectionType } from '@shared/enums/medications-section-type.enum';
+import { MediconSection, MediconTimeline } from '@models/medicon-data.model';
+import { MediconSectionType } from '@shared/enums/medicon-section-type.enum';
 
 @Component({
   selector: 'app-medicon-section-container',
@@ -10,11 +10,11 @@ import { MedicationsSectionType } from '@shared/enums/medications-section-type.e
 export class MediconSectionContainerComponent implements OnInit {
   @Input() direction;
   @Input() text;
-  @Input() section: MedicationsSection;
-  @Input() timeline: MedicationTimeline;
+  @Input() section: MediconSection;
+  @Input() timeline: MediconTimeline;
   @Input() preTimelineWidth = 0;
   @Input() timelineWidth = 0;
-  MedicationsSectionType = MedicationsSectionType;
+  MediconSectionType = MediconSectionType;
   timelineValuesWidth;
   timelineValuesRight;
 
