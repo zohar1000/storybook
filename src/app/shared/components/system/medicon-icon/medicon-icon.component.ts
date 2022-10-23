@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MediconLegendIcons } from '@shared/consts/medicon-legend-icons.const';
 
 @Component({
   selector: 'app-medicon-icon',
@@ -7,12 +8,9 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class MediconIconComponent implements OnInit {
   @Input() type: string;
-
-  iconClass = 'bi-square';
-
-  constructor() { }
+  iconClass;
 
   ngOnInit(): void {
+    this.iconClass = MediconLegendIcons[0][this.type] || MediconLegendIcons[1][this.type];
   }
-
 }

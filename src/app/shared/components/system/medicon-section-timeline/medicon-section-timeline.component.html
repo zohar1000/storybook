@@ -45,10 +45,10 @@
 
 <ng-template #legendTemplate>
   <div class="legend" [dir]="direction">
-    <ng-container *ngFor="let column of legendIcons; let i=index">
+    <ng-container *ngFor="let column of MediconLegendIcons; let i=index">
       <ul>
         <li *ngFor="let item of column | keyvalue">
-          <i class="bi bi-square"></i>
+          <i class="bi {{item.value}}"></i>
           <span>{{text.medicon.icons[item.key]}}</span>
         </li>
       </ul>

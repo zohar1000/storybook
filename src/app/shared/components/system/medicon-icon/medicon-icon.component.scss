@@ -10,4 +10,7 @@
 i {
   position: absolute;
   left: -0.5rem;
+  &::before {
+    background: white;
+  }
 }

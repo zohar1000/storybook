@@ -1,0 +1,35 @@
+:host {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  position: relative;
+
+  .icon, .line {
+    position: absolute;
+  }
+
+  .line {
+    height: 2px;
+    top: calc(50% - 2px);
+    background-position: center;
+  }
+
+  .order-icon {
+    z-index: 10;
+  }
+
+  .order-line {
+    z-index: 1;
+    background: black;
+  }
+
+  .execution-icon {
+    z-index: 11;
+  }
+
+  .execution-line {
+    z-index: 2;
+
+    background: repeating-linear-gradient(to right, black, black 5px, transparent 5px, transparent 7px, black 7px, black 9px, transparent 9px, transparent 11px);
+  }
+}

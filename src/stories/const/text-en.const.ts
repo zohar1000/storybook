@@ -34,7 +34,7 @@ export const textEn = {
     medicon: {
       legend: 'Legend',
       icons: {
-        command: 'Command',
+        order: 'Order',
         rateChangeCommand: 'Rate change command',
         execution: 'Execution',
         report: 'Report',

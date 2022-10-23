@@ -1,1 +1,24 @@
-<app-medicon-icon [style.margin-left.px]="orderMargin"></app-medicon-icon>
+<app-medicon-icon
+    class="icon order-icon"
+    [type]="'order'"
+    [style.margin-left.px]="orderIconMargin">
+</app-medicon-icon>
+
+<div *ngIf="orderLineMargin !== -1"
+    class="line order-line"
+    [style.margin-left.px]="orderLineMargin"
+    [style.width.px]="orderLineWidth">
+</div>
+
+<app-medicon-icon
+    *ngIf="executionIconMargin !== -1"
+    class="icon execution-icon"
+    [type]="'execution'"
+    [style.margin-left.px]="executionIconMargin">
+</app-medicon-icon>
+
+<div *ngIf="executionLineMargin !== -1"
+     class="line execution-line"
+     [style.margin-left.px]="executionLineMargin"
+     [style.width.px]="executionLineWidth">
+</div>

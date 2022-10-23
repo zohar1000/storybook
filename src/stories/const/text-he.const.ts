@@ -34,7 +34,7 @@ export const textHe = {
     medicon: {
       legend: 'מקרא',
       icons: {
-        command: 'הוראה',
+        order: 'הוראה',
         rateChangeCommand: 'הוראה לשינוי קצב',
         execution: 'ביצוע',
         report: 'דיווח',

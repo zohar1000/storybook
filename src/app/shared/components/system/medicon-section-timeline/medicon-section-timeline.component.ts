@@ -1,5 +1,6 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { MediconSection, MediconTimeline } from '@models/medicon-data.model';
+import { MediconLegendIcons } from '@shared/consts/medicon-legend-icons.const';
 
 @Component({
   selector: 'app-medicon-section-timeline',
@@ -15,23 +16,7 @@ export class MediconSectionTimelineComponent implements AfterViewInit {
   @Input() preTimelineWidth = 0;
   @Input() timelineWidth = 0;
   @Output() backgroundColored = new EventEmitter();
-  readonly legendIcons = [
-    { command: 'bi-square',
-      rateChangeCommand: 'bi-square',
-      execution: 'bi-square',
-      report: 'bi-square',
-      notAdministered: 'bi-square',
-      notExecuted: 'bi-square'
-    }, {
-      rateChange: 'bi-square',
-      dosageDecrease: 'bi-square',
-      dosageIncrease: 'bi-square',
-      delay: 'bi-square',
-      cancelDelay: 'bi-square',
-      stop: 'bi-square',
-      executionTime: 'bi-square'
-    }
-  ]
+  MediconLegendIcons = MediconLegendIcons;
 
   constructor(private cdr: ChangeDetectorRef) {}
 
