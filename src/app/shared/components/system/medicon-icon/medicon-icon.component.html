@@ -1,2 +1,14 @@
-<i class="bi" [ngClass]="iconClass"></i>
+<span [ngClass]="{aligned: position==='aligned', centered: !position}">
+  <ng-container [ngSwitch]="type">
 
+
+
+
+    <i class="bi" *ngSwitchDefault
+       [ngClass]="iconClass"
+       [style.color]="outlineColor"
+       [style.font-size.rem]="fontSize"
+       [style.margin-left.rem]="marginLeft"
+    ></i>
+  </ng-container>
+</span>

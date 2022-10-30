@@ -8,9 +8,23 @@ import { MediconLegendIcons } from '@shared/consts/medicon-legend-icons.const';
 })
 export class MediconIconComponent implements OnInit {
   @Input() type: string;
+  @Input() position = '';  // 'aligned' for regular, '' for 0,0 centered
   iconClass;
+  outlineColor = 'black';
+  fontSize = 1;
+  marginLeft = 0;
+  svgs = [
+    { }
+  ]
 
   ngOnInit(): void {
-    this.iconClass = MediconLegendIcons[0][this.type] || MediconLegendIcons[1][this.type];
+    const item = MediconLegendIcons.find(item => item.type === this.type);
+    this.iconClass = item.iconClass;
+    if (item.outlineColor) this.outlineColor = item.outlineColor;
+console.log('item.outlineColor:', item.outlineColor);
+    if (item.size) {
+      this.fontSize = item.size;
+      this.marginLeft = (1 - item.size) / 2;
+    }
   }
 }

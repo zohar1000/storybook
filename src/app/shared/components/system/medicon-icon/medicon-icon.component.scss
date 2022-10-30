@@ -1,16 +1,16 @@
-:host {
+.centered {
   position: relative;
-  width: 1rem;
-  height: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: yellow;
+  i {
+    position: absolute;
+  }
 }
 
 i {
-  position: absolute;
-  left: -0.5rem;
   &::before {
-    background: white;
+     background: white;
   }
 }

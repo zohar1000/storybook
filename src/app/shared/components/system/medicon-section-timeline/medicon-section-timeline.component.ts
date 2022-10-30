@@ -17,8 +17,14 @@ export class MediconSectionTimelineComponent implements AfterViewInit {
   @Input() timelineWidth = 0;
   @Output() backgroundColored = new EventEmitter();
   MediconLegendIcons = MediconLegendIcons;
+  legendColumns;
 
-  constructor(private cdr: ChangeDetectorRef) {}
+  constructor(private cdr: ChangeDetectorRef) {
+    this.legendColumns = [
+      this.MediconLegendIcons.filter(item => item.column === 0),
+      this.MediconLegendIcons.filter(item => item.column === 1)
+    ]
+  }
 
   ngAfterViewInit() {
     this.setCategoriesBackgroundColor();

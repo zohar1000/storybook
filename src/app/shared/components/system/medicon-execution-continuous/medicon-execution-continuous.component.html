@@ -4,9 +4,9 @@
     [style.margin-left.px]="orderIconMargin">
 </app-medicon-icon>
 
-<div *ngIf="orderLineMargin !== -1"
+<div *ngIf="orderIconMargin !== -1"
     class="line order-line"
-    [style.margin-left.px]="orderLineMargin"
+    [style.margin-left.px]="orderIconMargin"
     [style.width.px]="orderLineWidth">
 </div>
 
@@ -17,8 +17,8 @@
     [style.margin-left.px]="executionIconMargin">
 </app-medicon-icon>
 
-<div *ngIf="executionLineMargin !== -1"
+<div *ngIf="executionIconMargin !== -1"
      class="line execution-line"
-     [style.margin-left.px]="executionLineMargin"
+     [style.margin-left.px]="executionIconMargin"
      [style.width.px]="executionLineWidth">
 </div>
