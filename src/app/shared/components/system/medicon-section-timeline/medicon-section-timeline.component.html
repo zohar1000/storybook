@@ -34,7 +34,7 @@
             [popover]="legendTemplate"
             [placement]="'bottom'"
             [container]="'body'"
-            [isOpen]="false"
+            [isOpen]="true"
             [triggers]="'hover'">{{text.medicon.legend}}</span>
       <span><i class="bi bi-plus-circle"></i></span>
       <span><i class="bi bi-alarm"></i></span>
@@ -49,8 +49,10 @@
     <ng-container *ngFor="let column of legendColumns; let i=index">
       <ul>
         <li *ngFor="let item of column">
-          <app-medicon-icon [type]="item.type" [position]="'aligned'"></app-medicon-icon>
-          <span>{{text.medicon.icons[item.type]}}</span>
+          <div class="vertical-center">
+            <app-medicon-icon [type]="item.type" [position]="'aligned'"></app-medicon-icon>
+            <span>{{text.medicon.icons[item.type]}}</span>
+          </div>
         </li>
       </ul>
     </ng-container>

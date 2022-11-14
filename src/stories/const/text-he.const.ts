@@ -1,3 +1,5 @@
+import { MediconLegendIconType } from "@shared/enums/medicon-legend-icon-type.enum";
+
 export const textHe = {
   direction: 'rtl',
   text: {
@@ -34,19 +36,19 @@ export const textHe = {
     medicon: {
       legend: 'מקרא',
       icons: {
-        order: 'הוראה',
-        rateChangeCommand: 'הוראה לשינוי קצב',
-        execution: 'ביצוע',
-        report: 'דיווח',
-        notAdministered: 'אי מתן',
-        notExecuted: 'לא בוצע',
-        rateChange: 'שינוי קצב',
-        dosageDecrease: 'הורדת מינון',
-        dosageIncrease: 'העלאת מינון',
-        delay: 'השהיה',
-        cancelDelay: 'ביטול השהיה',
-        stop: 'עצירה',
-        executionTime: 'מועד ביצוע / החלפת שקית מתוכנן'
+        [MediconLegendIconType.Order]: 'הוראה',
+        [MediconLegendIconType.RateChangeOrder]: 'הוראה לשינוי קצב',
+        [MediconLegendIconType.Execution]: 'ביצוע',
+        [MediconLegendIconType.Report]: 'דיווח',
+        [MediconLegendIconType.NotAdministered]: 'אי מתן',
+        [MediconLegendIconType.NotExecuted]: 'לא בוצע',
+        [MediconLegendIconType.RateChange]: 'שינוי קצב',
+        [MediconLegendIconType.DosageDecrease]: 'הורדת מינון',
+        [MediconLegendIconType.DosageIncrease]: 'העלאת מינון',
+        [MediconLegendIconType.Hold]: 'השהיה',
+        [MediconLegendIconType.CancelHold]: 'ביטול השהיה',
+        [MediconLegendIconType.Stop]: 'עצירה',
+        [MediconLegendIconType.ExecutionTime]: 'מועד ביצוע / החלפת שקית מתוכנן'
       }
     }
   }

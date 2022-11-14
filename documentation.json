@@ -6017,21 +6017,21 @@
                 "name": "environment",
                 "ctype": "miscellaneous",
                 "subtype": "variable",
-                "file": "src/environments/environment.ts",
-                "deprecated": false,
-                "deprecationMessage": "",
-                "type": "object",
-                "defaultValue": "{\n  production: false\n}"
-            },
-            {
-                "name": "environment",
-                "ctype": "miscellaneous",
-                "subtype": "variable",
                 "file": "src/environments/environment.prod.ts",
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "object",
                 "defaultValue": "{\n  production: true\n}"
+            },
+            {
+                "name": "environment",
+                "ctype": "miscellaneous",
+                "subtype": "variable",
+                "file": "src/environments/environment.ts",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "type": "object",
+                "defaultValue": "{\n  production: false\n}"
             },
             {
                 "name": "exportModules",
@@ -6633,18 +6633,6 @@
                     "defaultValue": "{\n  languageCode: 'en',\n  resolution: TimelineResolution.Hours1,\n  pivotTime: '10:00',\n  hoursForward: 14,\n  hoursBackward: 5,\n  refreshTime: 2,\n  locale: 'he-il',\n  sections: [\n    {\n      isDisplay: true,\n      type: MediconSectionType.Timeline,\n      medications: [\n        { id: 10, name: 'Medication 10', categoryId: 1, type: ExecutionType.Continuous, timingType: null, times: ['', '', ''], orderTime: 30, executionTime: 50, duration: 100 },\n        { id: 11, name: 'Medication 11', categoryId: 1, type: ExecutionType.Periodic, timingType: null, times: ['08:00', '14:00', '20:00'], orderTime: 0, executionTime: 0, duration: 0 },\n        { id: 12, name: 'Medication 15', categoryId: 1, type: ExecutionType.Continuous, timingType: null, times: ['', '', ''], orderTime: 20, executionTime: 0, duration: 100 },\n        { id: 20, name: 'Medication 22', categoryId: 2, type: ExecutionType.Periodic, timingType: null, times: ['09:00', '10:00', '11:00'], orderTime: 0, executionTime: 0, duration: 0 },\n        { id: 30, name: 'Medication 32', categoryId: 3, type: ExecutionType.Periodic, timingType: null, times: ['11:00', '11:10', '11:20'], orderTime: 0, executionTime: 0, duration: 0 },\n        { id: 31, name: 'Medication 31', categoryId: 3, type: ExecutionType.Continuous, timingType: null, times: ['', '', ''], orderTime: 10, executionTime: 30, duration: 200 },\n      ]\n    }\n  ]\n}"
                 }
             ],
-            "src/environments/environment.ts": [
-                {
-                    "name": "environment",
-                    "ctype": "miscellaneous",
-                    "subtype": "variable",
-                    "file": "src/environments/environment.ts",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "object",
-                    "defaultValue": "{\n  production: false\n}"
-                }
-            ],
             "src/environments/environment.prod.ts": [
                 {
                     "name": "environment",
@@ -6655,6 +6643,18 @@
                     "deprecationMessage": "",
                     "type": "object",
                     "defaultValue": "{\n  production: true\n}"
+                }
+            ],
+            "src/environments/environment.ts": [
+                {
+                    "name": "environment",
+                    "ctype": "miscellaneous",
+                    "subtype": "variable",
+                    "file": "src/environments/environment.ts",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "object",
+                    "defaultValue": "{\n  production: false\n}"
                 }
             ],
             "src/stories/examples/button.stories.ts": [

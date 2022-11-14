@@ -1,3 +1,5 @@
+import { MediconLegendIconType } from "@shared/enums/medicon-legend-icon-type.enum";
+
 export const textEn = {
   direction: 'ltr',
   text: {
@@ -34,19 +36,19 @@ export const textEn = {
     medicon: {
       legend: 'Legend',
       icons: {
-        order: 'Order',
-        rateChangeCommand: 'Rate change command',
-        execution: 'Execution',
-        report: 'Report',
-        notAdministered: 'Not Administered',
-        notExecuted: 'Not Executed',
-        rateChange: 'Rate Change',
-        dosageDecrease: 'Dosage Decrease',
-        dosageIncrease: 'Dosage Increase',
-        delay: 'Delay',
-        cancelDelay: 'Cancel delay',
-        stop: 'Stop',
-        executionTime: 'planned Execution time'
+        [MediconLegendIconType.Order]: 'Order',
+        [MediconLegendIconType.RateChangeOrder]: 'Rate change order',
+        [MediconLegendIconType.Execution]: 'Execution',
+        [MediconLegendIconType.Report]: 'Report',
+        [MediconLegendIconType.NotAdministered]: 'Not Administered',
+        [MediconLegendIconType.NotExecuted]: 'Not Executed',
+        [MediconLegendIconType.RateChange]: 'Rate Change',
+        [MediconLegendIconType.DosageDecrease]: 'Dosage Decrease',
+        [MediconLegendIconType.DosageIncrease]: 'Dosage Increase',
+        [MediconLegendIconType.Hold]: 'Hold',
+        [MediconLegendIconType.CancelHold]: 'Cancel hold',
+        [MediconLegendIconType.Stop]: 'Stop',
+        [MediconLegendIconType.ExecutionTime]: 'planned Execution time'
       }
     }
   }

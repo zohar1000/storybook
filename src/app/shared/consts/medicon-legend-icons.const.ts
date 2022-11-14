@@ -1,18 +1,18 @@
+import { MediconLegendIconType } from "@shared/enums/medicon-legend-icon-type.enum";
+
 export const MediconLegendIcons = [
-  { type: 'order', iconClass: 'bi-square', size: 0.86, column: 0 },
-  { type: 'execution', iconClass: 'bi-circle', size: 0.78, column: 0 },
-  { type: 'rateChangeCommand', iconClass: 'bi-square', size: 0.7, column: 0, outlineColor: '#37affe' },
-  { type: 'report', iconClass: 'bi-star', size: 0.78, column: 0 },
-  { type: 'notAdministered', iconClass: 'bi-circle', size: 0.78, column: 0, outlineColor: '#e34a69' },
-  { type: 'notExecuted', iconClass: 'bi-star', size: 0.78, column: 0, outlineColor: '#e34a69' },
-  { type: 'rateChange', iconClass: 'bi-triangle', size: 0.78, column: 1 },
-  { type: 'dosageDecrease', iconClass: 'bi-triangle', size: 0.68, column: 1, outlineColor: '#37affe' },
-  { type: 'dosageIncrease', iconClass: 'bi-triangle', column: 1, outlineColor: '#37affe' },
-  { type: 'delay', iconClass: 'bi-star-fill', column: 1 },
-  { type: 'cancelDelay', iconClass: 'bi-star-fill', column: 1 },
-  { type: 'stop', iconClass: 'bi-dpad', column: 1 },
-  // { type: 'stop', iconClass: 'bi-qr-code-scan', column: 1 },
-  // { type: 'stop', iconClass: 'bi-x-lg', column: 1 },
-  // { type: 'stop', iconClass: 'bi-command', column: 1 },
-  { type: 'executionTime', iconClass: 'bi-diamond', size: 0.78, column: 1 }
+  { type: MediconLegendIconType.Order, size: 0.9, stroke: 'black', column: 0 },
+  { type: MediconLegendIconType.Execution, size: 0.95, stroke: 'black', column: 0 },
+  { type: MediconLegendIconType.RateChangeOrder, size: 0.9, stroke: '#2eaafe', column: 0 },
+  { type: MediconLegendIconType.Report, size: 0.95, stroke: 'black', column: 0 },
+  { type: MediconLegendIconType.NotAdministered, size: 0.95, stroke: '#e24664', column: 0 },
+  { type: MediconLegendIconType.NotExecuted, size: 0.95, stroke: '#e24664', column: 0 },
+
+  { type: MediconLegendIconType.RateChange, size: 1, stroke: 'black', column: 1 },
+  { type: MediconLegendIconType.DosageDecrease, size: 0.7, stroke: '#2eaafe', column: 1 },
+  { type: MediconLegendIconType.DosageIncrease, size: 1, stroke: '#2eaafe', column: 1 },
+  { type: MediconLegendIconType.Hold, size: 1, stroke: 'black', fill: '#ffd700', column: 1 },
+  { type: MediconLegendIconType.CancelHold, size: 1, stroke: 'black', fill: '#7cfc00', column: 1 },
+  { type: MediconLegendIconType.Stop, size: 1.15, stroke: 'black', column: 1 },
+  { type: MediconLegendIconType.ExecutionTime, size: 0.9, stroke: 'black', column: 1 }
 ]

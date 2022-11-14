@@ -1,16 +1,41 @@
+$icon-size: 1rem;
+
+:host {
+  width: $icon-size;
+  height: $icon-size;
+  //background: yellow;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .centered {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: yellow;
-  i {
+  //background: yellow;
+  i, .icon-order {
     position: absolute;
   }
 }
 
-i {
-  &::before {
-     background: white;
-  }
+.svg {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  //background: cyan;
+  //width: calc()
+}
+
+.icon {
+  width: $icon-size;
+  height: $icon-size;
+}
+
+.icon-order {
+  border: 1px solid black;
+  background: white;
+  border-radius: 5px;
 }

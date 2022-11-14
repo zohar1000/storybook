@@ -1,6 +1,6 @@
 <app-medicon-icon
     class="icon order-icon"
-    [type]="'order'"
+    [type]="MediconLegendIconType.Order"
     [style.margin-left.px]="orderIconMargin">
 </app-medicon-icon>
 
@@ -13,7 +13,7 @@
 <app-medicon-icon
     *ngIf="executionIconMargin !== -1"
     class="icon execution-icon"
-    [type]="'execution'"
+    [type]="MediconLegendIconType.Execution"
     [style.margin-left.px]="executionIconMargin">
 </app-medicon-icon>
 

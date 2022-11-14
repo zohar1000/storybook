@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Medication } from '@stories/models/medication.model';
 import { MediconTimeline } from '@models/medicon-data.model';
-import { MediconLegendIcons } from '@shared/consts/medicon-legend-icons.const';
+import { MediconLegendIconType } from '@shared/enums/medicon-legend-icon-type.enum';
 
 @Component({
   selector: 'app-medicon-execution-continuous',
@@ -12,6 +12,7 @@ export class MediconExecutionContinuousComponent implements OnInit {
   @Input() timeline: MediconTimeline;
   @Input() medication: Medication;
   @Input() timelineWidth;
+  MediconLegendIconType = MediconLegendIconType;
   timelineWidthInMs;
   orderIconMargin = -1;
   orderLineWidth = -1;
