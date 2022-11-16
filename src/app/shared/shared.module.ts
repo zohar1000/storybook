@@ -24,6 +24,8 @@ import { MediconExecutionContinuousComponent } from './components/system/medicon
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { PopoverModule } from 'ngx-bootstrap/popover';
 import { MediconIconComponent } from './components/system/medicon-icon/medicon-icon.component';
+import { MediconResolutionComponent } from './components/system/medicon-resolution/medicon-resolution.component';
+import { MediconScrollbarComponent } from './components/system/medicon-scrollbar/medicon-scrollbar.component';
 
 const declarations = [
   GraphLinesComponent,
@@ -36,6 +38,8 @@ const declarations = [
   MediconExecutionPeriodicComponent,
   MediconExecutionContinuousComponent,
   MediconIconComponent,
+  MediconResolutionComponent,
+  MediconScrollbarComponent,
   MediconSectionContainerComponent,
   MediconSectionTimelineComponent,
   MediconTimelineValuesComponent

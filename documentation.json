@@ -3880,7 +3880,7 @@
         },
         {
             "name": "MediconExecutionContinuousComponent",
-            "id": "component-MediconExecutionContinuousComponent-e466bf5bb80fac2fb7f8acada8fd9178e086be71401f7d6a46fa199312e9041341f33f686c8f94ba3b47539bb9f51456ee29e8c9fc3e188212d63bb09d4c9339",
+            "id": "component-MediconExecutionContinuousComponent-5e320081b06f999862199b35b558bd5969377bf8762f35bf7a8b4a196ba960e52bae025fea505b712e44984b799bfe19853950fff09ba50a6130f72c3d63b080",
             "file": "src/app/shared/components/system/medicon-execution-continuous/medicon-execution-continuous.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -3932,7 +3932,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 18
+                    "line": 19
                 },
                 {
                     "name": "executionLineWidth",
@@ -3942,7 +3942,17 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 19
+                    "line": 20
+                },
+                {
+                    "name": "MediconLegendIconType",
+                    "defaultValue": "MediconLegendIconType",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 15
                 },
                 {
                     "name": "orderIconMargin",
@@ -3952,7 +3962,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 16
+                    "line": 17
                 },
                 {
                     "name": "orderLineWidth",
@@ -3962,7 +3972,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 17
+                    "line": 18
                 },
                 {
                     "name": "timelineWidthInMs",
@@ -3971,7 +3981,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 15
+                    "line": 16
                 }
             ],
             "methodsClass": [
@@ -3988,7 +3998,7 @@
                     "optional": false,
                     "returnType": "number",
                     "typeParameters": [],
-                    "line": 38,
+                    "line": 39,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -4022,7 +4032,7 @@
                     "optional": false,
                     "returnType": "number",
                     "typeParameters": [],
-                    "line": 32,
+                    "line": 33,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -4059,7 +4069,7 @@
                     "optional": false,
                     "returnType": "number",
                     "typeParameters": [],
-                    "line": 44,
+                    "line": 45,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -4080,7 +4090,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 21,
+                    "line": 22,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -4092,7 +4102,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\nimport { Medication } from '@stories/models/medication.model';\nimport { MediconTimeline } from '@models/medicon-data.model';\nimport { MediconLegendIcons } from '@shared/consts/medicon-legend-icons.const';\n\n@Component({\n  selector: 'app-medicon-execution-continuous',\n  templateUrl: './medicon-execution-continuous.component.html',\n  styleUrls: ['./medicon-execution-continuous.component.scss']\n})\nexport class MediconExecutionContinuousComponent implements OnInit {\n  @Input() timeline: MediconTimeline;\n  @Input() medication: Medication;\n  @Input() timelineWidth;\n  timelineWidthInMs;\n  orderIconMargin = -1;\n  orderLineWidth = -1;\n  executionIconMargin = -1;\n  executionLineWidth = -1;\n\n  ngOnInit(): void {\n    this.timelineWidthInMs = this.timeline.range.toEpoch - this.timeline.range.fromEpoch;\n    this.orderIconMargin = this.getIconMargin(this.medication.orderTime);\n    const orderLineDuration = this.medication.executionTime ? this.medication.executionTime - this.medication.orderTime : this.medication.duration;\n    this.orderLineWidth = this.getLineWidth(this.orderIconMargin, orderLineDuration);\n    if (this.medication.executionTime) {\n      this.executionIconMargin = this.getIconMargin(this.medication.executionTime);\n      this.executionLineWidth = this.getLineWidth(this.executionIconMargin, this.medication.duration);\n    }\n  }\n\n  getLineWidth(startX, durationInMinutes) {\n    let width = (durationInMinutes * 60000 / this.timelineWidthInMs) * this.timelineWidth;\n    if (startX + width > this.timelineWidth) width = this.timelineWidth - startX - 1;  // not to exceed timeline\n    return width; // (durationInMinutes * 60000 / this.timelineWidthInMs) * this.timelineWidth;\n  }\n\n  getIconMargin(epoch) {\n    const iconEpoch = this.timeline.pivotTime.epoch + (epoch * 60000);\n    const pct = this.getTimelinePct(iconEpoch);\n    return pct * this.timelineWidth;\n  }\n\n  getTimelinePct(pos) {\n    return (pos - this.timeline.range.fromEpoch) / this.timelineWidthInMs;\n  }\n}\n",
+            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\nimport { Medication } from '@stories/models/medication.model';\nimport { MediconTimeline } from '@models/medicon-data.model';\nimport { MediconLegendIconType } from '@shared/enums/medicon-legend-icon-type.enum';\n\n@Component({\n  selector: 'app-medicon-execution-continuous',\n  templateUrl: './medicon-execution-continuous.component.html',\n  styleUrls: ['./medicon-execution-continuous.component.scss']\n})\nexport class MediconExecutionContinuousComponent implements OnInit {\n  @Input() timeline: MediconTimeline;\n  @Input() medication: Medication;\n  @Input() timelineWidth;\n  MediconLegendIconType = MediconLegendIconType;\n  timelineWidthInMs;\n  orderIconMargin = -1;\n  orderLineWidth = -1;\n  executionIconMargin = -1;\n  executionLineWidth = -1;\n\n  ngOnInit(): void {\n    this.timelineWidthInMs = this.timeline.range.toEpoch - this.timeline.range.fromEpoch;\n    this.orderIconMargin = this.getIconMargin(this.medication.orderTime);\n    const orderLineDuration = this.medication.executionTime ? this.medication.executionTime - this.medication.orderTime : this.medication.duration;\n    this.orderLineWidth = this.getLineWidth(this.orderIconMargin, orderLineDuration);\n    if (this.medication.executionTime) {\n      this.executionIconMargin = this.getIconMargin(this.medication.executionTime);\n      this.executionLineWidth = this.getLineWidth(this.executionIconMargin, this.medication.duration);\n    }\n  }\n\n  getLineWidth(startX, durationInMinutes) {\n    let width = (durationInMinutes * 60000 / this.timelineWidthInMs) * this.timelineWidth;\n    if (startX + width > this.timelineWidth) width = this.timelineWidth - startX - 1;  // not to exceed timeline\n    return width; // (durationInMinutes * 60000 / this.timelineWidthInMs) * this.timelineWidth;\n  }\n\n  getIconMargin(epoch) {\n    const iconEpoch = this.timeline.pivotTime.epoch + (epoch * 60000);\n    const pct = this.getTimelinePct(iconEpoch);\n    return pct * this.timelineWidth;\n  }\n\n  getTimelinePct(pos) {\n    return (pos - this.timeline.range.fromEpoch) / this.timelineWidthInMs;\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -4104,7 +4114,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<app-medicon-icon\n    class=\"icon order-icon\"\n    [type]=\"'order'\"\n    [style.margin-left.px]=\"orderIconMargin\">\n</app-medicon-icon>\n\n<div *ngIf=\"orderIconMargin !== -1\"\n    class=\"line order-line\"\n    [style.margin-left.px]=\"orderIconMargin\"\n    [style.width.px]=\"orderLineWidth\">\n</div>\n\n<app-medicon-icon\n    *ngIf=\"executionIconMargin !== -1\"\n    class=\"icon execution-icon\"\n    [type]=\"'execution'\"\n    [style.margin-left.px]=\"executionIconMargin\">\n</app-medicon-icon>\n\n<div *ngIf=\"executionIconMargin !== -1\"\n     class=\"line execution-line\"\n     [style.margin-left.px]=\"executionIconMargin\"\n     [style.width.px]=\"executionLineWidth\">\n</div>\n"
+            "templateData": "<app-medicon-icon\n    class=\"icon order-icon\"\n    [type]=\"MediconLegendIconType.Order\"\n    [style.margin-left.px]=\"orderIconMargin\">\n</app-medicon-icon>\n\n<div *ngIf=\"orderIconMargin !== -1\"\n    class=\"line order-line\"\n    [style.margin-left.px]=\"orderIconMargin\"\n    [style.width.px]=\"orderLineWidth\">\n</div>\n\n<app-medicon-icon\n    *ngIf=\"executionIconMargin !== -1\"\n    class=\"icon execution-icon\"\n    [type]=\"MediconLegendIconType.Execution\"\n    [style.margin-left.px]=\"executionIconMargin\">\n</app-medicon-icon>\n\n<div *ngIf=\"executionIconMargin !== -1\"\n     class=\"line execution-line\"\n     [style.margin-left.px]=\"executionIconMargin\"\n     [style.width.px]=\"executionLineWidth\">\n</div>\n"
         },
         {
             "name": "MediconExecutionPeriodicComponent",
@@ -4170,7 +4180,7 @@
         },
         {
             "name": "MediconIconComponent",
-            "id": "component-MediconIconComponent-83aafb6a64eec886c81bf8408580349905a30ff8b1c2cf8b6866a77cc159587aefd98a1ac978a225591c4b8c52e50ab29e6e291b63d7181f4edb04f557f3cae1",
+            "id": "component-MediconIconComponent-4ede33975a3cc2a24ed1f179b93c47dd2692e07c104186fa99ecf751997368566a05967caf093735bb08eda352a613951c0f1b4713f1652051a913027e1eb9c2",
             "file": "src/app/shared/components/system/medicon-icon/medicon-icon.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -4192,7 +4202,7 @@
                     "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 11,
+                    "line": 12,
                     "type": "string",
                     "decorators": []
                 },
@@ -4200,13 +4210,23 @@
                     "name": "type",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 10,
+                    "line": 11,
                     "type": "string",
                     "decorators": []
                 }
             ],
             "outputsClass": [],
             "propertiesClass": [
+                {
+                    "name": "fill",
+                    "defaultValue": "'white'",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "string",
+                    "optional": false,
+                    "description": "",
+                    "line": 16
+                },
                 {
                     "name": "fontSize",
                     "defaultValue": "1",
@@ -4218,43 +4238,24 @@
                     "line": 14
                 },
                 {
-                    "name": "iconClass",
+                    "name": "MediconLegendIconType",
+                    "defaultValue": "MediconLegendIconType",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 12
+                    "line": 13
                 },
                 {
-                    "name": "marginLeft",
-                    "defaultValue": "0",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "number",
-                    "optional": false,
-                    "description": "",
-                    "line": 15
-                },
-                {
-                    "name": "outlineColor",
-                    "defaultValue": "'black'",
+                    "name": "stroke",
+                    "defaultValue": "''",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "string",
                     "optional": false,
                     "description": "",
-                    "line": 13
-                },
-                {
-                    "name": "svgs",
-                    "defaultValue": "[\n    { }\n  ]",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "[]",
-                    "optional": false,
-                    "description": "",
-                    "line": 16
+                    "line": 15
                 }
             ],
             "methodsClass": [
@@ -4264,7 +4265,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 20,
+                    "line": 18,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -4276,11 +4277,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\nimport { MediconLegendIcons } from '@shared/consts/medicon-legend-icons.const';\n\n@Component({\n  selector: 'app-medicon-icon',\n  templateUrl: './medicon-icon.component.html',\n  styleUrls: ['./medicon-icon.component.scss']\n})\nexport class MediconIconComponent implements OnInit {\n  @Input() type: string;\n  @Input() position = '';  // 'aligned' for regular, '' for 0,0 centered\n  iconClass;\n  outlineColor = 'black';\n  fontSize = 1;\n  marginLeft = 0;\n  svgs = [\n    { }\n  ]\n\n  ngOnInit(): void {\n    const item = MediconLegendIcons.find(item => item.type === this.type);\n    this.iconClass = item.iconClass;\n    if (item.outlineColor) this.outlineColor = item.outlineColor;\nconsole.log('item.outlineColor:', item.outlineColor);\n    if (item.size) {\n      this.fontSize = item.size;\n      this.marginLeft = (1 - item.size) / 2;\n    }\n  }\n}\n",
+            "sourceCode": "import { Component, Input, OnInit } from '@angular/core';\nimport { MediconLegendIcons } from '@shared/consts/medicon-legend-icons.const';\nimport { MediconLegendIconType } from '@shared/enums/medicon-legend-icon-type.enum';\n\n@Component({\n  selector: 'app-medicon-icon',\n  templateUrl: './medicon-icon.component.html',\n  styleUrls: ['./medicon-icon.component.scss']\n})\nexport class MediconIconComponent implements OnInit {\n  @Input() type: string;\n  @Input() position = '';  // 'aligned' for regular, '' for 0,0 centered\n  MediconLegendIconType = MediconLegendIconType;\n  fontSize = 1;\n  stroke = '';\n  fill = 'white';\n\n  ngOnInit(): void {\n    const item = MediconLegendIcons.find(item => item.type === this.type);\n    if (item.size) this.fontSize = item.size;\n    if (item.stroke) this.stroke = item.stroke;\n    if (item.fill) this.fill = item.fill;\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".centered {\n  position: relative;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  background: yellow;\n  i {\n    position: absolute;\n  }\n}\n\ni {\n  &::before {\n     background: white;\n  }\n}\n",
+                    "data": "$icon-size: 1rem;\n\n:host {\n  width: $icon-size;\n  height: $icon-size;\n  //background: yellow;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n}\n\n.centered {\n  position: relative;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  //background: yellow;\n  i, .icon-order {\n    position: absolute;\n  }\n}\n\n.svg {\n  cursor: pointer;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  //background: cyan;\n  //width: calc()\n}\n\n.icon {\n  width: $icon-size;\n  height: $icon-size;\n}\n\n.icon-order {\n  border: 1px solid black;\n  background: white;\n  border-radius: 5px;\n}\n",
                     "styleUrl": "./medicon-icon.component.scss"
                 }
             ],
@@ -4288,7 +4289,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<span [ngClass]=\"{aligned: position==='aligned', centered: !position}\">\n  <ng-container [ngSwitch]=\"type\">\n\n\n\n\n    <i class=\"bi\" *ngSwitchDefault\n       [ngClass]=\"iconClass\"\n       [style.color]=\"outlineColor\"\n       [style.font-size.rem]=\"fontSize\"\n       [style.margin-left.rem]=\"marginLeft\"\n    ></i>\n  </ng-container>\n</span>\n"
+            "templateData": "<span [ngClass]=\"{aligned: position==='aligned', centered: !position}\">\n  <div class=\"svg hold\" [style.width.rem]=\"fontSize\" [style.height.rem]=\"fontSize\">\n\n    <ng-container [ngSwitch]=\"type\">\n      <ng-container *ngSwitchCase=\"MediconLegendIconType.Order\" [ngTemplateOutlet]=\"square\"></ng-container>\n      <ng-container *ngSwitchCase=\"MediconLegendIconType.Execution\" [ngTemplateOutlet]=\"circle\"></ng-container>\n      <ng-container *ngSwitchCase=\"MediconLegendIconType.RateChangeOrder\" [ngTemplateOutlet]=\"square\"></ng-container>\n      <ng-container *ngSwitchCase=\"MediconLegendIconType.Report\" [ngTemplateOutlet]=\"davidStar\"></ng-container>\n      <ng-container *ngSwitchCase=\"MediconLegendIconType.NotAdministered\" [ngTemplateOutlet]=\"circle\"></ng-container>\n      <ng-container *ngSwitchCase=\"MediconLegendIconType.NotExecuted\" [ngTemplateOutlet]=\"davidStar\"></ng-container>\n\n      <ng-container *ngSwitchCase=\"MediconLegendIconType.RateChange\" [ngTemplateOutlet]=\"triangle\"></ng-container>\n      <ng-container *ngSwitchCase=\"MediconLegendIconType.DosageDecrease\" [ngTemplateOutlet]=\"triangle\"></ng-container>\n      <ng-container *ngSwitchCase=\"MediconLegendIconType.DosageIncrease\" [ngTemplateOutlet]=\"triangle\"></ng-container>\n      <ng-container *ngSwitchCase=\"MediconLegendIconType.Hold\" [ngTemplateOutlet]=\"star\"></ng-container>\n      <ng-container *ngSwitchCase=\"MediconLegendIconType.CancelHold\" [ngTemplateOutlet]=\"star\"></ng-container>\n      <ng-container *ngSwitchCase=\"MediconLegendIconType.Stop\" [ngTemplateOutlet]=\"stop\"></ng-container>\n      <ng-container *ngSwitchCase=\"MediconLegendIconType.ExecutionTime\" [ngTemplateOutlet]=\"diamond\"></ng-container>\n    </ng-container>\n\n  </div>\n</span>\n\n<ng-template #star>\n  <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\" viewBox=\"0 0 16 16\"\n       [attr.stroke]=\"stroke\" stroke-width=\"1.5\" [attr.fill]=\"fill\">\n    <path d=\"M 2.866 14.85 c -0.078 0.444 0.36 0.791 0.746 0.593 l 4.39 -2.256 l 4.389 2.256 c 0.386 0.198 0.824 -0.149 0.746 -0.592 l -0.83 -4.73 l 3.522 -3.356 c 0.33 -0.314 0.16 -0.888 -0.282 -0.95 l -4.898 -0.696 L 8.465 0.792 a 0.513 0.513 0 0 0 -0.927 0 L 5.354 5.12 l -4.898 0.696 c -0.441 0.062 -0.612 0.636 -0.283 0.95 l 3.523 3.356 l -0.83 4.73 z\"></path>\n  </svg>\n</ng-template>\n\n<ng-template #davidStar>\n  <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\" viewBox=\"0 -10 500 510\"\n       [attr.stroke]=\"stroke\" stroke-width=\"45\" [attr.fill]=\"fill\">\n    <path d=\"M 33.003 369.492 c 2.233 3.869 6.36 6.25 10.825 6.25 c 0.015 0 0.029 0 0.044 0 l 128.002 -0.453 l 63.606 111.078 c 2.228 3.889 6.366 6.289 10.848 6.289 c 4.481 0 8.62 -2.399 10.848 -6.288 l 63.608 -111.079 l 128 0.453 c 0.015 0 0.029 0 0.044 0 c 4.465 0 8.592 -2.382 10.825 -6.25 c 2.241 -3.881 2.231 -8.665 -0.022 -12.538 l -64.392 -110.626 l 64.392 -110.626 c 2.255 -3.873 2.265 -8.657 0.022 -12.538 c -2.233 -3.869 -6.36 -6.25 -10.825 -6.25 c -0.015 0 -0.029 0 -0.044 0 l -128 0.453 L 257.176 6.288 C 254.948 2.399 250.81 0 246.328 0 c -4.482 0 -8.62 2.399 -10.848 6.289 l -63.606 111.079 l -128.002 -0.453 c -0.015 0 -0.029 0 -0.044 0 c -4.465 0 -8.592 2.382 -10.825 6.25 c -2.241 3.881 -2.232 8.665 0.022 12.538 l 64.392 110.625 L 33.025 356.954 C 30.77 360.827 30.762 365.611 33.003 369.492 z c 2.229 3.89 6.367 6.288 10.848 6.288 c 0.016 0 0.029 0 0.044 0 c -2.228 -3.892 -6.367 -6.289 -10.848 -6.289 c -0.015 0 -0.029 0 -0.044 0 z\"/>\n  </svg>\n</ng-template>\n\n<ng-template #square>\n  <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\" viewBox=\"-1 -1 32 32\"\n       [attr.stroke]=\"stroke\" stroke-width=\"3\" [attr.fill]=\"fill\">\n    <rect x=\"1\" y=\"1\" width=\"28\" height=\"28\" />\n  </svg>\n</ng-template>\n\n<ng-template #circle>\n  <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\" viewBox=\"0 0 50 50\"\n       [attr.stroke]=\"stroke\" stroke-width=\"4\" [attr.fill]=\"fill\">\n    <circle cx=\"25\" cy=\"25\" r=\"22\"/>\n  </svg>\n</ng-template>\n\n<ng-template #triangle>\n  <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\" viewBox=\"-1 0 13 12\"\n       [attr.stroke]=\"stroke\" stroke-width=\"1.5\" [attr.fill]=\"fill\">\n    <path d=\"M 6 0 l 6 12 H 0 z\"/>\n  </svg>\n</ng-template>\n\n<ng-template #stop>\n  <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\" viewBox=\"-2 -2 404 404\"\n       [attr.stroke]=\"stroke\" stroke-width=\"45\" [attr.fill]=\"fill\">\n    <g transform=\"translate(1173.2 38.831)\">\n      <g transform=\"matrix(.48018 0 0 .48018 -316.23 468.11)\">\n        <path d=\"m-1535.3-915.12-108.68 108.68 144.8 144.74c12.426 12.426 12.426 32.479 0 44.905l-144.8 144.8 108.68 108.68 144.8-144.8c12.426-12.426 32.479-12.426 44.905 0l144.8 144.8 108.68-108.68-144.8-144.8c-12.426-12.426-12.426-32.479 0-44.905l144.8-144.74-108.68-108.68-144.8 144.74c-12.426 12.426-32.479 12.426-44.905 0l-144.8-144.74z\"/>\n      </g>\n    </g>\n  </svg>\n</ng-template>\n\n<ng-template #diamond>\n  <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"100%\" height=\"100%\" viewBox=\"0 0 400 400\"\n       [attr.stroke]=\"stroke\" stroke-width=\"35\" [attr.fill]=\"fill\">\n    <g transform=\"translate(0 -652.36)\">\n      <rect id=\"rect3990\" style=\"stroke-linejoin: round\" transform=\"matrix(.70812 .70609 -.71524 .69888 0 0)\" height=\"269.45\" width=\"267.66\" y=\"328.97\" x=\"615.33\"/>\n    </g>\n  </svg>\n</ng-template>\n"
         },
         {
             "name": "MediconListerComponent",
@@ -5074,7 +5075,7 @@
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": ".header {\n  width: 100%;\n  height: 2.5rem;\n  display: inline-flex;\n  justify-content: space-between;\n  align-items: center;\n  padding-inline: 2rem;\n  > div {\n    width: 30%;\n  }\n  &.top {\n    background: #eeeeee;\n    margin-bottom: 1rem;\n  }\n  &.bottom {\n    margin-top: 1rem;\n  }\n  > .action-icons {\n    span {\n      width: 5.3rem !important;\n      display: inline-block;\n      //padding-inline-end: 4rem;\n      &.legend-title {\n        overflow: visible;\n        width: 5.3rem !important;\n      }\n      i {\n        font-size: var(--action-icons-font-size);\n      }\n    }\n  }\n}\n\n.legend {\n  padding-inline: 1rem;\n  display: inline-grid;\n  column-gap: 5rem;\n  grid-template-columns: auto auto;\n  ul {\n    list-style: none;\n    margin: 0;\n    padding: 0;\n    li {\n      app-medicon-icon {\n        margin-inline-end: 1rem;\n      }\n    }\n  }\n}\n\n",
+                    "data": ".header {\n  width: 100%;\n  height: 2.5rem;\n  display: inline-flex;\n  justify-content: space-between;\n  align-items: center;\n  padding-inline: 2rem;\n  > div {\n    width: 30%;\n  }\n  &.top {\n    background: #eeeeee;\n    margin-bottom: 1rem;\n  }\n  &.bottom {\n    margin-top: 1rem;\n  }\n  > .action-icons {\n    span {\n      width: 5.3rem !important;\n      display: inline-block;\n      //padding-inline-end: 4rem;\n      &.legend-title {\n        overflow: visible;\n        width: 5.3rem !important;\n      }\n      i {\n        font-size: var(--action-icons-font-size);\n      }\n    }\n  }\n}\n\n.legend {\n  padding-inline: 1rem;\n  display: inline-grid;\n  column-gap: 5rem;\n  grid-template-columns: auto auto;\n  ul {\n    list-style: none;\n    margin: 0;\n    padding: 0;\n    li {\n      margin-bottom: 0.2rem;\n      app-medicon-icon {\n        margin-inline-end: 1rem;\n      }\n    }\n  }\n}\n\n",
                     "styleUrl": "./medicon-section-timeline.component.scss"
                 }
             ],
@@ -5108,7 +5109,7 @@
             "implements": [
                 "AfterViewInit"
             ],
-            "templateData": "<ng-container [ngTemplateOutlet]=\"header\" [ngTemplateOutletContext]=\"{isTop: true}\"></ng-container>\n\n<app-medicon-timeline-values\n    [timeline]=\"timeline\"\n    [preTimelineWidth]=\"preTimelineWidth\"\n    [timelineWidth]=\"timelineWidth\">\n</app-medicon-timeline-values>\n\n<div #categories>\n  <app-medicon-category\n    *ngFor=\"let category of section.categories; let i=index\"\n    [category]=\"category\"\n    [timeline]=\"timeline\"\n    [preTimelineWidth]=\"preTimelineWidth\"\n    [timelineWidth]=\"timelineWidth\"\n    [isLastCategory]=\"i+1===section.categories.length\"\n    (expandCondense)=\"onExpandCondense()\"\n  >\n  </app-medicon-category>\n</div>\n\n<app-medicon-timeline-values\n    [timeline]=\"timeline\"\n    [preTimelineWidth]=\"preTimelineWidth\"\n    [timelineWidth]=\"timelineWidth\">\n</app-medicon-timeline-values>\n\n<ng-container [ngTemplateOutlet]=\"header\" [ngTemplateOutletContext]=\"{isTop: false}\"></ng-container>\n\n<ng-template #header let-isTop=\"isTop\">\n  <div class=\"header\" [class.top]=\"isTop\" [class.bottom]=\"!isTop\">\n    <div class=\"action-icons horizontal-left vertical-center\">\n      <span class=\"legend-title\"\n            [popover]=\"legendTemplate\"\n            [placement]=\"'bottom'\"\n            [container]=\"'body'\"\n            [isOpen]=\"false\"\n            [triggers]=\"'hover'\">{{text.medicon.legend}}</span>\n      <span><i class=\"bi bi-plus-circle\"></i></span>\n      <span><i class=\"bi bi-alarm\"></i></span>\n    </div>\n    <div><span *ngIf=\"isTop\" class=\"horizontal-center\">{{section.name}}</span></div>\n    <div>&nbsp;</div>\n  </div>\n</ng-template>\n\n<ng-template #legendTemplate>\n  <div class=\"legend\" [dir]=\"direction\">\n    <ng-container *ngFor=\"let column of legendColumns; let i=index\">\n      <ul>\n        <li *ngFor=\"let item of column\">\n          <app-medicon-icon [type]=\"item.type\" [position]=\"'aligned'\"></app-medicon-icon>\n          <span>{{text.medicon.icons[item.type]}}</span>\n        </li>\n      </ul>\n    </ng-container>\n  </div>\n</ng-template>\n"
+            "templateData": "<ng-container [ngTemplateOutlet]=\"header\" [ngTemplateOutletContext]=\"{isTop: true}\"></ng-container>\n\n<app-medicon-timeline-values\n    [timeline]=\"timeline\"\n    [preTimelineWidth]=\"preTimelineWidth\"\n    [timelineWidth]=\"timelineWidth\">\n</app-medicon-timeline-values>\n\n<div #categories>\n  <app-medicon-category\n    *ngFor=\"let category of section.categories; let i=index\"\n    [category]=\"category\"\n    [timeline]=\"timeline\"\n    [preTimelineWidth]=\"preTimelineWidth\"\n    [timelineWidth]=\"timelineWidth\"\n    [isLastCategory]=\"i+1===section.categories.length\"\n    (expandCondense)=\"onExpandCondense()\"\n  >\n  </app-medicon-category>\n</div>\n\n<app-medicon-timeline-values\n    [timeline]=\"timeline\"\n    [preTimelineWidth]=\"preTimelineWidth\"\n    [timelineWidth]=\"timelineWidth\">\n</app-medicon-timeline-values>\n\n<ng-container [ngTemplateOutlet]=\"header\" [ngTemplateOutletContext]=\"{isTop: false}\"></ng-container>\n\n<ng-template #header let-isTop=\"isTop\">\n  <div class=\"header\" [class.top]=\"isTop\" [class.bottom]=\"!isTop\">\n    <div class=\"action-icons horizontal-left vertical-center\">\n      <span class=\"legend-title\"\n            [popover]=\"legendTemplate\"\n            [placement]=\"'bottom'\"\n            [container]=\"'body'\"\n            [isOpen]=\"true\"\n            [triggers]=\"'hover'\">{{text.medicon.legend}}</span>\n      <span><i class=\"bi bi-plus-circle\"></i></span>\n      <span><i class=\"bi bi-alarm\"></i></span>\n    </div>\n    <div><span *ngIf=\"isTop\" class=\"horizontal-center\">{{section.name}}</span></div>\n    <div>&nbsp;</div>\n  </div>\n</ng-template>\n\n<ng-template #legendTemplate>\n  <div class=\"legend\" [dir]=\"direction\">\n    <ng-container *ngFor=\"let column of legendColumns; let i=index\">\n      <ul>\n        <li *ngFor=\"let item of column\">\n          <div class=\"vertical-center\">\n            <app-medicon-icon [type]=\"item.type\" [position]=\"'aligned'\"></app-medicon-icon>\n            <span>{{text.medicon.icons[item.type]}}</span>\n          </div>\n        </li>\n      </ul>\n    </ng-container>\n  </div>\n</ng-template>\n"
         },
         {
             "name": "MediconTesterComponent",
@@ -6131,7 +6132,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "[]",
-                "defaultValue": "[\n  { type: 'order', iconClass: 'bi-square', size: 0.86, column: 0 },\n  { type: 'execution', iconClass: 'bi-circle', size: 0.78, column: 0 },\n  { type: 'rateChangeCommand', iconClass: 'bi-square', size: 0.7, column: 0, outlineColor: '#37affe' },\n  { type: 'report', iconClass: 'bi-star', size: 0.78, column: 0 },\n  { type: 'notAdministered', iconClass: 'bi-circle', size: 0.78, column: 0, outlineColor: '#e34a69' },\n  { type: 'notExecuted', iconClass: 'bi-star', size: 0.78, column: 0, outlineColor: '#e34a69' },\n  { type: 'rateChange', iconClass: 'bi-triangle', size: 0.78, column: 1 },\n  { type: 'dosageDecrease', iconClass: 'bi-triangle', size: 0.68, column: 1, outlineColor: '#37affe' },\n  { type: 'dosageIncrease', iconClass: 'bi-triangle', column: 1, outlineColor: '#37affe' },\n  { type: 'delay', iconClass: 'bi-star-fill', column: 1 },\n  { type: 'cancelDelay', iconClass: 'bi-star-fill', column: 1 },\n  { type: 'stop', iconClass: 'bi-dpad', column: 1 },\n  // { type: 'stop', iconClass: 'bi-qr-code-scan', column: 1 },\n  // { type: 'stop', iconClass: 'bi-x-lg', column: 1 },\n  // { type: 'stop', iconClass: 'bi-command', column: 1 },\n  { type: 'executionTime', iconClass: 'bi-diamond', size: 0.78, column: 1 }\n]"
+                "defaultValue": "[\n  { type: MediconLegendIconType.Order, size: 0.9, stroke: 'black', column: 0 },\n  { type: MediconLegendIconType.Execution, size: 0.95, stroke: 'black', column: 0 },\n  { type: MediconLegendIconType.RateChangeOrder, size: 0.9, stroke: '#2eaafe', column: 0 },\n  { type: MediconLegendIconType.Report, size: 0.95, stroke: 'black', column: 0 },\n  { type: MediconLegendIconType.NotAdministered, size: 0.95, stroke: '#e24664', column: 0 },\n  { type: MediconLegendIconType.NotExecuted, size: 0.95, stroke: '#e24664', column: 0 },\n\n  { type: MediconLegendIconType.RateChange, size: 1, stroke: 'black', column: 1 },\n  { type: MediconLegendIconType.DosageDecrease, size: 0.7, stroke: '#2eaafe', column: 1 },\n  { type: MediconLegendIconType.DosageIncrease, size: 1, stroke: '#2eaafe', column: 1 },\n  { type: MediconLegendIconType.Hold, size: 1, stroke: 'black', fill: '#ffd700', column: 1 },\n  { type: MediconLegendIconType.CancelHold, size: 1, stroke: 'black', fill: '#7cfc00', column: 1 },\n  { type: MediconLegendIconType.Stop, size: 1.15, stroke: 'black', column: 1 },\n  { type: MediconLegendIconType.ExecutionTime, size: 0.9, stroke: 'black', column: 1 }\n]"
             },
             {
                 "name": "mockDataGraphLines",
@@ -6290,7 +6291,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "{\n  direction: 'ltr',\n  text: {\n    buttons: {\n      save: 'Save',\n      cancel: 'cancel',\n      defaultSettings: 'Reset to Default Settings'\n    },\n    pivotTime: {\n      label: 'Pivot time',\n      button: 'Reset Time'\n    },\n    resolution: {\n      label: 'Resolution',\n      options: [\n        { value: '1m', label: '1 minute' },\n        { value: '2m', label: '2 minutes' },\n        { value: '5m', label: '5 minutes' },\n        { value: '15m', label: '15 minutes' },\n        { value: '30m', label: '30 minutes' },\n        { value: '1h', label: '1 hour' },\n        { value: '2h', label: '2 hours' },\n        { value: '4h', label: '4 hours' },\n        { value: '8h', label: '8 hours' },\n        { value: '24h', label: '24 hours' }\n      ]\n    },\n    graphSections: [\n      { title: 'Medications' },\n      { title: 'Operations' },\n      { title: 'Metrics' },\n      { title: 'Table Metrics' }\n    ],\n    medicon: {\n      legend: 'Legend',\n      icons: {\n        order: 'Order',\n        rateChangeCommand: 'Rate change command',\n        execution: 'Execution',\n        report: 'Report',\n        notAdministered: 'Not Administered',\n        notExecuted: 'Not Executed',\n        rateChange: 'Rate Change',\n        dosageDecrease: 'Dosage Decrease',\n        dosageIncrease: 'Dosage Increase',\n        delay: 'Delay',\n        cancelDelay: 'Cancel delay',\n        stop: 'Stop',\n        executionTime: 'planned Execution time'\n      }\n    }\n  }\n} as const"
+                "defaultValue": "{\n  direction: 'ltr',\n  text: {\n    buttons: {\n      save: 'Save',\n      cancel: 'cancel',\n      defaultSettings: 'Reset to Default Settings'\n    },\n    pivotTime: {\n      label: 'Pivot time',\n      button: 'Reset Time'\n    },\n    resolution: {\n      label: 'Resolution',\n      options: [\n        { value: '1m', label: '1 minute' },\n        { value: '2m', label: '2 minutes' },\n        { value: '5m', label: '5 minutes' },\n        { value: '15m', label: '15 minutes' },\n        { value: '30m', label: '30 minutes' },\n        { value: '1h', label: '1 hour' },\n        { value: '2h', label: '2 hours' },\n        { value: '4h', label: '4 hours' },\n        { value: '8h', label: '8 hours' },\n        { value: '24h', label: '24 hours' }\n      ]\n    },\n    graphSections: [\n      { title: 'Medications' },\n      { title: 'Operations' },\n      { title: 'Metrics' },\n      { title: 'Table Metrics' }\n    ],\n    medicon: {\n      legend: 'Legend',\n      icons: {\n        [MediconLegendIconType.Order]: 'Order',\n        [MediconLegendIconType.RateChangeOrder]: 'Rate change order',\n        [MediconLegendIconType.Execution]: 'Execution',\n        [MediconLegendIconType.Report]: 'Report',\n        [MediconLegendIconType.NotAdministered]: 'Not Administered',\n        [MediconLegendIconType.NotExecuted]: 'Not Executed',\n        [MediconLegendIconType.RateChange]: 'Rate Change',\n        [MediconLegendIconType.DosageDecrease]: 'Dosage Decrease',\n        [MediconLegendIconType.DosageIncrease]: 'Dosage Increase',\n        [MediconLegendIconType.Hold]: 'Hold',\n        [MediconLegendIconType.CancelHold]: 'Cancel hold',\n        [MediconLegendIconType.Stop]: 'Stop',\n        [MediconLegendIconType.ExecutionTime]: 'planned Execution time'\n      }\n    }\n  }\n} as const"
             },
             {
                 "name": "textHe",
@@ -6300,7 +6301,7 @@
                 "deprecated": false,
                 "deprecationMessage": "",
                 "type": "",
-                "defaultValue": "{\n  direction: 'rtl',\n  text: {\n    buttons: {\n      save: 'שמירה',\n      cancel: 'ביטול',\n      defaultSettings: 'איפוס הגדרות'\n    },\n    pivotTime: {\n      label: 'שעת ציר',\n      button: 'זמן נוכחי'\n    },\n    resolution: {\n      label: 'רזולוציה',\n      options: [\n        { value: '1m', label: 'דקה 1' },\n        { value: '2m', label: '2 דקות' },\n        { value: '5m', label: '5 דקות' },\n        { value: '15m', label: '15 דקות' },\n        { value: '30m', label: '30 דקות' },\n        { value: '1h', label: 'שעה 1' },\n        { value: '2h', label: '2 שעות' },\n        { value: '4h', label: '4 שעות' },\n        { value: '8h', label: '8 שעות' },\n        { value: '24h', label: '24 שעות' }\n      ]\n    },\n    graphSections: [\n      { title: 'תרופות' },\n      { title: 'פעולות' },\n      { title: 'מדדים' },\n      { title: 'מדדים בטבלה' }\n    ],\n    medicon: {\n      legend: 'מקרא',\n      icons: {\n        order: 'הוראה',\n        rateChangeCommand: 'הוראה לשינוי קצב',\n        execution: 'ביצוע',\n        report: 'דיווח',\n        notAdministered: 'אי מתן',\n        notExecuted: 'לא בוצע',\n        rateChange: 'שינוי קצב',\n        dosageDecrease: 'הורדת מינון',\n        dosageIncrease: 'העלאת מינון',\n        delay: 'השהיה',\n        cancelDelay: 'ביטול השהיה',\n        stop: 'עצירה',\n        executionTime: 'מועד ביצוע / החלפת שקית מתוכנן'\n      }\n    }\n  }\n} as const"
+                "defaultValue": "{\n  direction: 'rtl',\n  text: {\n    buttons: {\n      save: 'שמירה',\n      cancel: 'ביטול',\n      defaultSettings: 'איפוס הגדרות'\n    },\n    pivotTime: {\n      label: 'שעת ציר',\n      button: 'זמן נוכחי'\n    },\n    resolution: {\n      label: 'רזולוציה',\n      options: [\n        { value: '1m', label: 'דקה 1' },\n        { value: '2m', label: '2 דקות' },\n        { value: '5m', label: '5 דקות' },\n        { value: '15m', label: '15 דקות' },\n        { value: '30m', label: '30 דקות' },\n        { value: '1h', label: 'שעה 1' },\n        { value: '2h', label: '2 שעות' },\n        { value: '4h', label: '4 שעות' },\n        { value: '8h', label: '8 שעות' },\n        { value: '24h', label: '24 שעות' }\n      ]\n    },\n    graphSections: [\n      { title: 'תרופות' },\n      { title: 'פעולות' },\n      { title: 'מדדים' },\n      { title: 'מדדים בטבלה' }\n    ],\n    medicon: {\n      legend: 'מקרא',\n      icons: {\n        [MediconLegendIconType.Order]: 'הוראה',\n        [MediconLegendIconType.RateChangeOrder]: 'הוראה לשינוי קצב',\n        [MediconLegendIconType.Execution]: 'ביצוע',\n        [MediconLegendIconType.Report]: 'דיווח',\n        [MediconLegendIconType.NotAdministered]: 'אי מתן',\n        [MediconLegendIconType.NotExecuted]: 'לא בוצע',\n        [MediconLegendIconType.RateChange]: 'שינוי קצב',\n        [MediconLegendIconType.DosageDecrease]: 'הורדת מינון',\n        [MediconLegendIconType.DosageIncrease]: 'העלאת מינון',\n        [MediconLegendIconType.Hold]: 'השהיה',\n        [MediconLegendIconType.CancelHold]: 'ביטול השהיה',\n        [MediconLegendIconType.Stop]: 'עצירה',\n        [MediconLegendIconType.ExecutionTime]: 'מועד ביצוע / החלפת שקית מתוכנן'\n      }\n    }\n  }\n} as const"
             },
             {
                 "name": "TimelineResolutionValues",
@@ -6406,6 +6407,95 @@
                 "deprecationMessage": "",
                 "description": "",
                 "file": "src/app/shared/enums/graph-type.enum.ts"
+            },
+            {
+                "name": "MediconLegendIconType",
+                "childs": [
+                    {
+                        "name": "Order",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "Order"
+                    },
+                    {
+                        "name": "Execution",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "Execution"
+                    },
+                    {
+                        "name": "RateChangeOrder",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "RateChangeOrder"
+                    },
+                    {
+                        "name": "Report",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "Report"
+                    },
+                    {
+                        "name": "NotAdministered",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "NotAdministered"
+                    },
+                    {
+                        "name": "NotExecuted",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "NotExecuted"
+                    },
+                    {
+                        "name": "RateChange",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "RateChange"
+                    },
+                    {
+                        "name": "DosageDecrease",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "DosageDecrease"
+                    },
+                    {
+                        "name": "DosageIncrease",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "DosageIncrease"
+                    },
+                    {
+                        "name": "Hold",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "Hold"
+                    },
+                    {
+                        "name": "CancelHold",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "CancelDelay"
+                    },
+                    {
+                        "name": "Stop",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "Stop"
+                    },
+                    {
+                        "name": "ExecutionTime",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "value": "ExecutionTime"
+                    }
+                ],
+                "ctype": "miscellaneous",
+                "subtype": "enum",
+                "deprecated": false,
+                "deprecationMessage": "",
+                "description": "",
+                "file": "src/app/shared/enums/medicon-legend-icon-type.enum.ts"
             },
             {
                 "name": "MediconSectionType",
@@ -6806,7 +6896,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "[]",
-                    "defaultValue": "[\n  { type: 'order', iconClass: 'bi-square', size: 0.86, column: 0 },\n  { type: 'execution', iconClass: 'bi-circle', size: 0.78, column: 0 },\n  { type: 'rateChangeCommand', iconClass: 'bi-square', size: 0.7, column: 0, outlineColor: '#37affe' },\n  { type: 'report', iconClass: 'bi-star', size: 0.78, column: 0 },\n  { type: 'notAdministered', iconClass: 'bi-circle', size: 0.78, column: 0, outlineColor: '#e34a69' },\n  { type: 'notExecuted', iconClass: 'bi-star', size: 0.78, column: 0, outlineColor: '#e34a69' },\n  { type: 'rateChange', iconClass: 'bi-triangle', size: 0.78, column: 1 },\n  { type: 'dosageDecrease', iconClass: 'bi-triangle', size: 0.68, column: 1, outlineColor: '#37affe' },\n  { type: 'dosageIncrease', iconClass: 'bi-triangle', column: 1, outlineColor: '#37affe' },\n  { type: 'delay', iconClass: 'bi-star-fill', column: 1 },\n  { type: 'cancelDelay', iconClass: 'bi-star-fill', column: 1 },\n  { type: 'stop', iconClass: 'bi-dpad', column: 1 },\n  // { type: 'stop', iconClass: 'bi-qr-code-scan', column: 1 },\n  // { type: 'stop', iconClass: 'bi-x-lg', column: 1 },\n  // { type: 'stop', iconClass: 'bi-command', column: 1 },\n  { type: 'executionTime', iconClass: 'bi-diamond', size: 0.78, column: 1 }\n]"
+                    "defaultValue": "[\n  { type: MediconLegendIconType.Order, size: 0.9, stroke: 'black', column: 0 },\n  { type: MediconLegendIconType.Execution, size: 0.95, stroke: 'black', column: 0 },\n  { type: MediconLegendIconType.RateChangeOrder, size: 0.9, stroke: '#2eaafe', column: 0 },\n  { type: MediconLegendIconType.Report, size: 0.95, stroke: 'black', column: 0 },\n  { type: MediconLegendIconType.NotAdministered, size: 0.95, stroke: '#e24664', column: 0 },\n  { type: MediconLegendIconType.NotExecuted, size: 0.95, stroke: '#e24664', column: 0 },\n\n  { type: MediconLegendIconType.RateChange, size: 1, stroke: 'black', column: 1 },\n  { type: MediconLegendIconType.DosageDecrease, size: 0.7, stroke: '#2eaafe', column: 1 },\n  { type: MediconLegendIconType.DosageIncrease, size: 1, stroke: '#2eaafe', column: 1 },\n  { type: MediconLegendIconType.Hold, size: 1, stroke: 'black', fill: '#ffd700', column: 1 },\n  { type: MediconLegendIconType.CancelHold, size: 1, stroke: 'black', fill: '#7cfc00', column: 1 },\n  { type: MediconLegendIconType.Stop, size: 1.15, stroke: 'black', column: 1 },\n  { type: MediconLegendIconType.ExecutionTime, size: 0.9, stroke: 'black', column: 1 }\n]"
                 }
             ],
             "src/stories/mock-data/mock-data-graph-lines.const.ts": [
@@ -6886,7 +6976,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "{\n  direction: 'ltr',\n  text: {\n    buttons: {\n      save: 'Save',\n      cancel: 'cancel',\n      defaultSettings: 'Reset to Default Settings'\n    },\n    pivotTime: {\n      label: 'Pivot time',\n      button: 'Reset Time'\n    },\n    resolution: {\n      label: 'Resolution',\n      options: [\n        { value: '1m', label: '1 minute' },\n        { value: '2m', label: '2 minutes' },\n        { value: '5m', label: '5 minutes' },\n        { value: '15m', label: '15 minutes' },\n        { value: '30m', label: '30 minutes' },\n        { value: '1h', label: '1 hour' },\n        { value: '2h', label: '2 hours' },\n        { value: '4h', label: '4 hours' },\n        { value: '8h', label: '8 hours' },\n        { value: '24h', label: '24 hours' }\n      ]\n    },\n    graphSections: [\n      { title: 'Medications' },\n      { title: 'Operations' },\n      { title: 'Metrics' },\n      { title: 'Table Metrics' }\n    ],\n    medicon: {\n      legend: 'Legend',\n      icons: {\n        order: 'Order',\n        rateChangeCommand: 'Rate change command',\n        execution: 'Execution',\n        report: 'Report',\n        notAdministered: 'Not Administered',\n        notExecuted: 'Not Executed',\n        rateChange: 'Rate Change',\n        dosageDecrease: 'Dosage Decrease',\n        dosageIncrease: 'Dosage Increase',\n        delay: 'Delay',\n        cancelDelay: 'Cancel delay',\n        stop: 'Stop',\n        executionTime: 'planned Execution time'\n      }\n    }\n  }\n} as const"
+                    "defaultValue": "{\n  direction: 'ltr',\n  text: {\n    buttons: {\n      save: 'Save',\n      cancel: 'cancel',\n      defaultSettings: 'Reset to Default Settings'\n    },\n    pivotTime: {\n      label: 'Pivot time',\n      button: 'Reset Time'\n    },\n    resolution: {\n      label: 'Resolution',\n      options: [\n        { value: '1m', label: '1 minute' },\n        { value: '2m', label: '2 minutes' },\n        { value: '5m', label: '5 minutes' },\n        { value: '15m', label: '15 minutes' },\n        { value: '30m', label: '30 minutes' },\n        { value: '1h', label: '1 hour' },\n        { value: '2h', label: '2 hours' },\n        { value: '4h', label: '4 hours' },\n        { value: '8h', label: '8 hours' },\n        { value: '24h', label: '24 hours' }\n      ]\n    },\n    graphSections: [\n      { title: 'Medications' },\n      { title: 'Operations' },\n      { title: 'Metrics' },\n      { title: 'Table Metrics' }\n    ],\n    medicon: {\n      legend: 'Legend',\n      icons: {\n        [MediconLegendIconType.Order]: 'Order',\n        [MediconLegendIconType.RateChangeOrder]: 'Rate change order',\n        [MediconLegendIconType.Execution]: 'Execution',\n        [MediconLegendIconType.Report]: 'Report',\n        [MediconLegendIconType.NotAdministered]: 'Not Administered',\n        [MediconLegendIconType.NotExecuted]: 'Not Executed',\n        [MediconLegendIconType.RateChange]: 'Rate Change',\n        [MediconLegendIconType.DosageDecrease]: 'Dosage Decrease',\n        [MediconLegendIconType.DosageIncrease]: 'Dosage Increase',\n        [MediconLegendIconType.Hold]: 'Hold',\n        [MediconLegendIconType.CancelHold]: 'Cancel hold',\n        [MediconLegendIconType.Stop]: 'Stop',\n        [MediconLegendIconType.ExecutionTime]: 'planned Execution time'\n      }\n    }\n  }\n} as const"
                 }
             ],
             "src/stories/const/text-he.const.ts": [
@@ -6898,7 +6988,7 @@
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "",
-                    "defaultValue": "{\n  direction: 'rtl',\n  text: {\n    buttons: {\n      save: 'שמירה',\n      cancel: 'ביטול',\n      defaultSettings: 'איפוס הגדרות'\n    },\n    pivotTime: {\n      label: 'שעת ציר',\n      button: 'זמן נוכחי'\n    },\n    resolution: {\n      label: 'רזולוציה',\n      options: [\n        { value: '1m', label: 'דקה 1' },\n        { value: '2m', label: '2 דקות' },\n        { value: '5m', label: '5 דקות' },\n        { value: '15m', label: '15 דקות' },\n        { value: '30m', label: '30 דקות' },\n        { value: '1h', label: 'שעה 1' },\n        { value: '2h', label: '2 שעות' },\n        { value: '4h', label: '4 שעות' },\n        { value: '8h', label: '8 שעות' },\n        { value: '24h', label: '24 שעות' }\n      ]\n    },\n    graphSections: [\n      { title: 'תרופות' },\n      { title: 'פעולות' },\n      { title: 'מדדים' },\n      { title: 'מדדים בטבלה' }\n    ],\n    medicon: {\n      legend: 'מקרא',\n      icons: {\n        order: 'הוראה',\n        rateChangeCommand: 'הוראה לשינוי קצב',\n        execution: 'ביצוע',\n        report: 'דיווח',\n        notAdministered: 'אי מתן',\n        notExecuted: 'לא בוצע',\n        rateChange: 'שינוי קצב',\n        dosageDecrease: 'הורדת מינון',\n        dosageIncrease: 'העלאת מינון',\n        delay: 'השהיה',\n        cancelDelay: 'ביטול השהיה',\n        stop: 'עצירה',\n        executionTime: 'מועד ביצוע / החלפת שקית מתוכנן'\n      }\n    }\n  }\n} as const"
+                    "defaultValue": "{\n  direction: 'rtl',\n  text: {\n    buttons: {\n      save: 'שמירה',\n      cancel: 'ביטול',\n      defaultSettings: 'איפוס הגדרות'\n    },\n    pivotTime: {\n      label: 'שעת ציר',\n      button: 'זמן נוכחי'\n    },\n    resolution: {\n      label: 'רזולוציה',\n      options: [\n        { value: '1m', label: 'דקה 1' },\n        { value: '2m', label: '2 דקות' },\n        { value: '5m', label: '5 דקות' },\n        { value: '15m', label: '15 דקות' },\n        { value: '30m', label: '30 דקות' },\n        { value: '1h', label: 'שעה 1' },\n        { value: '2h', label: '2 שעות' },\n        { value: '4h', label: '4 שעות' },\n        { value: '8h', label: '8 שעות' },\n        { value: '24h', label: '24 שעות' }\n      ]\n    },\n    graphSections: [\n      { title: 'תרופות' },\n      { title: 'פעולות' },\n      { title: 'מדדים' },\n      { title: 'מדדים בטבלה' }\n    ],\n    medicon: {\n      legend: 'מקרא',\n      icons: {\n        [MediconLegendIconType.Order]: 'הוראה',\n        [MediconLegendIconType.RateChangeOrder]: 'הוראה לשינוי קצב',\n        [MediconLegendIconType.Execution]: 'ביצוע',\n        [MediconLegendIconType.Report]: 'דיווח',\n        [MediconLegendIconType.NotAdministered]: 'אי מתן',\n        [MediconLegendIconType.NotExecuted]: 'לא בוצע',\n        [MediconLegendIconType.RateChange]: 'שינוי קצב',\n        [MediconLegendIconType.DosageDecrease]: 'הורדת מינון',\n        [MediconLegendIconType.DosageIncrease]: 'העלאת מינון',\n        [MediconLegendIconType.Hold]: 'השהיה',\n        [MediconLegendIconType.CancelHold]: 'ביטול השהיה',\n        [MediconLegendIconType.Stop]: 'עצירה',\n        [MediconLegendIconType.ExecutionTime]: 'מועד ביצוע / החלפת שקית מתוכנן'\n      }\n    }\n  }\n} as const"
                 }
             ],
             "src/app/shared/consts/timeline-resolution-values.const.ts": [
@@ -6964,6 +7054,97 @@
                     "deprecationMessage": "",
                     "description": "",
                     "file": "src/app/shared/enums/graph-type.enum.ts"
+                }
+            ],
+            "src/app/shared/enums/medicon-legend-icon-type.enum.ts": [
+                {
+                    "name": "MediconLegendIconType",
+                    "childs": [
+                        {
+                            "name": "Order",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "Order"
+                        },
+                        {
+                            "name": "Execution",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "Execution"
+                        },
+                        {
+                            "name": "RateChangeOrder",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "RateChangeOrder"
+                        },
+                        {
+                            "name": "Report",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "Report"
+                        },
+                        {
+                            "name": "NotAdministered",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "NotAdministered"
+                        },
+                        {
+                            "name": "NotExecuted",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "NotExecuted"
+                        },
+                        {
+                            "name": "RateChange",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "RateChange"
+                        },
+                        {
+                            "name": "DosageDecrease",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "DosageDecrease"
+                        },
+                        {
+                            "name": "DosageIncrease",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "DosageIncrease"
+                        },
+                        {
+                            "name": "Hold",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "Hold"
+                        },
+                        {
+                            "name": "CancelHold",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "CancelDelay"
+                        },
+                        {
+                            "name": "Stop",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "Stop"
+                        },
+                        {
+                            "name": "ExecutionTime",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "value": "ExecutionTime"
+                        }
+                    ],
+                    "ctype": "miscellaneous",
+                    "subtype": "enum",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "description": "",
+                    "file": "src/app/shared/enums/medicon-legend-icon-type.enum.ts"
                 }
             ],
             "src/app/shared/enums/medicon-section-type.enum.ts": [
@@ -7275,7 +7456,7 @@
                 "linktype": "component",
                 "name": "MediconExecutionContinuousComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/13",
+                "coverageCount": "0/14",
                 "status": "low"
             },
             {
@@ -7293,7 +7474,7 @@
                 "linktype": "component",
                 "name": "MediconIconComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/9",
+                "coverageCount": "0/8",
                 "status": "low"
             },
             {

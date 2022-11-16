@@ -19,28 +19,39 @@
   </app-medicon-category>
 </div>
 
+<app-medicon-scrollbar
+    [timeline]="timeline"
+    [preTimelineWidth]="preTimelineWidth"
+    [timelineWidth]="timelineWidth"
+>
+</app-medicon-scrollbar>
+
+<!--
 <app-medicon-timeline-values
     [timeline]="timeline"
     [preTimelineWidth]="preTimelineWidth"
     [timelineWidth]="timelineWidth">
 </app-medicon-timeline-values>
+-->
 
 <ng-container [ngTemplateOutlet]="header" [ngTemplateOutletContext]="{isTop: false}"></ng-container>
 
 <ng-template #header let-isTop="isTop">
-  <div class="header" [class.top]="isTop" [class.bottom]="!isTop">
+  <div class="header vertical-center" [class.top]="isTop" [class.bottom]="!isTop">
     <div class="action-icons horizontal-left vertical-center">
       <span class="legend-title"
             [popover]="legendTemplate"
             [placement]="'bottom'"
             [container]="'body'"
-            [isOpen]="true"
+            [isOpen]="false"
             [triggers]="'hover'">{{text.medicon.legend}}</span>
       <span><i class="bi bi-plus-circle"></i></span>
       <span><i class="bi bi-alarm"></i></span>
     </div>
     <div><span *ngIf="isTop" class="horizontal-center">{{section.name}}</span></div>
-    <div>&nbsp;</div>
+    <div *ngIf="isTop" class="horizontal-right">
+      <app-medicon-resolution [text]="text" [resolution]="resolution"></app-medicon-resolution>
+    </div>
   </div>
 </ng-template>
 

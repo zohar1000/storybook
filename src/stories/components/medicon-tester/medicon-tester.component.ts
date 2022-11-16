@@ -177,7 +177,8 @@ export class MediconTesterComponent implements OnInit {
       },
       xAxisValues: values,
       subDivision: item.subDivision,
-      interval: item.interval
+      interval: item.interval,
+      days: 20
     }
   }
 }

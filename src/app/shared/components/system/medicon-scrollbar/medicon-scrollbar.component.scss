@@ -1,0 +1,12 @@
+.scrollbar {
+  display: block;
+  background: cyan;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  height: 16px;
+  word-wrap: anywhere;
+  .scrollbar-content {
+  width: 3000px;
+
+  }
+}

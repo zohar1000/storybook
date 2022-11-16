@@ -3,12 +3,12 @@
     <div class="action-icons horizontal-left">
       <i class="bi bi-printer print"></i>
       <i class="bi bi-arrow-clockwise"></i>
-      <span class="paging-icons">
+<!--      <span class="paging-icons">
         <i class="bi bi-fast-forward backward larger"></i>
         <i class="bi bi-caret-left"></i>
         <i class="bi bi-caret-right"></i>
         <i class="bi bi-fast-forward larger"></i>
-      </span>
+      </span>-->
     </div>
 
     <div class="title horizontal-center">
@@ -16,10 +16,10 @@
     </div>
 
     <div class="resolution horizontal-right vertical-center" [dir]="direction">
-      <span>{{text.resolution.label}}</span>
+<!--      <span>{{text.resolution.label}}</span>
       <select [(ngModel)]="data.resolution" (change)="onChangeResolution()">
         <option *ngFor="let option of text.resolution.options" [value]="option.value">{{option.label}}</option>
-      </select>
+      </select>-->
     </div>
   </div>
 
@@ -30,7 +30,8 @@
       [section]="section"
       [timeline]="data.timeline"
       [preTimelineWidth]="preTimelineWidth"
-      [timelineWidth]="timelineWidth">
+      [timelineWidth]="timelineWidth"
+      [resolution]="data.resolution">
     </app-medicon-section-container>
   </div>
 </div>

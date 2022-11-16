@@ -41,4 +41,5 @@ export interface MediconTimeline {
   xAxisValues: string[];
   subDivision: number;
   interval: number;
+  days: number;
 }

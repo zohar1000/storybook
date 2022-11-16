@@ -1,0 +1,23 @@
+
+
+
+
+<div class="slider-container vertical-center">
+  <span class="m1">1m</span>
+  <div [style.width.rem]="sliderWidth" class="slider">
+    <div class="value centered" [style.marginLeft.rem]="ix">{{value}}</div>
+    <input type="range" min="0"
+      [value]="ix"
+      [attr.max]="sliderMax"
+      [attr.step]="1"
+      [style.before.content]="ix"
+      (input)="onChangeSlider($event)">
+  </div>
+  <span class="h24">24h</span>
+</div>
+
+<div class="pivot centered"
+     [class.disabled]="!isPivotEnabled"
+     (click)="onClickPivot()">
+  <i class="bi bi-geo-fill"></i>
+</div>

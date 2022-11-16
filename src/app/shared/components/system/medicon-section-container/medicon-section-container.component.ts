@@ -1,6 +1,7 @@
 import { Component, ElementRef, Input, OnInit, Output, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
 import { MediconSection, MediconTimeline } from '@models/medicon-data.model';
 import { MediconSectionType } from '@shared/enums/medicon-section-type.enum';
+import { TimelineResolution } from '@shared/enums/timeline-resolution.enum';
 
 @Component({
   selector: 'app-medicon-section-container',
@@ -14,6 +15,7 @@ export class MediconSectionContainerComponent implements OnInit {
   @Input() timeline: MediconTimeline;
   @Input() preTimelineWidth = 0;
   @Input() timelineWidth = 0;
+  @Input() resolution: TimelineResolution;
   MediconSectionType = MediconSectionType;
   timelineValuesWidth;
   timelineValuesRight;

@@ -1,6 +1,7 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { MediconSection, MediconTimeline } from '@models/medicon-data.model';
 import { MediconLegendIcons } from '@shared/consts/medicon-legend-icons.const';
+import { TimelineResolution } from '@shared/enums/timeline-resolution.enum';
 
 @Component({
   selector: 'app-medicon-section-timeline',
@@ -15,6 +16,7 @@ export class MediconSectionTimelineComponent implements AfterViewInit {
   @Input() timeline: MediconTimeline;
   @Input() preTimelineWidth = 0;
   @Input() timelineWidth = 0;
+  @Input() resolution: TimelineResolution;
   @Output() backgroundColored = new EventEmitter();
   MediconLegendIcons = MediconLegendIcons;
   legendColumns;
