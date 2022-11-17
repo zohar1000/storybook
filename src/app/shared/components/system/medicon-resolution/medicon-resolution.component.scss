@@ -1,5 +1,6 @@
 $value-size-net: 20;
 $value-size: 20px;
+$pivot-icon-color: red;
 
 :host {
   display: flex;
@@ -7,9 +8,10 @@ $value-size: 20px;
   position: relative;
 
   .slider-container {
-    background: #d9d9d9;
+    background: #e7e7e7;
     padding: 3px 10px;
     border-radius: 5px;
+    border: 1px solid #e1e1e1;
 
     .m1 {
       margin-inline-end: 1rem;
@@ -58,12 +60,12 @@ $value-size: 20px;
 
   .pivot {
     padding: 1px 2px;
-    border: 1px solid red;
+    border: 1px solid $pivot-icon-color;
     border-radius: 4px;
     margin-left: 2.5rem;
     cursor: pointer;
     i {
-      color: red;
+      color: $pivot-icon-color;
       pointer-events: none;
       font-size: 0.8rem;
     }
