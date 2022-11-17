@@ -12,7 +12,7 @@
     </div>
 
     <div class="title horizontal-center">
-      {{data.title.fromTime}}&nbsp; -&nbsp; {{data.title.toTime}}
+      {{serverData.title.fromTime}}&nbsp; -&nbsp; {{serverData.title.toTime}}
     </div>
 
     <div class="resolution horizontal-right vertical-center" [dir]="direction">
@@ -24,14 +24,16 @@
   </div>
 
   <div *ngIf="timelineWidth" class="sections">
-    <app-medicon-section-container *ngFor="let section of data.sections"
+    <app-medicon-section-container *ngFor="let section of serverData.sections"
       [direction]="direction"
       [text]="text"
       [section]="section"
-      [timeline]="data.timeline"
+      [timeline]="serverData.timeline"
       [preTimelineWidth]="preTimelineWidth"
       [timelineWidth]="timelineWidth"
-      [resolution]="data.resolution">
+      [resolution]="resolution"
+      (changeResolution)="onChangeResolution($event)"
+    >
     </app-medicon-section-container>
   </div>
 </div>

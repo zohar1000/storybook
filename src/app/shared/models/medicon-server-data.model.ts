@@ -2,7 +2,7 @@ import { Medication } from '@stories/models/medication.model';
 import { TimelineResolution } from '@shared/enums/timeline-resolution.enum';
 import { MediconSectionType } from '@shared/enums/medicon-section-type.enum';
 
-export interface MediconData {
+export interface MediconServerData {
   title: {
     fromTime: string;
     toTime: string;
@@ -28,15 +28,15 @@ export interface MedicationsCategory {
 }
 
 export interface MediconTimeline {
-  pivotTime: {
-    epoch: number;  // local epoch time
-    iso: string;    // local iso time
-  }
   range: {
     fromTime: string;
     fromEpoch: number;
     toTime: string;
     toEpoch: number;
+  }
+  pivotTime: {
+    epoch: number;  // local epoch time
+    iso: string;    // local iso time
   }
   xAxisValues: string[];
   subDivision: number;

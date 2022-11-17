@@ -18,12 +18,12 @@
     </div>
   </header>
 
-  <div *ngIf="!isShowSettings && data" class="data">
+  <div *ngIf="!isShowSettings && serverData" class="data">
     <app-medicon
       [direction]="direction"
       [text]="text"
-      [data]="data"
-      (resolution)="onChangeResolution($event)"
+      [serverData]="serverData"
+      (changeResolution)="onChangeResolution($event)"
     ></app-medicon>
   </div>
 

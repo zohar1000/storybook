@@ -1,19 +1,14 @@
-
-
-
-
 <div class="slider-container vertical-center">
-  <span class="m1">1m</span>
+  <span class="m1">{{startLabel}}</span>
   <div [style.width.rem]="sliderWidth" class="slider">
-    <div class="value centered" [style.marginLeft.rem]="ix">{{value}}</div>
+    <div class="value centered" [style.marginLeft.rem]="ix">{{label}}</div>
     <input type="range" min="0"
       [value]="ix"
       [attr.max]="sliderMax"
       [attr.step]="1"
-      [style.before.content]="ix"
       (input)="onChangeSlider($event)">
   </div>
-  <span class="h24">24h</span>
+  <span class="h24">{{endLabel}}</span>
 </div>
 
 <div class="pivot centered"

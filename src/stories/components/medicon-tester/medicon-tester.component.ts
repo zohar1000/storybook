@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { Settings } from '@stories/models/settings.model';
 import { ToastrService } from 'ngx-toastr';
-import { MedicationsCategory, MediconSection, MediconTimeline, MediconData } from '@models/medicon-data.model';
+import { MedicationsCategory, MediconSection, MediconTimeline, MediconServerData } from '@models/medicon-server-data.model';
 import { Direction } from '@stories/models/direction.model';
 import { MedicationCategories } from '@stories/const/medication-categories.const';
 import { TimeDisplayType } from '@shared/enums/time-display-type.enum';
@@ -23,7 +23,7 @@ export class MediconTesterComponent implements OnInit {
   isShowSettings = false;
   accordionClass = 'settings-accordion';
   prevSettings;
-  data: MediconData;
+  serverData: MediconServerData;
 
   constructor(
     private cdr: ChangeDetectorRef,
@@ -63,7 +63,7 @@ export class MediconTesterComponent implements OnInit {
 
   onChangeResolution(resolution) {
     this.settings.resolution = resolution;
-    this.saveToLocalStorage();
+    this.saveToLocalStorage(false);
   }
 
   onClickSaveSettings() {
@@ -76,11 +76,11 @@ export class MediconTesterComponent implements OnInit {
     this.isShowSettings = false;
   }
 
-  saveToLocalStorage() {
+  saveToLocalStorage(isShowToaster = true) {
     const item = JSON.stringify(this.settings);
     localStorage.setItem(this.LOCAL_STORAGE_KEY, item);
-    this.toastr.success('Settings were saved');
-    this.buildData();
+    if (isShowToaster) this.toastr.success('Settings were saved');
+    if (isShowToaster) this.buildData();
   }
 
   getFromLocalStorage() {
@@ -138,7 +138,7 @@ export class MediconTesterComponent implements OnInit {
       }
     }
 
-    this.data = {
+    this.serverData = {
       title: {
         fromTime: '2022-01-01 10:00',
         toTime: '2022-01-02 17:00',
@@ -178,7 +178,7 @@ export class MediconTesterComponent implements OnInit {
       xAxisValues: values,
       subDivision: item.subDivision,
       interval: item.interval,
-      days: 20
+      days: 12
     }
   }
 }

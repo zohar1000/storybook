@@ -50,7 +50,11 @@
     </div>
     <div><span *ngIf="isTop" class="horizontal-center">{{section.name}}</span></div>
     <div *ngIf="isTop" class="horizontal-right">
-      <app-medicon-resolution [text]="text" [resolution]="resolution"></app-medicon-resolution>
+      <app-medicon-resolution
+          [text]="text"
+          [resolution]="resolution"
+          (changeResolution)="onChangeResolution($event)"
+      ></app-medicon-resolution>
     </div>
   </div>
 </ng-template>

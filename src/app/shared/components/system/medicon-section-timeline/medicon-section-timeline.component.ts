@@ -18,6 +18,7 @@ export class MediconSectionTimelineComponent implements AfterViewInit {
   @Input() timelineWidth = 0;
   @Input() resolution: TimelineResolution;
   @Output() backgroundColored = new EventEmitter();
+  @Output() changeResolution = new EventEmitter();
   MediconLegendIcons = MediconLegendIcons;
   legendColumns;
 
@@ -49,6 +50,10 @@ export class MediconSectionTimelineComponent implements AfterViewInit {
       ++elementIx === graphElements.length ? element.classList.add('last-section-graph') : element.classList.remove('last-section-graph');
     }
     this.cdr.detectChanges();
+  }
+
+  onChangeResolution(resolution) {
+    this.changeResolution.emit(resolution);
   }
 
 }

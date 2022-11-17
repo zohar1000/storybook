@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TimelineResolution } from '@shared/enums/timeline-resolution.enum';
 
 @Component({
@@ -9,24 +9,34 @@ import { TimelineResolution } from '@shared/enums/timeline-resolution.enum';
 export class MediconResolutionComponent implements OnInit {
   @Input() text;
   @Input() resolution: TimelineResolution;
-  values;
+  @Output() changeResolution = new EventEmitter();
+  options;
+  label;
   sliderWidth;
   sliderMax;
   ix;
   value;
   isPivotEnabled = true;
+  startLabel;
+  endLabel;
 
   ngOnInit(): void {
-    this.values = this.text.resolution.options.map(item => item.value);
-    this.sliderWidth = this.values.length;
-    this.sliderMax = this.sliderWidth - 1;
-    this.ix = this.values.indexOf(this.resolution);
-    this.value = this.values[this.ix];
+    this.options = this.text.resolution.options;
+    const len = this.options.length;
+    this.sliderWidth = len;
+    this.sliderMax = len - 1;
+    this.ix = this.options.findIndex(item => item.value === this.resolution);
+    this.label = this.text.resolution.options[this.ix].label;
+    this.startLabel = this.text.resolution.options[0].label;
+    this.endLabel = this.text.resolution.options[len - 1].label;
   }
 
   onChangeSlider(e) {
+    // e.stopPropagation();
+    // e.stopImmediatePropagation();
     this.ix = Number(e.target.value);
-    this.value = this.values[this.ix];
+    this.label = this.options[this.ix].label;
+    this.changeResolution.emit(this.options[this.ix].value);
   }
 
   onClickPivot() {
