@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MediconTimeline } from '@models/medicon-data.model';
+import { MediconTimelineRange, MediconTimelineValues } from '@models/medicon-server-data.model';
 
 @Component({
   selector: 'app-medicon-timeline-values',
@@ -7,15 +7,15 @@ import { MediconTimeline } from '@models/medicon-data.model';
   styleUrls: ['./medicon-timeline-values.component.scss']
 })
 export class MediconTimelineValuesComponent implements OnInit {
-  @Input() timeline: MediconTimeline;
-  @Input() preTimelineWidth = 0;
+  @Input() timelineRange: MediconTimelineRange;
+  @Input() timelineValues: MediconTimelineValues;
   @Input() timelineWidth = 0;
   timelineValuesWidth;
   timelineValuesRight;
 
   ngOnInit() {
-    const valueWidth = this.timelineWidth / (this.timeline.xAxisValues.length - 1);
-    this.timelineValuesWidth = valueWidth * this.timeline.xAxisValues.length;
+    const valueWidth = this.timelineWidth / (this.timelineValues.xAxisValues.length - 1);
+    this.timelineValuesWidth = valueWidth * this.timelineValues.xAxisValues.length;
     this.timelineValuesRight = -valueWidth / 2;
   }
 }

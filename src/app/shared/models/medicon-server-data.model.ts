@@ -4,12 +4,12 @@ import { MediconSectionType } from '@shared/enums/medicon-section-type.enum';
 
 export interface MediconServerData {
   title: {
-    fromTime: string;
-    toTime: string;
+    fromTimeGmt: string;
+    toTimeGmt: string;
   },
   resolution: TimelineResolution;
   sections: MediconSection[],
-  timeline: MediconTimeline
+  timelineRange: MediconTimelineRange
 }
 
 export interface MediconSection {
@@ -27,19 +27,23 @@ export interface MedicationsCategory {
   medications: Medication[]
 }
 
-export interface MediconTimeline {
+export interface MediconTimelineRange {
   range: {
-    fromTime: string;
-    fromEpoch: number;
-    toTime: string;
-    toEpoch: number;
+    fromTimeGmt: string;  // gmt time of start day
+    fromTimeEpoch: number;
+    toTimeGmt: string;
+    toTimeEpoch: number;
   }
+  days: number;
   pivotTime: {
     epoch: number;  // local epoch time
     iso: string;    // local iso time
   }
+}
+
+export interface MediconTimelineValues {
+  resolution: TimelineResolution;
   xAxisValues: string[];
   subDivision: number;
   interval: number;
-  days: number;
 }

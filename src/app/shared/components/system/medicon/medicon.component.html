@@ -1,40 +1,25 @@
-<div #content class="content">
-  <div class="header">
-    <div class="action-icons horizontal-left">
-      <i class="bi bi-printer print"></i>
-      <i class="bi bi-arrow-clockwise"></i>
-<!--      <span class="paging-icons">
-        <i class="bi bi-fast-forward backward larger"></i>
-        <i class="bi bi-caret-left"></i>
-        <i class="bi bi-caret-right"></i>
-        <i class="bi bi-fast-forward larger"></i>
-      </span>-->
-    </div>
-
-    <div class="title horizontal-center">
-      {{serverData.title.fromTime}}&nbsp; -&nbsp; {{serverData.title.toTime}}
-    </div>
-
-    <div class="resolution horizontal-right vertical-center" [dir]="direction">
-<!--      <span>{{text.resolution.label}}</span>
-      <select [(ngModel)]="data.resolution" (change)="onChangeResolution()">
-        <option *ngFor="let option of text.resolution.options" [value]="option.value">{{option.label}}</option>
-      </select>-->
-    </div>
+<div class="header">
+  <div class="action-icons horizontal-left">
+    <i class="bi bi-printer print"></i>
+    <i class="bi bi-arrow-clockwise"></i>
   </div>
 
-  <div *ngIf="timelineWidth" class="sections">
-    <app-medicon-section-container *ngFor="let section of serverData.sections"
-      [direction]="direction"
-      [text]="text"
-      [section]="section"
-      [timeline]="serverData.timeline"
-      [preTimelineWidth]="preTimelineWidth"
-      [timelineWidth]="timelineWidth"
-      [resolution]="resolution"
-      (changeResolution)="onChangeResolution($event)"
-    >
-    </app-medicon-section-container>
+  <div class="title horizontal-center">
+    {{serverData.title.fromTimeGmt}}&nbsp; -&nbsp; {{serverData.title.toTimeGmt}}
   </div>
+
+  <div class="resolution horizontal-right vertical-center" [dir]="direction"></div>
+</div>
+
+<div class="sections">
+  <app-medicon-section-container *ngFor="let section of serverData.sections"
+    [direction]="direction"
+    [text]="text"
+    [section]="section"
+    [timelineRange]="serverData.timelineRange"
+    [timelineValues]="timelineValues"
+    (changeResolution)="onChangeResolution($event)"
+  >
+  </app-medicon-section-container>
 </div>
 

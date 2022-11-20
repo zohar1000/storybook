@@ -1,0 +1,27 @@
+<div class="expand-icon">
+  <i class="bi bi-plus" *ngIf="!isExpanded" (click)="onClickExpand()"></i>
+  <i class="bi bi-dash" *ngIf="isExpanded" (click)="onClickCondense()"></i>
+</div>
+
+<div class="frame">
+  <ng-container *ngIf="isExpanded">
+    <div *ngFor="let medication of category.medications" class="frame-line-filler"></div>
+  </ng-container>
+</div>
+
+<div class="medication">
+  <ng-container *ngIf="!isExpanded">
+    <app-medicon-category-item
+        [isCondensedCategory]="true"
+        [category]="category"
+    ></app-medicon-category-item>
+  </ng-container>
+  <ng-container *ngIf="isExpanded">
+    <div *ngFor="let medication of category.medications; let i=index" class="medication-container">
+      <app-medicon-category-item
+          [isCondensedCategory]="false"
+          [medication]="medication"
+      ></app-medicon-category-item>
+    </div>
+  </ng-container>
+</div>

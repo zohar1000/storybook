@@ -1,0 +1,7 @@
+<ng-container *ngIf="!isCondensedCategory">
+  {{medication.name}}
+</ng-container>
+
+<ng-container *ngIf="isCondensedCategory">
+  <span [style.color]="category.color">{{category.name}}</span>
+</ng-container>

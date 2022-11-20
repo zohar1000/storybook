@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Medication } from '@stories/models/medication.model';
-import { MediconTimeline } from '@models/medicon-data.model';
+import { MediconTimelineRange } from '@models/medicon-server-data.model';
 import { MediconLegendIconType } from '@shared/enums/medicon-legend-icon-type.enum';
 
 @Component({
@@ -9,7 +9,7 @@ import { MediconLegendIconType } from '@shared/enums/medicon-legend-icon-type.en
   styleUrls: ['./medicon-execution-continuous.component.scss']
 })
 export class MediconExecutionContinuousComponent implements OnInit {
-  @Input() timeline: MediconTimeline;
+  @Input() timelineRange: MediconTimelineRange;
   @Input() medication: Medication;
   @Input() timelineWidth;
   MediconLegendIconType = MediconLegendIconType;
@@ -20,7 +20,7 @@ export class MediconExecutionContinuousComponent implements OnInit {
   executionLineWidth = -1;
 
   ngOnInit(): void {
-    this.timelineWidthInMs = this.timeline.range.toEpoch - this.timeline.range.fromEpoch;
+    this.timelineWidthInMs = this.timelineRange.range.toTimeEpoch - this.timelineRange.range.fromTimeEpoch;
     this.orderIconMargin = this.getIconMargin(this.medication.orderTime);
     const orderLineDuration = this.medication.executionTime ? this.medication.executionTime - this.medication.orderTime : this.medication.duration;
     this.orderLineWidth = this.getLineWidth(this.orderIconMargin, orderLineDuration);
@@ -37,12 +37,12 @@ export class MediconExecutionContinuousComponent implements OnInit {
   }
 
   getIconMargin(epoch) {
-    const iconEpoch = this.timeline.pivotTime.epoch + (epoch * 60000);
+    const iconEpoch = this.timelineRange.pivotTime.epoch + (epoch * 60000);
     const pct = this.getTimelinePct(iconEpoch);
     return pct * this.timelineWidth;
   }
 
   getTimelinePct(pos) {
-    return (pos - this.timeline.range.fromEpoch) / this.timelineWidthInMs;
+    return (pos - this.timelineRange.range.fromTimeEpoch) / this.timelineWidthInMs;
   }
 }

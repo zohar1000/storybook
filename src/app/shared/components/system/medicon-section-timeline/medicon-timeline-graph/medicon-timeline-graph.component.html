@@ -1,0 +1,54 @@
+<p>medicon-timeline-graph works!</p>
+
+<app-medicon-timeline-values
+    [timelineRange]="timelineRange"
+    [timelineValues]="timelineValues"
+    [timelineWidth]="timelineWidth">
+</app-medicon-timeline-values>
+
+
+<app-medicon-scrollbar
+    [timelineRange]="timelineRange"
+    [timelineWidth]="timelineWidth"
+>
+</app-medicon-scrollbar>
+
+
+<div class="graph-container" [style.width.px]="timelineWidth">
+  <div class="graph" [class.show-bottom-border]="isShowBottomBorder">
+    <div class="vertical-lines-container">
+      <ng-container *ngFor="let part of [].constructor(PARTS); let i=index">
+        <ng-container
+            [ngTemplateOutlet]="verticalLines"
+            [ngTemplateOutletContext]="{isLast: i===PARTS, value: timelineValues.xAxisValues[i]}"
+        ></ng-container>
+      </ng-container>
+    </div>
+    <div class="pivot-line" [style.left.px]="pivotTimePositionX"></div>
+    <div class="execution">
+      <app-medicon-execution-continuous
+          *ngIf="medication.type===ExecutionType.Continuous"
+          class="continuous"
+          [timelineRange]="timelineRange"
+          [medication]="medication"
+          [timelineWidth]="timelineWidth"
+      ></app-medicon-execution-continuous>
+      <app-medicon-execution-periodic
+          *ngIf="medication.type===ExecutionType.Periodic"
+          class="periodic"
+      ></app-medicon-execution-periodic>
+    </div>
+  </div>
+</div>
+
+<ng-template #verticalLines let-isLast="isLast" let-value="value" >
+  <div class="vertical-lines-part-container">
+    <div class="vertical-lines-part">
+      <div class="sub-divisions">
+        <div *ngFor="let line of [].constructor(subDivisionLines)" class="sub-division-line"></div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+

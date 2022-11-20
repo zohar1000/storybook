@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MediconTimeline } from '@models/medicon-data.model';
+import { MediconTimelineRange } from '@models/medicon-server-data.model';
 
 @Component({
   selector: 'app-medicon-scrollbar',
@@ -7,13 +7,13 @@ import { MediconTimeline } from '@models/medicon-data.model';
   styleUrls: ['./medicon-scrollbar.component.scss']
 })
 export class MediconScrollbarComponent implements OnInit {
-  @Input() timeline: MediconTimeline;
-  @Input() preTimelineWidth = 0;
+  @Input() timelineRange: MediconTimelineRange;
+  @Input() medicationsAreaWidth = 0;
   @Input() timelineWidth = 0;
   fullWidth;
 
   ngOnInit(): void {
-this.fullWidth = this.timelineWidth * this.timeline.days;
+this.fullWidth = this.timelineWidth * this.timelineRange.days;
   }
 
 }

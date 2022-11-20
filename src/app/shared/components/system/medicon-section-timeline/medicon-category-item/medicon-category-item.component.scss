@@ -1,0 +1,9 @@
+@import 'src/styles/variables';
+
+:host {
+  display: flex;
+  align-items: center;
+  height: $medicon-graph-line-height;
+  overflow-y: hidden;
+}
+

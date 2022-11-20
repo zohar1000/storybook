@@ -1,40 +1,28 @@
-<ng-container [ngTemplateOutlet]="header" [ngTemplateOutletContext]="{isTop: true}"></ng-container>
-
-<app-medicon-timeline-values
-    [timeline]="timeline"
-    [preTimelineWidth]="preTimelineWidth"
-    [timelineWidth]="timelineWidth">
-</app-medicon-timeline-values>
+<ng-container
+    [ngTemplateOutlet]="header"
+    [ngTemplateOutletContext]="{isTop: true}">
+</ng-container>
 
 <div #categories>
   <app-medicon-category
     *ngFor="let category of section.categories; let i=index"
     [category]="category"
-    [timeline]="timeline"
-    [preTimelineWidth]="preTimelineWidth"
-    [timelineWidth]="timelineWidth"
-    [isLastCategory]="i+1===section.categories.length"
-    (expandCondense)="onExpandCondense()"
-  >
+    (expandCondense)="onExpandCondense()">
   </app-medicon-category>
 </div>
-
-<app-medicon-scrollbar
-    [timeline]="timeline"
-    [preTimelineWidth]="preTimelineWidth"
-    [timelineWidth]="timelineWidth"
->
-</app-medicon-scrollbar>
 
 <!--
 <app-medicon-timeline-values
     [timeline]="timeline"
-    [preTimelineWidth]="preTimelineWidth"
+    [medicationsAreaWidth]="medicationsAreaWidth"
     [timelineWidth]="timelineWidth">
 </app-medicon-timeline-values>
 -->
 
-<ng-container [ngTemplateOutlet]="header" [ngTemplateOutletContext]="{isTop: false}"></ng-container>
+<ng-container
+    [ngTemplateOutlet]="header"
+    [ngTemplateOutletContext]="{isTop: false}">
+</ng-container>
 
 <ng-template #header let-isTop="isTop">
   <div class="header vertical-center" [class.top]="isTop" [class.bottom]="!isTop">
@@ -52,7 +40,7 @@
     <div *ngIf="isTop" class="horizontal-right">
       <app-medicon-resolution
           [text]="text"
-          [resolution]="resolution"
+          [timelineValues]="timelineValues"
           (changeResolution)="onChangeResolution($event)"
       ></app-medicon-resolution>
     </div>

@@ -1,20 +1,12 @@
-<div class="content">
-  <ng-container *ngIf="timelineWidth">
-    <div class="categories-container">
-        <ng-container [ngSwitch]="section.type">
-          <app-medicon-section-timeline
-              *ngSwitchCase="MediconSectionType.Timeline"
-              [direction]="direction"
-              [text]="text"
-              [section]="section"
-              [timeline]="timeline"
-              [preTimelineWidth]="preTimelineWidth"
-              [timelineWidth]="timelineWidth"
-              [resolution]="resolution"
-              (changeResolution)="onChangeResolution($event)"
-          >
-          </app-medicon-section-timeline>
-        </ng-container>
-    </div>
-  </ng-container>
-</div>
+<ng-container [ngSwitch]="section.type">
+  <app-medicon-section-timeline
+      *ngSwitchCase="MediconSectionType.Timeline"
+      [direction]="direction"
+      [text]="text"
+      [section]="section"
+      [timelineRange]="timelineRange"
+      [timelineValues]="timelineValues"
+      (changeResolution)="onChangeResolution($event)"
+  >
+  </app-medicon-section-timeline>
+</ng-container>

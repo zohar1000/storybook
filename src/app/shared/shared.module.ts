@@ -14,18 +14,19 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { SortableModule } from 'ngx-bootstrap/sortable';
 import { ToastrModule } from 'ngx-toastr';
 import { MediconComponent } from '@shared/components/system/medicon/medicon.component';
-import { MediconCategoryComponent } from '@shared/components/system/medicon-category/medicon-category.component';
-import { MediconCategoryItemComponent } from '@shared/components/system/medicon-category-item/medicon-category-item.component';
+import { MediconCategoryComponent } from '@shared/components/system/medicon-section-timeline/medicon-category/medicon-category.component';
+import { MediconCategoryItemComponent } from '@shared/components/system/medicon-section-timeline/medicon-category-item/medicon-category-item.component';
 import { MediconSectionContainerComponent } from '@shared/components/system/medicon-section-container/medicon-section-container.component';
 import { MediconSectionTimelineComponent } from '@shared/components/system/medicon-section-timeline/medicon-section-timeline.component';
-import { MediconTimelineValuesComponent } from '@shared/components/system/medicon-timeline-values/medicon-timeline-values.component';
-import { MediconExecutionPeriodicComponent } from './components/system/medicon-execution-periodic/medicon-execution-periodic.component';
-import { MediconExecutionContinuousComponent } from './components/system/medicon-execution-continuous/medicon-execution-continuous.component';
+import { MediconTimelineValuesComponent } from '@shared/components/system/shared/medicon-timeline-values/medicon-timeline-values.component';
+import { MediconExecutionPeriodicComponent } from './components/system/medicon-section-timeline/medicon-execution-periodic/medicon-execution-periodic.component';
+import { MediconExecutionContinuousComponent } from './components/system/medicon-section-timeline/medicon-execution-continuous/medicon-execution-continuous.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { PopoverModule } from 'ngx-bootstrap/popover';
-import { MediconIconComponent } from './components/system/medicon-icon/medicon-icon.component';
-import { MediconResolutionComponent } from './components/system/medicon-resolution/medicon-resolution.component';
-import { MediconScrollbarComponent } from './components/system/medicon-scrollbar/medicon-scrollbar.component';
+import { MediconIconComponent } from './components/system/shared/medicon-icon/medicon-icon.component';
+import { MediconResolutionComponent } from './components/system/shared/medicon-resolution/medicon-resolution.component';
+import { MediconScrollbarComponent } from './components/system/shared/medicon-scrollbar/medicon-scrollbar.component';
+import { MediconTimelineGraphComponent } from './components/system/medicon-section-timeline/medicon-timeline-graph/medicon-timeline-graph.component';
 
 const declarations = [
   GraphLinesComponent,
@@ -42,6 +43,7 @@ const declarations = [
   MediconScrollbarComponent,
   MediconSectionContainerComponent,
   MediconSectionTimelineComponent,
+  MediconTimelineGraphComponent,
   MediconTimelineValuesComponent
 ];
 

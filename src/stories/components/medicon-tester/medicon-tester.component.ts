@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 import { Settings } from '@stories/models/settings.model';
 import { ToastrService } from 'ngx-toastr';
-import { MedicationsCategory, MediconSection, MediconTimeline, MediconServerData } from '@models/medicon-server-data.model';
+import { MedicationsCategory, MediconSection, MediconTimelineRange, MediconServerData } from '@models/medicon-server-data.model';
 import { Direction } from '@stories/models/direction.model';
 import { MedicationCategories } from '@stories/const/medication-categories.const';
 import { TimeDisplayType } from '@shared/enums/time-display-type.enum';
@@ -140,8 +140,8 @@ export class MediconTesterComponent implements OnInit {
 
     this.serverData = {
       title: {
-        fromTime: '2022-01-01 10:00',
-        toTime: '2022-01-02 17:00',
+        fromTimeGmt: '2022-01-01 10:00',
+        toTimeGmt: '2022-01-02 17:00',
       },
       resolution: this.settings.resolution,
       sections: this.settings.sections.map((section, i) => getSection(section, i)),
@@ -149,7 +149,7 @@ export class MediconTesterComponent implements OnInit {
     }
   }
 
-  getTimeline(): MediconTimeline {
+  getTimeline(): MediconTimelineRange {
     const item = TimelineResolutionValues[this.settings.resolution];
     const pivotEpoch = this.timeService.getMidnightEpoch(this.settings.pivotTime);
     const roundBy = 60000 * item.minutes;
@@ -170,10 +170,10 @@ export class MediconTesterComponent implements OnInit {
         iso: this.timeService.getLocalIso(pivotEpoch)
       },
       range: {
-        fromTime: values[0],
-        fromEpoch: tlStartEpoch,
-        toTime: values[12],
-        toEpoch: elEndEpoch
+        fromTimeGmt: values[0],
+        fromTimeEpoch: tlStartEpoch,
+        toTimeGmt: values[12],
+        toTimeEpoch: elEndEpoch
       },
       xAxisValues: values,
       subDivision: item.subDivision,
