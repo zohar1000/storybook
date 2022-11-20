@@ -1,5 +1,56 @@
 @import 'variables';
 
+:host {
+  width: 100%;
+  margin-right: $medicon-post-timeline-margin-right;
+
+  .content {
+    //background: yellow;
+    // height: 100%;  // calc(100% + 17px);
+    height: calc(var(--medications-count) * #{$medicon-graph-line-height} + var(--scrollbar-width) + 2px);
+    overflow-x: scroll;
+    overflow-y: hidden;
+    //box-sizing: content-box;
+    .full-width {
+      background: white;
+      height: 100%;
+      position: relative;
+      border-top: 1px solid black;
+      border-bottom: 1px solid black;
+      border-right: 1px solid black;
+      //box-sizing: content-box;
+      .hard-verticals, .soft-verticals, .medication-backgrounds {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: grid;
+      }
+      .medication-backgrounds {
+        z-index: 1;
+        background-image: linear-gradient(180deg, #e7e7e7 $medicon-graph-line-height, transparent 0);
+        background-size: 100% calc($medicon-graph-line-height * 2);
+      }
+      .soft-verticals {
+        z-index: 2;
+        background-image: linear-gradient(90deg, #CECECEFF 1px, transparent 0);
+        background-size: var(--soft-verticals-width);
+      }
+      .hard-verticals {
+        z-index: 3;
+        background-image: linear-gradient(90deg, black 1px, transparent 0);
+        background-size: var(--hard-verticals-width);
+      }
+    }
+
+  }
+
+}
+
+
+
+
 .graph-container {
   position: relative;
   .graph {

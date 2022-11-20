@@ -9,6 +9,7 @@ import { MediconLegendIcons } from '@shared/consts/medicon-legend-icons.const';
 })
 export class MediconSectionTimelineComponent implements AfterViewInit {
   @ViewChild('categories') elRefCategories: ElementRef;
+  @ViewChild('timelineGraph') elRefTimelineGraph: ElementRef;
   @Input() direction;
   @Input() text;
   @Input() section: MediconSection;
@@ -17,6 +18,7 @@ export class MediconSectionTimelineComponent implements AfterViewInit {
   @Output() changeResolution = new EventEmitter();
   MediconLegendIcons = MediconLegendIcons;
   legendColumns;
+  timelineGraphWidth;
 
   constructor(private cdr: ChangeDetectorRef) {
     this.legendColumns = [
@@ -26,7 +28,11 @@ export class MediconSectionTimelineComponent implements AfterViewInit {
   }
 
   ngAfterViewInit() {
-    this.setCategoriesBackgroundColor();
+    const offsetWidth = this.elRefTimelineGraph.nativeElement.offsetWidth;
+    this.timelineGraphWidth = offsetWidth - (offsetWidth % 12);
+    this.cdr.detectChanges();
+
+    // this.setCategoriesBackgroundColor();
   }
 
   onExpandCondense() {

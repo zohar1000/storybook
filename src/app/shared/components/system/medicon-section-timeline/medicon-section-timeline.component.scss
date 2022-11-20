@@ -1,3 +1,10 @@
+@import 'variables';
+
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
 .header {
   width: 100%;
   height: 2.5rem;
@@ -46,6 +53,20 @@
         margin-inline-end: 1rem;
       }
     }
+  }
+}
+
+.content {
+  display: inline-flex;
+  width: 100%;
+  flex-direction: row;
+  .categories {
+    width: $medicon-category-area-width;
+    display: block;
+  }
+  .timelineGraph {
+    flex-grow: 1;
+    margin-right: $medicon-post-timeline-margin-right;
   }
 }
 

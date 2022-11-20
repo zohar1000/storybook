@@ -1,20 +1,31 @@
-<p>medicon-timeline-graph works!</p>
 
-<app-medicon-timeline-values
+<div class="content" [style.width.px]="timelineGraphWidth" style="--medications-count:{{medicationsCount}}">
+  <div class="full-width" [style.width.px]="fullWidth">
+    <div class="soft-verticals" style="--soft-verticals-width:{{softVerticalsWidth}}"></div>
+    <div class="hard-verticals" style="--hard-verticals-width:{{hardVerticalsWidth}}"></div>
+    <div class="medication-backgrounds"></div>
+
+
+  </div>
+</div>
+
+
+
+<!--<app-medicon-timeline-values
     [timelineRange]="timelineRange"
     [timelineValues]="timelineValues"
     [timelineWidth]="timelineWidth">
-</app-medicon-timeline-values>
+</app-medicon-timeline-values>-->
 
 
-<app-medicon-scrollbar
+<!--<app-medicon-scrollbar
     [timelineRange]="timelineRange"
     [timelineWidth]="timelineWidth"
 >
-</app-medicon-scrollbar>
+</app-medicon-scrollbar>-->
 
 
-<div class="graph-container" [style.width.px]="timelineWidth">
+<!--<div class="graph-container" [style.width.px]="timelineWidth">
   <div class="graph" [class.show-bottom-border]="isShowBottomBorder">
     <div class="vertical-lines-container">
       <ng-container *ngFor="let part of [].constructor(PARTS); let i=index">
@@ -39,7 +50,7 @@
       ></app-medicon-execution-periodic>
     </div>
   </div>
-</div>
+</div>-->
 
 <ng-template #verticalLines let-isLast="isLast" let-value="value" >
   <div class="vertical-lines-part-container">

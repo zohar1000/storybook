@@ -3,12 +3,25 @@
     [ngTemplateOutletContext]="{isTop: true}">
 </ng-container>
 
-<div #categories>
-  <app-medicon-category
-    *ngFor="let category of section.categories; let i=index"
-    [category]="category"
-    (expandCondense)="onExpandCondense()">
-  </app-medicon-category>
+<div class="content">
+  <div class="categories" #categories>
+    <app-medicon-category
+      *ngFor="let category of section.categories; let i=index"
+      [category]="category"
+      (expandCondense)="onExpandCondense()">
+    </app-medicon-category>
+  </div>
+
+  <div class="timelineGraph" #timelineGraph>
+    <app-medicon-timeline-graph
+      *ngIf="timelineGraphWidth"
+      [style.width.px]="timelineGraphWidth"
+      [categories]="section.categories"
+      [timelineGraphWidth]="timelineGraphWidth"
+    >
+    </app-medicon-timeline-graph>
+  </div>
+
 </div>
 
 <!--
