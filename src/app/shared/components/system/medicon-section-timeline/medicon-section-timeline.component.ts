@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MediconSection, MediconTimelineRange, MediconTimelineValues } from '@models/medicon-server-data.model';
 import { MediconLegendIcons } from '@shared/consts/medicon-legend-icons.const';
 
@@ -7,7 +7,7 @@ import { MediconLegendIcons } from '@shared/consts/medicon-legend-icons.const';
   templateUrl: './medicon-section-timeline.component.html',
   styleUrls: ['./medicon-section-timeline.component.scss']
 })
-export class MediconSectionTimelineComponent implements AfterViewInit {
+export class MediconSectionTimelineComponent implements OnInit, AfterViewInit {
   @ViewChild('categories') elRefCategories: ElementRef;
   @ViewChild('timelineGraph') elRefTimelineGraph: ElementRef;
   @Input() direction;
@@ -19,12 +19,17 @@ export class MediconSectionTimelineComponent implements AfterViewInit {
   MediconLegendIcons = MediconLegendIcons;
   legendColumns;
   timelineGraphWidth;
+  categoryStates;
 
   constructor(private cdr: ChangeDetectorRef) {
     this.legendColumns = [
       this.MediconLegendIcons.filter(item => item.column === 0),
       this.MediconLegendIcons.filter(item => item.column === 1)
     ]
+  }
+
+  ngOnInit() {
+    this.categoryStates = this.section.categories.map(cat => ({ id: cat.id, isExpanded: true }));
   }
 
   ngAfterViewInit() {
@@ -35,8 +40,11 @@ export class MediconSectionTimelineComponent implements AfterViewInit {
     // this.setCategoriesBackgroundColor();
   }
 
-  onExpandCondense() {
-    this.setCategoriesBackgroundColor();
+  onExpandCondense(id, isExpanded) {
+    const item = this.categoryStates.find(cat => cat.id === id);
+    item.isExpanded = isExpanded;
+    this.categoryStates = [...this.categoryStates];
+    // this.setCategoriesBackgroundColor();
   }
 
   setCategoriesBackgroundColor() {

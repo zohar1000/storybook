@@ -11,6 +11,11 @@
     overflow-x: scroll;
     overflow-y: hidden;
     //box-sizing: content-box;
+
+    .timeline-values {
+      background: yellow;
+    }
+
     .full-width {
       background: white;
       height: 100%;
@@ -19,13 +24,13 @@
       border-bottom: 1px solid black;
       border-right: 1px solid black;
       //box-sizing: content-box;
-      .hard-verticals, .soft-verticals, .medication-backgrounds {
+      .hard-verticals, .soft-verticals, .medication-backgrounds, .filler {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        display: grid;
+        // display: grid;
       }
       .medication-backgrounds {
         z-index: 1;
@@ -41,6 +46,12 @@
         z-index: 3;
         background-image: linear-gradient(90deg, black 1px, transparent 0);
         background-size: var(--hard-verticals-width);
+      }
+      .filler {
+        z-index: 4;
+        background: #939393;
+        left: unset;
+        right: 0;
       }
     }
 

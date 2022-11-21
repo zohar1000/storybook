@@ -15,6 +15,9 @@ export class MediconTimelineGraphComponent implements OnInit {
   @Input() timelineGraphWidth: number;
   @Input() timelineRange: MediconTimelineRange;
   @Input() timelineValues: MediconTimelineValues;
+  @Input() set categoryStates(value) {
+    if (this.fullWidth) this.onChangeCategoryStates(value);
+  };
   readonly PARTS = 12;
   ExecutionType = ExecutionType;
   subDivisionLines;
@@ -23,6 +26,7 @@ export class MediconTimelineGraphComponent implements OnInit {
   hardVerticalsWidth;
   softVerticalsWidth;
   medicationsCount;
+  fillerWidth;
 
   ngOnInit() {
     this.calcFullWidth();
@@ -33,11 +37,12 @@ export class MediconTimelineGraphComponent implements OnInit {
   }
 
   calcFullWidth() {
-    // for 1h
+    // for 24h
     this.fullWidth = 16 / 12 * this.timelineGraphWidth;
     const hardVerticalsWidth = this.fullWidth / 16;
-    this.hardVerticalsWidth = hardVerticalsWidth + 'px 100%'; // this.fullWidth / 16;
+    this.hardVerticalsWidth = hardVerticalsWidth + 'px 100%';
     this.softVerticalsWidth = hardVerticalsWidth / 6 + 'px 100%';
+    this.fillerWidth = this.fullWidth - this.timelineGraphWidth;
     this.timelineGraphWidth++;
 
 console.log('this.timelineGraphWidth:', this.timelineGraphWidth);
@@ -47,10 +52,23 @@ console.log('this.hardVerticalsWidth:', this.hardVerticalsWidth);
 
 console.log('window.innerWidth, document.body.clientWidth:', window.innerWidth, document.body.clientWidth);
 console.log('categories:', this.categories);
+console.log('this.fillerWidth:', this.fillerWidth);
     this.medicationsCount = 0;
     this.categories.forEach(category => {
       this.medicationsCount += Math.max(category.medications.length, 1);
     });
     // this.medicationsCount += 'px';
+  }
+
+  onChangeCategoryStates(categoryStates) {
+    this.medicationsCount = 0;
+    categoryStates.forEach(catState => {
+      if (!catState.isExpanded) {
+        this.medicationsCount++;
+      } else {
+        const item = this.categories.find(cat => cat.id === catState.id);
+        this.medicationsCount += item.medications.length;
+      }
+    })
   }
 }

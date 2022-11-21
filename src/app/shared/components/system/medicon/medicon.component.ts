@@ -5,6 +5,7 @@ import { MediconServerData, MediconTimelineValues, MediconTimelineRange } from '
 import { TimelineResolutionValues } from '@shared/consts/timeline-resolution-values.const';
 import { TimeDisplayType } from '@shared/enums/time-display-type.enum';
 import { TimeService } from '@shared/services/time.service';
+import { MediconService } from '@shared/components/system/shared/services/medicon.service';
 
 @Component({
   selector: 'app-medicon',
@@ -19,10 +20,11 @@ export class MediconComponent {
   @Output() changeResolution = new EventEmitter<TimelineResolution>();
   timelineValues: MediconTimelineValues;
 
-  constructor(private cdr: ChangeDetectorRef, private timeService: TimeService) {}
+  constructor(private mediconService: MediconService) {}
 
   ngOnInit() {
     this.calcTimelineValues(this.serverData.resolution);
+    this.mediconService.serverData = this.serverData;
   }
 
   onChangeResolution(resolution) {
@@ -30,16 +32,6 @@ export class MediconComponent {
     // this.serverData.timeline = this.getTimeline(resolution);
     this.calcTimelineValues(resolution)
     this.changeResolution.emit(resolution);
-  }
-
-  calcTimelineValues(resolution) {
-    const item = TimelineResolutionValues[resolution];
-    this.timelineValues = {
-      resolution,
-      xAxisValues: [],
-      subDivision: item.subDivision,
-      interval: item.interval,
-    }
   }
 
   // getTimeline(resolution): MediconTimelineRange {

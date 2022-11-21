@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 import { MediconTesterComponent } from '@stories/components/medicon-tester/medicon-tester.component';
 import { MediconListerComponent } from '@stories/components/medicon-lister/medicon-lister.component';
 import { MediconListerItemComponent } from '@stories/components/medicon-lister-item/medicon-lister-item.component';
+import { MediconService } from '@shared/components/system/shared/services/medicon.service';
 
 export default {
   title: 'רכיבים/תצוגה מרוכזת',
@@ -28,7 +29,7 @@ export default {
         MediconListerItemComponent
       ],
       imports: [SharedModule],
-      providers: [BsModalService, ToastrService]
+      providers: [BsModalService, ToastrService, MediconService]
     })
   ],
 } as Meta;

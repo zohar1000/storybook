@@ -47,3 +47,11 @@ export interface MediconTimelineValues {
   subDivision: number;
   interval: number;
 }
+
+export interface MediconTimeMetrics {
+  fullWidth: number;
+  hardVerticalsWidth: number;
+  softVerticalsWidth: number;
+  fillerWidth: number;
+  timelineGraphWidth: number;
+}

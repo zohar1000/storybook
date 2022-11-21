@@ -21,6 +21,6 @@ export class MediconCategoryComponent {
 
   emitExpandCondense(isExpanded) {
     this.isExpanded = isExpanded;
-    setTimeout(() => this.expandCondense.emit());  // timeout b/c dom hasn't changed yet
+    this.expandCondense.emit(isExpanded);
   }
 }

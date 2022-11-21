@@ -43,7 +43,7 @@ export class MediconTesterComponent implements OnInit {
     this.settings = item ? JSON.parse(item) : JSON.parse(JSON.stringify(this.defaultSettings));
   }
 
-  onClickResetTime(e) {
+  onClickResetTime() {
     this.settings.pivotTime = new Intl.DateTimeFormat('en-GB', { timeStyle: 'short' }).format(new Date());
     this.saveToLocalStorage();
   }
@@ -145,11 +145,11 @@ export class MediconTesterComponent implements OnInit {
       },
       resolution: this.settings.resolution,
       sections: this.settings.sections.map((section, i) => getSection(section, i)),
-      timeline: this.getTimeline()
+      timelineRange: this.getTimelineRange()
     }
   }
 
-  getTimeline(): MediconTimelineRange {
+  getTimelineRange(): MediconTimelineRange {
     const item = TimelineResolutionValues[this.settings.resolution];
     const pivotEpoch = this.timeService.getMidnightEpoch(this.settings.pivotTime);
     const roundBy = 60000 * item.minutes;
@@ -175,9 +175,6 @@ export class MediconTesterComponent implements OnInit {
         toTimeGmt: values[12],
         toTimeEpoch: elEndEpoch
       },
-      xAxisValues: values,
-      subDivision: item.subDivision,
-      interval: item.interval,
       days: 12
     }
   }
