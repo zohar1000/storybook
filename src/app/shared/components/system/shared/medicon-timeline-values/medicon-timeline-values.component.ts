@@ -8,15 +8,12 @@ import { MediconService } from '@shared/components/system/shared/services/medico
   styleUrls: ['./medicon-timeline-values.component.scss']
 })
 export class MediconTimelineValuesComponent implements OnInit {
-  @Input() timelineRange: MediconTimelineRange;
-  @Input() timelineValues: MediconTimelineValues;
   timelineValuesWidth;
   timelineValuesRight;
 
   constructor(private mediconService: MediconService) {}
 
   ngOnInit() {
-console.log('values:', this.timelineValues);
     // const valueWidth = this.timelineWidth / (this.timelineValues.xAxisValues.length - 1);
     // this.timelineValuesWidth = valueWidth * this.timelineValues.xAxisValues.length;
     // this.timelineValuesRight = -valueWidth / 2;

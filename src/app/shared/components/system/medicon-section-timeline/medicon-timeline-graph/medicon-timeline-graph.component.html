@@ -1,19 +1,20 @@
-
-<div class="content" [style.width.px]="timelineGraphWidth" style="--medications-count:{{medicationsCount}}">
-  <div class="timeline-values" [style.width.px]="fullWidth">
-    <app-medicon-timeline-values
-      [timelineRange]="timelineRange"
-      [timelineValues]="timelineValues">
-    </app-medicon-timeline-values>
+<div class="content"
+     *ngIf="mediconService.timelineMetrics$ | async; let metrics"
+     [style.width.px]="timelineGraphWidth"
+     style="--medications-count:{{graphLinesCount}}">
+  <div class="timeline-values" [style.width.px]="metrics.fullWidth">
+    <app-medicon-timeline-values></app-medicon-timeline-values>
   </div>
 
-  <div class="full-width" [style.width.px]="fullWidth">
-    <div class="soft-verticals" style="--soft-verticals-width:{{softVerticalsWidth}}"></div>
-    <div class="hard-verticals" style="--hard-verticals-width:{{hardVerticalsWidth}}"></div>
+  <div class="full-width" [style.width.px]="metrics.fullWidth">
+    <div class="soft-verticals"
+         style="--soft-verticals-width:{{metrics.softVerticalsWidthStyle}}">
+    </div>
+    <div class="hard-verticals"
+         style="--hard-verticals-width:{{metrics.hardVerticalsWidthStyle}}">
+    </div>
     <div class="medication-backgrounds"></div>
-    <div class="filler" *ngIf="fillerWidth>0" [style.width.px]="fillerWidth">
-
-
+    <div class="filler" *ngIf="metrics.fillerWidth>0" [style.width.px]="metrics.fillerWidth"></div>
   </div>
 </div>
 

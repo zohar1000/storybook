@@ -14,26 +14,12 @@
 
   <div class="timelineGraph" #timelineGraph>
     <app-medicon-timeline-graph
-      *ngIf="timelineGraphWidth"
-      [style.width.px]="timelineGraphWidth"
       [categories]="section.categories"
       [categoryStates]="categoryStates"
-      [timelineGraphWidth]="timelineGraphWidth"
-      [timelineRange]="timelineRange"
-      [timelineValues]="timelineValues"
     >
     </app-medicon-timeline-graph>
   </div>
-
 </div>
-
-<!--
-<app-medicon-timeline-values
-    [timeline]="timeline"
-    [medicationsAreaWidth]="medicationsAreaWidth"
-    [timelineWidth]="timelineWidth">
-</app-medicon-timeline-values>
--->
 
 <ng-container
     [ngTemplateOutlet]="header"
@@ -56,8 +42,6 @@
     <div *ngIf="isTop" class="horizontal-right">
       <app-medicon-resolution
           [text]="text"
-          [timelineValues]="timelineValues"
-          (changeResolution)="onChangeResolution($event)"
       ></app-medicon-resolution>
     </div>
   </div>

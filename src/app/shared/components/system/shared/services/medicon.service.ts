@@ -1,16 +1,28 @@
 import { Injectable } from '@angular/core';
-import { MediconServerData, MediconTimelineRange, MediconTimelineValues, MediconTimeMetrics } from '@models/medicon-server-data.model';
+import { MediconServerData, MediconTimelineValues, MediconTimelineMetrics } from '@models/medicon-server-data.model';
 import { TimelineResolutionValues } from '@shared/consts/timeline-resolution-values.const';
 import { TimeDisplayType } from '@shared/enums/time-display-type.enum';
+import { ReplaySubject } from 'rxjs';
+import { TimelineResolution } from '@shared/enums/timeline-resolution.enum';
 
 @Injectable()
 export class MediconService {
   serverData: MediconServerData;
   timelineValues: MediconTimelineValues;
-  timelineMetrics: MediconTimeMetrics;
+  timelineMetrics: MediconTimelineMetrics;
+  timelineValues$ = new ReplaySubject<MediconTimelineValues>();
+  timelineMetrics$ = new ReplaySubject<MediconTimelineMetrics>();
+  resolution$ = new ReplaySubject<TimelineResolution>();
 
-  constructor() {
-    console.log('service con');
+  init(serverData: MediconServerData, elTimelineWidth) {
+    this.serverData = serverData;
+    this.setResolution(this.serverData.resolution);
+    this.setTimelineValues(this.serverData.resolution);
+    this.setTimelineMetrics(elTimelineWidth);
+  }
+
+  setResolution(resolution) {
+    this.resolution$.next(resolution);
   }
 
   /***************************************/
@@ -21,16 +33,14 @@ export class MediconService {
     const item = TimelineResolutionValues[resolution];
     this.timelineValues = {
       resolution,
-      xAxisValues: this.getTimelineXAxis(resolution, this.serverData.timelineRange.days),
+      xAxisValues: this.getXAxisValues(resolution, this.serverData.timelineRange.days),
       subDivision: item.subDivision,
       interval: item.interval,
     }
+    this.timelineValues$.next(this.timelineValues);
   }
 
-  calcTimelineValues(resolution) {
-  }
-
-  getTimelineXAxis(resolution, days) {
+  getXAxisValues(resolution, days) {
     const item = TimelineResolutionValues[resolution];
     const totalMinutes = days * 1440;
     const xAxisHardLines = totalMinutes / item.minutes + 1;
@@ -55,6 +65,30 @@ export class MediconService {
     // }
   }
 
+  /*****************************************/
+  /*    T I M E L I N E   M E T R I C S    */
+  /*****************************************/
+
+  setTimelineMetrics(elGraphAreaWidth) {
+    const timelineWidth = elGraphAreaWidth - (elGraphAreaWidth % 12);
+
+    // for 24h
+    const fullWidth = 16 / 12 * timelineWidth;
+    const hardVerticalsWidth = fullWidth / 16;
+    const hardVerticalsWidthStyle = hardVerticalsWidth + 'px 100%';
+    const softVerticalsWidthStyle = hardVerticalsWidth / 6 + 'px 100%';
+    const fillerWidth = fullWidth - timelineWidth;
+    this.timelineMetrics = {
+      timelineWidth,
+      fullWidth,
+      hardVerticalsWidth,
+      hardVerticalsWidthStyle,
+      softVerticalsWidthStyle,
+      fillerWidth
+    }
+    this.timelineMetrics$.next(this.timelineMetrics);
+console.log('this.timelineMetrics:', this.timelineMetrics);
+  }
 
 
 

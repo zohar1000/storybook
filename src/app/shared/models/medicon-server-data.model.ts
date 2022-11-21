@@ -48,10 +48,11 @@ export interface MediconTimelineValues {
   interval: number;
 }
 
-export interface MediconTimeMetrics {
+export interface MediconTimelineMetrics {
+  timelineWidth: number;
   fullWidth: number;
   hardVerticalsWidth: number;
-  softVerticalsWidth: number;
+  hardVerticalsWidthStyle: string;
+  softVerticalsWidthStyle: string;
   fillerWidth: number;
-  timelineGraphWidth: number;
 }

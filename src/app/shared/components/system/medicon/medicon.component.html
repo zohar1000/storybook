@@ -1,4 +1,8 @@
-<div class="header">
+<div class="hidden">
+  <div class="graph-area" #graphArea></div>
+</div>  <!-- serves to calculate the graph area width -->
+
+<div class="header" #header>
   <div class="action-icons horizontal-left">
     <i class="bi bi-printer print"></i>
     <i class="bi bi-arrow-clockwise"></i>
@@ -16,9 +20,6 @@
     [direction]="direction"
     [text]="text"
     [section]="section"
-    [timelineRange]="serverData.timelineRange"
-    [timelineValues]="timelineValues"
-    (changeResolution)="onChangeResolution($event)"
   >
   </app-medicon-section-container>
 </div>

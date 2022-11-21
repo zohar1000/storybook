@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TimelineResolution } from '@shared/enums/timeline-resolution.enum';
 import { MediconTimelineValues } from '@models/medicon-server-data.model';
+import { MediconService } from '@shared/components/system/shared/services/medicon.service';
 
 @Component({
   selector: 'app-medicon-resolution',
@@ -9,7 +10,6 @@ import { MediconTimelineValues } from '@models/medicon-server-data.model';
 })
 export class MediconResolutionComponent implements OnInit {
   @Input() text;
-  @Input() timelineValues: MediconTimelineValues;
   @Output() changeResolution = new EventEmitter();
   options;
   label;
@@ -21,12 +21,14 @@ export class MediconResolutionComponent implements OnInit {
   startLabel;
   endLabel;
 
+  constructor(private mediconService: MediconService) {}
+
   ngOnInit(): void {
     this.options = this.text.resolution.options;
     const len = this.options.length;
     this.sliderWidth = len;
     this.sliderMax = len - 1;
-    this.ix = this.options.findIndex(item => item.value === this.timelineValues.resolution);
+    this.ix = this.options.findIndex(item => item.value === this.mediconService.timelineValues.resolution);
     this.label = this.text.resolution.options[this.ix].label;
     this.startLabel = this.text.resolution.options[0].label;
     this.endLabel = this.text.resolution.options[len - 1].label;

@@ -13,25 +13,17 @@ import { MediconService } from '@shared/components/system/shared/services/medico
   styleUrls: ['./medicon.component.scss']
 })
 export class MediconComponent {
-  @ViewChild('content') elContent: ElementRef;
+  @ViewChild('header', { static: true }) elRefHeader: ElementRef;
+  @ViewChild('graphArea', { static: true }) elRefGraphArea: ElementRef;
   @Input() direction: Direction;
   @Input() text: any;
   @Input() serverData: MediconServerData;
   @Output() changeResolution = new EventEmitter<TimelineResolution>();
-  timelineValues: MediconTimelineValues;
 
   constructor(private mediconService: MediconService) {}
 
   ngOnInit() {
-    this.calcTimelineValues(this.serverData.resolution);
-    this.mediconService.serverData = this.serverData;
-  }
-
-  onChangeResolution(resolution) {
-    // this.resolution.emit(this.data.resolution);
-    // this.serverData.timeline = this.getTimeline(resolution);
-    this.calcTimelineValues(resolution)
-    this.changeResolution.emit(resolution);
+    this.mediconService.init(this.serverData, this.elRefGraphArea.nativeElement.offsetWidth);
   }
 
   // getTimeline(resolution): MediconTimelineRange {

@@ -2,6 +2,7 @@ import { Component, ElementRef, EventEmitter, Input, OnInit, Output, QueryList, 
 import { MediconSection, MediconTimelineRange, MediconTimelineValues } from '@models/medicon-server-data.model';
 import { MediconSectionType } from '@shared/enums/medicon-section-type.enum';
 import { TimelineResolution } from '@shared/enums/timeline-resolution.enum';
+import { MediconService } from '@shared/components/system/shared/services/medicon.service';
 
 @Component({
   selector: 'app-medicon-section-container',
@@ -12,12 +13,6 @@ export class MediconSectionContainerComponent {
   @Input() direction;
   @Input() text;
   @Input() section: MediconSection;
-  @Input() timelineRange: MediconTimelineRange;
-  @Input() timelineValues: MediconTimelineValues;
   @Output() changeResolution = new EventEmitter();
   MediconSectionType = MediconSectionType;
-
-  onChangeResolution(resolution) {
-    this.changeResolution.emit(resolution);
-  }
 }
