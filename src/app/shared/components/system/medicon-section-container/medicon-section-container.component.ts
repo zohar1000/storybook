@@ -1,8 +1,6 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, QueryList, Renderer2, ViewChild, ViewChildren } from '@angular/core';
-import { MediconSection, MediconTimelineRange, MediconTimelineValues } from '@models/medicon-server-data.model';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MediconSection } from '@models/medicon-server-data.model';
 import { MediconSectionType } from '@shared/enums/medicon-section-type.enum';
-import { TimelineResolution } from '@shared/enums/timeline-resolution.enum';
-import { MediconService } from '@shared/components/system/shared/services/medicon.service';
 
 @Component({
   selector: 'app-medicon-section-container',

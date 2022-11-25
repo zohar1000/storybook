@@ -1,13 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { MediconTimelineRange, MediconTimelineValues } from '@models/medicon-server-data.model';
+import { Component, OnInit } from '@angular/core';
 import { MediconService } from '@shared/components/system/shared/services/medicon.service';
 
 @Component({
-  selector: 'app-medicon-timeline-values',
-  templateUrl: './medicon-timeline-values.component.html',
-  styleUrls: ['./medicon-timeline-values.component.scss']
+  selector: 'app-medicon-timeline-metrics',
+  templateUrl: './medicon-timeline-metrics.component.html',
+  styleUrls: ['./medicon-timeline-metrics.component.scss']
 })
-export class MediconTimelineValuesComponent implements OnInit {
+export class MediconTimelineMetricsComponent implements OnInit {
   timelineValuesWidth;
   timelineValuesRight;
 

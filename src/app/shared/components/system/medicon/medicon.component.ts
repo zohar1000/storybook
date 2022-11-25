@@ -1,10 +1,7 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { Direction } from '@stories/models/direction.model';
 import { TimelineResolution } from '@shared/enums/timeline-resolution.enum';
-import { MediconServerData, MediconTimelineValues, MediconTimelineRange } from '@models/medicon-server-data.model';
-import { TimelineResolutionValues } from '@shared/consts/timeline-resolution-values.const';
-import { TimeDisplayType } from '@shared/enums/time-display-type.enum';
-import { TimeService } from '@shared/services/time.service';
+import { MediconServerData } from '@models/medicon-server-data.model';
 import { MediconService } from '@shared/components/system/shared/services/medicon.service';
 
 @Component({
@@ -18,7 +15,6 @@ export class MediconComponent {
   @Input() direction: Direction;
   @Input() text: any;
   @Input() serverData: MediconServerData;
-  @Output() changeResolution = new EventEmitter<TimelineResolution>();
 
   constructor(private mediconService: MediconService) {}
 

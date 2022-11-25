@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { Settings } from '@stories/models/settings.model';
 import { ToastrService } from 'ngx-toastr';
 import { MedicationsCategory, MediconSection, MediconTimelineRange, MediconServerData } from '@models/medicon-server-data.model';
@@ -7,6 +7,8 @@ import { MedicationCategories } from '@stories/const/medication-categories.const
 import { TimeDisplayType } from '@shared/enums/time-display-type.enum';
 import { TimelineResolutionValues } from '@shared/consts/timeline-resolution-values.const';
 import { TimeService } from '@shared/services/time.service';
+import { MediconService } from '@shared/components/system/shared/services/medicon.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-medicon-tester',
@@ -14,7 +16,7 @@ import { TimeService } from '@shared/services/time.service';
   styleUrls: ['./medicon-tester.component.scss'],
   encapsulation: ViewEncapsulation.None
 })
-export class MediconTesterComponent implements OnInit {
+export class MediconTesterComponent implements OnInit, OnDestroy {
   @Input() text: any;
   @Input() direction: Direction;
   @Input() defaultSettings: Settings;
@@ -24,18 +26,25 @@ export class MediconTesterComponent implements OnInit {
   accordionClass = 'settings-accordion';
   prevSettings;
   serverData: MediconServerData;
+  resolutionSubscription: Subscription;
 
   constructor(
     private cdr: ChangeDetectorRef,
     private toastr: ToastrService,
-    private timeService: TimeService) {}
+    private timeService: TimeService,
+    private mediconService: MediconService) {}
 
   ngOnInit() {
+    this.resolutionSubscription = this.mediconService.resolution$.subscribe(resolution => this.onChangeResolution(resolution));
     setTimeout(() => {
       this.initSettings();
       // this.onClickSettings();
       this.buildData();
     }, 50);
+  }
+
+  ngOnDestroy() {
+    if (this.resolutionSubscription) this.resolutionSubscription.unsubscribe();
   }
 
   initSettings() {

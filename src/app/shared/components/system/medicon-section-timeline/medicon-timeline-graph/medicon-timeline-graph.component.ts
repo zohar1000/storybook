@@ -1,6 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { MedicationsCategory, MediconTimelineRange, MediconTimelineValues } from '@models/medicon-server-data.model';
-import { ExecutionType } from '@stories/enums/execution-type.enum';
+import { MedicationsCategory } from '@models/medicon-server-data.model';
 import { MediconService } from '@shared/components/system/shared/services/medicon.service';
 
 @Component({
@@ -16,7 +15,7 @@ export class MediconTimelineGraphComponent implements OnInit {
   // @Input() timelineRange: MediconTimelineRange;
   // @Input() timelineValues: MediconTimelineValues;
   @Input() set categoryStates(value) {
-    if (this.fullWidth) this.onChangeCategoryStates(value);
+    this.onChangeCategoryStates(value);
   };
   // readonly PARTS = 12;
   // ExecutionType = ExecutionType;
@@ -25,7 +24,7 @@ export class MediconTimelineGraphComponent implements OnInit {
   // fullWidth;
   // hardVerticalsWidth;
   // softVerticalsWidth;
-  graphLinesCount = 4;
+  graphLinesCount;
   // fillerWidth;
   timelineGraphWidth;
 

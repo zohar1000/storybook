@@ -1,7 +1,7 @@
 import { GraphMetadata } from '@models/graph-metadata.model';
 import { GraphData } from '@models/graph-data.model';
 import * as echarts from 'echarts';
-import { LinesSeriesOption, TitleComponentOption } from 'echarts/types/dist/echarts';
+import { TitleComponentOption } from 'echarts/types/dist/echarts';
 import { AfterViewInit, ChangeDetectorRef, Directive, ElementRef, Input, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 type EChartsOption = echarts.EChartsOption;
 // import { axis } from 'echarts/types/dist/echarts';

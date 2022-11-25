@@ -1,6 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { TimelineResolution } from '@shared/enums/timeline-resolution.enum';
-import { MediconTimelineValues } from '@models/medicon-server-data.model';
 import { MediconService } from '@shared/components/system/shared/services/medicon.service';
 
 @Component({
@@ -28,7 +26,7 @@ export class MediconResolutionComponent implements OnInit {
     const len = this.options.length;
     this.sliderWidth = len;
     this.sliderMax = len - 1;
-    this.ix = this.options.findIndex(item => item.value === this.mediconService.timelineValues.resolution);
+    this.ix = this.options.findIndex(item => item.value === this.mediconService.timelineMetrics.resolution);
     this.label = this.text.resolution.options[this.ix].label;
     this.startLabel = this.text.resolution.options[0].label;
     this.endLabel = this.text.resolution.options[len - 1].label;
@@ -39,7 +37,7 @@ export class MediconResolutionComponent implements OnInit {
     e.stopImmediatePropagation();
     this.ix = Number(e.target.value);
     this.label = this.options[this.ix].label;
-    this.changeResolution.emit(this.options[this.ix].value);
+    this.mediconService.setResolution(this.options[this.ix].value);
   }
 
   onClickPivot() {

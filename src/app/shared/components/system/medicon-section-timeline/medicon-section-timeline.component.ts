@@ -1,5 +1,5 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { MediconSection, MediconTimelineRange, MediconTimelineValues } from '@models/medicon-server-data.model';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { MediconSection } from '@models/medicon-server-data.model';
 import { MediconLegendIcons } from '@shared/consts/medicon-legend-icons.const';
 import { MediconService } from '@shared/components/system/shared/services/medicon.service';
 
@@ -35,6 +35,5 @@ export class MediconSectionTimelineComponent implements OnInit {
     const item = this.categoryStates.find(cat => cat.id === id);
     item.isExpanded = isExpanded;
     this.categoryStates = [...this.categoryStates];
-    // this.setCategoriesBackgroundColor();
   }
 }

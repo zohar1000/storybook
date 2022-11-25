@@ -18,7 +18,7 @@ import { MediconCategoryComponent } from '@shared/components/system/medicon-sect
 import { MediconCategoryItemComponent } from '@shared/components/system/medicon-section-timeline/medicon-category-item/medicon-category-item.component';
 import { MediconSectionContainerComponent } from '@shared/components/system/medicon-section-container/medicon-section-container.component';
 import { MediconSectionTimelineComponent } from '@shared/components/system/medicon-section-timeline/medicon-section-timeline.component';
-import { MediconTimelineValuesComponent } from '@shared/components/system/shared/medicon-timeline-values/medicon-timeline-values.component';
+import { MediconTimelineMetricsComponent } from '@shared/components/system/shared/medicon-timeline-metrics/medicon-timeline-metrics.component';
 import { MediconExecutionPeriodicComponent } from './components/system/medicon-section-timeline/medicon-execution-periodic/medicon-execution-periodic.component';
 import { MediconExecutionContinuousComponent } from './components/system/medicon-section-timeline/medicon-execution-continuous/medicon-execution-continuous.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
@@ -44,7 +44,7 @@ const declarations = [
   MediconSectionContainerComponent,
   MediconSectionTimelineComponent,
   MediconTimelineGraphComponent,
-  MediconTimelineValuesComponent
+  MediconTimelineMetricsComponent
 ];
 
 const modules = [

@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { MedicationsCategory, MediconTimelineRange } from '@models/medicon-server-data.model';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MedicationsCategory } from '@models/medicon-server-data.model';
 
 @Component({
   selector: 'app-medicon-category',

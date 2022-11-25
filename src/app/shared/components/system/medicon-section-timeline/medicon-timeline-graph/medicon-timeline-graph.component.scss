@@ -7,12 +7,12 @@
   .content {
     //background: yellow;
     // height: 100%;  // calc(100% + 17px);
-    height: calc(var(--medications-count) * #{$medicon-graph-line-height} + var(--scrollbar-width) + 2px);
+    height: calc(var(--medications-count) * #{$medicon-graph-line-height} + #{$medicon-timeline-metrics-height} + var(--scrollbar-width) + 2px);
     overflow-x: scroll;
     overflow-y: hidden;
     //box-sizing: content-box;
 
-    .timeline-values {
+    .timeline-metrics {
       background: yellow;
     }
 

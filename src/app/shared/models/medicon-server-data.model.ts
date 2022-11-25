@@ -41,14 +41,11 @@ export interface MediconTimelineRange {
   }
 }
 
-export interface MediconTimelineValues {
+export interface MediconTimelineMetrics {
   resolution: TimelineResolution;
   xAxisValues: string[];
   subDivision: number;
   interval: number;
-}
-
-export interface MediconTimelineMetrics {
   timelineWidth: number;
   fullWidth: number;
   hardVerticalsWidth: number;

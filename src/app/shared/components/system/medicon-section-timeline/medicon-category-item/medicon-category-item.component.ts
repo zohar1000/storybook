@@ -1,7 +1,6 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Medication } from '@stories/models/medication.model';
-import { MedicationsCategory, MediconTimelineRange } from '@models/medicon-server-data.model';
-import { ExecutionType } from '@stories/enums/execution-type.enum';
+import { MedicationsCategory } from '@models/medicon-server-data.model';
 
 @Component({
   selector: 'app-medicon-category-item',
