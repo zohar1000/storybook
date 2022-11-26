@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TimeDisplayType } from '@shared/enums/time-display-type.enum';
+import * as dayjs from 'dayjs';
 
 @Injectable({ providedIn: 'root' })
 export class TimeService {
@@ -47,5 +48,21 @@ export class TimeService {
         const isoTime = date.toLocaleString(this.locale, this.TimeFormatOptions.dateTime);
         return isoTime.substring(0, 8) + ' ' + isoTime.substring(10, 15);
     }
+  }
+
+  getTimelineFromGmtToGmt() {
+    const date = new Date();
+    const localTime = dayjs(date);
+    const fromTime = localTime.subtract(10, 'day');
+    const fromTimeGmt = `${fromTime.year()}-${fromTime.month() + 1}-${fromTime.date()}T00:00:00Z+02:00`;
+    console.log('fromTimeGmt:', fromTimeGmt);
+    const toTime = localTime.add(2, 'day');
+    const toTimeGmt = `${toTime.year()}-${toTime.month() + 1}-${toTime.date()}T00:00:00Z+02:00`;
+    console.log('toTimeGmt:', toTimeGmt);
+    return { fromTimeGmt, toTimeGmt };
+  }
+
+  gmtToEpoch(gmt) {
+    return dayjs(gmt).valueOf();
   }
 }

@@ -1,12 +1,14 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { MediconService } from '@shared/components/system/shared/services/medicon.service';
+import { take } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-medicon-resolution',
   templateUrl: './medicon-resolution.component.html',
   styleUrls: ['./medicon-resolution.component.scss']
 })
-export class MediconResolutionComponent implements OnInit {
+export class MediconResolutionComponent implements OnInit, OnDestroy {
   @Input() text;
   @Output() changeResolution = new EventEmitter();
   options;
@@ -18,6 +20,7 @@ export class MediconResolutionComponent implements OnInit {
   isPivotEnabled = true;
   startLabel;
   endLabel;
+  subscription: Subscription;
 
   constructor(private mediconService: MediconService) {}
 
@@ -26,18 +29,22 @@ export class MediconResolutionComponent implements OnInit {
     const len = this.options.length;
     this.sliderWidth = len;
     this.sliderMax = len - 1;
-    this.ix = this.options.findIndex(item => item.value === this.mediconService.timelineMetrics.resolution);
-    this.label = this.text.resolution.options[this.ix].label;
-    this.startLabel = this.text.resolution.options[0].label;
-    this.endLabel = this.text.resolution.options[len - 1].label;
+    this.startLabel = this.options[0].label;
+    this.endLabel = this.options[len - 1].label;
+    this.subscription = this.mediconService.resolution$.subscribe(resolution => {
+      this.ix = this.options.findIndex(item => item.value === resolution);
+      this.label = this.options[this.ix].label;
+    });
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) this.subscription.unsubscribe();
   }
 
   onChangeSlider(e) {
     e.stopPropagation();
     e.stopImmediatePropagation();
-    this.ix = Number(e.target.value);
-    this.label = this.options[this.ix].label;
-    this.mediconService.setResolution(this.options[this.ix].value);
+    this.mediconService.setResolution(this.options[Number(e.target.value)].value);
   }
 
   onClickPivot() {

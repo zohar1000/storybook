@@ -3,6 +3,8 @@ import { MediconServerData, MediconTimelineMetrics } from '@models/medicon-serve
 import { TimelineResolutionValues } from '@shared/consts/timeline-resolution-values.const';
 import { ReplaySubject } from 'rxjs';
 import { TimelineResolution } from '@shared/enums/timeline-resolution.enum';
+import { TimeService } from '@shared/services/time.service';
+import { TimeDisplayType } from '@shared/enums/time-display-type.enum';
 
 @Injectable()
 export class MediconService {
@@ -10,14 +12,18 @@ export class MediconService {
   timelineMetrics: MediconTimelineMetrics;
   timelineMetrics$ = new ReplaySubject<MediconTimelineMetrics>();
   resolution$ = new ReplaySubject<TimelineResolution>();
+  elGraphAreaWidth;
 
-  init(serverData: MediconServerData, elTimelineWidth) {
+  constructor(private timeService: TimeService) {}
+
+  init(serverData: MediconServerData, elGraphAreaWidth) {
+    this.elGraphAreaWidth = elGraphAreaWidth;
     this.serverData = serverData;
     this.setResolution(this.serverData.resolution);
-    this.setTimelineMetrics(elTimelineWidth, this.serverData.resolution);
   }
 
   setResolution(resolution) {
+    this.setTimelineMetrics(resolution);
     this.resolution$.next(resolution);
   }
 
@@ -25,18 +31,18 @@ export class MediconService {
   /*    T I M E L I N E   M E T R I C S    */
   /*****************************************/
 
-  setTimelineMetrics(elGraphAreaWidth, resolution) {
-    const timelineWidth = elGraphAreaWidth - (elGraphAreaWidth % 12);
+  setTimelineMetrics(resolution) {
+    const item = TimelineResolutionValues[resolution];
+    const hardVerticalsWidth = Math.floor(this.elGraphAreaWidth / 12);
+    const hardVerticalsWidthStyle = hardVerticalsWidth + 'px 100%';
+    const timelineWidth = hardVerticalsWidth * 12;
 
     // for 24h
-    const fullWidth = 16 / 12 * timelineWidth;
-    const hardVerticalsWidth = fullWidth / 16;
-    const hardVerticalsWidthStyle = hardVerticalsWidth + 'px 100%';
-    const softVerticalsWidthStyle = hardVerticalsWidth / 6 + 'px 100%';
+    const totalLCells = 12 + (item.filler ?? 0);
+    const fullWidth = totalLCells * hardVerticalsWidth;
+    const softVerticalsWidthStyle = hardVerticalsWidth / item.softVerticals + 'px 100%';
     const fillerWidth = fullWidth - timelineWidth;
-    const item = TimelineResolutionValues[resolution];
     this.timelineMetrics = {
-      resolution,
       xAxisValues: this.getXAxisValues(resolution, this.serverData.timelineRange.days),
       subDivision: item.subDivision,
       interval: item.interval,
@@ -48,17 +54,31 @@ export class MediconService {
       fillerWidth
     }
     this.timelineMetrics$.next(this.timelineMetrics);
-console.log('this.timelineMetrics:', this.timelineMetrics);
   }
 
   getXAxisValues(resolution, days) {
+    // let epoch = this.timeService.gmtToEpoch(this.serverData.timelineRange.range.fromTimeGmt);
+    console.log('epoch2:', this.serverData.timelineRange.range.fromTimeGmt);
+    let d = new Date(this.serverData.timelineRange.range.fromTimeGmt.substring(0, 10));
+    console.log('d:', d.toISOString());
+    let startEpoch = d.getTime();
+    console.log('startEpoch:', startEpoch);
+    console.time('getXAxisValues');
     const item = TimelineResolutionValues[resolution];
-    const totalMinutes = days * 1440;
-    const xAxisHardLines = totalMinutes / item.minutes + 1;
+    const totalRangeInMs = this.serverData.timelineRange.days * 1440 * 60000;
+    const endEpoch = startEpoch + totalRangeInMs;
+    const adv = item.minutes * 60000;
     const values = [];
-    for (let i = 0; i < xAxisHardLines; i++) {
-      values.push('TL' + i + 1);
+    let interval = 0;
+    for (let epoch = startEpoch; epoch <= endEpoch; epoch += adv) {
+      if (item.type !== TimeDisplayType.DateTime || ++interval % 2 !== 0) {
+        values.push(this.timeService.getFormattedTime(item.type, epoch));
+      }
+      // values.push('TL' + i + 1);
+      // const time = (new Date(epoch)).toISOString();
+      // values.push(time);
     }
+    console.timeEnd('getXAxisValues');
     return values;
 
     // const pivotEpoch = this.timeService.getMidnightEpoch(this.serverData.timeline.pivotTime.iso.substring(11, 16));

@@ -35,11 +35,11 @@ export class MediconTesterComponent implements OnInit, OnDestroy {
     private mediconService: MediconService) {}
 
   ngOnInit() {
-    this.resolutionSubscription = this.mediconService.resolution$.subscribe(resolution => this.onChangeResolution(resolution));
     setTimeout(() => {
       this.initSettings();
       // this.onClickSettings();
-      this.buildData();
+      this.buildServerData();
+      this.resolutionSubscription = this.mediconService.resolution$.subscribe(resolution => this.onChangeResolution(resolution));
     }, 50);
   }
 
@@ -71,6 +71,7 @@ export class MediconTesterComponent implements OnInit, OnDestroy {
   }
 
   onChangeResolution(resolution) {
+    if (this.settings.resolution === resolution) return;
     this.settings.resolution = resolution;
     this.saveToLocalStorage(false);
   }
@@ -89,7 +90,7 @@ export class MediconTesterComponent implements OnInit, OnDestroy {
     const item = JSON.stringify(this.settings);
     localStorage.setItem(this.LOCAL_STORAGE_KEY, item);
     if (isShowToaster) this.toastr.success('Settings were saved');
-    if (isShowToaster) this.buildData();
+    if (isShowToaster) this.buildServerData();
   }
 
   getFromLocalStorage() {
@@ -109,7 +110,7 @@ export class MediconTesterComponent implements OnInit, OnDestroy {
     if (isClear) {
       this.clearLocalStorage();
       this.settings = JSON.parse(JSON.stringify(this.defaultSettings));
-      this.buildData();
+      this.buildServerData();
       this.toastr.success('Settings were saved');
       this.cdr.detectChanges();
     }
@@ -121,7 +122,7 @@ export class MediconTesterComponent implements OnInit, OnDestroy {
     this.cdr.detectChanges();
   }
 
-  buildData() {
+  buildServerData() {
     const getCategories = (medications): MedicationsCategory[] => {
       const categories = {};
       medications.forEach(medication => {
@@ -156,6 +157,8 @@ export class MediconTesterComponent implements OnInit, OnDestroy {
       sections: this.settings.sections.map((section, i) => getSection(section, i)),
       timelineRange: this.getTimelineRange()
     }
+
+
   }
 
   getTimelineRange(): MediconTimelineRange {
@@ -173,15 +176,16 @@ export class MediconTesterComponent implements OnInit, OnDestroy {
         values.push(this.timeService.getFormattedTime(item.type, time));
       }
     }
+    const { fromTimeGmt, toTimeGmt } = this.timeService.getTimelineFromGmtToGmt();
     return {
       pivotTime: {
         epoch: this.timeService.getLocalEpoch(pivotEpoch),
         iso: this.timeService.getLocalIso(pivotEpoch)
       },
       range: {
-        fromTimeGmt: values[0],
+        fromTimeGmt,
         fromTimeEpoch: tlStartEpoch,
-        toTimeGmt: values[12],
+        toTimeGmt,
         toTimeEpoch: elEndEpoch
       },
       days: 12

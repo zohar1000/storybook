@@ -42,7 +42,6 @@ export interface MediconTimelineRange {
 }
 
 export interface MediconTimelineMetrics {
-  resolution: TimelineResolution;
   xAxisValues: string[];
   subDivision: number;
   interval: number;

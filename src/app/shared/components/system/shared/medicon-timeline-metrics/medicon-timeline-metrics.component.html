@@ -1,5 +1,7 @@
-<!--
-<div class="x-axis-timeline-metrics">
-  <div *ngFor="let value of timelineValues.xAxisValues">{{value}}</div>
-</div>
--->
+<ng-container *ngIf="mediconService.timelineMetrics$ | async as metrics">
+  <div class="x-axis-timeline-metrics" style="--hardVerticalsWidth: {{metrics.hardVerticalsWidth}}px">
+    <div *ngFor="let value of metrics.xAxisValues">{{value}}</div>
+  </div>
+</ng-container>
+
+

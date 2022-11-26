@@ -1,20 +1,18 @@
+@import 'variables';
+
 :host {
-  display: flex;
-  justify-content: flex-end;
+  display: inline-block;
   position: relative;
-  line-height: 1.5rem;
-  height: 1.5rem;
+  line-height: $medicon-timeline-metrics-height;
+  height: $medicon-timeline-metrics-height;
   .x-axis-timeline-metrics {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
     position: absolute;
+    display: inline-flex;
+    justify-content: left;
+    left: calc(var(--hardVerticalsWidth) * -0.5);
     > div {
       text-align: center;
-      width: 100%;
-    }
-    &.top {
-      // align-items: flex-end;
+      width: var(--hardVerticalsWidth);
     }
   }
 }
