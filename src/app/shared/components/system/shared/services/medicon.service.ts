@@ -68,25 +68,30 @@ console.log('this.timelineMetrics:', this.timelineMetrics);
     this.scrollTo(e.target.scrollLeft);
   }
 
-  scrollTo(x) {
+  scrollTo(scrollPos) {
     // console.log('e:', x, '/', this.timelineMetrics.fullWidth, '/', this.timelineMetrics.timelineWidth);
-    const startPct = Math.max(0, (x - this.SCROLL_SAFE_TEXT_MARGIN) / this.timelineMetrics.fullWidth);
-    const endPct = Math.min(1, (x + this.SCROLL_SAFE_TEXT_MARGIN + this.timelineMetrics.timelineWidth) / this.timelineMetrics.fullWidth);
+    const startPct = Math.max(0, (scrollPos - this.SCROLL_SAFE_TEXT_MARGIN) / this.timelineMetrics.fullWidth);
+    const endPct = Math.min(1, (scrollPos + this.SCROLL_SAFE_TEXT_MARGIN + this.timelineMetrics.timelineWidth) / this.timelineMetrics.fullWidth);
     console.log('start/end:', (startPct * 100).toFixed(0) + '%', '/', (endPct * 100).toFixed(0) + '%');
 
-    const rangeInMs = this.timelineMetrics.toEpoch - this.timelineMetrics.fromEpoch;
-    const startEpoch = this.timelineMetrics.fromEpoch + Math.round(startPct * rangeInMs);
+    const fullRangeInMs = this.timelineMetrics.toEpoch - this.timelineMetrics.fromEpoch;
+    const windowRangeInMs = fullRangeInMs * (this.timelineMetrics.timelineWidth / this.timelineMetrics.fullWidth);
+    const startEpoch = this.timelineMetrics.fromEpoch + Math.round(startPct * fullRangeInMs);
 console.log('from/to epoch:', this.timelineMetrics.fromEpoch, '/', this.timelineMetrics.toEpoch);
-    const endEpoch = this.timelineMetrics.fromEpoch + Math.round(endPct * rangeInMs);
+    const endEpoch = this.timeService.getLocalEpoch(this.timelineMetrics.fromEpoch + Math.round(endPct * fullRangeInMs));
     const startHardVerticalEpoch = Math.floor(this.timeService.getLocalEpoch(startEpoch) / this.timelineMetrics.gapEpoch) * this.timelineMetrics.gapEpoch;
     const item = TimelineResolutionValues[this.resolution];
     const values = [];
-    const gapInMs = this.timelineMetrics.gapEpoch;
+    const gapInMs = this.timelineMetrics.gapEpoch; // * windowRangeInMs / fullRangeInMs;
+    const adjLeftInMs = gapInMs / 2;
     for (let epoch = startHardVerticalEpoch; epoch <= endEpoch; epoch += gapInMs) {
       const value = this.timeService.getFormattedTime(item.type, this.timeService.getUtcEpoch(epoch));
       // console.log('d:', d);
-      const marginLeft = (epoch - startHardVerticalEpoch) / rangeInMs * this.timelineMetrics.fullWidth;
-      values.push({ value, marginLeft });
+      const leftInMs = epoch - startHardVerticalEpoch;
+      const pct = leftInMs / fullRangeInMs;
+      // const left = scrollPos + (epoch - startHardVerticalEpoch) / windowRangeInMs * this.timelineMetrics.timelineWidth;
+      const left = pct * this.timelineMetrics.timelineWidth;
+      values.push({ value, left });
     }
     console.log('values:', values[0], '-', values[values.length - 1]);
     this.xAxisValues$.next(values);

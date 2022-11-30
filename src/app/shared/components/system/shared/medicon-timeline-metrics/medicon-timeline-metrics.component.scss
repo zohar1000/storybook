@@ -5,15 +5,10 @@
   position: relative;
   line-height: $medicon-timeline-metrics-height;
   height: $medicon-timeline-metrics-height;
-  .x-axis-timeline-metrics {
+  .xaxis-value {
     position: absolute;
-    display: inline-flex;
-    justify-content: left;
-    // left: calc(var(--hardVerticalsWidth) * -0.5);
     left: 0;
-    > div {
-      text-align: center;
-      // width: var(--hardVerticalsWidth);
-    }
+    // text-align: center;
+    // width: var(--hardVerticalsWidth);
   }
 }
