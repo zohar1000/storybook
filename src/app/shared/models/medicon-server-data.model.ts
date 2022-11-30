@@ -9,7 +9,7 @@ export interface MediconServerData {
   },
   resolution: TimelineResolution;
   sections: MediconSection[],
-  timelineRange: MediconTimelineRange
+  timelineRange: MediconServerTimelineRange
 }
 
 export interface MediconSection {
@@ -27,28 +27,9 @@ export interface MedicationsCategory {
   medications: Medication[]
 }
 
-export interface MediconTimelineRange {
-  range: {
-    fromTimeGmt: string;  // gmt time of start day
-    fromTimeEpoch: number;
-    toTimeGmt: string;
-    toTimeEpoch: number;
-  }
+export interface MediconServerTimelineRange {
+  fromTimeGmt: string;  // gmt time of start day
+  toTimeGmt: string;
   days: number;
-  pivotTime: {
-    epoch: number;  // local epoch time
-    iso: string;    // local iso time
-  }
-}
-
-export interface MediconTimelineMetrics {
-  xAxisValues: string[];
-  subDivision: number;
-  interval: number;
-  timelineWidth: number;
-  fullWidth: number;
-  hardVerticalsWidth: number;
-  hardVerticalsWidthStyle: string;
-  softVerticalsWidthStyle: string;
-  fillerWidth: number;
+  pivotTimeGmt: string;
 }

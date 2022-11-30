@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { Settings } from '@stories/models/settings.model';
 import { ToastrService } from 'ngx-toastr';
-import { MedicationsCategory, MediconSection, MediconTimelineRange, MediconServerData } from '@models/medicon-server-data.model';
+import { MedicationsCategory, MediconSection, MediconServerTimelineRange, MediconServerData } from '@models/medicon-server-data.model';
 import { Direction } from '@stories/models/direction.model';
 import { MedicationCategories } from '@stories/const/medication-categories.const';
 import { TimeDisplayType } from '@shared/enums/time-display-type.enum';
@@ -9,6 +9,7 @@ import { TimelineResolutionValues } from '@shared/consts/timeline-resolution-val
 import { TimeService } from '@shared/services/time.service';
 import { MediconService } from '@shared/components/system/shared/services/medicon.service';
 import { Subscription } from 'rxjs';
+import * as dayjs from 'dayjs';
 
 @Component({
   selector: 'app-medicon-tester',
@@ -32,7 +33,12 @@ export class MediconTesterComponent implements OnInit, OnDestroy {
     private cdr: ChangeDetectorRef,
     private toastr: ToastrService,
     private timeService: TimeService,
-    private mediconService: MediconService) {}
+    private mediconService: MediconService) {
+    window['windowsSettings'] = {
+      localDateFormatPadded: 'DD/MM/YY',
+      localDateFormatUnpadded: 'D/M/YY'
+    }
+  }
 
   ngOnInit() {
     setTimeout(() => {
@@ -148,47 +154,84 @@ export class MediconTesterComponent implements OnInit, OnDestroy {
       }
     }
 
+    const timelineRange = this.getTimelineRange();
     this.serverData = {
       title: {
-        fromTimeGmt: '2022-01-01 10:00',
-        toTimeGmt: '2022-01-02 17:00',
+        fromTimeGmt: timelineRange.fromTimeGmt,
+        toTimeGmt: timelineRange.toTimeGmt,
       },
       resolution: this.settings.resolution,
       sections: this.settings.sections.map((section, i) => getSection(section, i)),
       timelineRange: this.getTimelineRange()
     }
-
-
   }
 
-  getTimelineRange(): MediconTimelineRange {
-    const item = TimelineResolutionValues[this.settings.resolution];
-    const pivotEpoch = this.timeService.getMidnightEpoch(this.settings.pivotTime);
-    const roundBy = 60000 * item.minutes;
-    const roundedPivotEpoch = pivotEpoch - (pivotEpoch % roundBy);
-    const roundedPivotLocalEpoch = this.timeService.getLocalEpoch(roundedPivotEpoch);
-    const tlStartEpoch = roundedPivotLocalEpoch - (6 * roundBy);
-    const elEndEpoch = roundedPivotLocalEpoch + (6 * roundBy);
-    const values = [];
-    let interval = 0;
-    for (let time = tlStartEpoch; time <= elEndEpoch; time += roundBy) {
-      if (item.type !== TimeDisplayType.DateTime || ++interval % 2 !== 0) {
-        values.push(this.timeService.getFormattedTime(item.type, time));
+  getTimelineRange(): MediconServerTimelineRange {
+    const { pivotEpoch, pivotMidnightEpoch } = this.getPivotEpoch(this.settings.pivotTime);
+    const { fromTimeGmt, toTimeGmt } = this.getTimelineRangeInGmt(pivotMidnightEpoch);
+    return {
+      fromTimeGmt,
+      toTimeGmt,
+      days: 12,
+      pivotTimeGmt: this.timeService.epochToGmt(pivotEpoch)
+    }
+  }
+
+  getPivotEpoch(time: string) {
+    let pivotHour;
+    let pivotMinutes;
+    if (typeof(time) === 'string') {
+      pivotHour = Number(time.substring(0, 2));
+      pivotMinutes = Number(time.substring(3, 5));
+    }
+    const now = Date.now();
+    const localEpoch = this.timeService.getLocalEpoch(now);
+    const pivotMidnightEpoch = this.timeService.getUtcEpoch(localEpoch - (localEpoch % this.timeService.ONE_DAY_IN_MS));
+    const pivotEpoch = pivotMidnightEpoch + (pivotHour * this.timeService.ONE_HOUR_IN_MS) + pivotMinutes * 60000;
+    return { pivotEpoch, pivotMidnightEpoch };
+  }
+
+  getTimelineRangeInGmt(pivotMidnightEpoch) {
+    const localTime = dayjs(pivotMidnightEpoch);
+    const fromTime = localTime.subtract(10, 'day');
+    const fromTimeGmt = this.timeService.epochToGmt(fromTime.valueOf());
+    const toTime = localTime.add(2, 'day');
+    const toTimeGmt = this.timeService.epochToGmt(toTime.valueOf());
+    return { fromTimeGmt, toTimeGmt };
+  }
+
+
+  /*
+    // old - get from/to for paging
+    getTimelineRange(): MediconTimelineRange {
+      const item = TimelineResolutionValues[this.settings.resolution];
+      const pivotEpoch = this.timeService.getMidnightEpoch(this.settings.pivotTime);
+      const roundBy = 60000 * item.minutes;
+      const roundedPivotEpoch = pivotEpoch - (pivotEpoch % roundBy);
+      const roundedPivotLocalEpoch = this.timeService.getLocalEpoch(roundedPivotEpoch);
+      const tlStartEpoch = roundedPivotLocalEpoch - (6 * roundBy);
+      const elEndEpoch = roundedPivotLocalEpoch + (6 * roundBy);
+      const values = [];
+      let interval = 0;
+      for (let time = tlStartEpoch; time <= elEndEpoch; time += roundBy) {
+        if (item.type !== TimeDisplayType.DateTime || ++interval % 2 !== 0) {
+          values.push(this.timeService.getFormattedTime(item.type, time));
+        }
+      }
+      const { fromTimeGmt, toTimeGmt } = this.timeService.getTimelineFromGmtToGmt();
+      return {
+        pivotTime: {
+          epoch: this.timeService.getLocalEpoch(pivotEpoch),
+          iso: this.timeService.getLocalIso(pivotEpoch)
+        },
+        range: {
+          fromTimeGmt,
+          fromTimeEpoch: tlStartEpoch,
+          toTimeGmt,
+          toTimeEpoch: elEndEpoch
+        },
+        days: 12
       }
     }
-    const { fromTimeGmt, toTimeGmt } = this.timeService.getTimelineFromGmtToGmt();
-    return {
-      pivotTime: {
-        epoch: this.timeService.getLocalEpoch(pivotEpoch),
-        iso: this.timeService.getLocalIso(pivotEpoch)
-      },
-      range: {
-        fromTimeGmt,
-        fromTimeEpoch: tlStartEpoch,
-        toTimeGmt,
-        toTimeEpoch: elEndEpoch
-      },
-      days: 12
-    }
-  }
+  */
 }

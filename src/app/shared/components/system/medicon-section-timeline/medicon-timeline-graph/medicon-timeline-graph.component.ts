@@ -36,7 +36,7 @@ export class MediconTimelineGraphComponent implements OnInit {
     // this.hardVerticalsWidth = hardVerticalsWidth + 'px 100%';
     // this.softVerticalsWidth = hardVerticalsWidth / 6 + 'px 100%';
     // this.fillerWidth = this.fullWidth - this.timelineGraphWidth;
-    this.timelineGraphWidth = this.mediconService.timelineMetrics.timelineWidth + 1;
+    this.timelineGraphWidth = this.mediconService.timelineMetrics.timelineWidth; // + 1;
 
 
 
@@ -66,5 +66,12 @@ export class MediconTimelineGraphComponent implements OnInit {
         this.graphLinesCount += item.medications.length;
       }
     })
+  }
+
+  onScroll(e) {
+    e.stopPropagation();
+    e.stopImmediatePropagation();
+    // console.log('e:', e.target.scrollLeft, '/', e.target.scrollWidth);
+    this.mediconService.onScrollTimeline(e);
   }
 }

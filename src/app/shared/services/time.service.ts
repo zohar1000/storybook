@@ -13,56 +13,54 @@ export class TimeService {
   }
   locale = 'he-il';
 
-  getMidnightEpoch(time: string): number {
-    let pivotHour;
-    let pivotMinutes;
-    if (typeof(time) === 'string') {
-      pivotHour = Number(time.substring(0, 2));
-      pivotMinutes = Number(time.substring(3, 5));
-    }
-    const now = Date.now();
-    const dayStartTime = now - (now % this.ONE_DAY_IN_MS);
-    return dayStartTime + (pivotHour * this.ONE_HOUR_IN_MS) + pivotMinutes * 60000;
+  getLocalEpoch(epoch: number) {
+    return epoch - this.getZoneOffsetInMs();
   }
 
-  getLocalEpoch(epoch: number) {
+  getUtcEpoch(epoch: number) {
     return epoch + this.getZoneOffsetInMs();
   }
 
-  getLocalIso(epoch: number) {
+  epochToLocalIso(epoch: number) {
     return (new Date(this.getLocalEpoch(epoch))).toISOString();
   }
 
-  getZoneOffsetInMs() {
-    return (new Date()).getTimezoneOffset() * 60000;
+  epochToLocalGmt(epoch: number) {
+    // return (new Date(this.getLocalEpoch(epoch))).toISOString();
+    return dayjs(this.getLocalEpoch(epoch)).format('YYYY-MM-DDTHH:mm:ss[Z]Z');
+  }
+
+  epochToGmt(epoch: number) {
+    // return (new Date(this.getLocalEpoch(epoch))).toISOString();
+    return dayjs(epoch).format('YYYY-MM-DDTHH:mm:ssZ');
   }
 
   getFormattedTime(type: TimeDisplayType, epoch: number) {
     const date = new Date(epoch);
     switch(type) {
       case TimeDisplayType.Time:
-        return date.toLocaleTimeString(this.locale, this.TimeFormatOptions.time)
+        // return date.toLocaleTimeString(this.locale, this.TimeFormatOptions.time);
+        return dayjs(epoch).format('HH:mm');
       case TimeDisplayType.Date:
-        return date.toLocaleDateString(this.locale, this.TimeFormatOptions.date);
+        // return date.toLocaleDateString(this.locale, this.TimeFormatOptions.date);
+        return dayjs(epoch).format('D/M/YY');
       case TimeDisplayType.DateTime:
-        const isoTime = date.toLocaleString(this.locale, this.TimeFormatOptions.dateTime);
-        return isoTime.substring(0, 8) + ' ' + isoTime.substring(10, 15);
+        return dayjs(epoch).format('D/M/YY HH:mm');
+        // const isoTime = date.toLocaleString(this.locale, this.TimeFormatOptions.dateTime);
+        // return isoTime.substring(0, 8) + ' ' + isoTime.substring(10, 15);
     }
-  }
-
-  getTimelineFromGmtToGmt() {
-    const date = new Date();
-    const localTime = dayjs(date);
-    const fromTime = localTime.subtract(10, 'day');
-    const fromTimeGmt = `${fromTime.year()}-${fromTime.month() + 1}-${fromTime.date()}T00:00:00Z+02:00`;
-    console.log('fromTimeGmt:', fromTimeGmt);
-    const toTime = localTime.add(2, 'day');
-    const toTimeGmt = `${toTime.year()}-${toTime.month() + 1}-${toTime.date()}T00:00:00Z+02:00`;
-    console.log('toTimeGmt:', toTimeGmt);
-    return { fromTimeGmt, toTimeGmt };
   }
 
   gmtToEpoch(gmt) {
     return dayjs(gmt).valueOf();
   }
+
+  gmtToLocalEpoch(gmt) {
+    return this.getLocalEpoch(dayjs(gmt).valueOf());
+  }
+
+  getZoneOffsetInMs() {
+    return (new Date()).getTimezoneOffset() * 60000;
+  }
+
 }

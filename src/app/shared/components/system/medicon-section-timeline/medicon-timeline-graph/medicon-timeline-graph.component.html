@@ -1,7 +1,9 @@
 <div class="content"
      *ngIf="mediconService.timelineMetrics$ | async; let metrics"
      [style.width.px]="timelineGraphWidth"
-     style="--medications-count:{{graphLinesCount}}">
+     style="--medications-count:{{graphLinesCount}}"
+     (scroll)="onScroll($event)"
+  >
   <div class="timeline-metrics" [style.width.px]="metrics.fullWidth">
     <app-medicon-timeline-metrics></app-medicon-timeline-metrics>
   </div>

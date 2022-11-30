@@ -7,6 +7,10 @@ $pivot-icon-color: green;
   align-items: center;
   position: relative;
 
+  .lines-collapse {
+    color: $pivot-icon-color;
+  }
+
   .slider-container {
     background: #e7e7e7;
     padding: 3px 10px;
@@ -57,7 +61,7 @@ $pivot-icon-color: green;
     }
   }
 
-  .pivot {
+  .pivot, .lines-collapse {
     padding: 1px 2px;
     border: 1px solid $pivot-icon-color;
     border-radius: 4px;
@@ -74,6 +78,21 @@ $pivot-icon-color: green;
       i {
         color: gray;
       }
+    }
+  }
+
+  .lines-collapse {
+    padding: 0;
+    //padding: 2px 2px;
+    //border: none;
+    display: flex;
+    align-items: center;
+    margin-left: 0;
+    margin-right: 2.5rem;
+    //border: 0;
+    i {
+      font-size: 1rem;
+      padding-top: 1px;
     }
   }
 }

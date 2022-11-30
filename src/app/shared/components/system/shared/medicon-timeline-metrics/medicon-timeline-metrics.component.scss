@@ -9,10 +9,11 @@
     position: absolute;
     display: inline-flex;
     justify-content: left;
-    left: calc(var(--hardVerticalsWidth) * -0.5);
+    // left: calc(var(--hardVerticalsWidth) * -0.5);
+    left: 0;
     > div {
       text-align: center;
-      width: var(--hardVerticalsWidth);
+      // width: var(--hardVerticalsWidth);
     }
   }
 }
