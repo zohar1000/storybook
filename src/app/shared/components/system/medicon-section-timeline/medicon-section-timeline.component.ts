@@ -14,7 +14,6 @@ export class MediconSectionTimelineComponent implements OnInit {
   @Input() direction;
   @Input() text;
   @Input() section: MediconSection;
-  @Output() changeResolution = new EventEmitter();
   MediconLegendIcons = MediconLegendIcons;
   legendColumns;
   timelineGraphWidth;

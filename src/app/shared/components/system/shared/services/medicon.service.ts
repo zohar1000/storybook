@@ -17,21 +17,19 @@ export class MediconService {
   resolution$ = new ReplaySubject<TimelineResolution>();
   elGraphAreaWidth;
   xAxisValues$ = new ReplaySubject();
-  scrollLeft = 0;
-  middlePct;
+  // middlePct;
 
   constructor(private timeService: TimeService) {}
 
   init(serverData: MediconServerData, elGraphAreaWidth) {
     this.elGraphAreaWidth = elGraphAreaWidth;
     this.serverData = serverData;
-    this.setResolution(this.serverData.resolution);
+    this.setResolution(this.serverData.resolution, true);
   }
 
-  setResolution(resolution) {
-console.log('init, elGraphAreaWidth.scrollLeft:', this.elGraphAreaWidth.scrollLeft);
+  setResolution(resolution, isInit = false) {
     this.resolution = resolution;
-    this.setTimelineMetrics(resolution);
+    this.setTimelineMetrics(resolution, isInit);
     this.resolution$.next(resolution);
   }
 
@@ -39,8 +37,9 @@ console.log('init, elGraphAreaWidth.scrollLeft:', this.elGraphAreaWidth.scrollLe
   /*    T I M E L I N E   M E T R I C S    */
   /*****************************************/
 
-  setTimelineMetrics(resolution) {
+  private setTimelineMetrics(resolution, isInit = false) {
     const item = TimelineResolutionValues[resolution];
+    const middlePct = isInit ? 0 : this.getMiddlePct();
 
     // epoch / ms
     const totalFromEpoch =  this.timeService.gmtToEpoch(this.serverData.timelineRange.fromTimeGmt);
@@ -59,7 +58,7 @@ console.log('init, elGraphAreaWidth.scrollLeft:', this.elGraphAreaWidth.scrollLe
     const fillerWidth = totalWidth - (dataColumns * hardVerticalWidth);
     const totalRangeMs = totalLColumns * columnMs;
     const totalToEpoch = totalFromEpoch + totalRangeMs;
-
+    const scrollX = this.getNewScrollX(middlePct, windowWidth, totalWidth);
 
     this.timelineMetrics = {
       total: {
@@ -90,29 +89,68 @@ console.log('init, elGraphAreaWidth.scrollLeft:', this.elGraphAreaWidth.scrollLe
       hardVerticalWidth,
       hardVerticalWidthStyle,
       softVerticalWidthStyle,
-      xAxisValueWidth: hardVerticalWidth * item.interval
-
+      xAxisValueWidth: hardVerticalWidth * item.interval,
+      scrollX
     }
-console.log('this.timelineMetrics:', this.timelineMetrics);
-    this.scrollTo();
+
+// console.log('this.timelineMetrics:', this.timelineMetrics);
+//     this.scrollToMiddlePct(middlePct);
+    // this.scrollTo();
     this.timelineMetrics$.next(this.timelineMetrics);
   }
 
+  getMiddlePct() {
+    const prevScrollFromX = this.timelineMetrics.scrollX;
+    const prevScrollToX = prevScrollFromX + this.timelineMetrics.window.width;
+    const middleX = (prevScrollToX + prevScrollFromX) / 2;
+    const middlePct = middleX / this.timelineMetrics.total.width;
+console.log('prev width window/total:', this.timelineMetrics.window.width, '/', this.timelineMetrics.total.width);
+console.log('prev ScrollFromX/ScrollToX:', prevScrollFromX, '/', prevScrollToX);
+console.log('middle pct:', middlePct);
+    return middlePct;
+  }
+
+  getNewScrollX(middlePct, windowWidth, totalWidth) {
+    const middleX = middlePct * totalWidth;
+    const endX = middleX + (windowWidth / 2);
+    let startX = middleX - (windowWidth / 2);
+    if (endX > totalWidth) startX -= (endX - totalWidth);
+    if (startX < 0) startX = 0;
+    return startX;
+  }
+
+  /*************************/
+  /*      S C R O L L      */
+  /*************************/
+
+//   scrollToMiddlePct(middlePct) {
+// console.log('scrollToMiddlePct:', middlePct);
+//     const metrics = this.timelineMetrics;
+//     const middleX = middlePct * metrics.total.width;
+//     const endX = middleX + (metrics.window.width / 2);
+//     let startX = middleX - (metrics.window.width / 2);
+//     if (endX > metrics.total.width) startX -= (endX - metrics.total.width);
+//     if (startX < 0) startX = 0;
+//     this.scrollLeft = startX;
+//     this.scrollTo();
+//   }
+
   onScrollTimeline(e) {
-    this.scrollLeft = e.target.scrollLeft;
+console.log('onScrollTimeline:', this.timelineMetrics.scrollX, '->', e.target.scrollLeft);
+    this.timelineMetrics.scrollX = e.target.scrollLeft;
     this.scrollTo();
   }
 
   scrollTo() {
     const metrics = this.timelineMetrics;
     // console.log('e:', x, '/', this.timelineMetrics.fullWidth, '/', this.timelineMetrics.timelineWidth);
-    const startPct = Math.max(0, (this.scrollLeft - this.SCROLL_SAFE_TEXT_MARGIN) / metrics.total.width);
-console.log('startPct:', (startPct * 100).toFixed(0) + '%');
-const endPct = Math.min(1, (this.scrollLeft + this.SCROLL_SAFE_TEXT_MARGIN + metrics.window.width) / metrics.total.width);
+    const startPct = Math.max(0, (metrics.scrollX - this.SCROLL_SAFE_TEXT_MARGIN) / metrics.total.width);
+// console.log('startPct:', (startPct * 100).toFixed(0) + '%');
+const endPct = Math.min(1, (metrics.scrollX + this.SCROLL_SAFE_TEXT_MARGIN + metrics.window.width) / metrics.total.width);
 // console.log('start/end:', (startPct * 100).toFixed(0) + '%', '/', (endPct * 100).toFixed(0) + '%');
 // console.log('total from/to epoch:', metrics.total.fromEpoch, '/', metrics.total.toEpoch);
 
-    this.middlePct = (endPct - startPct) / 2;
+    // this.middlePct = (endPct - startPct) / 2;
     const startEpoch = metrics.total.fromEpoch + Math.round(startPct * metrics.total.rangeMs);
     const localStartEpoch = this.timeService.getLocalEpoch(startEpoch);
     const item = TimelineResolutionValues[this.resolution];

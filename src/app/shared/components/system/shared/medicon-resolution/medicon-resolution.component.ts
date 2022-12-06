@@ -31,10 +31,11 @@ export class MediconResolutionComponent implements OnInit, OnDestroy {
     this.sliderMax = len - 1;
     this.startLabel = this.options[0].label;
     this.endLabel = this.options[len - 1].label;
-    this.subscription = this.mediconService.resolution$.subscribe(resolution => {
-      this.ix = this.options.findIndex(item => item.value === resolution);
-      this.label = this.options[this.ix].label;
-    });
+    // this.subscription = this.mediconService.resolution$.subscribe(resolution => {
+    //   this.ix = this.options.findIndex(item => item.value === resolution);
+    //   this.label = this.options[this.ix].label;
+    // });
+    this.updateSlider(this.mediconService.resolution);
   }
 
   ngOnDestroy() {
@@ -44,7 +45,14 @@ export class MediconResolutionComponent implements OnInit, OnDestroy {
   onChangeSlider(e) {
     e.stopPropagation();
     e.stopImmediatePropagation();
-    this.mediconService.setResolution(this.options[Number(e.target.value)].value);
+    const resolution = this.options[Number(e.target.value)].value;
+    this.updateSlider(resolution);
+    this.mediconService.setResolution(resolution);
+  }
+
+  updateSlider(resolution) {
+    this.ix = this.options.findIndex(item => item.value === resolution);
+    this.label = this.options[this.ix].label;
   }
 
   onClickPivot() {
