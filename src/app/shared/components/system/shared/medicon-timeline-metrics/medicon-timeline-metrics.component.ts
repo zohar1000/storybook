@@ -20,14 +20,14 @@ export class MediconTimelineMetricsComponent implements OnInit, OnDestroy {
 
     // this.subscription = this.mediconService.timelineMetrics$.subscribe((metrics: MediconTimelineMetrics) => {
     //   // metrics.a =;
-    //   console.log('hardVerticalsWidth:', metrics.hardVerticalsWidth);
+    //   console.log('hardVerticalWidth:', metrics.hardVerticalWidth);
     //   console.log('xAxisValues.length:', metrics.xAxisValues.length);
     //   console.log('xAxisValues:', metrics.xAxisValues);
     // });
 
     // this.subscription = this.mediconService.xAxisValues$.subscribe((values) => {
     //   // metrics.a =;
-    //   console.log('hardVerticalsWidth:', metrics.hardVerticalsWidth);
+    //   console.log('hardVerticalWidth:', metrics.hardVerticalWidth);
     //   console.log('xAxisValues.length:', metrics.xAxisValues.length);
     //   console.log('xAxisValues:', metrics.xAxisValues);
     // });

@@ -1,6 +1,7 @@
 
 <ng-container *ngIf="mediconService.xAxisValues$ | async as values">
   <div *ngFor="let xAxis of values" class="xaxis-value"
+       [style.width.px]="xAxis.width"
        [style.left.px]="xAxis.left"
   >{{xAxis.value}}</div>
 </ng-container>
@@ -8,7 +9,7 @@
 
 <!--<ng-container *ngIf="mediconService.timelineMetrics$ | async as metrics">
   <ng-container *ngIf="mediconService.xAxisValues$ | async as values">
-    <div class="x-axis-timeline-metrics" style="&#45;&#45;hardVerticalsWidth: {{metrics.hardVerticalsWidth}}px">
+    <div class="x-axis-timeline-metrics" style="&#45;&#45;hardVerticalWidth: {{metrics.hardVerticalWidth}}px">
       <div *ngFor="let value of values">{{value}}</div>
     </div>
   </ng-container>
@@ -17,7 +18,7 @@
 
 <!--
 <ng-container *ngIf="mediconService.timelineMetrics$ | async as metrics">
-  <div class="x-axis-timeline-metrics" style="&#45;&#45;hardVerticalsWidth: {{metrics.hardVerticalsWidth}}px">
+  <div class="x-axis-timeline-metrics" style="&#45;&#45;hardVerticalWidth: {{metrics.hardVerticalWidth}}px">
     <div *ngFor="let value of metrics.xAxisValues">{{value}}</div>
   </div>
 </ng-container>

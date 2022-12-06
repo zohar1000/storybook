@@ -4,11 +4,12 @@ import { TimelineResolutionValues } from '@shared/consts/timeline-resolution-val
 import { ReplaySubject } from 'rxjs';
 import { TimelineResolution } from '@shared/enums/timeline-resolution.enum';
 import { TimeService } from '@shared/services/time.service';
-import { TimeDisplayType } from '@shared/enums/time-display-type.enum';
 import { MediconTimelineMetrics } from '@models/timeline-metrics.model';
 
 @Injectable()
 export class MediconService {
+  readonly WINDOW_COLUMNS = 12;
+  readonly SCROLL_SAFE_TEXT_MARGIN = 0; // 100;
   serverData: MediconServerData;
   timelineMetrics: MediconTimelineMetrics;
   timelineMetrics$ = new ReplaySubject<MediconTimelineMetrics>();
@@ -16,7 +17,8 @@ export class MediconService {
   resolution$ = new ReplaySubject<TimelineResolution>();
   elGraphAreaWidth;
   xAxisValues$ = new ReplaySubject();
-  readonly SCROLL_SAFE_TEXT_MARGIN = 0; // 100;
+  scrollLeft = 0;
+  middlePct;
 
   constructor(private timeService: TimeService) {}
 
@@ -27,6 +29,7 @@ export class MediconService {
   }
 
   setResolution(resolution) {
+console.log('init, elGraphAreaWidth.scrollLeft:', this.elGraphAreaWidth.scrollLeft);
     this.resolution = resolution;
     this.setTimelineMetrics(resolution);
     this.resolution$.next(resolution);
@@ -38,68 +41,103 @@ export class MediconService {
 
   setTimelineMetrics(resolution) {
     const item = TimelineResolutionValues[resolution];
-    const hardVerticalsWidth = Math.floor(this.elGraphAreaWidth / 12);
-    const hardVerticalsWidthStyle = hardVerticalsWidth + 'px 100%';
-    const timelineWidth = hardVerticalsWidth * 12;
-    const totalLColumns = 12 + (item.filler ?? 0);
-    const fullWidth = totalLColumns * hardVerticalsWidth;
-    const softVerticalsWidthStyle = hardVerticalsWidth / item.softVerticals + 'px 100%';
-    const fillerWidth = fullWidth - timelineWidth;
+
+    // epoch / ms
+    const totalFromEpoch =  this.timeService.gmtToEpoch(this.serverData.timelineRange.fromTimeGmt);
+    const dataToEpoch = this.timeService.gmtToEpoch(this.serverData.timelineRange.toTimeGmt);
+    const dataRangeInMs = dataToEpoch - totalFromEpoch;
+    const columnMs = item.minutes * 60000;
+    const dataColumns = dataRangeInMs / columnMs;
+
+    // width
+    const hardVerticalWidth = Math.floor(this.elGraphAreaWidth / this.WINDOW_COLUMNS);
+    const hardVerticalWidthStyle = hardVerticalWidth + 'px 100%';
+    const windowWidth = hardVerticalWidth * this.WINDOW_COLUMNS;
+    const totalLColumns = dataColumns + (item.fillerColumns ?? 0);
+    const totalWidth = totalLColumns * hardVerticalWidth;
+    const softVerticalWidthStyle = hardVerticalWidth / item.softVerticals + 'px 100%';
+    const fillerWidth = totalWidth - (dataColumns * hardVerticalWidth);
+    const totalRangeMs = totalLColumns * columnMs;
+    const totalToEpoch = totalFromEpoch + totalRangeMs;
+
 
     this.timelineMetrics = {
-      fromEpoch: this.timeService.gmtToEpoch(this.serverData.timelineRange.fromTimeGmt),
-      toEpoch: this.timeService.gmtToEpoch(this.serverData.timelineRange.toTimeGmt),
-      gapEpoch: item.minutes * item.interval * 60000,
-      xAxisValues: this.getXAxisValues(resolution, this.serverData.timelineRange.days),
+      total: {
+        fromEpoch: totalFromEpoch,
+        toEpoch: totalToEpoch,
+        width: totalWidth,
+        fillerWidth,
+        rangeMs: totalRangeMs
+      },
+      data: {
+        fromEpoch: totalFromEpoch,
+        toEpoch: dataToEpoch,
+        columns: dataColumns
+      },
+      window: {
+        width: windowWidth,
+        rangeMs: columnMs * this.WINDOW_COLUMNS
+      },
+
+
+      // fromEpoch: this.timeService.gmtToEpoch(this.serverData.timelineRange.fromTimeGmt),
+      // toEpoch: this.timeService.gmtToEpoch(this.serverData.timelineRange.toTimeGmt),
+      columnMs,
+      // xAxisValues: this.getXAxisValues(resolution, totalFromEpoch, totalToEpoch, this.serverData.timelineRange.days),
       interval: item.interval,
-      timelineWidth,
-      fullWidth,
-      hardVerticalsWidth,
-      hardVerticalsWidthStyle,
-      softVerticalsWidthStyle,
-      fillerWidth
+      // timelineWidth,
+      // fullWidth,
+      hardVerticalWidth,
+      hardVerticalWidthStyle,
+      softVerticalWidthStyle,
+      xAxisValueWidth: hardVerticalWidth * item.interval
+
     }
 console.log('this.timelineMetrics:', this.timelineMetrics);
-    this.scrollTo(0);
+    this.scrollTo();
     this.timelineMetrics$.next(this.timelineMetrics);
   }
 
   onScrollTimeline(e) {
-    this.scrollTo(e.target.scrollLeft);
+    this.scrollLeft = e.target.scrollLeft;
+    this.scrollTo();
   }
 
-  scrollTo(scrollPos) {
+  scrollTo() {
+    const metrics = this.timelineMetrics;
     // console.log('e:', x, '/', this.timelineMetrics.fullWidth, '/', this.timelineMetrics.timelineWidth);
-    const startPct = Math.max(0, (scrollPos - this.SCROLL_SAFE_TEXT_MARGIN) / this.timelineMetrics.fullWidth);
-    const endPct = Math.min(1, (scrollPos + this.SCROLL_SAFE_TEXT_MARGIN + this.timelineMetrics.timelineWidth) / this.timelineMetrics.fullWidth);
-    console.log('start/end:', (startPct * 100).toFixed(0) + '%', '/', (endPct * 100).toFixed(0) + '%');
+    const startPct = Math.max(0, (this.scrollLeft - this.SCROLL_SAFE_TEXT_MARGIN) / metrics.total.width);
+console.log('startPct:', (startPct * 100).toFixed(0) + '%');
+const endPct = Math.min(1, (this.scrollLeft + this.SCROLL_SAFE_TEXT_MARGIN + metrics.window.width) / metrics.total.width);
+// console.log('start/end:', (startPct * 100).toFixed(0) + '%', '/', (endPct * 100).toFixed(0) + '%');
+// console.log('total from/to epoch:', metrics.total.fromEpoch, '/', metrics.total.toEpoch);
 
-    const fullRangeInMs = this.timelineMetrics.toEpoch - this.timelineMetrics.fromEpoch;
-    const windowRangeInMs = fullRangeInMs * (this.timelineMetrics.timelineWidth / this.timelineMetrics.fullWidth);
-    const startEpoch = this.timelineMetrics.fromEpoch + Math.round(startPct * fullRangeInMs);
-console.log('from/to epoch:', this.timelineMetrics.fromEpoch, '/', this.timelineMetrics.toEpoch);
-    const endEpoch = this.timeService.getLocalEpoch(this.timelineMetrics.fromEpoch + Math.round(endPct * fullRangeInMs));
-    const startHardVerticalEpoch = Math.floor(this.timeService.getLocalEpoch(startEpoch) / this.timelineMetrics.gapEpoch) * this.timelineMetrics.gapEpoch;
+    this.middlePct = (endPct - startPct) / 2;
+    const startEpoch = metrics.total.fromEpoch + Math.round(startPct * metrics.total.rangeMs);
+    const localStartEpoch = this.timeService.getLocalEpoch(startEpoch);
     const item = TimelineResolutionValues[this.resolution];
+    const xAxisColumnMs = metrics.columnMs * item.interval;
+    const utcStartHardVerticalEpoch = Math.floor(localStartEpoch / xAxisColumnMs) * xAxisColumnMs;
+    const startColumn = Math.floor((utcStartHardVerticalEpoch - this.timeService.getLocalEpoch(metrics.total.fromEpoch)) / metrics.columnMs);
+    const endColumn = Math.min(startColumn + this.WINDOW_COLUMNS + item.interval, metrics.data.columns);
+    const xAxisColumns = endColumn - startColumn;
+    const utcEndHardVerticalEpoch = utcStartHardVerticalEpoch + xAxisColumns * metrics.columnMs;
+    let left = startColumn * metrics.hardVerticalWidth - 0.5 * metrics.xAxisValueWidth;
+    // const adv = metrics.columnMs * item.interval;
     const values = [];
-    const gapInMs = this.timelineMetrics.gapEpoch; // * windowRangeInMs / fullRangeInMs;
-    const adjLeftInMs = gapInMs / 2;
-    for (let epoch = startHardVerticalEpoch; epoch <= endEpoch; epoch += gapInMs) {
+    for (let epoch = utcStartHardVerticalEpoch; epoch <= utcEndHardVerticalEpoch; epoch += xAxisColumnMs) {
       const value = this.timeService.getFormattedTime(item.type, this.timeService.getUtcEpoch(epoch));
-      // console.log('d:', d);
-      const leftInMs = epoch - startHardVerticalEpoch;
-      const pct = leftInMs / fullRangeInMs;
-      // const left = scrollPos + (epoch - startHardVerticalEpoch) / windowRangeInMs * this.timelineMetrics.timelineWidth;
-      const left = pct * this.timelineMetrics.timelineWidth;
-      values.push({ value, left });
+      values.push({ value, left, width: metrics.xAxisValueWidth });
+      left += metrics.xAxisValueWidth;
     }
-    console.log('values:', values[0], '-', values[values.length - 1]);
+    // console.log('columns:', `${startColumn}-${endColumn}`, ', values:', values[0].value, '-', values[values.length - 1].value);
     this.xAxisValues$.next(values);
   }
 
-  getXAxisValues(resolution, days) {
+  /*
+  getXAxisValues(resolution, totalFromEpoch, totalToEpoch, days) {
     // let epoch = this.timeService.gmtToEpoch(this.serverData.timelineRange.range.fromTimeGmt);
-    console.log('epoch2:', this.serverData.timelineRange.fromTimeGmt);
+    console.log('server fromTimeGmt:', this.serverData.timelineRange.fromTimeGmt);
     let d = new Date(this.serverData.timelineRange.fromTimeGmt.substring(0, 10));
     console.log('d:', d.toISOString());
     let startEpoch = d.getTime();
@@ -136,7 +174,7 @@ console.log('from/to epoch:', this.timelineMetrics.fromEpoch, '/', this.timeline
     //   }
     // }
   }
-
+  */
 
   // getTimeline(): MediconTimelineRange {
   //   const item = TimelineResolutionValues[this.settings.resolution];

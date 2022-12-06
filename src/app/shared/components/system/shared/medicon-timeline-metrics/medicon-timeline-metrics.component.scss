@@ -7,8 +7,9 @@
   height: $medicon-timeline-metrics-height;
   .xaxis-value {
     position: absolute;
-    left: 0;
-    // text-align: center;
-    // width: var(--hardVerticalsWidth);
+    background: yellow;
+     text-align: center;
+    border: 1px solid black;
+    // width: var(--hardVerticalWidth);
   }
 }

@@ -22,7 +22,7 @@ export class MediconTimelineGraphComponent implements OnInit {
   // subDivisionLines;
   // pivotTimePositionX;
   // fullWidth;
-  // hardVerticalsWidth;
+  // hardVerticalWidth;
   // softVerticalsWidth;
   graphLinesCount;
   // fillerWidth;
@@ -32,11 +32,11 @@ export class MediconTimelineGraphComponent implements OnInit {
 
   ngOnInit() {
     // this.fullWidth = 16 / 12 * this.timelineGraphWidth;
-    // const hardVerticalsWidth = this.fullWidth / 16;
-    // this.hardVerticalsWidth = hardVerticalsWidth + 'px 100%';
-    // this.softVerticalsWidth = hardVerticalsWidth / 6 + 'px 100%';
+    // const hardVerticalWidth = this.fullWidth / 16;
+    // this.hardVerticalWidth = hardVerticalWidth + 'px 100%';
+    // this.softVerticalsWidth = hardVerticalWidth / 6 + 'px 100%';
     // this.fillerWidth = this.fullWidth - this.timelineGraphWidth;
-    this.timelineGraphWidth = this.mediconService.timelineMetrics.timelineWidth; // + 1;
+    // this.timelineGraphWidth = this.mediconService.timelineMetrics.window.width; // + 1;
 
 
 
