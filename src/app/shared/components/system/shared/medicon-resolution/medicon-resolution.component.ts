@@ -20,7 +20,7 @@ export class MediconResolutionComponent implements OnInit, OnDestroy {
   isPivotEnabled = true;
   startLabel;
   endLabel;
-  subscription: Subscription;
+  scrollSubscription: Subscription;
 
   constructor(private mediconService: MediconService) {}
 
@@ -35,11 +35,15 @@ export class MediconResolutionComponent implements OnInit, OnDestroy {
     //   this.ix = this.options.findIndex(item => item.value === resolution);
     //   this.label = this.options[this.ix].label;
     // });
+    this.scrollSubscription = this.mediconService.scroll$.subscribe(isPivotEnabled => {
+      console.log('isPivotEnabled:', isPivotEnabled);
+      this.isPivotEnabled = isPivotEnabled;
+    });
     this.updateSlider(this.mediconService.resolution);
   }
 
   ngOnDestroy() {
-    if (this.subscription) this.subscription.unsubscribe();
+    if (this.scrollSubscription) this.scrollSubscription.unsubscribe();
   }
 
   onChangeSlider(e) {
@@ -56,6 +60,7 @@ export class MediconResolutionComponent implements OnInit, OnDestroy {
   }
 
   onClickPivot() {
-    this.isPivotEnabled = !this.isPivotEnabled;
+    // this.isPivotEnabled = true;
+    this.mediconService.scrollToPivot();
   }
 }

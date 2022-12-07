@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MediconServerData } from '@models/medicon-server-data.model';
 import { TimelineResolutionValues } from '@shared/consts/timeline-resolution-values.const';
-import { ReplaySubject } from 'rxjs';
+import { ReplaySubject, Subject } from 'rxjs';
 import { TimelineResolution } from '@shared/enums/timeline-resolution.enum';
 import { TimeService } from '@shared/services/time.service';
 import { MediconTimelineMetrics } from '@models/timeline-metrics.model';
@@ -12,12 +12,14 @@ export class MediconService {
   readonly SCROLL_SAFE_TEXT_MARGIN = 0; // 100;
   serverData: MediconServerData;
   timelineMetrics: MediconTimelineMetrics;
-  timelineMetrics$ = new ReplaySubject<MediconTimelineMetrics>();
+  timelineMetrics$ = new ReplaySubject<MediconTimelineMetrics>(1);
   resolution: TimelineResolution;
-  resolution$ = new ReplaySubject<TimelineResolution>();
+  resolution$ = new ReplaySubject<TimelineResolution>(1);
   elGraphAreaWidth;
-  xAxisValues$ = new ReplaySubject();
-  // middlePct;
+  xAxisValues$ = new ReplaySubject(1);
+  pivotTime$ = new ReplaySubject(1);
+  scroll$ = new ReplaySubject<boolean>(1);
+  scrollCount = 0;
 
   constructor(private timeService: TimeService) {}
 
@@ -39,8 +41,8 @@ export class MediconService {
 
   private setTimelineMetrics(resolution, isInit = false) {
     const item = TimelineResolutionValues[resolution];
-    const middlePct = isInit ? 0 : this.getMiddlePct();
-
+    const windowMiddleEpoch = isInit ? this.getPivotEpoch() : this.getWindowMiddleEpoch();
+console.log('curr - resolution:', this.resolution, ', middle:', windowMiddleEpoch);
     // epoch / ms
     const totalFromEpoch =  this.timeService.gmtToEpoch(this.serverData.timelineRange.fromTimeGmt);
     const dataToEpoch = this.timeService.gmtToEpoch(this.serverData.timelineRange.toTimeGmt);
@@ -49,16 +51,22 @@ export class MediconService {
     const dataColumns = dataRangeInMs / columnMs;
 
     // width
-    const hardVerticalWidth = Math.floor(this.elGraphAreaWidth / this.WINDOW_COLUMNS);
+    const windowWidth = this.elGraphAreaWidth;
+    const hardVerticalWidth = windowWidth / this.WINDOW_COLUMNS;
     const hardVerticalWidthStyle = hardVerticalWidth + 'px 100%';
-    const windowWidth = hardVerticalWidth * this.WINDOW_COLUMNS;
     const totalLColumns = dataColumns + (item.fillerColumns ?? 0);
     const totalWidth = totalLColumns * hardVerticalWidth;
     const softVerticalWidthStyle = hardVerticalWidth / item.softVerticals + 'px 100%';
     const fillerWidth = totalWidth - (dataColumns * hardVerticalWidth);
     const totalRangeMs = totalLColumns * columnMs;
     const totalToEpoch = totalFromEpoch + totalRangeMs;
-    const scrollX = this.getNewScrollX(middlePct, windowWidth, totalWidth);
+    const scrollX = this.getScrollXByEpoch(windowMiddleEpoch, totalFromEpoch, windowWidth, totalWidth, totalRangeMs);
+
+    // pivot
+    const pivotEpoch = this.getPivotEpoch();
+    const pivotMs = pivotEpoch - totalFromEpoch;
+    const pivotPct = pivotMs / totalRangeMs;
+    const pivotX = pivotPct * totalWidth;
 
     this.timelineMetrics = {
       total: {
@@ -90,27 +98,31 @@ export class MediconService {
       hardVerticalWidthStyle,
       softVerticalWidthStyle,
       xAxisValueWidth: hardVerticalWidth * item.interval,
-      scrollX
+      scrollX,
+      pivotX
     }
 
 // console.log('this.timelineMetrics:', this.timelineMetrics);
 //     this.scrollToMiddlePct(middlePct);
     // this.scrollTo();
+    this.scrollCount = 0;
     this.timelineMetrics$.next(this.timelineMetrics);
   }
 
-  getMiddlePct() {
+  getWindowMiddleEpoch() {
     const prevScrollFromX = this.timelineMetrics.scrollX;
-    const prevScrollToX = prevScrollFromX + this.timelineMetrics.window.width;
-    const middleX = (prevScrollToX + prevScrollFromX) / 2;
-    const middlePct = middleX / this.timelineMetrics.total.width;
-console.log('prev width window/total:', this.timelineMetrics.window.width, '/', this.timelineMetrics.total.width);
-console.log('prev ScrollFromX/ScrollToX:', prevScrollFromX, '/', prevScrollToX);
-console.log('middle pct:', middlePct);
-    return middlePct;
+    const windowStartEpoch = this.timelineMetrics.total.fromEpoch + (prevScrollFromX / this.timelineMetrics.total.width) * this.timelineMetrics.total.rangeMs;
+    const windowMiddleEpoch = windowStartEpoch + this.timelineMetrics.window.rangeMs / 2;
+console.log('windowMiddleEpoch:', windowMiddleEpoch);
+    return windowMiddleEpoch;
   }
 
-  getNewScrollX(middlePct, windowWidth, totalWidth) {
+  getPivotEpoch() {
+    return this.timeService.gmtToEpoch(this.serverData.pivotTimeGmt);
+  }
+
+  getScrollXByEpoch(epoch, totalFromEpoch, windowWidth, totalWidth, totalRangeMs) {
+    const middlePct = (epoch - totalFromEpoch) / totalRangeMs;
     const middleX = middlePct * totalWidth;
     const endX = middleX + (windowWidth / 2);
     let startX = middleX - (windowWidth / 2);
@@ -136,17 +148,25 @@ console.log('middle pct:', middlePct);
 //   }
 
   onScrollTimeline(e) {
-console.log('onScrollTimeline:', this.timelineMetrics.scrollX, '->', e.target.scrollLeft);
     this.timelineMetrics.scrollX = e.target.scrollLeft;
+    if (this.scrollCount++) this.scroll$.next(false);
+    this.scrollTo();
+  }
+
+  scrollToPivot() {
+    const pivotEpoch = this.getPivotEpoch();
+    const metrics = this.timelineMetrics;
+    this.timelineMetrics.scrollX = this.getScrollXByEpoch(pivotEpoch, metrics.total.fromEpoch, metrics.window.width, metrics.total.width, metrics.total.rangeMs);
+    this.scrollCount = 0;
+    this.scroll$.next(true);
     this.scrollTo();
   }
 
   scrollTo() {
     const metrics = this.timelineMetrics;
-    // console.log('e:', x, '/', this.timelineMetrics.fullWidth, '/', this.timelineMetrics.timelineWidth);
     const startPct = Math.max(0, (metrics.scrollX - this.SCROLL_SAFE_TEXT_MARGIN) / metrics.total.width);
-// console.log('startPct:', (startPct * 100).toFixed(0) + '%');
-const endPct = Math.min(1, (metrics.scrollX + this.SCROLL_SAFE_TEXT_MARGIN + metrics.window.width) / metrics.total.width);
+
+// const endPct = Math.min(1, (metrics.scrollX + this.SCROLL_SAFE_TEXT_MARGIN + metrics.window.width) / metrics.total.width);
 // console.log('start/end:', (startPct * 100).toFixed(0) + '%', '/', (endPct * 100).toFixed(0) + '%');
 // console.log('total from/to epoch:', metrics.total.fromEpoch, '/', metrics.total.toEpoch);
 

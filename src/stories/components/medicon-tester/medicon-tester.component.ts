@@ -154,26 +154,27 @@ export class MediconTesterComponent implements OnInit, OnDestroy {
       }
     }
 
-    const timelineRange = this.getTimelineRange();
+    const { pivotEpoch, pivotMidnightEpoch } = this.getPivotEpoch(this.settings.pivotTime);
+    const timelineRange = this.getTimelineRange(pivotMidnightEpoch);
     this.serverData = {
+      pivotTimeGmt: (new Date()).toISOString(),
+      tempPivotTimeGmt: this.timeService.epochToGmt(pivotEpoch),
       title: {
         fromTimeGmt: timelineRange.fromTimeGmt,
         toTimeGmt: timelineRange.toTimeGmt,
       },
       resolution: this.settings.resolution,
       sections: this.settings.sections.map((section, i) => getSection(section, i)),
-      timelineRange: this.getTimelineRange()
+      timelineRange
     }
   }
 
-  getTimelineRange(): MediconServerTimelineRange {
-    const { pivotEpoch, pivotMidnightEpoch } = this.getPivotEpoch(this.settings.pivotTime);
+  getTimelineRange(pivotMidnightEpoch): MediconServerTimelineRange {
     const { fromTimeGmt, toTimeGmt } = this.getTimelineRangeInGmt(pivotMidnightEpoch);
     return {
       fromTimeGmt,
       toTimeGmt,
-      days: 12,
-      pivotTimeGmt: this.timeService.epochToGmt(pivotEpoch)
+      days: 12
     }
   }
 

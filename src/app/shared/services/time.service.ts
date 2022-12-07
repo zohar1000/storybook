@@ -63,4 +63,8 @@ export class TimeService {
     return (new Date()).getTimezoneOffset() * 60000;
   }
 
+  getCurrUtcEpoch() {
+    return Date.now();
+  }
+
 }

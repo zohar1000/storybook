@@ -1,7 +1,8 @@
 import { AfterViewInit, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MedicationsCategory } from '@models/medicon-server-data.model';
 import { MediconService } from '@shared/components/system/shared/services/medicon.service';
-import { Subscription } from 'rxjs';
+import { merge, Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 import { MediconTimelineMetrics } from '@models/timeline-metrics.model';
 
 @Component({
@@ -35,6 +36,10 @@ export class MediconTimelineGraphComponent implements OnInit ,AfterViewInit, OnD
   constructor(public mediconService: MediconService) {}
 
   ngOnInit() {
+    // this.mediconService.pivotTime$.subscribe(pivotTime => {
+    //   console.log('pivotTime:', pivotTime, ', metrics:', this.mediconService.timelineMetrics);
+    // });
+
     // this.mediconService.timelineMetrics$.subscribe((metrics: MediconTimelineMetrics) => {
     //   console.log('metrics:', metrics, ', this.elRefContent:', this.elRefContent);
     //   // if (this.elRefContent)
@@ -58,14 +63,28 @@ export class MediconTimelineGraphComponent implements OnInit ,AfterViewInit, OnD
   }
 
   ngAfterViewInit() {
-    this.subscription = this.mediconService.timelineMetrics$.subscribe((metrics: MediconTimelineMetrics) => {
-      const middleX = (metrics.scrollX + metrics.scrollX + metrics.window.width) / 2;
-      const middlePct = middleX / metrics.total.width;
-      const scrollX = metrics.scrollX;
-      console.log('graph comp., middlePct:', middlePct, ', metrics:', scrollX, metrics.window.width, metrics.total.width);
+console.log('content width:', this.elRefContent.nativeElement.offsetWidth);
+
+
+    const observables = [this.mediconService.timelineMetrics$, this.mediconService.scroll$.pipe(filter(val => val))];
+    // const observables = [this.mediconService.scroll$];
+    // const observables = [this.mediconService.timelineMetrics$];
+    // @ts-ignore
+    this.subscription = merge(...observables).subscribe(val => {
+    // this.subscription = this.mediconService.scroll$.subscribe(val => {
+      // const middleX = (metrics.scrollX + metrics.scrollX + metrics.window.width) / 2;
+      // const middlePct = middleX / metrics.total.width;
+      // const scrollX = metrics.scrollX;
+      // console.log('graph comp., middlePct:', middlePct, ', metrics:', scrollX, metrics.window.width, metrics.total.width);
       // this.elRefContent.nativeElement.scrollTo(scrollX, 0);
+      console.log('val:', val);
+      console.log('scroll order to:', this.mediconService.timelineMetrics.scrollX);
       setTimeout(() => {
-        this.elRefContent.nativeElement.scrollTo(scrollX, 0);
+        this.elRefContent.nativeElement.scrollTo(this.mediconService.timelineMetrics.scrollX, 0);
+
+        setTimeout(() => {
+          console.log('actual scroll pos:', this.elRefContent.nativeElement.scrollLeft);
+        }, 10)
       }, 0);
     });
   }

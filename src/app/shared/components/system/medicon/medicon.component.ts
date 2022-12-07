@@ -1,8 +1,13 @@
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, Renderer2, ViewChild } from '@angular/core';
 import { Direction } from '@stories/models/direction.model';
-import { TimelineResolution } from '@shared/enums/timeline-resolution.enum';
 import { MediconServerData } from '@models/medicon-server-data.model';
 import { MediconService } from '@shared/components/system/shared/services/medicon.service';
+
+// TODO:
+// 1. onPush
+// 2. horizontal lines blur when resolution goes down
+// icon to pivot
+
 
 @Component({
   selector: 'app-medicon',
@@ -16,10 +21,13 @@ export class MediconComponent {
   @Input() text: any;
   @Input() serverData: MediconServerData;
 
-  constructor(private mediconService: MediconService) {}
+  constructor(private mediconService: MediconService, private renderer: Renderer2) {}
 
   ngOnInit() {
-    this.mediconService.init(this.serverData, this.elRefGraphArea.nativeElement.offsetWidth);
+    const width = this.elRefGraphArea.nativeElement.offsetWidth;
+    const roundedWidth = width - (width % 60);  // to accommodate all variations of resolution intervals
+    this.renderer.setProperty(this.elRefGraphArea.nativeElement, 'width', roundedWidth);
+    this.mediconService.init(this.serverData, roundedWidth);
   }
 
   // getTimeline(resolution): MediconTimelineRange {

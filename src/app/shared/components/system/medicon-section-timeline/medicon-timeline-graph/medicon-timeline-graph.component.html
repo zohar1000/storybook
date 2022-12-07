@@ -17,6 +17,7 @@
     </div>
     <div class="medication-backgrounds"></div>
     <div class="filler" *ngIf="metrics.total.fillerWidth>0" [style.width.px]="metrics.total.fillerWidth"></div>
+    <div class="pivot-line" [style.left.px]="metrics.pivotX"></div>
   </div>
 </div>
 
@@ -59,7 +60,7 @@
   </div>
 </div>-->
 
-<ng-template #verticalLines let-isLast="isLast" let-value="value" >
+<!--<ng-template #verticalLines let-isLast="isLast" let-value="value" >
   <div class="vertical-lines-part-container">
     <div class="vertical-lines-part">
       <div class="sub-divisions">
@@ -67,6 +68,6 @@
       </div>
     </div>
   </div>
-</ng-template>
+</ng-template>-->
 
 

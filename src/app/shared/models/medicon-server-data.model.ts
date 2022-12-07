@@ -3,6 +3,8 @@ import { TimelineResolution } from '@shared/enums/timeline-resolution.enum';
 import { MediconSectionType } from '@shared/enums/medicon-section-type.enum';
 
 export interface MediconServerData {
+  pivotTimeGmt: string;
+  tempPivotTimeGmt: string;
   title: {
     fromTimeGmt: string;
     toTimeGmt: string;
@@ -31,5 +33,4 @@ export interface MediconServerTimelineRange {
   fromTimeGmt: string;  // gmt time of start day
   toTimeGmt: string;
   days: number;
-  pivotTimeGmt: string;
 }

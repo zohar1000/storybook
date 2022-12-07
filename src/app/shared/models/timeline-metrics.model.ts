@@ -30,4 +30,5 @@ export interface MediconTimelineMetrics {
   softVerticalWidthStyle: string;
   xAxisValueWidth: number;
   scrollX: number;
+  pivotX: number;
 }

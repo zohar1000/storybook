@@ -7,7 +7,7 @@
   .content {
     //background: yellow;
     // height: 100%;  // calc(100% + 17px);
-    height: calc(var(--medications-count) * #{$medicon-graph-line-height} + #{$medicon-timeline-metrics-height} + var(--scrollbar-width) + 2px);
+     height: calc(var(--medications-count) * #{$medicon-graph-line-height} + #{$medicon-timeline-metrics-height} + var(--scrollbar-width) + 2px);
     overflow-x: scroll;
     overflow-y: hidden;
     //box-sizing: content-box;
@@ -26,7 +26,7 @@
       border-bottom: 1px solid black;
       border-right: 1px solid black;
       //box-sizing: content-box;
-      .hard-verticals, .soft-verticals, .medication-backgrounds, .filler {
+      .medication-backgrounds, .filler, .hard-verticals, .soft-verticals, .pivot-line  {
         position: absolute;
         top: 0;
         left: 0;
@@ -37,7 +37,7 @@
       .medication-backgrounds {
         z-index: 1;
         background-image: linear-gradient(180deg, #e7e7e7 $medicon-graph-line-height, transparent 0);
-        background-size: 100% calc($medicon-graph-line-height * 2);
+        background-size: calc($medicon-graph-line-height * 2) calc($medicon-graph-line-height * 2);
       }
       .soft-verticals {
         z-index: 2;
@@ -55,14 +55,19 @@
         left: unset;
         right: 0;
       }
+      .pivot-line {
+        width: 2px;
+        background: red;
+        z-index: 5;
+      }
     }
-
   }
 
 }
 
 
 
+/*
 
 .graph-container {
   position: relative;
@@ -106,6 +111,9 @@
     }
   }
 }
+*/
+
+/*
 
 .vertical-lines-container {
   display: flex;
@@ -131,3 +139,4 @@
     }
   }
 }
+*/
