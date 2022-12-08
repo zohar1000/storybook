@@ -20,6 +20,7 @@ export class MediconService {
   pivotTime$ = new ReplaySubject(1);
   scroll$ = new ReplaySubject<boolean>(1);
   scrollCount = 0;
+  isPivotMiddle = true;
 
   constructor(private timeService: TimeService) {}
 
@@ -41,7 +42,7 @@ export class MediconService {
 
   private setTimelineMetrics(resolution, isInit = false) {
     const item = TimelineResolutionValues[resolution];
-    const windowMiddleEpoch = isInit ? this.getPivotEpoch() : this.getWindowMiddleEpoch();
+    const windowMiddleEpoch = this.isPivotMiddle ? this.getPivotEpoch() : this.getWindowMiddleEpoch();
 console.log('curr - resolution:', this.resolution, ', middle:', windowMiddleEpoch);
     // epoch / ms
     const totalFromEpoch =  this.timeService.gmtToEpoch(this.serverData.timelineRange.fromTimeGmt);
@@ -147,10 +148,22 @@ console.log('windowMiddleEpoch:', windowMiddleEpoch);
 //     this.scrollTo();
 //   }
 
-  onScrollTimeline(e) {
-    this.timelineMetrics.scrollX = e.target.scrollLeft;
-    if (this.scrollCount++) this.scroll$.next(false);
-    this.scrollTo();
+  onScrollTimeline(scrollX, isScrolledByUser) {
+// console.log('onScrollTimeline:', isScrolledByUser);
+    if (isScrolledByUser) {
+      this.isPivotMiddle = false;
+      this.timelineMetrics.scrollX = scrollX;
+      // if (this.scrollCount++) {
+      //   this.scroll$.next(false);
+      // }
+    }
+    if (this.scrollCount++) {
+      this.scroll$.next(false);
+    }
+
+    // this.scroll$.next(!isScrolledByUser);
+
+    this.setXAxisValues();
   }
 
   scrollToPivot() {
@@ -159,10 +172,10 @@ console.log('windowMiddleEpoch:', windowMiddleEpoch);
     this.timelineMetrics.scrollX = this.getScrollXByEpoch(pivotEpoch, metrics.total.fromEpoch, metrics.window.width, metrics.total.width, metrics.total.rangeMs);
     this.scrollCount = 0;
     this.scroll$.next(true);
-    this.scrollTo();
+    this.setXAxisValues();
   }
 
-  scrollTo() {
+  setXAxisValues() {
     const metrics = this.timelineMetrics;
     const startPct = Math.max(0, (metrics.scrollX - this.SCROLL_SAFE_TEXT_MARGIN) / metrics.total.width);
 

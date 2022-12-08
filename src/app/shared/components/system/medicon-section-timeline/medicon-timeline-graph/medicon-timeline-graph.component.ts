@@ -32,6 +32,7 @@ export class MediconTimelineGraphComponent implements OnInit ,AfterViewInit, OnD
   // fillerWidth;
   timelineGraphWidth;
   subscription: Subscription;
+  isScrolledByUser = true;
 
   constructor(public mediconService: MediconService) {}
 
@@ -80,6 +81,7 @@ console.log('content width:', this.elRefContent.nativeElement.offsetWidth);
       console.log('val:', val);
       console.log('scroll order to:', this.mediconService.timelineMetrics.scrollX);
       setTimeout(() => {
+        this.isScrolledByUser = false;
         this.elRefContent.nativeElement.scrollTo(this.mediconService.timelineMetrics.scrollX, 0);
 
         setTimeout(() => {
@@ -122,6 +124,7 @@ console.log('content width:', this.elRefContent.nativeElement.offsetWidth);
     e.stopPropagation();
     e.stopImmediatePropagation();
     // console.log('e:', e.target.scrollLeft, '/', e.target.scrollWidth);
-    this.mediconService.onScrollTimeline(e);
+    this.mediconService.onScrollTimeline(e.target.scrollLeft, this.isScrolledByUser);
+    this.isScrolledByUser = true;
   }
 }
