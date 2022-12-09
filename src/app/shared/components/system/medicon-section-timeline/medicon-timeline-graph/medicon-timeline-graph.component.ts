@@ -4,6 +4,8 @@ import { MediconService } from '@shared/components/system/shared/services/medico
 import { merge, Subscription } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { MediconTimelineMetrics } from '@models/timeline-metrics.model';
+import { Medication } from '@stories/models/medication.model';
+import { ExecutionType } from '@stories/enums/execution-type.enum';
 
 @Component({
   selector: 'app-medicon-timeline-graph',
@@ -18,9 +20,10 @@ export class MediconTimelineGraphComponent implements OnInit ,AfterViewInit, OnD
   // @Input() timelineGraphWidth: number;
   // @Input() timelineRange: MediconTimelineRange;
   // @Input() timelineValues: MediconTimelineValues;
-  @Input() set categoryStates(value) {
-    this.onChangeCategoryStates(value);
-  };
+  // @Input() set categoryStates(value) {
+  //   this.onChangeCategoryStates(value);
+  // };
+  @Input() medications: Medication[];
   // readonly PARTS = 12;
   // ExecutionType = ExecutionType;
   // subDivisionLines;
@@ -28,8 +31,9 @@ export class MediconTimelineGraphComponent implements OnInit ,AfterViewInit, OnD
   // fullWidth;
   // hardVerticalWidth;
   // softVerticalsWidth;
-  graphLinesCount;
+  // graphLinesCount;
   // fillerWidth;
+  ExecutionType = ExecutionType;
   timelineGraphWidth;
   subscription: Subscription;
   isScrolledByUser = true;
@@ -65,6 +69,7 @@ export class MediconTimelineGraphComponent implements OnInit ,AfterViewInit, OnD
 
   ngAfterViewInit() {
 console.log('content width:', this.elRefContent.nativeElement.offsetWidth);
+console.log('medications:', this.medications);
 
 
     const observables = [this.mediconService.timelineMetrics$, this.mediconService.scroll$.pipe(filter(val => val))];
@@ -99,26 +104,27 @@ console.log('content width:', this.elRefContent.nativeElement.offsetWidth);
 
   }
 
-  calcFullWidth() {
+/*  calcFullWidth() {
     // for 24h
     this.graphLinesCount = 0;
     this.categories.forEach(category => {
       this.graphLinesCount += Math.max(category.medications.length, 1);
     });
     // this.medicationsCount += 'px';
-  }
+  }*/
 
-  onChangeCategoryStates(categoryStates) {
-    this.graphLinesCount = 0;
-    categoryStates.forEach(catState => {
-      if (!catState.isExpanded) {
-        this.graphLinesCount++;
-      } else {
-        const item = this.categories.find(cat => cat.id === catState.id);
-        this.graphLinesCount += item.medications.length;
-      }
-    })
-  }
+//   onChangeCategoryStates(categoryStates) {
+// console.log('categoryStates:', categoryStates);
+//     this.graphLinesCount = 0;
+//     categoryStates.forEach(catState => {
+//       if (!catState.isExpanded) {
+//         this.graphLinesCount++;
+//       } else {
+//         const item = this.categories.find(cat => cat.id === catState.id);
+//         this.graphLinesCount += item.medications.length;
+//       }
+//     })
+//   }
 
   onScroll(e) {
     e.stopPropagation();

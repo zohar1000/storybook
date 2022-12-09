@@ -26,7 +26,7 @@
       border-bottom: 1px solid black;
       border-right: 1px solid black;
       //box-sizing: content-box;
-      .medication-backgrounds, .filler, .hard-verticals, .soft-verticals, .pivot-line  {
+      .medication-backgrounds, .filler, .hard-verticals, .soft-verticals, .pivot-line, .medications  {
         position: absolute;
         top: 0;
         left: 0;
@@ -59,6 +59,15 @@
         width: 2px;
         background: #ff612e;
         z-index: 5;
+      }
+      .medications {
+        z-index: 6;
+        display: flex;
+        flex-direction: column;
+        .execution {
+          height: $medicon-graph-line-height;
+          display: block;
+        }
       }
     }
   }

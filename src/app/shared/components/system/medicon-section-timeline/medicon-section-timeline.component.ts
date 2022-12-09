@@ -18,6 +18,7 @@ export class MediconSectionTimelineComponent implements OnInit {
   legendColumns;
   timelineGraphWidth;
   categoryStates;
+  medications = [];
 
   constructor(private mediconService: MediconService) {
     this.legendColumns = [
@@ -28,11 +29,24 @@ export class MediconSectionTimelineComponent implements OnInit {
 
   ngOnInit() {
     this.categoryStates = this.section.categories.map(cat => ({ id: cat.id, isExpanded: true }));
+    this.setMedications();
   }
 
   onExpandCondense(id, isExpanded) {
     const item = this.categoryStates.find(cat => cat.id === id);
     item.isExpanded = isExpanded;
-    this.categoryStates = [...this.categoryStates];
+    this.setMedications();
+  }
+
+  setMedications() {
+    this.medications = [];
+    this.categoryStates.forEach(catState => {
+      if (!catState.isExpanded) {
+        this.medications.push(null);
+      } else {
+        const category = this.section.categories.find(cat => cat.id === catState.id);
+        category.medications.forEach(medication => this.medications.push(medication));
+      }
+    });
   }
 }

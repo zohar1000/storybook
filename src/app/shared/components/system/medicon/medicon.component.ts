@@ -5,8 +5,6 @@ import { MediconService } from '@shared/components/system/shared/services/medico
 
 // TODO:
 // 1. onPush
-// 2. horizontal lines blur when resolution goes down
-// icon to pivot
 
 
 @Component({
