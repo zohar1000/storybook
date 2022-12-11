@@ -57,8 +57,10 @@
 }
 
 .filters {
-  margin: 0.5rem 0 1.5rem $medicon-category-area-width;
-  background: #f2ffeb;
+  margin: 1rem 0 2rem $medicon-category-area-width;
+  background: #e5ffd6;
+  border: 1px solid #d6d6d6;
+  border-radius: 4px;
   display: flex;
   justify-content: space-between;
   padding: 0.2rem 0.5rem;
