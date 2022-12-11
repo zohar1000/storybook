@@ -2,6 +2,7 @@ import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild }
 import { MediconSection } from '@models/medicon-server-data.model';
 import { MediconLegendIcons } from '@shared/consts/medicon-legend-icons.const';
 import { MediconService } from '@shared/components/system/shared/services/medicon.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-medicon-section-timeline',
@@ -16,11 +17,11 @@ export class MediconSectionTimelineComponent implements OnInit {
   @Input() section: MediconSection;
   MediconLegendIcons = MediconLegendIcons;
   legendColumns;
-  timelineGraphWidth;
   categoryStates;
   medications = [];
+  subscription: Subscription;
 
-  constructor(private mediconService: MediconService) {
+  constructor(public mediconService: MediconService) {
     this.legendColumns = [
       this.MediconLegendIcons.filter(item => item.column === 0),
       this.MediconLegendIcons.filter(item => item.column === 1)
@@ -30,6 +31,7 @@ export class MediconSectionTimelineComponent implements OnInit {
   ngOnInit() {
     this.categoryStates = this.section.categories.map(cat => ({ id: cat.id, isExpanded: true }));
     this.setMedications();
+    this.mediconService.timelineMetrics.total.width;
   }
 
   onExpandCondense(id, isExpanded) {

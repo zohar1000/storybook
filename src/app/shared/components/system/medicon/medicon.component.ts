@@ -1,7 +1,11 @@
-import { Component, ElementRef, EventEmitter, Input, Output, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, Renderer2, ViewChild } from '@angular/core';
 import { Direction } from '@stories/models/direction.model';
 import { MediconServerData } from '@models/medicon-server-data.model';
 import { MediconService } from '@shared/components/system/shared/services/medicon.service';
+import { Subscription } from 'rxjs';
+import { MediconTimelineMetrics } from '@models/timeline-metrics.model';
+import { TimeService } from '@shared/services/time.service';
+import { TimeDisplayType } from '@shared/enums/time-display-type.enum';
 
 // TODO:
 // 1. onPush
@@ -17,9 +21,21 @@ export class MediconComponent {
   @ViewChild('graphArea', { static: true }) elRefGraphArea: ElementRef;
   @Input() direction: Direction;
   @Input() text: any;
-  @Input() serverData: MediconServerData;
+  @Input()
+  get serverData() {
+    return this._serverData;
+  }
+  set serverData(value: MediconServerData) {
+    this._serverData = value;
+    this.onServerDataChange();
+  }
+  _serverData: MediconServerData;
+  title;
 
-  constructor(private mediconService: MediconService, private renderer: Renderer2) {}
+  constructor(
+    private mediconService: MediconService,
+    private renderer: Renderer2,
+    private timeService: TimeService) {}
 
   ngOnInit() {
     const width = this.elRefGraphArea.nativeElement.offsetWidth;
@@ -28,36 +44,16 @@ export class MediconComponent {
     this.mediconService.init(this.serverData, roundedWidth);
   }
 
-  // getTimeline(resolution): MediconTimelineRange {
-  //   const item = TimelineResolutionValues[resolution];
-  //   const pivotEpoch = this.timeService.getMidnightEpoch(this.serverData.timeline.pivotTime.iso.substring(11, 16));
-  //   const roundBy = 60000 * item.minutes;
-  //   const roundedPivotEpoch = pivotEpoch - (pivotEpoch % roundBy);
-  //   const roundedPivotLocalEpoch = this.timeService.getLocalEpoch(roundedPivotEpoch);
-  //   const tlStartEpoch = roundedPivotLocalEpoch - (6 * roundBy);
-  //   const elEndEpoch = roundedPivotLocalEpoch + (6 * roundBy);
-  //   const values = [];
-  //   let interval = 0;
-  //   for (let time = tlStartEpoch; time <= elEndEpoch; time += roundBy) {
-  //     if (item.type !== TimeDisplayType.DateTime || ++interval % 2 !== 0) {
-  //       values.push(this.timeService.getFormattedTime(item.type, time));
-  //     }
-  //   }
-  //   return {
-  //     pivotTime: {
-  //       epoch: this.timeService.getLocalEpoch(pivotEpoch),
-  //       iso: this.timeService.getLocalIso(pivotEpoch)
-  //     },
-  //     range: {
-  //       fromTimeGmt: values[0],
-  //       fromTimeEpoch: tlStartEpoch,
-  //       toTimeGmt: values[12],
-  //       toTimeEpoch: elEndEpoch
-  //     },
-  //     xAxisValues: values,
-  //     subDivision: item.subDivision,
-  //     interval: item.interval,
-  //     days: 12
-  //   }
-  // }
+  onServerDataChange(graphAreaWidth = 0) {
+    this.setTitle();
+    this.mediconService.init(this.serverData, graphAreaWidth);
+  }
+
+  setTitle() {
+    const from = this.timeService.gmtToEpoch(this._serverData.title.fromTimeGmt);
+    const to = this.timeService.gmtToEpoch(this._serverData.title.toTimeGmt);
+    const formattedFrom = this.timeService.getFormattedTime(TimeDisplayType.DateTime, from);
+    const formattedTo = this.timeService.getFormattedTime(TimeDisplayType.DateTime, to);
+    this.title = `${formattedFrom} - ${formattedTo}`;
+  }
 }

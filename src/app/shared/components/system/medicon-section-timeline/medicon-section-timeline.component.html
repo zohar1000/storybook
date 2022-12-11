@@ -3,6 +3,20 @@
     [ngTemplateOutletContext]="{isTop: true}">
 </ng-container>
 
+<div *ngIf="mediconService.timelineMetrics$ | async; let metrics"
+    class="filters" [style.width.px]="metrics.window.width">
+    <div class="filter-group">
+      <ng-container [ngTemplateOutlet]="filter" [ngTemplateOutletContext]="{label:'Active',checked:true}"></ng-container>
+      <ng-container [ngTemplateOutlet]="filter" [ngTemplateOutletContext]="{label:'Inactive',checked:false}"></ng-container>
+    </div>
+    <div class="filter-group">
+      <ng-container [ngTemplateOutlet]="filter" [ngTemplateOutletContext]="{label:'Continuous',checked:true}"></ng-container>
+      <ng-container [ngTemplateOutlet]="filter" [ngTemplateOutletContext]="{label:'Periodic',checked:true}"></ng-container>
+      <ng-container [ngTemplateOutlet]="filter" [ngTemplateOutletContext]="{label:'SOS',checked:true}"></ng-container>
+      <ng-container [ngTemplateOutlet]="filter" [ngTemplateOutletContext]="{label:'Once',checked:true}"></ng-container>
+    </div>
+</div>
+
 <div class="content">
   <div class="categories" #categories>
     <app-medicon-category
@@ -58,5 +72,12 @@
         </li>
       </ul>
     </ng-container>
+  </div>
+</ng-template>
+
+<ng-template #filter let-label="label" let-checked="checked">
+  <div class="filter">
+    <input class="form-check-input" [ngClass]="class" type="checkbox" value="something" [attr.checked]="checked ? '' : null">
+    <span>{{label}}</span>
   </div>
 </ng-template>

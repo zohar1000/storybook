@@ -16,7 +16,6 @@ export class MediconService {
   resolution$ = new ReplaySubject<TimelineResolution>(1);
   elGraphAreaWidth;
   xAxisValues$ = new ReplaySubject(1);
-  pivotTime$ = new ReplaySubject(1);
   scroll$ = new ReplaySubject<boolean>(1);
   scrollCount = 0;
   isPivotMiddle = true;
@@ -24,7 +23,7 @@ export class MediconService {
   constructor(private timeService: TimeService) {}
 
   init(serverData: MediconServerData, elGraphAreaWidth) {
-    this.elGraphAreaWidth = elGraphAreaWidth;
+    if (elGraphAreaWidth) this.elGraphAreaWidth = elGraphAreaWidth;
     this.serverData = serverData;
     this.setResolution(this.serverData.resolution, true);
   }
@@ -114,7 +113,8 @@ console.log('curr - resolution:', this.resolution, ', middle:', windowMiddleEpoc
   }
 
   getPivotEpoch() {
-    return this.timeService.gmtToEpoch(this.serverData.pivotTimeGmt);
+console.log('getPivotEpoch:', this.serverData.pivotTimeGmt, this.timeService.gmtToEpoch(this.serverData.pivotTimeGmt));
+    return this.timeService.gmtToEpoch(this.serverData.tempPivotTimeGmt);
   }
 
   getScrollXByEpoch(epoch) {
