@@ -58,7 +58,7 @@
 
 .filters {
   margin: 1rem 0 2rem $medicon-category-area-width;
-  background: #e5ffd6;
+  background: black;  // #e5ffd6;
   border: 1px solid #d6d6d6;
   border-radius: 4px;
   display: flex;
@@ -69,12 +69,13 @@
     .filter {
       display: flex;
       align-items: center;
+      color: white;
       input {
         margin: 0 0.4rem 0 0;
         //border-color: #e2e2e2 !important;
         &:checked {
-          //background-color: #0d6efd;
-          //border-color: #0d6efd;
+          //background-color: #0052fb;
+          //border-color: #0052fb;
 
 
           //background-color: #cfcfcf !important;
