@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { AfterViewInit, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Medication } from '@stories/models/medication.model';
 import { MediconLegendIconType } from '@shared/enums/medicon-legend-icon-type.enum';
 import { MediconService } from '@shared/components/system/shared/services/medicon.service';
@@ -9,7 +9,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './medicon-execution-continuous.component.html',
   styleUrls: ['./medicon-execution-continuous.component.scss']
 })
-export class MediconExecutionContinuousComponent implements OnInit {
+export class MediconExecutionContinuousComponent implements OnInit, OnDestroy {
   @Input() medication: Medication;
   MediconLegendIconType = MediconLegendIconType;
   orderIconMargin = -1;
@@ -21,18 +21,13 @@ export class MediconExecutionContinuousComponent implements OnInit {
   constructor(private mediconService: MediconService) {}
 
   ngOnInit(): void {
-    // this.timelineWidthInMs = this.timelineRange.range.toTimeEpoch - this.timelineRange.range.fromTimeEpoch;
-    // this.orderIconMargin = this.getIconMargin(this.medication.orderTime);
-    // const orderLineDuration = this.medication.executionTime ? this.medication.executionTime - this.medication.orderTime : this.medication.duration;
-    // this.orderLineWidth = this.getLineWidth(this.orderIconMargin, orderLineDuration);
-    // if (this.medication.executionTime) {
-    //   this.executionIconMargin = this.getIconMargin(this.medication.executionTime);
-    //   this.executionLineWidth = this.getLineWidth(this.executionIconMargin, this.medication.duration);
-    // }
-
     this.subscription = this.mediconService.timelineMetrics$.subscribe(() => {
       this.setMedication();
     })
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) this.subscription.unsubscribe();
   }
 
   setMedication() {

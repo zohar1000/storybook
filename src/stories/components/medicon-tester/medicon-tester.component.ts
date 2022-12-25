@@ -10,6 +10,8 @@ import { TimeService } from '@shared/services/time.service';
 import { MediconService } from '@shared/components/system/shared/services/medicon.service';
 import { Subscription } from 'rxjs';
 import * as dayjs from 'dayjs';
+import { ExecutionType } from '@stories/enums/execution-type.enum';
+import { Medication } from '@stories/models/medication.model';
 
 @Component({
   selector: 'app-medicon-tester',
@@ -131,13 +133,22 @@ export class MediconTesterComponent implements OnInit, OnDestroy {
   buildServerData() {
     const getCategories = (medications): MedicationsCategory[] => {
       const categories = {};
-      medications.forEach(medication => {
+      medications.forEach(orgMedication => {
+        const medication: Medication = {...orgMedication};
+        if (medication.type === ExecutionType.Periodic) {
+console.log('time before:', medication.times);
+          const localGmt = this.timeService.getCurrLocalGmt();
+          const prefix = localGmt.substring(0, 11);
+          const suffix = localGmt.substring(19);
+          medication.times = medication.times.map(time => `${prefix}${time}:00${suffix}`);
+console.log('time after:', medication.times);
+        }
         if (!categories[medication.categoryId]) categories[medication.categoryId] = [];
         categories[medication.categoryId].push(medication);
       });
       const ids = Object.keys(categories).map(id => Number(id));
       return ids.map(id => ({
-        id: id,
+        id,
         name: `category ${id}`,
         color: MedicationCategories.find(item => item.id === id).color,
         medications: categories[id]

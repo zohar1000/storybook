@@ -67,4 +67,9 @@ export class TimeService {
     return Date.now();
   }
 
+  getCurrLocalGmt() {
+    const localEpoch = this.getLocalEpoch(Date.now());
+    return this.epochToGmt(localEpoch);
+  }
+
 }

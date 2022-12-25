@@ -20,6 +20,7 @@
     <div *ngFor="let medication of category.medications; let i=index" class="medication-container">
       <app-medicon-category-item
           [isCondensedCategory]="false"
+          [category]="category"
           [medication]="medication"
       ></app-medicon-category-item>
     </div>

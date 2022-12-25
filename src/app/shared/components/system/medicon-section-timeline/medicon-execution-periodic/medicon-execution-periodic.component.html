@@ -1,1 +1,10 @@
+<ng-container *ngFor="let iconMargin of iconMargins">
+  <app-medicon-icon
+      class="icon order-icon"
+      [type]="MediconLegendIconType.Order"
+      [position]="'centered'"
+      [style.margin-left.px]="iconMargin">
+  </app-medicon-icon>
+</ng-container>
+
 

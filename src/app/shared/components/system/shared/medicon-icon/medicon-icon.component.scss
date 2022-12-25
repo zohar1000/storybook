@@ -3,7 +3,7 @@ $icon-size: 1rem;
 :host {
   width: $icon-size;
   height: $icon-size;
-  //background: yellow;
+  //background: cyan;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,8 +15,12 @@ $icon-size: 1rem;
   align-items: center;
   justify-content: center;
   //background: yellow;
-  i, .icon-order {
+  i, .icon-order, svg {
     position: absolute;
+    //left: 50%;
+    //-webkit-transform: translateX(-50%);
+    //-ms-transform: translateX(-50%);
+    transform: translateX(-50%);
   }
 }
 

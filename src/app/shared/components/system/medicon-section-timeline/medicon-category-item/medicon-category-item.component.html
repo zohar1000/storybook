@@ -1,7 +1,7 @@
 <ng-container *ngIf="!isCondensedCategory">
-  {{medication.name}}
+  <span [style.color]="category.color">{{medication.name}}</span>
 </ng-container>
 
 <ng-container *ngIf="isCondensedCategory">
-  <span [style.color]="category.color">{{category.name}}</span>
+  <span [style.color]="category.color"><b>{{category.name}}</b></span>
 </ng-container>

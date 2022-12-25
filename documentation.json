@@ -695,7 +695,7 @@
     "injectables": [
         {
             "name": "MediconService",
-            "id": "injectable-MediconService-e06506171897afbc4d4854eb8049e0224cd7fa2827cd19bebcaaef0e975b24149c2ff995c7bf440ccbba09e198ffea7531c9eda23999bcd8a5d35c6d72183e4b",
+            "id": "injectable-MediconService-6ccae8a6ae0f472fbfb304afd2561e97163e68105a7023d1139c5d9eec4a34bd81a20b34b6c90169d7b94ce4a238d51fd0eb6a6dee7c0857d99de3a207d9275d",
             "file": "src/app/shared/components/system/shared/services/medicon.service.ts",
             "properties": [
                 {
@@ -715,17 +715,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 22
-                },
-                {
-                    "name": "pivotTime$",
-                    "defaultValue": "new ReplaySubject(1)",
-                    "deprecated": false,
-                    "deprecationMessage": "",
-                    "type": "",
-                    "optional": false,
-                    "description": "",
-                    "line": 19
+                    "line": 21
                 },
                 {
                     "name": "resolution",
@@ -754,7 +744,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 20
+                    "line": 19
                 },
                 {
                     "name": "scrollCount",
@@ -764,7 +754,7 @@
                     "type": "number",
                     "optional": false,
                     "description": "",
-                    "line": 21
+                    "line": 20
                 },
                 {
                     "name": "serverData",
@@ -853,7 +843,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 116,
+                    "line": 115,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -891,7 +881,7 @@
                     "optional": false,
                     "returnType": "any",
                     "typeParameters": [],
-                    "line": 110,
+                    "line": 109,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -914,7 +904,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 26,
+                    "line": 25,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -1041,7 +1031,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 32,
+                    "line": 31,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -1086,7 +1076,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 42,
+                    "line": 41,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "rawdescription": "\n/",
@@ -1131,7 +1121,7 @@
             "deprecationMessage": "",
             "description": "",
             "rawdescription": "\n",
-            "sourceCode": "import { Injectable } from '@angular/core';\nimport { MediconServerData } from '@models/medicon-server-data.model';\nimport { TimelineResolutionValues } from '@shared/consts/timeline-resolution-values.const';\nimport { ReplaySubject } from 'rxjs';\nimport { TimelineResolution } from '@shared/enums/timeline-resolution.enum';\nimport { TimeService } from '@shared/services/time.service';\nimport { MediconTimelineMetrics } from '@models/timeline-metrics.model';\n\n@Injectable()\nexport class MediconService {\n  readonly WINDOW_COLUMNS = 12;\n  serverData: MediconServerData;\n  timelineMetrics: MediconTimelineMetrics;\n  timelineMetrics$ = new ReplaySubject<MediconTimelineMetrics>(1);\n  resolution: TimelineResolution;\n  resolution$ = new ReplaySubject<TimelineResolution>(1);\n  elGraphAreaWidth;\n  xAxisValues$ = new ReplaySubject(1);\n  pivotTime$ = new ReplaySubject(1);\n  scroll$ = new ReplaySubject<boolean>(1);\n  scrollCount = 0;\n  isPivotMiddle = true;\n\n  constructor(private timeService: TimeService) {}\n\n  init(serverData: MediconServerData, elGraphAreaWidth) {\n    this.elGraphAreaWidth = elGraphAreaWidth;\n    this.serverData = serverData;\n    this.setResolution(this.serverData.resolution, true);\n  }\n\n  setResolution(resolution, isInit = false) {\n    this.resolution = resolution;\n    this.setTimelineMetrics(resolution, isInit);\n    this.resolution$.next(resolution);\n  }\n\n  /*****************************************/\n  /*    T I M E L I N E   M E T R I C S    */\n  /*****************************************/\n\n  private setTimelineMetrics(resolution, isInit = false) {\n    const item = TimelineResolutionValues[resolution];\n    const windowMiddleEpoch = this.isPivotMiddle ? this.getPivotEpoch() : this.getWindowMiddleEpoch();\nconsole.log('curr - resolution:', this.resolution, ', middle:', windowMiddleEpoch);\n    // epoch / ms\n    const totalFromEpoch =  this.timeService.gmtToEpoch(this.serverData.timelineRange.fromTimeGmt);\n    const dataToEpoch = this.timeService.gmtToEpoch(this.serverData.timelineRange.toTimeGmt);\n    const dataRangeInMs = dataToEpoch - totalFromEpoch;\n    const columnMs = item.minutes * 60000;\n    const dataColumns = dataRangeInMs / columnMs;\n\n    // width\n    const windowWidth = this.elGraphAreaWidth;\n    const hardVerticalWidth = windowWidth / this.WINDOW_COLUMNS;\n    const hardVerticalWidthStyle = hardVerticalWidth + 'px 100%';\n    const totalLColumns = dataColumns + (item.fillerColumns ?? 0);\n    const totalWidth = totalLColumns * hardVerticalWidth;\n    const softVerticalWidthStyle = hardVerticalWidth / item.softVerticals + 'px 100%';\n    const fillerWidth = totalWidth - (dataColumns * hardVerticalWidth);\n    const totalRangeMs = totalLColumns * columnMs;\n    const totalToEpoch = totalFromEpoch + totalRangeMs;\n\n    // pivot\n    const pivotEpoch = this.getPivotEpoch();\n    const pivotMs = pivotEpoch - totalFromEpoch;\n    const pivotPct = pivotMs / totalRangeMs;\n    const pivotX = pivotPct * totalWidth;\n\n    this.timelineMetrics = {\n      total: {\n        fromEpoch: totalFromEpoch,\n        toEpoch: totalToEpoch,\n        width: totalWidth,\n        fillerWidth,\n        rangeMs: totalRangeMs\n      },\n      data: {\n        fromEpoch: totalFromEpoch,\n        toEpoch: dataToEpoch,\n        columns: dataColumns\n      },\n      window: {\n        width: windowWidth,\n        rangeMs: columnMs * this.WINDOW_COLUMNS\n      },\n\n\n      // fromEpoch: this.timeService.gmtToEpoch(this.serverData.timelineRange.fromTimeGmt),\n      // toEpoch: this.timeService.gmtToEpoch(this.serverData.timelineRange.toTimeGmt),\n      columnMs,\n      // xAxisValues: this.getXAxisValues(resolution, totalFromEpoch, totalToEpoch, this.serverData.timelineRange.days),\n      interval: item.interval,\n      // timelineWidth,\n      // fullWidth,\n      hardVerticalWidth,\n      hardVerticalWidthStyle,\n      softVerticalWidthStyle,\n      xAxisValueWidth: hardVerticalWidth * item.interval,\n      scrollX: 0,\n      pivotEpoch,\n      pivotX\n    }\n\n    this.timelineMetrics.scrollX = this.getScrollXByEpoch(windowMiddleEpoch);\n    this.scrollCount = 0;\n    this.timelineMetrics$.next(this.timelineMetrics);\n  }\n\n  getWindowMiddleEpoch() {\n    const prevScrollFromX = this.timelineMetrics.scrollX;\n    const windowStartEpoch = this.timelineMetrics.total.fromEpoch + (prevScrollFromX / this.timelineMetrics.total.width) * this.timelineMetrics.total.rangeMs;\n    return windowStartEpoch + this.timelineMetrics.window.rangeMs / 2;\n  }\n\n  getPivotEpoch() {\n    return this.timeService.gmtToEpoch(this.serverData.pivotTimeGmt);\n  }\n\n  getScrollXByEpoch(epoch) {\n    const middleX = this.epochToX(epoch);\n    const halfWindowWidth = this.timelineMetrics.window.width / 2;\n    let startX = middleX - (halfWindowWidth);\n    const endX = middleX + (halfWindowWidth);\n    const totalWidth = this.timelineMetrics.total.width;\n    if (endX > totalWidth) startX -= (endX - totalWidth);\n    if (startX < 0) startX = 0;\n    return startX;\n  }\n\n  epochToX(epoch) {\n    const pct = (epoch - this.timelineMetrics.total.fromEpoch) / this.timelineMetrics.total.rangeMs;\n    return pct * this.timelineMetrics.total.width;\n  }\n\n  msToWidth(ms) {\n    return (ms / this.timelineMetrics.total.rangeMs) * this.timelineMetrics.total.width;\n  }\n\n  /*************************/\n  /*      S C R O L L      */\n  /*************************/\n\n  onScrollTimeline(scrollX, isScrolledByUser) {\n    if (isScrolledByUser) {\n      this.isPivotMiddle = false;\n      this.timelineMetrics.scrollX = scrollX;\n    }\n    if (this.scrollCount++) this.scroll$.next(false);\n    this.setXAxisValues();\n  }\n\n  scrollToPivot() {\n    const pivotEpoch = this.getPivotEpoch();\n    this.timelineMetrics.scrollX = this.getScrollXByEpoch(pivotEpoch);\n    this.scrollCount = 0;\n    this.scroll$.next(true);\n    this.setXAxisValues();\n  }\n\n  setXAxisValues() {\n    const metrics = this.timelineMetrics;\n    const startPct = Math.max(0, metrics.scrollX / metrics.total.width);\n\n// const endPct = Math.min(1, (metrics.scrollX + this.SCROLL_SAFE_TEXT_MARGIN + metrics.window.width) / metrics.total.width);\n// console.log('start/end:', (startPct * 100).toFixed(0) + '%', '/', (endPct * 100).toFixed(0) + '%');\n// console.log('total from/to epoch:', metrics.total.fromEpoch, '/', metrics.total.toEpoch);\n\n    const startEpoch = metrics.total.fromEpoch + Math.round(startPct * metrics.total.rangeMs);\n    const localStartEpoch = this.timeService.getLocalEpoch(startEpoch);\n    const item = TimelineResolutionValues[this.resolution];\n    const xAxisColumnMs = metrics.columnMs * item.interval;\n    const utcStartHardVerticalEpoch = Math.floor(localStartEpoch / xAxisColumnMs) * xAxisColumnMs;\n    const startColumn = Math.floor((utcStartHardVerticalEpoch - this.timeService.getLocalEpoch(metrics.total.fromEpoch)) / metrics.columnMs);\n    const endColumn = Math.min(startColumn + this.WINDOW_COLUMNS + item.interval, metrics.data.columns);\n    const xAxisColumns = endColumn - startColumn;\n    const utcEndHardVerticalEpoch = utcStartHardVerticalEpoch + xAxisColumns * metrics.columnMs;\n    let left = startColumn * metrics.hardVerticalWidth - 0.5 * metrics.xAxisValueWidth;\n    // const adv = metrics.columnMs * item.interval;\n    const values = [];\n    for (let epoch = utcStartHardVerticalEpoch; epoch <= utcEndHardVerticalEpoch; epoch += xAxisColumnMs) {\n      const value = this.timeService.getFormattedTime(item.type, this.timeService.getUtcEpoch(epoch));\n      values.push({ value, left, width: metrics.xAxisValueWidth });\n      left += metrics.xAxisValueWidth;\n    }\n    // console.log('columns:', `${startColumn}-${endColumn}`, ', values:', values[0].value, '-', values[values.length - 1].value);\n    this.xAxisValues$.next(values);\n  }\n\n  /*\n  getXAxisValues(resolution, totalFromEpoch, totalToEpoch, days) {\n    // let epoch = this.timeService.gmtToEpoch(this.serverData.timelineRange.range.fromTimeGmt);\n    console.log('server fromTimeGmt:', this.serverData.timelineRange.fromTimeGmt);\n    let d = new Date(this.serverData.timelineRange.fromTimeGmt.substring(0, 10));\n    console.log('d:', d.toISOString());\n    let startEpoch = d.getTime();\n    console.log('startEpoch:', startEpoch);\n    console.time('getXAxisValues');\n    const item = TimelineResolutionValues[resolution];\n    const totalRangeInMs = this.serverData.timelineRange.days * 1440 * 60000;\n    const endEpoch = startEpoch + totalRangeInMs;\n    const adv = item.minutes * 60000;\n    const values = [];\n    let interval = 0;\n    for (let epoch = startEpoch; epoch <= endEpoch; epoch += adv) {\n      // if (item.type !== TimeDisplayType.DateTime || ++interval % 2 !== 0) {\n      //   values.push(this.timeService.getFormattedTime(item.type, epoch));\n      // }\n      // values.push('TL' + i + 1);\n      // const time = (new Date(epoch)).toISOString();\n      // values.push(time);\n    }\n    console.timeEnd('getXAxisValues');\n    return values;\n\n    // const pivotEpoch = this.timeService.getMidnightEpoch(this.serverData.timeline.pivotTime.iso.substring(11, 16));\n    // const roundBy = 60000 * item.minutes;\n    // const roundedPivotEpoch = pivotEpoch - (pivotEpoch % roundBy);\n    // const roundedPivotLocalEpoch = this.timeService.getLocalEpoch(roundedPivotEpoch);\n    // const tlStartEpoch = roundedPivotLocalEpoch - (6 * roundBy);\n    // const elEndEpoch = roundedPivotLocalEpoch + (6 * roundBy);\n    // const values = [];\n    // let interval = 0;\n    // for (let time = tlStartEpoch; time <= elEndEpoch; time += roundBy) {\n    //   if (item.type !== TimeDisplayType.DateTime || ++interval % 2 !== 0) {\n    //     values.push(this.timeService.getFormattedTime(item.type, time));\n    //   }\n    // }\n  }\n  */\n\n  // getTimeline(): MediconTimelineRange {\n  //   const item = TimelineResolutionValues[this.settings.resolution];\n  //   const pivotEpoch = this.timeService.getMidnightEpoch(this.settings.pivotTime);\n  //   const roundBy = 60000 * item.minutes;\n  //   const roundedPivotEpoch = pivotEpoch - (pivotEpoch % roundBy);\n  //   const roundedPivotLocalEpoch = this.timeService.getLocalEpoch(roundedPivotEpoch);\n  //   const tlStartEpoch = roundedPivotLocalEpoch - (6 * roundBy);\n  //   const elEndEpoch = roundedPivotLocalEpoch + (6 * roundBy);\n  //   const values = [];\n  //   let interval = 0;\n  //   for (let time = tlStartEpoch; time <= elEndEpoch; time += roundBy) {\n  //     if (item.type !== TimeDisplayType.DateTime || ++interval % 2 !== 0) {\n  //       values.push(this.timeService.getFormattedTime(item.type, time));\n  //     }\n  //   }\n  //   return {\n  //     pivotTime: {\n  //       epoch: this.timeService.getLocalEpoch(pivotEpoch),\n  //       iso: this.timeService.getLocalIso(pivotEpoch)\n  //     },\n  //     range: {\n  //       fromTimeGmt: values[0],\n  //       fromTimeEpoch: tlStartEpoch,\n  //       toTimeGmt: values[12],\n  //       toTimeEpoch: elEndEpoch\n  //     },\n  //     xAxisValues: values,\n  //     subDivision: item.subDivision,\n  //     interval: item.interval,\n  //     days: 12\n  //   }\n  // }\n\n}\n",
+            "sourceCode": "import { Injectable } from '@angular/core';\nimport { MediconServerData } from '@models/medicon-server-data.model';\nimport { TimelineResolutionValues } from '@shared/consts/timeline-resolution-values.const';\nimport { ReplaySubject } from 'rxjs';\nimport { TimelineResolution } from '@shared/enums/timeline-resolution.enum';\nimport { TimeService } from '@shared/services/time.service';\nimport { MediconTimelineMetrics } from '@models/timeline-metrics.model';\n\n@Injectable()\nexport class MediconService {\n  readonly WINDOW_COLUMNS = 12;\n  serverData: MediconServerData;\n  timelineMetrics: MediconTimelineMetrics;\n  timelineMetrics$ = new ReplaySubject<MediconTimelineMetrics>(1);\n  resolution: TimelineResolution;\n  resolution$ = new ReplaySubject<TimelineResolution>(1);\n  elGraphAreaWidth;\n  xAxisValues$ = new ReplaySubject(1);\n  scroll$ = new ReplaySubject<boolean>(1);\n  scrollCount = 0;\n  isPivotMiddle = true;\n\n  constructor(private timeService: TimeService) {}\n\n  init(serverData: MediconServerData, elGraphAreaWidth) {\n    if (elGraphAreaWidth) this.elGraphAreaWidth = elGraphAreaWidth;\n    this.serverData = serverData;\n    this.setResolution(this.serverData.resolution, true);\n  }\n\n  setResolution(resolution, isInit = false) {\n    this.resolution = resolution;\n    this.setTimelineMetrics(resolution, isInit);\n    this.resolution$.next(resolution);\n  }\n\n  /*****************************************/\n  /*    T I M E L I N E   M E T R I C S    */\n  /*****************************************/\n\n  private setTimelineMetrics(resolution, isInit = false) {\n    const item = TimelineResolutionValues[resolution];\n    const windowMiddleEpoch = this.isPivotMiddle ? this.getPivotEpoch() : this.getWindowMiddleEpoch();\nconsole.log('curr - resolution:', this.resolution, ', middle:', windowMiddleEpoch);\n    // epoch / ms\n    const totalFromEpoch =  this.timeService.gmtToEpoch(this.serverData.timelineRange.fromTimeGmt);\n    const dataToEpoch = this.timeService.gmtToEpoch(this.serverData.timelineRange.toTimeGmt);\n    const dataRangeInMs = dataToEpoch - totalFromEpoch;\n    const columnMs = item.minutes * 60000;\n    const dataColumns = dataRangeInMs / columnMs;\n\n    // width\n    const windowWidth = this.elGraphAreaWidth;\n    const hardVerticalWidth = windowWidth / this.WINDOW_COLUMNS;\n    const hardVerticalWidthStyle = hardVerticalWidth + 'px 100%';\n    const totalLColumns = dataColumns + (item.fillerColumns ?? 0);\n    const totalWidth = totalLColumns * hardVerticalWidth;\n    const softVerticalWidthStyle = hardVerticalWidth / item.softVerticals + 'px 100%';\n    const fillerWidth = totalWidth - (dataColumns * hardVerticalWidth);\n    const totalRangeMs = totalLColumns * columnMs;\n    const totalToEpoch = totalFromEpoch + totalRangeMs;\n\n    // pivot\n    const pivotEpoch = this.getPivotEpoch();\n    const pivotMs = pivotEpoch - totalFromEpoch;\n    const pivotPct = pivotMs / totalRangeMs;\n    const pivotX = pivotPct * totalWidth;\n\n    this.timelineMetrics = {\n      total: {\n        fromEpoch: totalFromEpoch,\n        toEpoch: totalToEpoch,\n        width: totalWidth,\n        fillerWidth,\n        rangeMs: totalRangeMs\n      },\n      data: {\n        fromEpoch: totalFromEpoch,\n        toEpoch: dataToEpoch,\n        columns: dataColumns\n      },\n      window: {\n        width: windowWidth,\n        rangeMs: columnMs * this.WINDOW_COLUMNS\n      },\n\n\n      // fromEpoch: this.timeService.gmtToEpoch(this.serverData.timelineRange.fromTimeGmt),\n      // toEpoch: this.timeService.gmtToEpoch(this.serverData.timelineRange.toTimeGmt),\n      columnMs,\n      // xAxisValues: this.getXAxisValues(resolution, totalFromEpoch, totalToEpoch, this.serverData.timelineRange.days),\n      interval: item.interval,\n      // timelineWidth,\n      // fullWidth,\n      hardVerticalWidth,\n      hardVerticalWidthStyle,\n      softVerticalWidthStyle,\n      xAxisValueWidth: hardVerticalWidth * item.interval,\n      scrollX: 0,\n      pivotEpoch,\n      pivotX\n    }\n\n    this.timelineMetrics.scrollX = this.getScrollXByEpoch(windowMiddleEpoch);\n    this.scrollCount = 0;\n    this.timelineMetrics$.next(this.timelineMetrics);\n  }\n\n  getWindowMiddleEpoch() {\n    const prevScrollFromX = this.timelineMetrics.scrollX;\n    const windowStartEpoch = this.timelineMetrics.total.fromEpoch + (prevScrollFromX / this.timelineMetrics.total.width) * this.timelineMetrics.total.rangeMs;\n    return windowStartEpoch + this.timelineMetrics.window.rangeMs / 2;\n  }\n\n  getPivotEpoch() {\nconsole.log('getPivotEpoch:', this.serverData.pivotTimeGmt, this.timeService.gmtToEpoch(this.serverData.pivotTimeGmt));\n    return this.timeService.gmtToEpoch(this.serverData.tempPivotTimeGmt);\n  }\n\n  getScrollXByEpoch(epoch) {\n    const middleX = this.epochToX(epoch);\n    const halfWindowWidth = this.timelineMetrics.window.width / 2;\n    let startX = middleX - (halfWindowWidth);\n    const endX = middleX + (halfWindowWidth);\n    const totalWidth = this.timelineMetrics.total.width;\n    if (endX > totalWidth) startX -= (endX - totalWidth);\n    if (startX < 0) startX = 0;\n    return startX;\n  }\n\n  epochToX(epoch) {\n    const pct = (epoch - this.timelineMetrics.total.fromEpoch) / this.timelineMetrics.total.rangeMs;\n    return pct * this.timelineMetrics.total.width;\n  }\n\n  msToWidth(ms) {\n    return (ms / this.timelineMetrics.total.rangeMs) * this.timelineMetrics.total.width;\n  }\n\n  /*************************/\n  /*      S C R O L L      */\n  /*************************/\n\n  onScrollTimeline(scrollX, isScrolledByUser) {\n    if (isScrolledByUser) {\n      this.isPivotMiddle = false;\n      this.timelineMetrics.scrollX = scrollX;\n    }\n    if (this.scrollCount++) this.scroll$.next(false);\n    this.setXAxisValues();\n  }\n\n  scrollToPivot() {\n    const pivotEpoch = this.getPivotEpoch();\n    this.timelineMetrics.scrollX = this.getScrollXByEpoch(pivotEpoch);\n    this.scrollCount = 0;\n    this.scroll$.next(true);\n    this.setXAxisValues();\n  }\n\n  setXAxisValues() {\n    const metrics = this.timelineMetrics;\n    const startPct = Math.max(0, metrics.scrollX / metrics.total.width);\n\n// const endPct = Math.min(1, (metrics.scrollX + this.SCROLL_SAFE_TEXT_MARGIN + metrics.window.width) / metrics.total.width);\n// console.log('start/end:', (startPct * 100).toFixed(0) + '%', '/', (endPct * 100).toFixed(0) + '%');\n// console.log('total from/to epoch:', metrics.total.fromEpoch, '/', metrics.total.toEpoch);\n\n    const startEpoch = metrics.total.fromEpoch + Math.round(startPct * metrics.total.rangeMs);\n    const localStartEpoch = this.timeService.getLocalEpoch(startEpoch);\n    const item = TimelineResolutionValues[this.resolution];\n    const xAxisColumnMs = metrics.columnMs * item.interval;\n    const utcStartHardVerticalEpoch = Math.floor(localStartEpoch / xAxisColumnMs) * xAxisColumnMs;\n    const startColumn = Math.floor((utcStartHardVerticalEpoch - this.timeService.getLocalEpoch(metrics.total.fromEpoch)) / metrics.columnMs);\n    const endColumn = Math.min(startColumn + this.WINDOW_COLUMNS + item.interval, metrics.data.columns);\n    const xAxisColumns = endColumn - startColumn;\n    const utcEndHardVerticalEpoch = utcStartHardVerticalEpoch + xAxisColumns * metrics.columnMs;\n    let left = startColumn * metrics.hardVerticalWidth - 0.5 * metrics.xAxisValueWidth;\n    // const adv = metrics.columnMs * item.interval;\n    const values = [];\n    for (let epoch = utcStartHardVerticalEpoch; epoch <= utcEndHardVerticalEpoch; epoch += xAxisColumnMs) {\n      const value = this.timeService.getFormattedTime(item.type, this.timeService.getUtcEpoch(epoch));\n      values.push({ value, left, width: metrics.xAxisValueWidth });\n      left += metrics.xAxisValueWidth;\n    }\n    // console.log('columns:', `${startColumn}-${endColumn}`, ', values:', values[0].value, '-', values[values.length - 1].value);\n    this.xAxisValues$.next(values);\n  }\n\n  /*\n  getXAxisValues(resolution, totalFromEpoch, totalToEpoch, days) {\n    // let epoch = this.timeService.gmtToEpoch(this.serverData.timelineRange.range.fromTimeGmt);\n    console.log('server fromTimeGmt:', this.serverData.timelineRange.fromTimeGmt);\n    let d = new Date(this.serverData.timelineRange.fromTimeGmt.substring(0, 10));\n    console.log('d:', d.toISOString());\n    let startEpoch = d.getTime();\n    console.log('startEpoch:', startEpoch);\n    console.time('getXAxisValues');\n    const item = TimelineResolutionValues[resolution];\n    const totalRangeInMs = this.serverData.timelineRange.days * 1440 * 60000;\n    const endEpoch = startEpoch + totalRangeInMs;\n    const adv = item.minutes * 60000;\n    const values = [];\n    let interval = 0;\n    for (let epoch = startEpoch; epoch <= endEpoch; epoch += adv) {\n      // if (item.type !== TimeDisplayType.DateTime || ++interval % 2 !== 0) {\n      //   values.push(this.timeService.getFormattedTime(item.type, epoch));\n      // }\n      // values.push('TL' + i + 1);\n      // const time = (new Date(epoch)).toISOString();\n      // values.push(time);\n    }\n    console.timeEnd('getXAxisValues');\n    return values;\n\n    // const pivotEpoch = this.timeService.getMidnightEpoch(this.serverData.timeline.pivotTime.iso.substring(11, 16));\n    // const roundBy = 60000 * item.minutes;\n    // const roundedPivotEpoch = pivotEpoch - (pivotEpoch % roundBy);\n    // const roundedPivotLocalEpoch = this.timeService.getLocalEpoch(roundedPivotEpoch);\n    // const tlStartEpoch = roundedPivotLocalEpoch - (6 * roundBy);\n    // const elEndEpoch = roundedPivotLocalEpoch + (6 * roundBy);\n    // const values = [];\n    // let interval = 0;\n    // for (let time = tlStartEpoch; time <= elEndEpoch; time += roundBy) {\n    //   if (item.type !== TimeDisplayType.DateTime || ++interval % 2 !== 0) {\n    //     values.push(this.timeService.getFormattedTime(item.type, time));\n    //   }\n    // }\n  }\n  */\n\n  // getTimeline(): MediconTimelineRange {\n  //   const item = TimelineResolutionValues[this.settings.resolution];\n  //   const pivotEpoch = this.timeService.getMidnightEpoch(this.settings.pivotTime);\n  //   const roundBy = 60000 * item.minutes;\n  //   const roundedPivotEpoch = pivotEpoch - (pivotEpoch % roundBy);\n  //   const roundedPivotLocalEpoch = this.timeService.getLocalEpoch(roundedPivotEpoch);\n  //   const tlStartEpoch = roundedPivotLocalEpoch - (6 * roundBy);\n  //   const elEndEpoch = roundedPivotLocalEpoch + (6 * roundBy);\n  //   const values = [];\n  //   let interval = 0;\n  //   for (let time = tlStartEpoch; time <= elEndEpoch; time += roundBy) {\n  //     if (item.type !== TimeDisplayType.DateTime || ++interval % 2 !== 0) {\n  //       values.push(this.timeService.getFormattedTime(item.type, time));\n  //     }\n  //   }\n  //   return {\n  //     pivotTime: {\n  //       epoch: this.timeService.getLocalEpoch(pivotEpoch),\n  //       iso: this.timeService.getLocalIso(pivotEpoch)\n  //     },\n  //     range: {\n  //       fromTimeGmt: values[0],\n  //       fromTimeEpoch: tlStartEpoch,\n  //       toTimeGmt: values[12],\n  //       toTimeEpoch: elEndEpoch\n  //     },\n  //     xAxisValues: values,\n  //     subDivision: item.subDivision,\n  //     interval: item.interval,\n  //     days: 12\n  //   }\n  // }\n\n}\n",
             "constructorObj": {
                 "name": "constructor",
                 "description": "",
@@ -1145,7 +1135,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 22,
+                "line": 21,
                 "jsdoctags": [
                     {
                         "name": "timeService",
@@ -4176,7 +4166,7 @@
         },
         {
             "name": "MediconComponent",
-            "id": "component-MediconComponent-8756a383df8d60d9078f6026a3382916b4598b70a357c07b65bf9acaf2f0c8dffd9f00a947e6d50d4f10a405a8584f88d7bdfe73d76d4173ff59bd2fc50025d1",
+            "id": "component-MediconComponent-0a81177f58d885292906edea68a98d5d6dbdbe2ecb79f4ac03710b8b53407affbc308b5979d3ac9f3a6204a17c0aca20a2c049bd0bcca1b9f3451127e0da0974",
             "file": "src/app/shared/components/system/medicon/medicon.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -4197,7 +4187,7 @@
                     "name": "direction",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 18,
+                    "line": 22,
                     "type": "Direction",
                     "decorators": []
                 },
@@ -4205,7 +4195,7 @@
                     "name": "serverData",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 20,
+                    "line": 25,
                     "type": "MediconServerData",
                     "decorators": []
                 },
@@ -4213,7 +4203,7 @@
                     "name": "text",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 19,
+                    "line": 23,
                     "type": "any",
                     "decorators": []
                 }
@@ -4221,13 +4211,22 @@
             "outputsClass": [],
             "propertiesClass": [
                 {
+                    "name": "_serverData",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "MediconServerData",
+                    "optional": false,
+                    "description": "",
+                    "line": 32
+                },
+                {
                     "name": "elRefGraphArea",
                     "deprecated": false,
                     "deprecationMessage": "",
                     "type": "ElementRef",
                     "optional": false,
                     "description": "",
-                    "line": 17,
+                    "line": 21,
                     "decorators": [
                         {
                             "name": "ViewChild",
@@ -4242,13 +4241,22 @@
                     "type": "ElementRef",
                     "optional": false,
                     "description": "",
-                    "line": 16,
+                    "line": 20,
                     "decorators": [
                         {
                             "name": "ViewChild",
                             "stringifiedArguments": "'header', {static: true}"
                         }
                     ]
+                },
+                {
+                    "name": "title",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "",
+                    "optional": false,
+                    "description": "",
+                    "line": 33
                 }
             ],
             "methodsClass": [
@@ -4258,7 +4266,47 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 24,
+                    "line": 40,
+                    "deprecated": false,
+                    "deprecationMessage": ""
+                },
+                {
+                    "name": "onServerDataChange",
+                    "args": [
+                        {
+                            "name": "graphAreaWidth",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "defaultValue": "0"
+                        }
+                    ],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 47,
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "jsdoctags": [
+                        {
+                            "name": "graphAreaWidth",
+                            "type": "number",
+                            "deprecated": false,
+                            "deprecationMessage": "",
+                            "defaultValue": "0",
+                            "tagName": {
+                                "text": "param"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "setTitle",
+                    "args": [],
+                    "optional": false,
+                    "returnType": "void",
+                    "typeParameters": [],
+                    "line": 52,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -4270,7 +4318,7 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, ElementRef, EventEmitter, Input, Output, Renderer2, ViewChild } from '@angular/core';\nimport { Direction } from '@stories/models/direction.model';\nimport { MediconServerData } from '@models/medicon-server-data.model';\nimport { MediconService } from '@shared/components/system/shared/services/medicon.service';\n\n// TODO:\n// 1. onPush\n\n\n@Component({\n  selector: 'app-medicon',\n  templateUrl: './medicon.component.html',\n  styleUrls: ['./medicon.component.scss']\n})\nexport class MediconComponent {\n  @ViewChild('header', { static: true }) elRefHeader: ElementRef;\n  @ViewChild('graphArea', { static: true }) elRefGraphArea: ElementRef;\n  @Input() direction: Direction;\n  @Input() text: any;\n  @Input() serverData: MediconServerData;\n\n  constructor(private mediconService: MediconService, private renderer: Renderer2) {}\n\n  ngOnInit() {\n    const width = this.elRefGraphArea.nativeElement.offsetWidth;\n    const roundedWidth = width - (width % 60);  // to accommodate all variations of resolution intervals\n    this.renderer.setProperty(this.elRefGraphArea.nativeElement, 'width', roundedWidth);\n    this.mediconService.init(this.serverData, roundedWidth);\n  }\n\n  // getTimeline(resolution): MediconTimelineRange {\n  //   const item = TimelineResolutionValues[resolution];\n  //   const pivotEpoch = this.timeService.getMidnightEpoch(this.serverData.timeline.pivotTime.iso.substring(11, 16));\n  //   const roundBy = 60000 * item.minutes;\n  //   const roundedPivotEpoch = pivotEpoch - (pivotEpoch % roundBy);\n  //   const roundedPivotLocalEpoch = this.timeService.getLocalEpoch(roundedPivotEpoch);\n  //   const tlStartEpoch = roundedPivotLocalEpoch - (6 * roundBy);\n  //   const elEndEpoch = roundedPivotLocalEpoch + (6 * roundBy);\n  //   const values = [];\n  //   let interval = 0;\n  //   for (let time = tlStartEpoch; time <= elEndEpoch; time += roundBy) {\n  //     if (item.type !== TimeDisplayType.DateTime || ++interval % 2 !== 0) {\n  //       values.push(this.timeService.getFormattedTime(item.type, time));\n  //     }\n  //   }\n  //   return {\n  //     pivotTime: {\n  //       epoch: this.timeService.getLocalEpoch(pivotEpoch),\n  //       iso: this.timeService.getLocalIso(pivotEpoch)\n  //     },\n  //     range: {\n  //       fromTimeGmt: values[0],\n  //       fromTimeEpoch: tlStartEpoch,\n  //       toTimeGmt: values[12],\n  //       toTimeEpoch: elEndEpoch\n  //     },\n  //     xAxisValues: values,\n  //     subDivision: item.subDivision,\n  //     interval: item.interval,\n  //     days: 12\n  //   }\n  // }\n}\n",
+            "sourceCode": "import { Component, ElementRef, Input, Renderer2, ViewChild } from '@angular/core';\nimport { Direction } from '@stories/models/direction.model';\nimport { MediconServerData } from '@models/medicon-server-data.model';\nimport { MediconService } from '@shared/components/system/shared/services/medicon.service';\nimport { Subscription } from 'rxjs';\nimport { MediconTimelineMetrics } from '@models/timeline-metrics.model';\nimport { TimeService } from '@shared/services/time.service';\nimport { TimeDisplayType } from '@shared/enums/time-display-type.enum';\n\n// TODO:\n// 1. onPush\n\n\n@Component({\n  selector: 'app-medicon',\n  templateUrl: './medicon.component.html',\n  styleUrls: ['./medicon.component.scss']\n})\nexport class MediconComponent {\n  @ViewChild('header', { static: true }) elRefHeader: ElementRef;\n  @ViewChild('graphArea', { static: true }) elRefGraphArea: ElementRef;\n  @Input() direction: Direction;\n  @Input() text: any;\n  @Input()\n  get serverData() {\n    return this._serverData;\n  }\n  set serverData(value: MediconServerData) {\n    this._serverData = value;\n    this.onServerDataChange();\n  }\n  _serverData: MediconServerData;\n  title;\n\n  constructor(\n    private mediconService: MediconService,\n    private renderer: Renderer2,\n    private timeService: TimeService) {}\n\n  ngOnInit() {\n    const width = this.elRefGraphArea.nativeElement.offsetWidth;\n    const roundedWidth = width - (width % 60);  // to accommodate all variations of resolution intervals\n    this.renderer.setProperty(this.elRefGraphArea.nativeElement, 'width', roundedWidth);\n    this.mediconService.init(this.serverData, roundedWidth);\n  }\n\n  onServerDataChange(graphAreaWidth = 0) {\n    this.setTitle();\n    this.mediconService.init(this.serverData, graphAreaWidth);\n  }\n\n  setTitle() {\n    const from = this.timeService.gmtToEpoch(this._serverData.title.fromTimeGmt);\n    const to = this.timeService.gmtToEpoch(this._serverData.title.toTimeGmt);\n    const formattedFrom = this.timeService.getFormattedTime(TimeDisplayType.DateTime, from);\n    const formattedTo = this.timeService.getFormattedTime(TimeDisplayType.DateTime, to);\n    this.title = `${formattedFrom} - ${formattedTo}`;\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
@@ -4296,9 +4344,15 @@
                         "type": "Renderer2",
                         "deprecated": false,
                         "deprecationMessage": ""
+                    },
+                    {
+                        "name": "timeService",
+                        "type": "TimeService",
+                        "deprecated": false,
+                        "deprecationMessage": ""
                     }
                 ],
-                "line": 20,
+                "line": 33,
                 "jsdoctags": [
                     {
                         "name": "mediconService",
@@ -4317,10 +4371,57 @@
                         "tagName": {
                             "text": "param"
                         }
+                    },
+                    {
+                        "name": "timeService",
+                        "type": "TimeService",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "tagName": {
+                            "text": "param"
+                        }
                     }
                 ]
             },
-            "templateData": "<div class=\"hidden\">\n  <div class=\"graph-area\" #graphArea></div>\n</div>  <!-- serves to calculate the graph area width -->\n\n<div class=\"header\" #header>\n  <div class=\"action-icons horizontal-left\">\n    <i class=\"bi bi-printer print\"></i>\n    <i class=\"bi bi-arrow-clockwise\"></i>\n  </div>\n\n  <div class=\"title horizontal-center\">\n    {{serverData.title.fromTimeGmt}}&nbsp; -&nbsp; {{serverData.title.toTimeGmt}}\n  </div>\n\n  <div class=\"resolution horizontal-right vertical-center\" [dir]=\"direction\"></div>\n</div>\n\n<div class=\"sections\">\n  <app-medicon-section-container *ngFor=\"let section of serverData.sections\"\n    [direction]=\"direction\"\n    [text]=\"text\"\n    [section]=\"section\"\n  >\n  </app-medicon-section-container>\n</div>\n\n"
+            "accessors": {
+                "serverData": {
+                    "name": "serverData",
+                    "setSignature": {
+                        "name": "serverData",
+                        "type": "void",
+                        "deprecated": false,
+                        "deprecationMessage": "",
+                        "args": [
+                            {
+                                "name": "value",
+                                "type": "MediconServerData",
+                                "deprecated": false,
+                                "deprecationMessage": ""
+                            }
+                        ],
+                        "returnType": "void",
+                        "line": 28,
+                        "jsdoctags": [
+                            {
+                                "name": "value",
+                                "type": "MediconServerData",
+                                "deprecated": false,
+                                "deprecationMessage": "",
+                                "tagName": {
+                                    "text": "param"
+                                }
+                            }
+                        ]
+                    },
+                    "getSignature": {
+                        "name": "serverData",
+                        "type": "",
+                        "returnType": "",
+                        "line": 25
+                    }
+                }
+            },
+            "templateData": "<div class=\"hidden\">\n  <div class=\"graph-area\" #graphArea></div>\n</div>  <!-- serves to calculate the graph area width -->\n\n<div class=\"header\" #header>\n  <div class=\"action-icons horizontal-left\">\n    <i class=\"bi bi-printer print\"></i>\n    <i class=\"bi bi-arrow-clockwise\"></i>\n  </div>\n\n  <div class=\"title horizontal-center\">\n    {{title}}\n  </div>\n\n  <div class=\"resolution horizontal-right vertical-center\" [dir]=\"direction\"></div>\n</div>\n\n<div class=\"sections\">\n  <app-medicon-section-container *ngFor=\"let section of serverData.sections\"\n    [direction]=\"direction\"\n    [text]=\"text\"\n    [section]=\"section\"\n  >\n  </app-medicon-section-container>\n</div>\n\n"
         },
         {
             "name": "MediconExecutionContinuousComponent",
@@ -5663,7 +5764,7 @@
         },
         {
             "name": "MediconSectionTimelineComponent",
-            "id": "component-MediconSectionTimelineComponent-9a0bc2270519c2f102e1c1abf9491315e99a3bd9d197a2d41c06613d3eeeefed74813c0cb2b3cf3df0b4726e9ca27da4484e42b48574d87b74540a4fa8b3f291",
+            "id": "component-MediconSectionTimelineComponent-e8faa10d5df082a6a633e7e00635a083c91c2bac2550d26a2a22f6c2a8a8765ae9a4ea750025ad5f20ac6d1f11108ada6724640faf8fa421fb8f1a9cc0ca2a3d",
             "file": "src/app/shared/components/system/medicon-section-timeline/medicon-section-timeline.component.ts",
             "encapsulation": [],
             "entryComponents": [],
@@ -5684,7 +5785,7 @@
                     "name": "direction",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 14,
+                    "line": 15,
                     "type": "any",
                     "decorators": []
                 },
@@ -5692,7 +5793,7 @@
                     "name": "section",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 16,
+                    "line": 17,
                     "type": "MediconSection",
                     "decorators": []
                 },
@@ -5700,7 +5801,7 @@
                     "name": "text",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "line": 15,
+                    "line": 16,
                     "type": "any",
                     "decorators": []
                 }
@@ -5723,7 +5824,7 @@
                     "type": "ElementRef",
                     "optional": false,
                     "description": "",
-                    "line": 12,
+                    "line": 13,
                     "decorators": [
                         {
                             "name": "ViewChild",
@@ -5738,7 +5839,7 @@
                     "type": "ElementRef",
                     "optional": false,
                     "description": "",
-                    "line": 13,
+                    "line": 14,
                     "decorators": [
                         {
                             "name": "ViewChild",
@@ -5753,7 +5854,7 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 18
+                    "line": 19
                 },
                 {
                     "name": "medications",
@@ -5773,16 +5874,28 @@
                     "type": "",
                     "optional": false,
                     "description": "",
-                    "line": 17
+                    "line": 18
                 },
                 {
-                    "name": "timelineGraphWidth",
+                    "name": "mediconService",
                     "deprecated": false,
                     "deprecationMessage": "",
-                    "type": "",
+                    "type": "MediconService",
                     "optional": false,
                     "description": "",
-                    "line": 19
+                    "line": 24,
+                    "modifierKind": [
+                        123
+                    ]
+                },
+                {
+                    "name": "subscription",
+                    "deprecated": false,
+                    "deprecationMessage": "",
+                    "type": "Subscription",
+                    "optional": false,
+                    "description": "",
+                    "line": 22
                 }
             ],
             "methodsClass": [
@@ -5792,7 +5905,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 30,
+                    "line": 31,
                     "deprecated": false,
                     "deprecationMessage": ""
                 },
@@ -5815,7 +5928,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 35,
+                    "line": 37,
                     "deprecated": false,
                     "deprecationMessage": "",
                     "jsdoctags": [
@@ -5845,7 +5958,7 @@
                     "optional": false,
                     "returnType": "void",
                     "typeParameters": [],
-                    "line": 41,
+                    "line": 43,
                     "deprecated": false,
                     "deprecationMessage": ""
                 }
@@ -5857,11 +5970,11 @@
             "description": "",
             "rawdescription": "\n",
             "type": "component",
-            "sourceCode": "import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';\nimport { MediconSection } from '@models/medicon-server-data.model';\nimport { MediconLegendIcons } from '@shared/consts/medicon-legend-icons.const';\nimport { MediconService } from '@shared/components/system/shared/services/medicon.service';\n\n@Component({\n  selector: 'app-medicon-section-timeline',\n  templateUrl: './medicon-section-timeline.component.html',\n  styleUrls: ['./medicon-section-timeline.component.scss']\n})\nexport class MediconSectionTimelineComponent implements OnInit {\n  @ViewChild('categories') elRefCategories: ElementRef;\n  @ViewChild('timelineGraph') elRefTimelineGraph: ElementRef;\n  @Input() direction;\n  @Input() text;\n  @Input() section: MediconSection;\n  MediconLegendIcons = MediconLegendIcons;\n  legendColumns;\n  timelineGraphWidth;\n  categoryStates;\n  medications = [];\n\n  constructor(private mediconService: MediconService) {\n    this.legendColumns = [\n      this.MediconLegendIcons.filter(item => item.column === 0),\n      this.MediconLegendIcons.filter(item => item.column === 1)\n    ]\n  }\n\n  ngOnInit() {\n    this.categoryStates = this.section.categories.map(cat => ({ id: cat.id, isExpanded: true }));\n    this.setMedications();\n  }\n\n  onExpandCondense(id, isExpanded) {\n    const item = this.categoryStates.find(cat => cat.id === id);\n    item.isExpanded = isExpanded;\n    this.setMedications();\n  }\n\n  setMedications() {\n    this.medications = [];\n    this.categoryStates.forEach(catState => {\n      if (!catState.isExpanded) {\n        this.medications.push(null);\n      } else {\n        const category = this.section.categories.find(cat => cat.id === catState.id);\n        category.medications.forEach(medication => this.medications.push(medication));\n      }\n    });\n  }\n}\n",
+            "sourceCode": "import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';\nimport { MediconSection } from '@models/medicon-server-data.model';\nimport { MediconLegendIcons } from '@shared/consts/medicon-legend-icons.const';\nimport { MediconService } from '@shared/components/system/shared/services/medicon.service';\nimport { Subscription } from 'rxjs';\n\n@Component({\n  selector: 'app-medicon-section-timeline',\n  templateUrl: './medicon-section-timeline.component.html',\n  styleUrls: ['./medicon-section-timeline.component.scss']\n})\nexport class MediconSectionTimelineComponent implements OnInit {\n  @ViewChild('categories') elRefCategories: ElementRef;\n  @ViewChild('timelineGraph') elRefTimelineGraph: ElementRef;\n  @Input() direction;\n  @Input() text;\n  @Input() section: MediconSection;\n  MediconLegendIcons = MediconLegendIcons;\n  legendColumns;\n  categoryStates;\n  medications = [];\n  subscription: Subscription;\n\n  constructor(public mediconService: MediconService) {\n    this.legendColumns = [\n      this.MediconLegendIcons.filter(item => item.column === 0),\n      this.MediconLegendIcons.filter(item => item.column === 1)\n    ]\n  }\n\n  ngOnInit() {\n    this.categoryStates = this.section.categories.map(cat => ({ id: cat.id, isExpanded: true }));\n    this.setMedications();\n    this.mediconService.timelineMetrics.total.width;\n  }\n\n  onExpandCondense(id, isExpanded) {\n    const item = this.categoryStates.find(cat => cat.id === id);\n    item.isExpanded = isExpanded;\n    this.setMedications();\n  }\n\n  setMedications() {\n    this.medications = [];\n    this.categoryStates.forEach(catState => {\n      if (!catState.isExpanded) {\n        this.medications.push(null);\n      } else {\n        const category = this.section.categories.find(cat => cat.id === catState.id);\n        category.medications.forEach(medication => this.medications.push(medication));\n      }\n    });\n  }\n}\n",
             "assetsDirs": [],
             "styleUrlsData": [
                 {
-                    "data": "@import 'variables';\n\n:host {\n  display: flex;\n  flex-direction: column;\n}\n\n.header {\n  width: 100%;\n  height: 2.5rem;\n  display: inline-flex;\n  justify-content: space-between;\n  align-items: center;\n  padding-inline: 2rem;\n  > div {\n    width: 30%;\n  }\n  &.top {\n    background: #eeeeee;\n    margin-bottom: 1rem;\n  }\n  &.bottom {\n    margin-top: 1rem;\n  }\n  > .action-icons {\n    span {\n      width: 5.3rem !important;\n      display: inline-block;\n      //padding-inline-end: 4rem;\n      &.legend-title {\n        overflow: visible;\n        width: 5.3rem !important;\n      }\n      i {\n        font-size: var(--action-icons-font-size);\n      }\n    }\n  }\n}\n\n.legend {\n  padding-inline: 1rem;\n  display: inline-grid;\n  column-gap: 5rem;\n  grid-template-columns: auto auto;\n  ul {\n    list-style: none;\n    margin: 0;\n    padding: 0;\n    li {\n      margin-bottom: 0.2rem;\n      app-medicon-icon {\n        margin-inline-end: 1rem;\n      }\n    }\n  }\n}\n\n.content {\n  display: inline-flex;\n  width: 100%;\n  flex-direction: row;\n  .categories {\n    width: $medicon-category-area-width;\n    display: block;\n  }\n  .timelineGraph {\n    flex-grow: 1;\n    margin-right: $medicon-post-timeline-margin-right;\n  }\n}\n\n",
+                    "data": "@import 'variables';\n\n:host {\n  display: flex;\n  flex-direction: column;\n}\n\n.header {\n  width: 100%;\n  height: 2.5rem;\n  display: inline-flex;\n  justify-content: space-between;\n  align-items: center;\n  padding-inline: 2rem;\n  > div {\n    width: 30%;\n  }\n  &.top {\n    background: #e9e9e9;\n    margin-bottom: 1rem;\n  }\n  &.bottom {\n    margin-top: 1rem;\n  }\n  > .action-icons {\n    span {\n      width: 5.3rem !important;\n      display: inline-block;\n      //padding-inline-end: 4rem;\n      &.legend-title {\n        overflow: visible;\n        width: 5.3rem !important;\n      }\n      i {\n        font-size: var(--action-icons-font-size);\n      }\n    }\n  }\n}\n\n.legend {\n  padding-inline: 1rem;\n  display: inline-grid;\n  column-gap: 5rem;\n  grid-template-columns: auto auto;\n  ul {\n    list-style: none;\n    margin: 0;\n    padding: 0;\n    li {\n      margin-bottom: 0.2rem;\n      app-medicon-icon {\n        margin-inline-end: 1rem;\n      }\n    }\n  }\n}\n\n.filters {\n  margin: 1rem 0 2rem $medicon-category-area-width;\n  background: black;  // #e5ffd6;\n  border: 1px solid #d6d6d6;\n  border-radius: 4px;\n  display: flex;\n  justify-content: space-between;\n  padding: 0.2rem 0.5rem;\n  .filter-group {\n    display: flex;\n    .filter {\n      display: flex;\n      align-items: center;\n      color: white;\n      input {\n        margin: 0 0.4rem 0 0;\n        //border-color: #e2e2e2 !important;\n        &:checked {\n          //background-color: #0052fb;\n          //border-color: #0052fb;\n\n\n          //background-color: #cfcfcf !important;\n          //filter: sepia(100%);\n          //border-color: unset !important;\n           //color: red !important;\n        }\n        //background-color: unset !important;\n        //border-color: #dcdcdc !important;\n        .checked {\n          //background-color: red !important;\n          //border-color: green !important;\n        }\n      }\n    }\n    :not(:last-child) {\n      margin-right: 1.5rem;\n    }\n  }\n\n/*  :not(:first-child) {\n    margin-left: 0.5rem;\n  }\n*/\n}\n\n.content {\n  display: inline-flex;\n  width: 100%;\n  flex-direction: row;\n  .categories {\n    width: $medicon-category-area-width;\n    display: block;\n  }\n  .timelineGraph {\n    flex-grow: 1;\n    margin-right: $medicon-post-timeline-margin-right;\n  }\n}\n\n",
                     "styleUrl": "./medicon-section-timeline.component.scss"
                 }
             ],
@@ -5879,7 +5992,7 @@
                         "deprecationMessage": ""
                     }
                 ],
-                "line": 21,
+                "line": 22,
                 "jsdoctags": [
                     {
                         "name": "mediconService",
@@ -5895,7 +6008,7 @@
             "implements": [
                 "OnInit"
             ],
-            "templateData": "<ng-container\n    [ngTemplateOutlet]=\"header\"\n    [ngTemplateOutletContext]=\"{isTop: true}\">\n</ng-container>\n\n<div class=\"content\">\n  <div class=\"categories\" #categories>\n    <app-medicon-category\n      *ngFor=\"let category of section.categories; let i=index\"\n      [category]=\"category\"\n      (expandCondense)=\"onExpandCondense(category.id, $event)\">\n    </app-medicon-category>\n  </div>\n\n  <div class=\"timelineGraph\" #timelineGraph>\n    <app-medicon-timeline-graph\n      [categories]=\"section.categories\"\n      [medications]=\"medications\">\n    </app-medicon-timeline-graph>\n  </div>\n</div>\n\n<ng-container\n    [ngTemplateOutlet]=\"header\"\n    [ngTemplateOutletContext]=\"{isTop: false}\">\n</ng-container>\n\n<ng-template #header let-isTop=\"isTop\">\n  <div class=\"header vertical-center\" [class.top]=\"isTop\" [class.bottom]=\"!isTop\">\n    <div class=\"action-icons horizontal-left vertical-center\">\n      <span class=\"legend-title\"\n            [popover]=\"legendTemplate\"\n            [placement]=\"'bottom'\"\n            [container]=\"'body'\"\n            [isOpen]=\"false\"\n            [triggers]=\"'hover'\">{{text.medicon.legend}}</span>\n      <span><i class=\"bi bi-plus-circle\"></i></span>\n      <span><i class=\"bi bi-alarm\"></i></span>\n    </div>\n    <div><span *ngIf=\"isTop\" class=\"horizontal-center\">{{section.name}}</span></div>\n    <div *ngIf=\"isTop\" class=\"horizontal-right\">\n      <app-medicon-resolution\n          [text]=\"text\"\n      ></app-medicon-resolution>\n    </div>\n  </div>\n</ng-template>\n\n<ng-template #legendTemplate>\n  <div class=\"legend\" [dir]=\"direction\">\n    <ng-container *ngFor=\"let column of legendColumns; let i=index\">\n      <ul>\n        <li *ngFor=\"let item of column\">\n          <div class=\"vertical-center\">\n            <app-medicon-icon [type]=\"item.type\" [position]=\"'aligned'\"></app-medicon-icon>\n            <span>{{text.medicon.icons[item.type]}}</span>\n          </div>\n        </li>\n      </ul>\n    </ng-container>\n  </div>\n</ng-template>\n"
+            "templateData": "<ng-container\n    [ngTemplateOutlet]=\"header\"\n    [ngTemplateOutletContext]=\"{isTop: true}\">\n</ng-container>\n\n<div *ngIf=\"mediconService.timelineMetrics$ | async; let metrics\"\n    class=\"filters\" [style.width.px]=\"metrics.window.width\">\n    <div class=\"filter-group\">\n      <ng-container [ngTemplateOutlet]=\"filter\" [ngTemplateOutletContext]=\"{label:'Active',checked:true}\"></ng-container>\n      <ng-container [ngTemplateOutlet]=\"filter\" [ngTemplateOutletContext]=\"{label:'Inactive',checked:false}\"></ng-container>\n    </div>\n    <div class=\"filter-group\">\n      <ng-container [ngTemplateOutlet]=\"filter\" [ngTemplateOutletContext]=\"{label:'Continuous',checked:true}\"></ng-container>\n      <ng-container [ngTemplateOutlet]=\"filter\" [ngTemplateOutletContext]=\"{label:'Periodic',checked:true}\"></ng-container>\n      <ng-container [ngTemplateOutlet]=\"filter\" [ngTemplateOutletContext]=\"{label:'SOS',checked:true}\"></ng-container>\n      <ng-container [ngTemplateOutlet]=\"filter\" [ngTemplateOutletContext]=\"{label:'Once',checked:true}\"></ng-container>\n    </div>\n</div>\n\n<div class=\"content\">\n  <div class=\"categories\" #categories>\n    <app-medicon-category\n      *ngFor=\"let category of section.categories; let i=index\"\n      [category]=\"category\"\n      (expandCondense)=\"onExpandCondense(category.id, $event)\">\n    </app-medicon-category>\n  </div>\n\n  <div class=\"timelineGraph\" #timelineGraph>\n    <app-medicon-timeline-graph\n      [categories]=\"section.categories\"\n      [medications]=\"medications\">\n    </app-medicon-timeline-graph>\n  </div>\n</div>\n\n<ng-container\n    [ngTemplateOutlet]=\"header\"\n    [ngTemplateOutletContext]=\"{isTop: false}\">\n</ng-container>\n\n<ng-template #header let-isTop=\"isTop\">\n  <div class=\"header vertical-center\" [class.top]=\"isTop\" [class.bottom]=\"!isTop\">\n    <div class=\"action-icons horizontal-left vertical-center\">\n      <span class=\"legend-title\"\n            [popover]=\"legendTemplate\"\n            [placement]=\"'bottom'\"\n            [container]=\"'body'\"\n            [isOpen]=\"false\"\n            [triggers]=\"'hover'\">{{text.medicon.legend}}</span>\n      <span><i class=\"bi bi-plus-circle\"></i></span>\n      <span><i class=\"bi bi-alarm\"></i></span>\n    </div>\n    <div><span *ngIf=\"isTop\" class=\"horizontal-center\">{{section.name}}</span></div>\n    <div *ngIf=\"isTop\" class=\"horizontal-right\">\n      <app-medicon-resolution\n          [text]=\"text\"\n      ></app-medicon-resolution>\n    </div>\n  </div>\n</ng-template>\n\n<ng-template #legendTemplate>\n  <div class=\"legend\" [dir]=\"direction\">\n    <ng-container *ngFor=\"let column of legendColumns; let i=index\">\n      <ul>\n        <li *ngFor=\"let item of column\">\n          <div class=\"vertical-center\">\n            <app-medicon-icon [type]=\"item.type\" [position]=\"'aligned'\"></app-medicon-icon>\n            <span>{{text.medicon.icons[item.type]}}</span>\n          </div>\n        </li>\n      </ul>\n    </ng-container>\n  </div>\n</ng-template>\n\n<ng-template #filter let-label=\"label\" let-checked=\"checked\">\n  <div class=\"filter\">\n    <input class=\"form-check-input\" [ngClass]=\"class\" type=\"checkbox\" value=\"something\" [attr.checked]=\"checked ? '' : null\">\n    <span>{{label}}</span>\n  </div>\n</ng-template>\n"
         },
         {
             "name": "MediconTesterComponent",
@@ -8700,7 +8813,7 @@
                 "linktype": "component",
                 "name": "MediconSectionTimelineComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/15",
+                "coverageCount": "0/16",
                 "status": "low"
             },
             {
@@ -8718,7 +8831,7 @@
                 "linktype": "component",
                 "name": "MediconComponent",
                 "coveragePercent": 0,
-                "coverageCount": "0/8",
+                "coverageCount": "0/12",
                 "status": "low"
             },
             {
@@ -8763,7 +8876,7 @@
                 "linktype": "injectable",
                 "name": "MediconService",
                 "coveragePercent": 8,
-                "coverageCount": "2/25",
+                "coverageCount": "2/24",
                 "status": "low"
             },
             {

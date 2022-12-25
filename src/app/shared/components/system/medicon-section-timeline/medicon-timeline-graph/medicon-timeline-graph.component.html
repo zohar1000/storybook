@@ -28,7 +28,8 @@
           </app-medicon-execution-continuous>
           <app-medicon-execution-periodic
             *ngIf="medication.type===ExecutionType.Periodic"
-            class="periodic">
+            class="periodic"
+            [medication]="medication">
           </app-medicon-execution-periodic>
         </ng-container>
       </div>
