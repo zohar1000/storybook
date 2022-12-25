@@ -3,12 +3,22 @@ $icon-size: 1rem;
 :host {
   width: $icon-size;
   height: $icon-size;
-  //background: cyan;
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  .icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &.centered-h {
+      transform: translateX(-50%);
+    }
+  }
 }
 
+
+/*
 .centered {
   position: relative;
   display: flex;
@@ -43,3 +53,4 @@ $icon-size: 1rem;
   background: white;
   border-radius: 5px;
 }
+*/

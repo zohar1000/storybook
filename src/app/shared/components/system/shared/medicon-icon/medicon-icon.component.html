@@ -1,7 +1,8 @@
 <!--<span [ngClass]="{aligned: position==='aligned', centered: !position}">-->
-<span class="centered">
-  <div class="svg hold" [style.width.rem]="fontSize" [style.height.rem]="fontSize">
-
+  <div class="icon-container"
+       [class.centered-h]="isCenteredH"
+       [style.width.rem]="fontSize"
+       [style.height.rem]="fontSize">
     <ng-container [ngSwitch]="type">
       <ng-container *ngSwitchCase="MediconLegendIconType.Order" [ngTemplateOutlet]="square"></ng-container>
       <ng-container *ngSwitchCase="MediconLegendIconType.Execution" [ngTemplateOutlet]="circle"></ng-container>
@@ -18,9 +19,7 @@
       <ng-container *ngSwitchCase="MediconLegendIconType.Stop" [ngTemplateOutlet]="stop"></ng-container>
       <ng-container *ngSwitchCase="MediconLegendIconType.ExecutionTime" [ngTemplateOutlet]="diamond"></ng-container>
     </ng-container>
-
   </div>
-</span>
 
 <ng-template #star>
   <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 16 16"

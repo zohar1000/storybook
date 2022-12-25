@@ -12,10 +12,10 @@ import { Subscription } from 'rxjs';
 export class MediconExecutionContinuousComponent implements OnInit, OnDestroy {
   @Input() medication: Medication;
   MediconLegendIconType = MediconLegendIconType;
-  orderIconMargin = -1;
-  orderLineWidth = -1;
-  executionIconMargin = -1;
-  executionLineWidth = -1;
+  orderIconMargin;
+  orderLineWidth;
+  executionIconMargin;
+  executionLineWidth;
   subscription: Subscription;
 
   constructor(private mediconService: MediconService) {}
@@ -31,6 +31,10 @@ export class MediconExecutionContinuousComponent implements OnInit, OnDestroy {
   }
 
   setMedication() {
+    this.orderIconMargin = -1;
+    this.orderLineWidth = -1;
+    this.executionIconMargin = -1;
+    this.executionLineWidth = -1;
     this.orderIconMargin = this.getIconMargin(this.medication.orderTime);
     const orderLineDuration = this.medication.executionTime ? this.medication.executionTime - this.medication.orderTime : this.medication.duration;
     this.orderLineWidth = this.getLineWidth(this.orderIconMargin, orderLineDuration);

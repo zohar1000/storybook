@@ -9,7 +9,7 @@ import { MediconLegendIconType } from '@shared/enums/medicon-legend-icon-type.en
 })
 export class MediconIconComponent implements OnInit {
   @Input() type: string;
-  @Input() position = '';  // 'aligned' for regular, '' for 0,0 centered
+  @Input() isCenteredH = false;
   MediconLegendIconType = MediconLegendIconType;
   fontSize = 1;
   stroke = '';

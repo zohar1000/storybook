@@ -14,7 +14,7 @@ export class MediconExecutionPeriodicComponent implements OnInit, OnDestroy {
   @Input() medication: Medication;
   MediconLegendIconType = MediconLegendIconType;
   subscription: Subscription;
-  iconMargins = [];
+  iconMargins;
 
   constructor(private mediconService: MediconService, private timeService: TimeService) {}
 
@@ -29,11 +29,11 @@ export class MediconExecutionPeriodicComponent implements OnInit, OnDestroy {
   }
 
   setMedication() {
+    this.iconMargins = [];
     this.medication.times.forEach(time => {
       const iconEpoch = this.timeService.gmtToEpoch(time);
       const x = this.mediconService.epochToX(iconEpoch);
       this.iconMargins.push(x);
     });
-    this.iconMargins = [0];
   }
 }
